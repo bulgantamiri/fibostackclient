@@ -7,5 +7,5 @@ to a given project and may be shared between projects.
 
 Network v2
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: address scope *

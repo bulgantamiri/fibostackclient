@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 
 class FlavorTests(base.TestCase):
@@ -24,7 +24,7 @@ class FlavorTests(base.TestCase):
     def setUpClass(cls):
         super(FlavorTests, cls).setUpClass()
         # Make a project
-        cmd_output = cls.openstack(
+        cmd_output = cls.fibostack(
             "project create --enable " + cls.PROJECT_NAME,
             parse_output=True,
         )
@@ -33,7 +33,7 @@ class FlavorTests(base.TestCase):
     @classmethod
     def tearDownClass(cls):
         try:
-            raw_output = cls.openstack("project delete " + cls.PROJECT_NAME)
+            raw_output = cls.fibostack("project delete " + cls.PROJECT_NAME)
             cls.assertOutput('', raw_output)
         finally:
             super(FlavorTests, cls).tearDownClass()
@@ -41,7 +41,7 @@ class FlavorTests(base.TestCase):
     def test_flavor_delete(self):
         """Test create w/project, delete multiple"""
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             "flavor create "
             + "--project "
             + self.PROJECT_NAME
@@ -53,7 +53,7 @@ class FlavorTests(base.TestCase):
         self.assertIsNotNone(cmd_output["id"])
 
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             "flavor create "
             + "--id qaz "
             + "--project "
@@ -69,7 +69,7 @@ class FlavorTests(base.TestCase):
             cmd_output["id"],
         )
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             "flavor delete " + name1 + " " + name2,
         )
         self.assertOutput('', raw_output)
@@ -77,11 +77,11 @@ class FlavorTests(base.TestCase):
     def test_flavor_list(self):
         """Test create defaults, list filters, delete"""
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             "flavor create " + "--property a=b " + "--property c=d " + name1,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, "flavor delete " + name1)
+        self.addCleanup(self.fibostack, "flavor delete " + name1)
         self.assertIsNotNone(cmd_output["id"])
         self.assertEqual(
             name1,
@@ -89,7 +89,7 @@ class FlavorTests(base.TestCase):
         )
 
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             "flavor create "
             + "--id qaz "
             + "--ram 123 "
@@ -99,7 +99,7 @@ class FlavorTests(base.TestCase):
             + name2,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, "flavor delete " + name2)
+        self.addCleanup(self.fibostack, "flavor delete " + name2)
         self.assertIsNotNone(cmd_output["id"])
         self.assertEqual(
             "qaz",
@@ -126,7 +126,7 @@ class FlavorTests(base.TestCase):
         )
 
         # Test list
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             "flavor list",
             parse_output=True,
         )
@@ -135,7 +135,7 @@ class FlavorTests(base.TestCase):
         self.assertNotIn(name2, col_name)
 
         # Test list --long
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             "flavor list " + "--long",
             parse_output=True,
         )
@@ -153,7 +153,7 @@ class FlavorTests(base.TestCase):
         self.assertTrue(found_expected)
 
         # Test list --public
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             "flavor list " + "--public",
             parse_output=True,
         )
@@ -162,7 +162,7 @@ class FlavorTests(base.TestCase):
         self.assertNotIn(name2, col_name)
 
         # Test list --private
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             "flavor list " + "--private",
             parse_output=True,
         )
@@ -171,7 +171,7 @@ class FlavorTests(base.TestCase):
         self.assertIn(name2, col_name)
 
         # Test list --all
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             "flavor list " + "--all",
             parse_output=True,
         )
@@ -182,7 +182,7 @@ class FlavorTests(base.TestCase):
     def test_flavor_properties(self):
         """Test create defaults, list filters, delete"""
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             "flavor create "
             + "--id qaz "
             + "--ram 123 "
@@ -193,7 +193,7 @@ class FlavorTests(base.TestCase):
             + name1,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, "flavor delete " + name1)
+        self.addCleanup(self.fibostack, "flavor delete " + name1)
         self.assertIsNotNone(cmd_output["id"])
         self.assertEqual(
             "qaz",
@@ -219,7 +219,7 @@ class FlavorTests(base.TestCase):
             cmd_output["properties"],
         )
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             "flavor set "
             + "--property a='third and 10' "
             + "--property g=fourth "
@@ -227,7 +227,7 @@ class FlavorTests(base.TestCase):
         )
         self.assertEqual('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             "flavor show " + name1,
             parse_output=True,
         )
@@ -239,10 +239,10 @@ class FlavorTests(base.TestCase):
         self.assertEqual('second', cmd_output['properties']['b'])
         self.assertEqual('fourth', cmd_output['properties']['g'])
 
-        raw_output = self.openstack("flavor unset " + "--property b " + name1)
+        raw_output = self.fibostack("flavor unset " + "--property b " + name1)
         self.assertEqual('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             "flavor show " + name1,
             parse_output=True,
         )

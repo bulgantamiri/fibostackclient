@@ -1,4 +1,4 @@
-#   Copyright 2012 OpenStack Foundation
+#   Copyright 2012 fibostack Foundation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
 #   not use this file except in compliance with the License. You may obtain
@@ -20,11 +20,11 @@ import itertools
 import logging
 import sys
 
-from osc_lib.command import command
-from osc_lib import utils
+from fsc_lib.command import command
+from fsc_lib import utils
 
-from openstackclient.i18n import _
-from openstackclient.network import common
+from fibostackclient.i18n import _
+from fibostackclient.network import common
 
 LOG = logging.getLogger(__name__)
 
@@ -234,7 +234,7 @@ class ListQuota(command.Lister):
 
     def get_parser(self, prog_name):
         parser = super().get_parser(prog_name)
-        # TODO(stephenfin): Remove in OSC 8.0
+        # TODO(stephenfin): Remove in fsc 8.0
         parser.add_argument(
             '--project',
             metavar='<project>',
@@ -244,7 +244,7 @@ class ListQuota(command.Lister):
                 "Use 'quota show' instead."
             ),
         )
-        # TODO(stephenfin): Remove in OSC 8.0
+        # TODO(stephenfin): Remove in fsc 8.0
         parser.add_argument(
             '--detail',
             dest='detail',
@@ -345,13 +345,13 @@ class ListQuota(command.Lister):
         if parsed_args.detail:
             msg = _(
                 "The --detail option has been deprecated. "
-                "Use 'openstack quota show --usage' instead."
+                "Use 'fibostack quota show --usage' instead."
             )
             self.log.warning(msg)
         elif parsed_args.project:  # elif to avoid being too noisy
             msg = _(
                 "The --project option has been deprecated. "
-                "Use 'openstack quota show' instead."
+                "Use 'fibostack quota show' instead."
             )
             self.log.warning(msg)
 
@@ -596,7 +596,7 @@ class SetQuota(common.NetDetectionMixin, command.Command):
             metavar='<project/class>',
             help=_('Set quotas for this project or class (name or ID)'),
         )
-        # TODO(stephenfin): Remove in OSC 8.0
+        # TODO(stephenfin): Remove in fsc 8.0
         parser.add_argument(
             '--class',
             dest='quota_class',
@@ -662,7 +662,7 @@ class SetQuota(common.NetDetectionMixin, command.Command):
                 "never fully implemented and the compute and volume services "
                 "only support a single 'default' quota class while the "
                 "network service does not support quota classes at all. "
-                "Please use 'openstack quota show --default' instead."
+                "Please use 'fibostack quota show --default' instead."
             )
             self.log.warning(msg)
 
@@ -768,7 +768,7 @@ and ``server-group-members`` output for a given quota class."""
             ),
         )
         type_group = parser.add_mutually_exclusive_group()
-        # TODO(stephenfin): Remove in OSC 8.0
+        # TODO(stephenfin): Remove in fsc 8.0
         type_group.add_argument(
             '--class',
             dest='quota_class',
@@ -842,7 +842,7 @@ and ``server-group-members`` output for a given quota class."""
                 "never fully implemented and the compute and volume services "
                 "only support a single 'default' quota class while the "
                 "network service does not support quota classes at all. "
-                "Please use 'openstack quota show --default' instead."
+                "Please use 'fibostack quota show --default' instead."
             )
             self.log.warning(msg)
         else:

@@ -10,8 +10,8 @@
 #   License for the specific language governing permissions and limitations
 #   under the License.
 
-from openstackclient.identity.v3 import endpoint
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.identity.v3 import endpoint
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
 
 
 class TestEndpoint(identity_fakes.TestIdentityv3):

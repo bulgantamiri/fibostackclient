@@ -1,4 +1,4 @@
 placement
 ---------
 
-.. autoprogram-cliff:: openstack.placement.v1
+.. autoprogram-cliff:: fibostack.placement.v1

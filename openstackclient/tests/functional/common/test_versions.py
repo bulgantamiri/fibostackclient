@@ -10,7 +10,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 
 class VersionsTests(base.TestCase):
@@ -19,7 +19,7 @@ class VersionsTests(base.TestCase):
     def test_versions_show(self):
         # TODO(mordred) Make this better. The trick is knowing what in the
         # payload to test for.
-        cmd_output = self.openstack('versions show', parse_output=True)
+        cmd_output = self.fibostack('versions show', parse_output=True)
         self.assertIsNotNone(cmd_output)
         self.assertIn(
             "Region Name",

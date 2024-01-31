@@ -4,13 +4,13 @@
 Command Beta
 ============
 
-OpenStackClient releases do not always coincide with OpenStack
-releases. This creates challenges when developing new OpenStackClient
-commands for the current OpenStack release under development
+fibostackClient releases do not always coincide with fibostack
+releases. This creates challenges when developing new fibostackClient
+commands for the current fibostack release under development
 since there may not be an official release of the REST API
 enhancements necessary for the command. In addition, backwards
-compatibility may not be guaranteed until an official OpenStack release.
-To address these challenges, an OpenStackClient command may
+compatibility may not be guaranteed until an official fibostack release.
+To address these challenges, an fibostackClient command may
 be labeled as a beta command according to the guidelines
 below. Such commands may introduce backwards incompatible
 changes and may use REST API enhancements not yet released.
@@ -47,7 +47,7 @@ List examples
 .. program:: example list
 .. code:: bash
 
-    openstack example list
+    fibostack example list
 
 Help
 ~~~~

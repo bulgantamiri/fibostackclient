@@ -15,13 +15,13 @@
 from unittest import mock
 from unittest.mock import call
 
-from osc_lib.cli import format_columns
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.cli import format_columns
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.tests.unit import utils as tests_utils
-from openstackclient.tests.unit.volume.v1 import fakes as volume_fakes
-from openstackclient.volume.v1 import volume_type
+from fibostackclient.tests.unit import utils as tests_utils
+from fibostackclient.tests.unit.volume.v1 import fakes as volume_fakes
+from fibostackclient.volume.v1 import volume_type
 
 
 class TestType(volume_fakes.TestVolumev1):

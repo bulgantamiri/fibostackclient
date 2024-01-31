@@ -1,5 +1,5 @@
 ---
 features:
   - |
-    Add support for ``openstack server show --topology`` flag, which will
+    Add support for ``fibostack server show --topology`` flag, which will
     include NUMA topology information in the output.

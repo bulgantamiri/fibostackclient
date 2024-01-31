@@ -10,7 +10,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 
 class ObjectStoreTests(base.TestCase):

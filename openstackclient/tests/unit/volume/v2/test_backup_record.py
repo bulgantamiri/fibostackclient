@@ -12,8 +12,8 @@
 #   under the License.
 #
 
-from openstackclient.tests.unit.volume.v2 import fakes as volume_fakes
-from openstackclient.volume.v2 import backup_record
+from fibostackclient.tests.unit.volume.v2 import fakes as volume_fakes
+from fibostackclient.volume.v2 import backup_record
 
 
 class TestBackupRecord(volume_fakes.TestVolume):

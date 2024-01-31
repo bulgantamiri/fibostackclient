@@ -2,4 +2,4 @@
 fixes:
   - |
     The ``--limit`` option of the ``image list`` command was previously ignored.
-    [Bug `2004314 <https://storyboard.openstack.org/#!/story/2004314>`_]
+    [Bug `2004314 <https://storyboard.fibostack.org/#!/story/2004314>`_]

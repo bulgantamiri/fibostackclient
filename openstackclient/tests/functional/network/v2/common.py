@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 
 class NetworkTests(base.TestCase):
@@ -37,7 +37,7 @@ class NetworkTagTests(NetworkTests):
 
     def test_tag_operation(self):
         # Get project IDs
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'token issue ',
             parse_output=True,
         )
@@ -79,7 +79,7 @@ class NetworkTagTests(NetworkTests):
         self._set_resource_and_tag_check('set', name2, '--no-tag', [])
 
     def _list_tag_check(self, project_id, expected):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             '{} list --long --project {}'.format(
                 self.base_command, project_id
             ),
@@ -90,7 +90,7 @@ class NetworkTagTests(NetworkTests):
             self.assertEqual(set(tags), set(net['Tags']))
 
     def _create_resource_for_tag_test(self, name, args):
-        return self.openstack(
+        return self.fibostack(
             '{} create {} {}'.format(self.base_command, args, name),
             parse_output=True,
         )
@@ -99,18 +99,18 @@ class NetworkTagTests(NetworkTests):
         name = uuid.uuid4().hex
         cmd_output = self._create_resource_for_tag_test(name, args)
         self.addCleanup(
-            self.openstack, '{} delete {}'.format(self.base_command, name)
+            self.fibostack, '{} delete {}'.format(self.base_command, name)
         )
         self.assertIsNotNone(cmd_output["id"])
         self.assertEqual(set(expected), set(cmd_output['tags']))
         return name
 
     def _set_resource_and_tag_check(self, command, name, args, expected):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             '{} {} {} {}'.format(self.base_command, command, args, name)
         )
         self.assertFalse(cmd_output)
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             '{} show {}'.format(self.base_command, name),
             parse_output=True,
         )

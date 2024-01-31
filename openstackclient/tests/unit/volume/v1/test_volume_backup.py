@@ -15,11 +15,11 @@
 from unittest import mock
 from unittest.mock import call
 
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.tests.unit.volume.v1 import fakes as volume_fakes
-from openstackclient.volume.v1 import volume_backup
+from fibostackclient.tests.unit.volume.v1 import fakes as volume_fakes
+from fibostackclient.volume.v1 import volume_backup
 
 
 class TestBackup(volume_fakes.TestVolumev1):

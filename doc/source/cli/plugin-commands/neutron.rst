@@ -1,4 +1,4 @@
 neutron
 -------
 
-.. autoprogram-cliff:: openstack.neutronclient.v2
+.. autoprogram-cliff:: fibostack.neutronclient.v2

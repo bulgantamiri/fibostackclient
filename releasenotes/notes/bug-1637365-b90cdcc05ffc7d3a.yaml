@@ -5,4 +5,4 @@ upgrade:
     and ``--remote-ip``.
     The ``--src-group`` and ``--src-ip`` options are deprecated but still
     supported, and will be removed in a future release.
-    [Bug `1637365 <https://bugs.launchpad.net/python-openstackclient/+bug/1637365>`_]
+    [Bug `1637365 <https://bugs.launchpad.net/python-fibostackclient/+bug/1637365>`_]

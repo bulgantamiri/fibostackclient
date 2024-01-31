@@ -14,8 +14,8 @@
 import io
 import sys
 
-from openstackclient.common import progressbar
-from openstackclient.tests.unit import utils
+from fibostackclient.common import progressbar
+from fibostackclient.tests.unit import utils
 
 
 class TestProgressBarWrapper(utils.TestCase):

@@ -13,7 +13,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class L3ConntrackHelperTests(common.NetworkTests):
@@ -28,19 +28,19 @@ class L3ConntrackHelperTests(common.NetworkTests):
 
     def _create_router(self):
         router_name = uuid.uuid4().hex
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'router create ' + router_name,
             parse_output=True,
         )
         self.assertIsNotNone(json_output['id'])
         router_id = json_output['id']
-        self.addCleanup(self.openstack, 'router delete ' + router_id)
+        self.addCleanup(self.fibostack, 'router delete ' + router_id)
         return router_id
 
     def _create_helpers(self, router_id, helpers):
         created_helpers = []
         for helper in helpers:
-            output = self.openstack(
+            output = self.fibostack(
                 'network l3 conntrack helper create %(router)s '
                 '--helper %(helper)s --protocol %(protocol)s '
                 '--port %(port)s '
@@ -69,7 +69,7 @@ class L3ConntrackHelperTests(common.NetworkTests):
         created_helpers = self._create_helpers(router_id, helpers)
         ct_ids = " ".join([ct['id'] for ct in created_helpers])
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             '--debug network l3 conntrack helper delete %(router)s '
             '%(ct_ids)s' % {'router': router_id, 'ct_ids': ct_ids}
         )
@@ -86,7 +86,7 @@ class L3ConntrackHelperTests(common.NetworkTests):
         ]
         router_id = self._create_router()
         self._create_helpers(router_id, helpers)
-        output = self.openstack(
+        output = self.fibostack(
             'network l3 conntrack helper list %s ' % router_id,
             parse_output=True,
         )
@@ -99,7 +99,7 @@ class L3ConntrackHelperTests(common.NetworkTests):
         helper = {'helper': 'tftp', 'protocol': 'udp', 'port': 69}
         router_id = self._create_router()
         created_helper = self._create_helpers(router_id, [helper])[0]
-        output = self.openstack(
+        output = self.fibostack(
             'network l3 conntrack helper show %(router_id)s %(ct_id)s '
             '-f json'
             % {
@@ -112,7 +112,7 @@ class L3ConntrackHelperTests(common.NetworkTests):
         self.assertEqual(helper['protocol'], output['protocol'])
         self.assertEqual(helper['port'], output['port'])
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'network l3 conntrack helper set %(router_id)s %(ct_id)s '
             '--port %(port)s '
             % {
@@ -123,7 +123,7 @@ class L3ConntrackHelperTests(common.NetworkTests):
         )
         self.assertOutput('', raw_output)
 
-        output = self.openstack(
+        output = self.fibostack(
             'network l3 conntrack helper show %(router_id)s %(ct_id)s '
             '-f json'
             % {

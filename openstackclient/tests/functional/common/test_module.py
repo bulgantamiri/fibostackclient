@@ -12,45 +12,45 @@
 #   License for the specific language governing permissions and limitations
 #   under the License.
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 
 class ModuleTest(base.TestCase):
-    """Functional tests for openstackclient module list output."""
+    """Functional tests for fibostackclient module list output."""
 
-    CLIENTS = ['openstackclient', 'keystoneclient', 'novaclient', 'openstack']
+    CLIENTS = ['fibostackclient', 'keystoneclient', 'novaclient', 'fibostack']
 
-    LIBS = ['osc_lib', 'keystoneauth1']
+    LIBS = ['fsc_lib', 'keystoneauth1']
 
     def test_module_list(self):
         # Test module list
-        cmd_output = self.openstack('module list', parse_output=True)
+        cmd_output = self.fibostack('module list', parse_output=True)
         for one_module in self.CLIENTS:
             self.assertIn(one_module, cmd_output.keys())
         for one_module in self.LIBS:
             self.assertNotIn(one_module, cmd_output.keys())
 
         # Test module list --all
-        cmd_output = self.openstack('module list --all', parse_output=True)
+        cmd_output = self.fibostack('module list --all', parse_output=True)
         for one_module in self.CLIENTS + self.LIBS:
             self.assertIn(one_module, cmd_output.keys())
 
 
 class CommandTest(base.TestCase):
-    """Functional tests for openstackclient command list."""
+    """Functional tests for fibostackclient command list."""
 
     GROUPS = [
-        'openstack.volume.v3',
-        'openstack.network.v2',
-        'openstack.image.v2',
-        'openstack.identity.v3',
-        'openstack.compute.v2',
-        'openstack.common',
-        'openstack.cli',
+        'fibostack.volume.v3',
+        'fibostack.network.v2',
+        'fibostack.image.v2',
+        'fibostack.identity.v3',
+        'fibostack.compute.v2',
+        'fibostack.common',
+        'fibostack.cli',
     ]
 
     def test_command_list_no_option(self):
-        cmd_output = self.openstack('command list', parse_output=True)
+        cmd_output = self.fibostack('command list', parse_output=True)
         group_names = [each.get('Command Group') for each in cmd_output]
         for one_group in self.GROUPS:
             self.assertIn(one_group, group_names)
@@ -58,7 +58,7 @@ class CommandTest(base.TestCase):
     def test_command_list_with_group(self):
         input_groups = ['volume', 'network', 'image', 'identity', 'compute.v2']
         for each_input in input_groups:
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 'command list --group %s' % each_input,
                 parse_output=True,
             )

@@ -1,4 +1,4 @@
 barbican
 --------
 
-.. autoprogram-cliff:: openstack.key_manager.v1
+.. autoprogram-cliff:: fibostack.key_manager.v1

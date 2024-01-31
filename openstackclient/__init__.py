@@ -15,7 +15,7 @@ import pbr.version
 
 __all__ = ['__version__']
 
-version_info = pbr.version.VersionInfo('python-openstackclient')
+version_info = pbr.version.VersionInfo('python-fibostackclient')
 try:
     __version__ = version_info.version_string()
 except AttributeError:

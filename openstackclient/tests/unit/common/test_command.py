@@ -14,11 +14,11 @@
 
 from unittest import mock
 
-from osc_lib.command import command
-from osc_lib import exceptions
+from fsc_lib.command import command
+from fsc_lib import exceptions
 
-from openstackclient.tests.unit import fakes as test_fakes
-from openstackclient.tests.unit import utils as test_utils
+from fibostackclient.tests.unit import fakes as test_fakes
+from fibostackclient.tests.unit import utils as test_utils
 
 
 class FakeCommand(command.Command):
@@ -31,7 +31,7 @@ class TestCommand(test_utils.TestCase):
         cmd = FakeCommand(mock.Mock(), mock.Mock())
         self.assertTrue(hasattr(cmd, 'log'))
         self.assertEqual(
-            'openstackclient.tests.unit.common.test_command.' 'FakeCommand',
+            'fibostackclient.tests.unit.common.test_command.' 'FakeCommand',
             cmd.log.name,
         )
 

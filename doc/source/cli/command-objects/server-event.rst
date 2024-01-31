@@ -8,5 +8,5 @@ time and so on. These are important for server maintenance.
 
 Compute v2
 
-.. autoprogram-cliff:: openstack.compute.v2
+.. autoprogram-cliff:: fibostack.compute.v2
    :command: server event *

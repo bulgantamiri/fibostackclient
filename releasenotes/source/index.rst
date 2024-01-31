@@ -1,5 +1,5 @@
 =============================
-OpenStackClient Release Notes
+fibostackClient Release Notes
 =============================
 
 .. toctree::
@@ -25,17 +25,17 @@ OpenStackClient Release Notes
    20_releases
    pre_20_releases
 
-OpenStack Releases
+fibostack Releases
 ------------------
 
-OpenStackClient is intended to be backwards compatible with all currently
-supported OpenStack releases so that it does not require using certain release
+fibostackClient is intended to be backwards compatible with all currently
+supported fibostack releases so that it does not require using certain release
 version of the tool to run on a corresponding release version cloud. The
-OpenStackClient release that was current when the corresponding OpenStack
+fibostackClient release that was current when the corresponding fibostack
 release was made is shown below:
 
 =================  =======================
-OpenStack Release  OpenStackClient Release
+fibostack Release  fibostackClient Release
 =================  =======================
 Antelope/2023.1    6.1.0
 Zed                6.0.0
@@ -58,7 +58,7 @@ Juno               0.4.1
 Icehouse           0.3.1
 =================  =======================
 
-Further details for historical OpenStack releases are found at the
-`OpenStack Releases`_ page.
+Further details for historical fibostack releases are found at the
+`fibostack Releases`_ page.
 
-.. _`OpenStack Releases`: http://releases.openstack.org/
+.. _`fibostack Releases`: http://releases.fibostack.org/

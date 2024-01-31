@@ -16,11 +16,11 @@
 import copy
 
 from keystoneclient import exceptions as identity_exc
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.identity.v3 import access_rule
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.identity.v3 import access_rule
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
 
 
 class TestAccessRule(identity_fakes.TestIdentityv3):

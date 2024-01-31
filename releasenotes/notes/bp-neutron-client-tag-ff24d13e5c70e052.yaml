@@ -3,7 +3,7 @@ features:
   - |
     Added support for ``tags`` to the following resources:
     ``network``, ``subnet``, ``port``, ``router`` and ``subnet pool``.
-    [Blueprint :oscbp:`neutron-client-tag`]
+    [Blueprint :fscbp:`neutron-client-tag`]
 
     - Add ``--tag`` and ``--no-tag`` options to corresponding "create" commands.
     - Add ``--tag`` and ``--no-tag`` options to corresponding "set" commands.

@@ -20,19 +20,19 @@ import uuid
 
 from cliff import columns
 import iso8601
-from openstack import exceptions as sdk_exceptions
-from openstack import utils as sdk_utils
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fibostack import exceptions as sdk_exceptions
+from fibostack import utils as sdk_utils
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.common import pagination
-from openstackclient.i18n import _
+from fibostackclient.common import pagination
+from fibostackclient.i18n import _
 
 LOG = logging.getLogger(__name__)
 
 
-# TODO(stephenfin): Move this to osc_lib since it's useful elsewhere (e.g.
+# TODO(stephenfin): Move this to fsc_lib since it's useful elsewhere (e.g.
 # glance)
 def is_uuid_like(value) -> bool:
     """Returns validation of a value as a UUID.
@@ -60,14 +60,14 @@ def is_uuid_like(value) -> bool:
 class ServerActionEventColumn(columns.FormattableColumn):
     """Custom formatter for server action events.
 
-    Format the :class:`~openstack.compute.v2.server_action.ServerActionEvent`
+    Format the :class:`~fibostack.compute.v2.server_action.ServerActionEvent`
     objects as we'd like.
     """
 
     def _format_event(self, event):
         column_map = {}
         hidden_columns = ['id', 'name', 'location']
-        _, columns = utils.get_osc_show_columns_for_sdk_resource(
+        _, columns = utils.get_fsc_show_columns_for_sdk_resource(
             event,
             column_map,
             hidden_columns,
@@ -95,7 +95,7 @@ def _get_server_event_columns(item, client):
         # updated_at was introduced in 2.58
         hidden_columns.append('updated_at')
 
-    return utils.get_osc_show_columns_for_sdk_resource(
+    return utils.get_fsc_show_columns_for_sdk_resource(
         item,
         column_map,
         hidden_columns,

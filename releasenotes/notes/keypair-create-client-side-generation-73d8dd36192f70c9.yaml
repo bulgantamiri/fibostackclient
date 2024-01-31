@@ -1,7 +1,7 @@
 ---
 features:
   - |
-    The ``openstack keypair create`` command will now generate keypairs on the
+    The ``fibostack keypair create`` command will now generate keypairs on the
     client side in ssh-ed25519 format. The Compute service no longer supports
     server-side key generation starting with ``--os-compute-api-version 2.92``
     while the use of ssh-ed25519 is necessary as support for ssh-rsa has been

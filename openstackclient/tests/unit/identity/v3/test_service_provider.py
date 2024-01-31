@@ -14,9 +14,9 @@
 
 import copy
 
-from openstackclient.identity.v3 import service_provider
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v3 import fakes as service_fakes
+from fibostackclient.identity.v3 import service_provider
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as service_fakes
 
 
 class TestServiceProvider(service_fakes.TestFederatedIdentity):

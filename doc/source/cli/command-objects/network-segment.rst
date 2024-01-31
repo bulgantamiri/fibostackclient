@@ -12,17 +12,17 @@ Network v2
 .. NOTE(efried): have to list these out one by one; 'network segment *' pulls
                  ... range *.
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: network segment create
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: network segment delete
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: network segment list
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: network segment set
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: network segment show

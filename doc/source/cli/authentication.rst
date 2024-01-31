@@ -4,10 +4,10 @@
 Authentication
 ==============
 
-OpenStackClient leverages `python-keystoneclient`_ authentication
+fibostackClient leverages `python-keystoneclient`_ authentication
 plugins to support a number of different authentication methods.
 
-.. _`python-keystoneclient`: https://docs.openstack.org/python-keystoneclient/latest/using-sessions.html#sharing-authentication-plugins
+.. _`python-keystoneclient`: https://docs.fibostack.org/python-keystoneclient/latest/using-sessions.html#sharing-authentication-plugins
 
 Authentication Process
 ----------------------
@@ -15,7 +15,7 @@ Authentication Process
 The user provides some number of authentication credential options.
 If an authentication type is not provided (``--os-auth-type``), the
 authentication options are examined to determine if one of the default
-types can be used. If no match is found an error is reported and OSC exits.
+types can be used. If no match is found an error is reported and fsc exits.
 
 Note that the authentication call to the Identity service has not yet
 occurred. It is deferred until the last possible moment in order to
@@ -46,7 +46,7 @@ There are at least three authentication types that are always available:
 Detailed Process
 ----------------
 
-The authentication process in OpenStackClient is all contained in and handled
+The authentication process in fibostackClient is all contained in and handled
 by the ``ClientManager`` object.
 
 * On import ``api.auth``:
@@ -137,14 +137,14 @@ Thus, a minimal set of environment variables would be:
 Federated users support
 -----------------------
 
-The OpenStackClient also allows the use of Federated users to log in.
+The fibostackClient also allows the use of Federated users to log in.
 It enables one to use the identity providers credentials such as Google or
-Facebook to log in the OpenStackClient instead of using the Keystone
+Facebook to log in the fibostackClient instead of using the Keystone
 credentials.
 
 This is useful in a Federated environment where one credential give access
 to many applications/services that the Federation supports. To check how to
-configure the OpenStackClient to allow Federated users to log in, please check
+configure the fibostackClient to allow Federated users to log in, please check
 the :ref:`Authentication using federation. <manpage>`
 
 Examples
@@ -163,7 +163,7 @@ Using ``clouds.yaml``:
     clouds:
       demo:
         auth:
-          auth_url: http://openstack.dev/identity
+          auth_url: http://fibostack.dev/identity
           project_name: demo
           project_domain_name: default
           user_domain_name: default
@@ -175,8 +175,8 @@ or, using command line options:
 
 .. code-block:: bash
 
-    $ openstack \
-      --os-auth-url "http://openstack.dev/identity" \
+    $ fibostack \
+      --os-auth-url "http://fibostack.dev/identity" \
       --os-project-name demo \
       --os-project-domain-name default \
       --os-user-domain-name default \
@@ -189,13 +189,13 @@ or, using environment variables:
 
 .. code-block:: bash
 
-    $ export OS_AUTH_URL="http://openstack.dev/identity"
+    $ export OS_AUTH_URL="http://fibostack.dev/identity"
     $ export OS_PROJECT_NAME=demo
     $ export OS_PROJECT_DOMAIN_NAME=default
     $ export OS_AUTH_TYPE=v3password
     $ export OS_USERNAME=demo
     $ export OS_PASSWORD=password
-    $ openstack server list
+    $ fibostack server list
 
 .. note::
 
@@ -211,7 +211,7 @@ Using ``clouds.yaml``:
     clouds:
       demo:
         auth:
-          auth_url: http://openstack.dev/identity
+          auth_url: http://fibostack.dev/identity
           application_credential_id: ${APP_CRED_ID}
           application_credential_secret: ${APP_CRED_SECRET}
         auth_type: v3applicationcredential
@@ -220,8 +220,8 @@ or, using command line options:
 
 .. code-block:: bash
 
-    $ openstack \
-      --os-auth-url "http://openstack.dev/identity" \
+    $ fibostack \
+      --os-auth-url "http://fibostack.dev/identity" \
       --os-auth-type=v3applicationcredential \
       --os-application-credential-id=${APP_CRED_ID} \
       --os-application-credential-secret=${APP_CRED_SECRET}
@@ -231,20 +231,20 @@ or, using environment variables:
 
 .. code-block:: bash
 
-    $ export OS_AUTH_URL="http://openstack.dev/identity"
+    $ export OS_AUTH_URL="http://fibostack.dev/identity"
     $ export OS_AUTH_TYPE=v3applicationcredential
     $ export OS_APPLICATION_CREDENTIAL_ID=${APP_CRED_ID}
     $ export OS_APPLICATION_CREDENTIAL_SECRET=${APP_CRED_SECRET}
-    $ openstack server list
+    $ fibostack server list
 
 .. note::
 
-    You can generate application credentials using the :program:`openstack
+    You can generate application credentials using the :program:`fibostack
     application credential create` command:
 
     .. code-block:: bash
 
-       $ readarray -t lines <<< $(openstack application credential create test -f value -c id -c secret)
+       $ readarray -t lines <<< $(fibostack application credential create test -f value -c id -c secret)
        $ APP_CRED_ID=${lines[0]}
        $ APP_CRED_SECRET=${lines[1]}
 
@@ -258,7 +258,7 @@ Using ``clouds.yaml``:
     clouds:
       demo:
         auth:
-          auth_url: http://openstack.dev/identity
+          auth_url: http://fibostack.dev/identity
           project_name: demo
           project_domain_name: default
           token: ${TOKEN}
@@ -268,8 +268,8 @@ or, using command line options:
 
 .. code-block:: bash
 
-    $ openstack \
-      --os-auth-url "http://openstack.dev/identity" \
+    $ fibostack \
+      --os-auth-url "http://fibostack.dev/identity" \
       --os-project-name demo \
       --os-project-domain-name default \
       --os-auth-type=v3token \
@@ -280,20 +280,20 @@ or, using environment variables:
 
 .. code-block:: bash
 
-    $ export OS_AUTH_URL="http://openstack.dev/identity"
+    $ export OS_AUTH_URL="http://fibostack.dev/identity"
     $ export OS_PROJECT_NAME=demo
     $ export OS_PROJECT_DOMAIN_NAME=default
     $ export OS_AUTH_TYPE=v3token
     $ export OS_TOKEN=${TOKEN}
-    $ openstack server list
+    $ fibostack server list
 
 .. note::
 
-    You can generate tokens using the :program:`openstack token issue` command:
+    You can generate tokens using the :program:`fibostack token issue` command:
 
     .. code-block:: bash
 
-       $ TOKEN=$(openstack token issue -f value -c id)
+       $ TOKEN=$(fibostack token issue -f value -c id)
 
 ``v3totp``
 ~~~~~~~~~~
@@ -320,7 +320,7 @@ Using ``clouds.yaml``:
     clouds:
       demo:
         auth:
-          auth_url: http://openstack.dev/identity
+          auth_url: http://fibostack.dev/identity
           project_name: demo
           project_domain_name: default
           user_domain_name: default
@@ -332,8 +332,8 @@ or, using command line options:
 
 .. code-block:: bash
 
-    $ openstack \
-      --os-auth-url "http://openstack.dev/identity" \
+    $ fibostack \
+      --os-auth-url "http://fibostack.dev/identity" \
       --os-project-name demo \
       --os-project-domain-name default \
       --os-user-domain-name default \
@@ -346,13 +346,13 @@ or, using environment variables:
 
 .. code-block:: bash
 
-    $ export OS_AUTH_URL="http://openstack.dev/identity"
+    $ export OS_AUTH_URL="http://fibostack.dev/identity"
     $ export OS_PROJECT_NAME=demo
     $ export OS_PROJECT_DOMAIN_NAME=default
     $ export OS_AUTH_TYPE=v3totp
     $ export OS_USERNAME=demo
     $ export OS_PASSCODE=${PASSCODE}
-    $ openstack server list
+    $ fibostack server list
 
 .. note::
 
@@ -361,7 +361,7 @@ or, using environment variables:
     information on how to configure an authenticator application, or to the
     `Keystone documentation`__ if you are configuring this for your own cloud.
 
-    .. __: https://docs.openstack.org/keystone/latest/admin/auth-totp.html
+    .. __: https://docs.fibostack.org/keystone/latest/admin/auth-totp.html
 
 .. note::
 

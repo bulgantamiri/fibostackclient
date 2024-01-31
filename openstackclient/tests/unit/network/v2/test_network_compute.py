@@ -14,18 +14,18 @@
 from unittest import mock
 from unittest.mock import call
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.network.v2 import network
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
-from openstackclient.tests.unit import utils as tests_utils
+from fibostackclient.network.v2 import network
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.tests.unit import utils as tests_utils
 
 
 # Tests for Nova network
 #
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.network_create')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.network_create')
 class TestCreateNetworkCompute(compute_fakes.TestComputev2):
     # The network to create.
     _network = compute_fakes.create_one_network()
@@ -165,7 +165,7 @@ class TestCreateNetworkCompute(compute_fakes.TestComputev2):
         self.assertEqual(self.data, data)
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.network_delete')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.network_delete')
 class TestDeleteNetworkCompute(compute_fakes.TestComputev2):
     def setUp(self):
         super(TestDeleteNetworkCompute, self).setUp()
@@ -245,7 +245,7 @@ class TestDeleteNetworkCompute(compute_fakes.TestComputev2):
         net_mock.assert_any_call('xxxx-yyyy-zzzz')
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.network_list')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.network_list')
 class TestListNetworkCompute(compute_fakes.TestComputev2):
     # The networks going to be listed up.
     _networks = compute_fakes.create_networks(count=3)
@@ -290,7 +290,7 @@ class TestListNetworkCompute(compute_fakes.TestComputev2):
         self.assertEqual(self.data, list(data))
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.network_find')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.network_find')
 class TestShowNetworkCompute(compute_fakes.TestComputev2):
     # The network to show.
     _network = compute_fakes.create_one_network()

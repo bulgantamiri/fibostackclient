@@ -8,5 +8,5 @@ to **Floating IP** of IPv4 in functionality.
 
 Network v2
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: router ndp proxy *

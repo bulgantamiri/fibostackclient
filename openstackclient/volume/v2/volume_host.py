@@ -14,9 +14,9 @@
 
 """Volume v2 host action implementations"""
 
-from osc_lib.command import command
+from fsc_lib.command import command
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 class FailoverVolumeHost(command.Command):

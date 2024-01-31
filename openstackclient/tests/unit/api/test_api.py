@@ -13,10 +13,10 @@
 
 """Base API Library Tests"""
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.api import api
-from openstackclient.tests.unit.api import fakes as api_fakes
+from fibostackclient.api import api
+from fibostackclient.tests.unit.api import fakes as api_fakes
 
 
 class TestKeystoneSession(api_fakes.TestSession):

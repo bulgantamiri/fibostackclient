@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class IPAvailabilityTests(common.NetworkTests):
@@ -27,8 +27,8 @@ class IPAvailabilityTests(common.NetworkTests):
             cls.NETWORK_NAME = uuid.uuid4().hex
 
             # Create a network for the subnet
-            cls.openstack('network create ' + cls.NETWORK_NAME)
-            cmd_output = cls.openstack(
+            cls.fibostack('network create ' + cls.NETWORK_NAME)
+            cmd_output = cls.fibostack(
                 'subnet create '
                 + '--network '
                 + cls.NETWORK_NAME
@@ -43,8 +43,8 @@ class IPAvailabilityTests(common.NetworkTests):
     def tearDownClass(cls):
         try:
             if cls.haz_network:
-                raw_subnet = cls.openstack('subnet delete ' + cls.NAME)
-                raw_network = cls.openstack(
+                raw_subnet = cls.fibostack('subnet delete ' + cls.NAME)
+                raw_network = cls.fibostack(
                     'network delete ' + cls.NETWORK_NAME
                 )
                 cls.assertOutput('', raw_subnet)
@@ -54,7 +54,7 @@ class IPAvailabilityTests(common.NetworkTests):
 
     def test_ip_availability_list(self):
         """Test ip availability list"""
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'ip availability list',
             parse_output=True,
         )
@@ -63,7 +63,7 @@ class IPAvailabilityTests(common.NetworkTests):
 
     def test_ip_availability_show(self):
         """Test ip availability show"""
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'ip availability show ' + self.NETWORK_NAME,
             parse_output=True,
         )

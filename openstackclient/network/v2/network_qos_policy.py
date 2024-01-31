@@ -16,13 +16,13 @@
 import logging
 
 from cliff import columns as cliff_columns
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.i18n import _
-from openstackclient.identity import common as identity_common
-from openstackclient.network import common
+from fibostackclient.i18n import _
+from fibostackclient.identity import common as identity_common
+from fibostackclient.network import common
 
 LOG = logging.getLogger(__name__)
 
@@ -42,7 +42,7 @@ def _get_columns(item):
         'is_shared': 'shared',
     }
     hidden_columns = ['location', 'tenant_id']
-    return utils.get_osc_show_columns_for_sdk_resource(
+    return utils.get_fsc_show_columns_for_sdk_resource(
         item, column_map, hidden_columns
     )
 
@@ -78,7 +78,7 @@ def _get_attrs(client_manager, parsed_args):
 
 
 # TODO(abhiraut): Use the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class CreateNetworkQosPolicy(
     command.ShowOne, common.NeutronCommandWithExtraArgs
 ):
@@ -180,7 +180,7 @@ class DeleteNetworkQosPolicy(command.Command):
 
 
 # TODO(abhiraut): Use only the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class ListNetworkQosPolicy(command.Lister):
     _description = _("List QoS policies")
 
@@ -239,7 +239,7 @@ class ListNetworkQosPolicy(command.Lister):
 
 
 # TODO(abhiraut): Use the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class SetNetworkQosPolicy(common.NeutronCommandWithExtraArgs):
     _description = _("Set QoS policy properties")
 

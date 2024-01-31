@@ -11,9 +11,9 @@
 #   under the License.
 #
 
-from openstackclient.common import limits
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
-from openstackclient.tests.unit.volume.v2 import fakes as volume_fakes
+from fibostackclient.common import limits
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.tests.unit.volume.v2 import fakes as volume_fakes
 
 
 class TestComputeLimits(compute_fakes.TestComputev2):

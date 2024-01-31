@@ -13,7 +13,7 @@
 #   under the License.
 #
 
-from openstackclient.tests.functional.compute.v2 import common
+from fibostackclient.tests.functional.compute.v2 import common
 
 
 class ServerEventTests(common.ComputeTestCase):
@@ -31,7 +31,7 @@ class ServerEventTests(common.ComputeTestCase):
     def test_server_event_list_and_show(self):
         """Test list, show server event"""
         # Test 'server event list' for creating
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server event list ' + self.server_name,
             parse_output=True,
         )
@@ -46,7 +46,7 @@ class ServerEventTests(common.ComputeTestCase):
                 break
         self.assertIsNotNone(request_id)
         # Test 'server event show' for creating
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server event show ' + self.server_name + ' ' + request_id,
             parse_output=True,
         )
@@ -56,9 +56,9 @@ class ServerEventTests(common.ComputeTestCase):
         self.assertIsInstance(cmd_output.get('events'), list)
 
         # Reboot server, trigger reboot event
-        self.openstack('server reboot --wait ' + self.server_name)
+        self.fibostack('server reboot --wait ' + self.server_name)
         # Test 'server event list --long' for rebooting
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server event list --long ' + self.server_name,
             parse_output=True,
         )
@@ -73,7 +73,7 @@ class ServerEventTests(common.ComputeTestCase):
                 break
         self.assertIsNotNone(request_id)
         # Test 'server event show' for rebooting
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server event show ' + self.server_name + ' ' + request_id,
             parse_output=True,
         )
@@ -89,10 +89,10 @@ class ServerEventTests(common.ComputeTestCase):
         cmd_output = self.server_create(cleanup=False)
         server_id = cmd_output['id']
         # Delete the server
-        self.openstack('server delete --wait ' + server_id)
+        self.fibostack('server delete --wait ' + server_id)
         # And verify we can get the event list after it's deleted
         # Test 'server event list' for deleting
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             '--os-compute-api-version 2.21 ' 'server event list ' + server_id,
             parse_output=True,
         )
@@ -107,7 +107,7 @@ class ServerEventTests(common.ComputeTestCase):
                 break
         self.assertIsNotNone(request_id)
         # Test 'server event show' for deleting
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             '--os-compute-api-version 2.21 '
             'server event show ' + server_id + ' ' + request_id,
             parse_output=True,

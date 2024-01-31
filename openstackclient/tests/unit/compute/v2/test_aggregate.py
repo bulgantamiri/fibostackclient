@@ -16,14 +16,14 @@
 from unittest import mock
 from unittest.mock import call
 
-from openstack import exceptions as sdk_exceptions
-from openstack import utils as sdk_utils
-from osc_lib.cli import format_columns
-from osc_lib import exceptions
+from fibostack import exceptions as sdk_exceptions
+from fibostack import utils as sdk_utils
+from fsc_lib.cli import format_columns
+from fsc_lib import exceptions
 
-from openstackclient.compute.v2 import aggregate
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
-from openstackclient.tests.unit.image.v2 import fakes as image_fakes
+from fibostackclient.compute.v2 import aggregate
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.tests.unit.image.v2 import fakes as image_fakes
 
 
 class TestAggregate(compute_fakes.TestComputev2):

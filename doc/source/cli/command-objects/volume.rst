@@ -12,7 +12,7 @@ Create new volume
 .. program:: volume create
 .. code:: bash
 
-    openstack volume create
+    fibostack volume create
         [--size <size>]
         [--type <volume-type>]
         [--image <image> | --snapshot <snapshot> | --source <volume> ]
@@ -101,7 +101,7 @@ Delete volume(s)
 .. program:: volume delete
 .. code:: bash
 
-    openstack volume delete
+    fibostack volume delete
         [--force | --purge]
         <volume> [<volume> ...]
 
@@ -128,7 +128,7 @@ List volumes
 .. program:: volume list
 .. code:: bash
 
-    openstack volume list
+    fibostack volume list
         [--project <project> [--project-domain <project-domain>]]
         [--user <user> [--user-domain <user-domain>]]
         [--name <name>]
@@ -200,7 +200,7 @@ Migrate volume to a new host
 .. program:: volume migrate
 .. code:: bash
 
-    openstack volume migrate
+    fibostack volume migrate
         --host <host>
         [--force-host-copy]
         [--lock-volume]
@@ -235,7 +235,7 @@ Set volume properties
 .. program:: volume set
 .. code:: bash
 
-    openstack volume set
+    fibostack volume set
         [--name <name>]
         [--size <size>]
         [--description <description>]
@@ -352,7 +352,7 @@ Show volume details
 .. program:: volume show
 .. code:: bash
 
-    openstack volume show
+    fibostack volume show
         <volume>
 
 .. _volume_show-volume:
@@ -368,7 +368,7 @@ Unset volume properties
 .. program:: volume unset
 .. code:: bash
 
-    openstack volume unset
+    fibostack volume unset
         [--property <key>]
         [--image-property <key>]
         <volume>
@@ -391,8 +391,8 @@ Unset volume properties
 
 Block Storage v3
 
- .. autoprogram-cliff:: openstack.volume.v3
+ .. autoprogram-cliff:: fibostack.volume.v3
      :command: volume summary
 
- .. autoprogram-cliff:: openstack.volume.v3
+ .. autoprogram-cliff:: fibostack.volume.v3
      :command: volume revert

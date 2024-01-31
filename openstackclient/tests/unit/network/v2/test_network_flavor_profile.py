@@ -12,11 +12,11 @@
 
 from unittest import mock
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.network.v2 import network_flavor_profile
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes_v3
-from openstackclient.tests.unit.network.v2 import fakes as network_fakes
+from fibostackclient.network.v2 import network_flavor_profile
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes_v3
+from fibostackclient.tests.unit.network.v2 import fakes as network_fakes
 
 
 class TestFlavorProfile(network_fakes.TestNetworkV2):

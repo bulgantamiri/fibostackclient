@@ -13,11 +13,11 @@
 from unittest import mock
 from unittest.mock import call
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.identity.v3 import credential
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
-from openstackclient.tests.unit import utils
+from fibostackclient.identity.v3 import credential
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.tests.unit import utils
 
 
 class TestCredential(identity_fakes.TestIdentityv3):

@@ -13,7 +13,7 @@
 
 """Image v1 API Library"""
 
-from openstackclient.api import api
+from fibostackclient.api import api
 
 
 class APIv1(api.BaseAPI):
@@ -49,9 +49,9 @@ class APIv1(api.BaseAPI):
         images are returned.  Both arguments True is a filter that includes
         both public and private images which is the same set as all images.
 
-        http://docs.openstack.org/api/openstack-image-service/1.1/content/requesting-a-list-of-public-vm-images.html
-        http://docs.openstack.org/api/openstack-image-service/1.1/content/requesting-detailed-metadata-on-public-vm-images.html
-        http://docs.openstack.org/api/openstack-image-service/1.1/content/filtering-images-returned-via-get-images-and-get-imagesdetail.html
+        http://docs.fibostack.org/api/fibostack-image-service/1.1/content/requesting-a-list-of-public-vm-images.html
+        http://docs.fibostack.org/api/fibostack-image-service/1.1/content/requesting-detailed-metadata-on-public-vm-images.html
+        http://docs.fibostack.org/api/fibostack-image-service/1.1/content/filtering-images-returned-via-get-images-and-get-imagesdetail.html
         """
 
         url = "/images"

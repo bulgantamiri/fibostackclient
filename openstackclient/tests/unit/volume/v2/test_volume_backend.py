@@ -12,10 +12,10 @@
 #   under the License.
 #
 
-from osc_lib.cli import format_columns
+from fsc_lib.cli import format_columns
 
-from openstackclient.tests.unit.volume.v2 import fakes as volume_fakes
-from openstackclient.volume.v2 import volume_backend
+from fibostackclient.tests.unit.volume.v2 import fakes as volume_fakes
+from fibostackclient.volume.v2 import volume_backend
 
 
 class TestShowVolumeCapability(volume_fakes.TestVolume):

@@ -15,7 +15,7 @@ import uuid
 from tempest.lib.common.utils import data_utils
 from tempest.lib import exceptions
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 
 class QuotaTests(base.TestCase):
@@ -32,16 +32,16 @@ class QuotaTests(base.TestCase):
         super().setUpClass()
         cls.haz_network = cls.is_service_enabled('network')
         cls.PROJECT_NAME = data_utils.rand_name('TestProject')
-        cls.openstack(f'project create {cls.PROJECT_NAME}')
+        cls.fibostack(f'project create {cls.PROJECT_NAME}')
 
     @classmethod
     def tearDownClass(cls):
-        cls.openstack(f'project delete {cls.PROJECT_NAME}')
+        cls.fibostack(f'project delete {cls.PROJECT_NAME}')
         super().tearDownClass()
 
     def test_quota_list_details_compute(self):
         expected_headers = ["Resource", "In Use", "Reserved", "Limit"]
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'quota list --detail --compute',
             parse_output=True,
         )
@@ -58,7 +58,7 @@ class QuotaTests(base.TestCase):
 
     def test_quota_list_details_network(self):
         expected_headers = ["Resource", "In Use", "Reserved", "Limit"]
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'quota list --detail --network',
             parse_output=True,
         )
@@ -76,8 +76,8 @@ class QuotaTests(base.TestCase):
     def test_quota_list_network_option(self):
         if not self.haz_network:
             self.skipTest("No Network service present")
-        self.openstack('quota set --networks 40 ' + self.PROJECT_NAME)
-        cmd_output = self.openstack(
+        self.fibostack('quota set --networks 40 ' + self.PROJECT_NAME)
+        cmd_output = self.fibostack(
             'quota list --network',
             parse_output=True,
         )
@@ -88,8 +88,8 @@ class QuotaTests(base.TestCase):
         )
 
     def test_quota_list_compute_option(self):
-        self.openstack('quota set --instances 30 ' + self.PROJECT_NAME)
-        cmd_output = self.openstack(
+        self.fibostack('quota set --instances 30 ' + self.PROJECT_NAME)
+        cmd_output = self.fibostack(
             'quota list --compute',
             parse_output=True,
         )
@@ -100,8 +100,8 @@ class QuotaTests(base.TestCase):
         )
 
     def test_quota_list_volume_option(self):
-        self.openstack('quota set --volumes 20 ' + self.PROJECT_NAME)
-        cmd_output = self.openstack(
+        self.fibostack('quota set --volumes 20 ' + self.PROJECT_NAME)
+        cmd_output = self.fibostack(
             'quota list --volume',
             parse_output=True,
         )
@@ -116,12 +116,12 @@ class QuotaTests(base.TestCase):
         network_option = ""
         if self.haz_network:
             network_option = "--routers 21 "
-        self.openstack(
+        self.fibostack(
             'quota set --cores 31 --backups 41 '
             + network_option
             + self.PROJECT_NAME
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'quota show ' + self.PROJECT_NAME,
             parse_output=True,
         )
@@ -142,7 +142,7 @@ class QuotaTests(base.TestCase):
             )
 
         # Check default quotas
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'quota show --default',
             parse_output=True,
         )
@@ -156,10 +156,10 @@ class QuotaTests(base.TestCase):
             self.assertTrue(cmd_output["routers"] >= 0)
 
     def test_quota_set_class(self):
-        self.openstack(
+        self.fibostack(
             'quota set --key-pairs 33 --snapshots 43 ' + '--class default'
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'quota show --class default',
             parse_output=True,
         )
@@ -175,7 +175,7 @@ class QuotaTests(base.TestCase):
         )
 
         # Check default quota class
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'quota show --class',
             parse_output=True,
         )
@@ -187,7 +187,7 @@ class QuotaTests(base.TestCase):
         self.assertTrue(cmd_output["snapshots"] >= 0)
 
     def _restore_quota_limit(self, resource, limit, project):
-        self.openstack('quota set --%s %s %s' % (resource, limit, project))
+        self.fibostack('quota set --%s %s %s' % (resource, limit, project))
 
     def test_quota_network_set_with_no_force(self):
         if not self.haz_network:
@@ -195,7 +195,7 @@ class QuotaTests(base.TestCase):
         if not self.is_extension_enabled('quota-check-limit'):
             self.skipTest('No "quota-check-limit" extension present')
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'quota list --network',
             parse_output=True,
         )
@@ -206,8 +206,8 @@ class QuotaTests(base.TestCase):
             self.PROJECT_NAME,
         )
 
-        self.openstack('quota set --networks 40 ' + self.PROJECT_NAME)
-        cmd_output = self.openstack(
+        self.fibostack('quota set --networks 40 ' + self.PROJECT_NAME)
+        cmd_output = self.fibostack(
             'quota list --network',
             parse_output=True,
         )
@@ -216,14 +216,14 @@ class QuotaTests(base.TestCase):
 
         # That will ensure we have at least two networks in the system.
         for _ in range(2):
-            self.openstack(
+            self.fibostack(
                 'network create --project %s %s'
                 % (self.PROJECT_NAME, uuid.uuid4().hex)
             )
 
         self.assertRaises(
             exceptions.CommandFailed,
-            self.openstack,
+            self.fibostack,
             'quota set --networks 1 --no-force ' + self.PROJECT_NAME,
         )
 
@@ -241,7 +241,7 @@ class QuotaTests(base.TestCase):
         if not self.is_extension_enabled('quota-check-limit'):
             self.skipTest('No "quota-check-limit" extension present')
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'quota list --network',
             parse_output=True,
         )
@@ -252,8 +252,8 @@ class QuotaTests(base.TestCase):
             self.PROJECT_NAME,
         )
 
-        self.openstack('quota set --networks 40 ' + self.PROJECT_NAME)
-        cmd_output = self.openstack(
+        self.fibostack('quota set --networks 40 ' + self.PROJECT_NAME)
+        cmd_output = self.fibostack(
             'quota list --network',
             parse_output=True,
         )
@@ -262,13 +262,13 @@ class QuotaTests(base.TestCase):
 
         # That will ensure we have at least two networks in the system.
         for _ in range(2):
-            self.openstack(
+            self.fibostack(
                 'network create --project %s %s'
                 % (self.PROJECT_NAME, uuid.uuid4().hex)
             )
 
-        self.openstack('quota set --networks 1 --force ' + self.PROJECT_NAME)
-        cmd_output = self.openstack(
+        self.fibostack('quota set --networks 1 --force ' + self.PROJECT_NAME)
+        cmd_output = self.fibostack(
             'quota list --network',
             parse_output=True,
         )

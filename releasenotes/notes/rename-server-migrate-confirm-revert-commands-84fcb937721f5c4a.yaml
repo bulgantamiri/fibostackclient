@@ -2,6 +2,6 @@
 upgrade:
   - |
     The ``server migrate confirm`` and ``server migrate revert`` commands,
-    introduced in OSC 5.0, have been deprecated in favour of
+    introduced in fsc 5.0, have been deprecated in favour of
     ``server migration confirm`` and ``server migration revert`` respectively.
     The deprecated commands will be removed in a future major version.

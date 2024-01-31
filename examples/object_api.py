@@ -27,8 +27,8 @@ import sys
 import common
 from os_client_config import config as cloud_config
 
-from openstackclient.api import object_store_v1 as object_store
-from openstackclient.identity import client as identity_client
+from fibostackclient.api import object_store_v1 as object_store
+from fibostackclient.identity import client as identity_client
 
 
 LOG = logging.getLogger('')
@@ -40,16 +40,16 @@ def run(opts):
     # Look for configuration file
     # To support token-flow we have no required values
     # print "options: %s" % self.options
-    cloud = cloud_config.OpenStackConfig().get_one_cloud(
+    cloud = cloud_config.fibostackConfig().get_one_cloud(
         cloud=opts.cloud,
         argparse=opts,
     )
     LOG.debug("cloud cfg: %s", cloud.config)
 
     # Set up certificate verification and CA bundle
-    # NOTE(dtroyer): This converts from the usual OpenStack way to the single
+    # NOTE(dtroyer): This converts from the usual fibostack way to the single
     #                requests argument and is an app-specific thing because
-    #                we want to be like OpenStackClient.
+    #                we want to be like fibostackClient.
     if opts.cacert:
         verify = opts.cacert
     else:

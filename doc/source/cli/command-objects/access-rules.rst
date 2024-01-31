@@ -18,7 +18,7 @@ Delete access rule(s)
 .. program:: access rule delete
 .. code:: bash
 
-    openstack access rule delete <access-rule> [<access-rule> ...]
+    fibostack access rule delete <access-rule> [<access-rule> ...]
 
 .. describe:: <access-rule>
 
@@ -32,7 +32,7 @@ List access rules
 .. program:: access rule list
 .. code:: bash
 
-    openstack access rule list
+    fibostack access rule list
         [--user <user>]
         [--user-domain <user-domain>]
 
@@ -54,7 +54,7 @@ Display access rule details
 .. program:: access rule show
 .. code:: bash
 
-    openstack access rule show <access-rule>
+    fibostack access rule show <access-rule>
 
 .. describe:: <access-rule>
 

@@ -1,4 +1,4 @@
 ---
 features:
   - |
-    Migrate openstack server add volume to using sdk.
+    Migrate fibostack server add volume to using sdk.

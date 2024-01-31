@@ -11,20 +11,20 @@ Network v2
 .. NOTE(efried): have to list these out one by one; 'subnet *' pulls in
                  subnet pool *.
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: subnet create
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: subnet delete
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: subnet list
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: subnet set
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: subnet show
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: subnet unset

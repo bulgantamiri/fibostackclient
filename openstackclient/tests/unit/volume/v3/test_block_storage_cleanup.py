@@ -13,10 +13,10 @@
 import uuid
 
 from cinderclient import api_versions
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.tests.unit.volume.v3 import fakes as volume_fakes
-from openstackclient.volume.v3 import block_storage_cleanup
+from fibostackclient.tests.unit.volume.v3 import fakes as volume_fakes
+from fibostackclient.volume.v3 import block_storage_cleanup
 
 
 class TestBlockStorage(volume_fakes.TestVolume):

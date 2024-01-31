@@ -14,9 +14,9 @@
 
 """Versions Action Implementation"""
 
-from osc_lib.command import command
+from fsc_lib.command import command
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 class ShowVersions(command.Lister):
@@ -51,7 +51,7 @@ class ShowVersions(command.Lister):
                 'be either an exact match to what is in the catalog or a '
                 'known official value or alias from '
                 'service-types-authority '
-                '(https://service-types.openstack.org/)'
+                '(https://service-types.fibostack.org/)'
             ),
         )
         parser.add_argument(

@@ -14,9 +14,9 @@
 import datetime
 from unittest import mock
 
-from openstackclient.compute.v2 import usage as usage_cmds
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.compute.v2 import usage as usage_cmds
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
 
 
 class TestUsage(compute_fakes.TestComputev2):

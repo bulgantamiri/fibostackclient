@@ -2,17 +2,17 @@
 Command Logs
 ============
 
-Logger usage in OpenStackClient is not exactly the same as those in other
-OpenStack projects. The following basic rules should be followed.
+Logger usage in fibostackClient is not exactly the same as those in other
+fibostack projects. The following basic rules should be followed.
 
-1. OpenStackClient uses python standard logging library instead of oslo.log
+1. fibostackClient uses python standard logging library instead of oslo.log
    so that it will depend on oslo as little as possible.
 
 2. All logs except debug log need to be translated. The log message strings
    that need to be translated should follow the rule of i18n guidelines:
-   https://docs.openstack.org/oslo.i18n/latest/user/guidelines.html
+   https://docs.fibostack.org/oslo.i18n/latest/user/guidelines.html
 
-3. There are mainly two kinds of logs in OpenStackClient: command specific
+3. There are mainly two kinds of logs in fibostackClient: command specific
    log and general log. Use different logger to record them. The examples
    below will show the detail.
 
@@ -20,19 +20,19 @@ Command specific log
 ====================
 
 Command specific logs are those messages that used to record info, warning
-and error generated from a specific command. OpenStackClient uses the logger
+and error generated from a specific command. fibostackClient uses the logger
 of the module the command belongs to to record the command specific logs.
 
 Example
 ~~~~~~~
 
-This example shows how to log command specific logs in OpenStackClient.
+This example shows how to log command specific logs in fibostackClient.
 
 .. code-block:: python
 
     import logging
 
-    from openstackclient.i18n import _
+    from fibostackclient.i18n import _
 
 
     LOG = logging.getLogger(__name__)     # Get the logger of this module
@@ -50,17 +50,17 @@ General log
 ===========
 
 General logs are those messages that not specific to any single command. Use
-the logger of ``openstackclient.shell`` to record them. In each command class,
+the logger of ``fibostackclient.shell`` to record them. In each command class,
 we can simply get this logger by ``self.app.log``.
 
 Example
 ~~~~~~~
 
-This example shows how to log general logs in OpenStackClient.
+This example shows how to log general logs in fibostackClient.
 
 .. code-block:: python
 
-    from openstackclient.i18n import _
+    from fibostackclient.i18n import _
 
 
     ## ...

@@ -16,11 +16,11 @@
 from unittest import mock
 
 from keystoneauth1 import exceptions as ks_exc
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.identity.v2_0 import user
-from openstackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
+from fibostackclient.identity.v2_0 import user
+from fibostackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
 
 
 class TestUser(identity_fakes.TestIdentityv2):
@@ -149,7 +149,7 @@ class TestUserCreate(TestUser):
         # data to be shown.
         mocker = mock.Mock()
         mocker.return_value = 'abc123'
-        with mock.patch("osc_lib.utils.get_password", mocker):
+        with mock.patch("fsc_lib.utils.get_password", mocker):
             columns, data = self.cmd.take_action(parsed_args)
 
         # Set expected values
@@ -636,7 +636,7 @@ class TestUserSet(TestUser):
 
         mocker = mock.Mock()
         mocker.return_value = 'abc123'
-        with mock.patch("osc_lib.utils.get_password", mocker):
+        with mock.patch("fsc_lib.utils.get_password", mocker):
             result = self.cmd.take_action(parsed_args)
 
         # UserManager.update_password(user, password)

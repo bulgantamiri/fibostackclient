@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.volume.v1 import common
+from fibostackclient.tests.functional.volume.v1 import common
 
 
 class TransferRequestTests(common.BaseVolumeTests):
@@ -24,7 +24,7 @@ class TransferRequestTests(common.BaseVolumeTests):
     @classmethod
     def setUpClass(cls):
         super(TransferRequestTests, cls).setUpClass()
-        cmd_output = cls.openstack(
+        cmd_output = cls.fibostack(
             'volume create --size 1 ' + cls.VOLUME_NAME,
             parse_output=True,
         )
@@ -35,7 +35,7 @@ class TransferRequestTests(common.BaseVolumeTests):
     @classmethod
     def tearDownClass(cls):
         try:
-            raw_output_volume = cls.openstack(
+            raw_output_volume = cls.fibostack(
                 'volume delete ' + cls.VOLUME_NAME
             )
             cls.assertOutput('', raw_output_volume)
@@ -47,7 +47,7 @@ class TransferRequestTests(common.BaseVolumeTests):
         name = uuid.uuid4().hex
 
         # create a volume
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create --size 1 ' + volume_name,
             parse_output=True,
         )
@@ -55,7 +55,7 @@ class TransferRequestTests(common.BaseVolumeTests):
 
         # create volume transfer request for the volume
         # and get the auth_key of the new transfer request
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume transfer request create '
             + volume_name
             + ' --name '
@@ -66,7 +66,7 @@ class TransferRequestTests(common.BaseVolumeTests):
         self.assertTrue(auth_key)
 
         # accept the volume transfer request
-        output = self.openstack(
+        output = self.fibostack(
             'volume transfer request accept '
             + name
             + ' '
@@ -78,12 +78,12 @@ class TransferRequestTests(common.BaseVolumeTests):
 
         # the volume transfer will be removed by default after accepted
         # so just need to delete the volume here
-        raw_output = self.openstack('volume delete ' + volume_name)
+        raw_output = self.fibostack('volume delete ' + volume_name)
         self.assertEqual('', raw_output)
 
     def test_volume_transfer_request_list_show(self):
         name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume transfer request create '
             + ' --name '
             + name
@@ -92,19 +92,19 @@ class TransferRequestTests(common.BaseVolumeTests):
             parse_output=True,
         )
         self.addCleanup(
-            self.openstack, 'volume transfer request delete ' + name
+            self.fibostack, 'volume transfer request delete ' + name
         )
         self.assertOutput(name, cmd_output['name'])
         auth_key = cmd_output['auth_key']
         self.assertTrue(auth_key)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume transfer request list',
             parse_output=True,
         )
         self.assertIn(name, [req['Name'] for req in cmd_output])
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume transfer request show ' + name,
             parse_output=True,
         )

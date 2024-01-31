@@ -1,4 +1,4 @@
-#   Copyright 2012-2013 OpenStack Foundation
+#   Copyright 2012-2013 fibostack Foundation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
 #   not use this file except in compliance with the License. You may obtain
@@ -15,19 +15,19 @@
 
 """Compute v2 Console action implementations"""
 
-from osc_lib.cli import parseractions
-from osc_lib.command import command
-from osc_lib import utils
+from fsc_lib.cli import parseractions
+from fsc_lib.command import command
+from fsc_lib import utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 def _get_console_columns(item):
     # To maintain backwards compatibility we need to rename sdk props to
-    # whatever OSC was using before
+    # whatever fsc was using before
     column_map = {}
     hidden_columns = ['id', 'links', 'location', 'name']
-    return utils.get_osc_show_columns_for_sdk_resource(
+    return utils.get_fsc_show_columns_for_sdk_resource(
         item, column_map, hidden_columns
     )
 

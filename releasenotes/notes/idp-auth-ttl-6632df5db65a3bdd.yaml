@@ -5,5 +5,5 @@ features:
     accept the ``--authorization-ttl <VALUE>`` argument, with ``<VALUE>``
     being a non-negative integer.
 
-    See `note <https://docs.openstack.org/keystone/latest/admin/federation/configure_federation.html#create-a-mapping>`_
+    See `note <https://docs.fibostack.org/keystone/latest/admin/federation/configure_federation.html#create-a-mapping>`_
     in Keystone documentations for more details on the meaning of this option.

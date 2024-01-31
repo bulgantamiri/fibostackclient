@@ -2,11 +2,11 @@
 Command Options
 ===============
 
-OpenStackClient commands all have a set of zero or more options unique to
+fibostackClient commands all have a set of zero or more options unique to
 the command, however there are of course ways in which these options are
 common and consistent across all of the commands that include them.
 
-These are the set of guidelines for OSC developers that help keep the
+These are the set of guidelines for fsc developers that help keep the
 interface and commands consistent.
 
 In some cases (like the boolean variables below) we use the same pattern
@@ -19,7 +19,7 @@ In short:
 
 * All option names shall be GNU-style long names (two leading dashes).
 * Some global options may have short names, generally limited to those defined
-  in support libraries such as `cliff <https://docs.openstack.org/cliff/latest>`__.
+  in support libraries such as `cliff <https://docs.fibostack.org/cliff/latest>`__.
 
 General Command Options
 =======================
@@ -279,8 +279,8 @@ The parser declaration should look like this:
 Pagination
 ----------
 
-There are many ways to do pagination, some OpenStack APIs support it, some
-don't. OpenStackClient attempts to define a single common way to specify
+There are many ways to do pagination, some fibostack APIs support it, some
+don't. fibostackClient attempts to define a single common way to specify
 pagination on the command line.
 
 .. option:: --marker <resource>

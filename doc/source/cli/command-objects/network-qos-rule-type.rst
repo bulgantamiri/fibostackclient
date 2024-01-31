@@ -7,5 +7,5 @@ used.
 
 Network v2
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: network qos rule type *

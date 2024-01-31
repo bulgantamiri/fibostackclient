@@ -12,14 +12,14 @@
 
 from unittest import mock
 
-from openstackclient.common import extension
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
-from openstackclient.tests.unit.network.v2 import fakes as network_fakes
-from openstackclient.tests.unit import utils
-from openstackclient.tests.unit import utils as tests_utils
-from openstackclient.tests.unit.volume.v3 import fakes as volume_fakes
+from fibostackclient.common import extension
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
+from fibostackclient.tests.unit.network.v2 import fakes as network_fakes
+from fibostackclient.tests.unit import utils
+from fibostackclient.tests.unit import utils as tests_utils
+from fibostackclient.tests.unit.volume.v3 import fakes as volume_fakes
 
 
 class TestExtension(network_fakes.FakeClientMixin, utils.TestCommand):

@@ -6,7 +6,7 @@ A **network topology** shows a topological graph about
 devices which connect to the specific network. Also, it
 will return availability information for each individual
 device within the network as well. One other thing to note
-is that it is the intention for OSC to collect data from
+is that it is the intention for fsc to collect data from
 existing REST APIs
 
 Network v2
@@ -19,7 +19,7 @@ List network topologies
 .. program:: network topology list
 .. code:: bash
 
-    openstack network topology list
+    fibostack network topology list
         [--project <project>]
 
 .. option:: --project <project>
@@ -35,7 +35,7 @@ Show network topology details
 .. program:: network topology show
 .. code:: bash
 
-    openstack network topology show
+    fibostack network topology show
         <network>
 
 .. _network_topology_show-network:

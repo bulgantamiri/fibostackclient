@@ -12,7 +12,7 @@
 
 import argparse
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 class _CommaListAction(argparse.Action):

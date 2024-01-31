@@ -16,7 +16,7 @@
 from keystoneauth1 import session
 from requests_mock.contrib import fixture
 
-from openstackclient.tests.unit import utils
+from fibostackclient.tests.unit import utils
 
 
 RESP_ITEM_1 = {

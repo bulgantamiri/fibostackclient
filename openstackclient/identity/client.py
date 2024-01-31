@@ -1,4 +1,4 @@
-#   Copyright 2012-2013 OpenStack Foundation
+#   Copyright 2012-2013 fibostack Foundation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
 #   not use this file except in compliance with the License. You may obtain
@@ -16,9 +16,9 @@
 import logging
 
 from keystoneclient.v2_0 import client as identity_client_v2
-from osc_lib import utils
+from fsc_lib import utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 LOG = logging.getLogger(__name__)
@@ -27,8 +27,8 @@ DEFAULT_API_VERSION = '3'
 API_VERSION_OPTION = 'os_identity_api_version'
 API_NAME = 'identity'
 API_VERSIONS = {
-    '2.0': 'openstackclient.identity.client.IdentityClientv2',
-    '2': 'openstackclient.identity.client.IdentityClientv2',
+    '2.0': 'fibostackclient.identity.client.IdentityClientv2',
+    '2': 'fibostackclient.identity.client.IdentityClientv2',
     '3': 'keystoneclient.v3.client.Client',
 }
 

@@ -4,7 +4,7 @@
 Configuration
 =============
 
-OpenStackClient is primarily configured using command line options and environment
+fibostackClient is primarily configured using command line options and environment
 variables.  Most of those settings can also be placed into a configuration file to
 simplify managing multiple cloud configurations.
 
@@ -24,14 +24,14 @@ names by dropping the ``--os-`` prefix if present.
 Global Options
 --------------
 
-The :ref:`openstack manpage <manpage>` lists all of the global
-options recognized by OpenStackClient and the default authentication plugins.
+The :ref:`fibostack manpage <manpage>` lists all of the global
+options recognized by fibostackClient and the default authentication plugins.
 
 Environment Variables
 ---------------------
 
-The :ref:`openstack manpage <manpage>` also lists all of the
-environment variables recognized by OpenStackClient and the default
+The :ref:`fibostack manpage <manpage>` also lists all of the
+environment variables recognized by fibostackClient and the default
 authentication plugins.
 
 Configuration Files
@@ -44,16 +44,16 @@ clouds.yaml
 to connect to one or more clouds.  It may contain private information and
 is generally considered private to a user.
 
-OpenStackClient looks for a file called :file:`clouds.yaml` in the following
+fibostackClient looks for a file called :file:`clouds.yaml` in the following
 locations:
 
 * current directory
-* :file:`~/.config/openstack`
-* :file:`/etc/openstack`
+* :file:`~/.config/fibostack`
+* :file:`/etc/fibostack`
 
 The first file found wins.
 
-The keys match the :program:`openstack` global options but without the
+The keys match the :program:`fibostack` global options but without the
 ``--os-`` prefix.
 
 ::
@@ -77,7 +77,7 @@ The keys match the :program:`openstack` global options but without the
         cloud: rackspace
         auth:
           project_id: 275610
-          username: openstack
+          username: fibostack
           password: xyzpdq!lazydog
         region_name: DFW,ORD,IAD
         interface: internal
@@ -96,14 +96,14 @@ to the following options if the ``rackspace`` entry in :file:`clouds-public.yaml
 
     --os-auth-url https://identity.api.rackspacecloud.com/v2.0/
     --os-project-id 275610
-    --os-username openstack
+    --os-username fibostack
     --os-password xyzpdq!lazydog
     --os-region-name DFW
     --os-interface internal
 
 and can be selected on the command line::
 
-    openstack --os-cloud infra server list
+    fibostack --os-cloud infra server list
 
 Note that multiple regions are listed in the ``rackspace`` entry.  An otherwise
 identical configuration is created for each region.  If ``-os-region-name`` is not
@@ -137,12 +137,12 @@ public information about clouds that are common across a large number of users.
 The idea is that :file:`clouds-public.yaml` could easily be shared among users
 to simplify public cloud configuration.
 
-Similar to :file:`clouds.yaml`, OpenStackClient looks for
+Similar to :file:`clouds.yaml`, fibostackClient looks for
 :file:`clouds-public.yaml` in the following locations:
 
 * current directory
-* :file:`~/.config/openstack`
-* :file:`/etc/openstack`
+* :file:`~/.config/fibostack`
+* :file:`/etc/fibostack`
 
 The first file found wins.
 
@@ -178,7 +178,7 @@ By setting `log_level` or `log_file` in the configuration
         region_name: RegionOne
         operation_log:
           logging: TRUE
-          file: /tmp/openstackclient_demo.log
+          file: /tmp/fibostackclient_demo.log
           level: info
       ds-admin:
         auth:
@@ -187,7 +187,7 @@ By setting `log_level` or `log_file` in the configuration
           username: admin
           password: 0penstack
         region_name: RegionOne
-        log_file: /tmp/openstackclient_admin.log
+        log_file: /tmp/fibostackclient_admin.log
         log_level: debug
 
 :dfn:`log_file`: ``</path/file-name>``
@@ -236,7 +236,7 @@ The logging level for `--log-file` can be set by using following options.
 Locale and Language Support
 ---------------------------
 
-Full support for languages is included as of OpenStackClient 3.0.0. Here are a
+Full support for languages is included as of fibostackClient 3.0.0. Here are a
 few tips to ensure you have a correct configuration.
 
 Verify preferred python encoding
@@ -287,4 +287,4 @@ independently or using the ``devstack`` or ``devstack-admin`` os-cloud profile.
 
 ::
 
-  $ openstack project list --os-cloud devstack-admin
+  $ fibostack project list --os-cloud devstack-admin

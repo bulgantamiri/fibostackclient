@@ -13,13 +13,13 @@
 from unittest import mock
 
 from novaclient import api_versions
-from openstack import utils as sdk_utils
-from osc_lib import exceptions
-from osc_lib import utils as common_utils
+from fibostack import utils as sdk_utils
+from fsc_lib import exceptions
+from fsc_lib import utils as common_utils
 
-from openstackclient.compute.v2 import server_migration
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.compute.v2 import server_migration
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
 
 
 class TestServerMigration(compute_fakes.TestComputev2):

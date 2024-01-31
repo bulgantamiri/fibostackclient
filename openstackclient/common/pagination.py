@@ -10,12 +10,12 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from osc_lib.cli import parseractions
+from fsc_lib.cli import parseractions
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
-# TODO(stephenfin): Consider moving these to osc-lib since they're broadly
+# TODO(stephenfin): Consider moving these to fsc-lib since they're broadly
 # useful
 
 

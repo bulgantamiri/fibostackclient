@@ -1,4 +1,4 @@
-#   Copyright 2012-2013 OpenStack Foundation
+#   Copyright 2012-2013 fibostack Foundation
 #   Copyright 2013 Nebula Inc.
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -20,7 +20,7 @@ import os
 import fixtures
 import testtools
 
-from openstackclient.tests.unit import fakes
+from fibostackclient.tests.unit import fakes
 
 
 class ParserException(Exception):

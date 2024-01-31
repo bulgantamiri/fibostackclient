@@ -2,9 +2,9 @@
 extension
 =========
 
-Many OpenStack server APIs include API extensions that enable
+Many fibostack server APIs include API extensions that enable
 additional functionality.
 
 
-.. autoprogram-cliff:: openstack.common
+.. autoprogram-cliff:: fibostack.common
    :command: extension *

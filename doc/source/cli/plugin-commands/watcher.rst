@@ -1,4 +1,4 @@
 watcher
 -------
 
-.. autoprogram-cliff:: openstack.infra_optim.v1
+.. autoprogram-cliff:: fibostack.infra_optim.v1

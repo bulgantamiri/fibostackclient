@@ -13,9 +13,9 @@
 
 import logging
 
-from osc_lib import utils
+from fsc_lib import utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 LOG = logging.getLogger(__name__)
@@ -24,21 +24,21 @@ DEFAULT_API_VERSION = '2.0'
 API_VERSION_OPTION = 'os_network_api_version'
 API_NAME = "network"
 API_VERSIONS = {
-    "2.0": "openstack.connection.Connection",
-    "2": "openstack.connection.Connection",
+    "2.0": "fibostack.connection.Connection",
+    "2": "fibostack.connection.Connection",
 }
 
 
 def make_client(instance):
     """Returns a network proxy"""
-    # NOTE(dtroyer): As of osc-lib 1.8.0 and OpenStackSDK 0.10.0 the
+    # NOTE(dtroyer): As of fsc-lib 1.8.0 and openstacksdk 0.10.0 the
     #                old Profile interface and separate client creation
     #                for each API that uses the SDK is unnecessary.  This
     #                callback remains as a remnant of the original plugin
     #                interface and to avoid the code churn of changing all
     #                of the existing references.
     LOG.debug(
-        'Network client initialized using OpenStack SDK: %s',
+        'Network client initialized using fibostack SDK: %s',
         instance.sdk_connection.network,
     )
     return instance.sdk_connection.network

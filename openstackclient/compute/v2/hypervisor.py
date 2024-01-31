@@ -1,4 +1,4 @@
-#   Copyright 2012-2013 OpenStack Foundation
+#   Copyright 2012-2013 fibostack Foundation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
 #   not use this file except in compliance with the License. You may obtain
@@ -19,14 +19,14 @@ import json
 import re
 
 from novaclient import exceptions as nova_exceptions
-from openstack import utils as sdk_utils
-from osc_lib.cli import format_columns
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fibostack import utils as sdk_utils
+from fsc_lib.cli import format_columns
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.common import pagination
-from openstackclient.i18n import _
+from fibostackclient.common import pagination
+from fibostackclient.i18n import _
 
 
 def _get_hypervisor_columns(item, client):
@@ -62,7 +62,7 @@ def _get_hypervisor_columns(item, client):
             }
         )
 
-    return utils.get_osc_show_columns_for_sdk_resource(
+    return utils.get_fsc_show_columns_for_sdk_resource(
         item, column_map, hidden_columns
     )
 

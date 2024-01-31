@@ -13,13 +13,13 @@
 from unittest import mock
 from unittest.mock import call
 
-from osc_lib.cli import format_columns
-from osc_lib import exceptions
+from fsc_lib.cli import format_columns
+from fsc_lib import exceptions
 
-from openstackclient.network.v2 import subnet_pool
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes_v3
-from openstackclient.tests.unit.network.v2 import fakes as network_fakes
-from openstackclient.tests.unit import utils as test_utils
+from fibostackclient.network.v2 import subnet_pool
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes_v3
+from fibostackclient.tests.unit.network.v2 import fakes as network_fakes
+from fibostackclient.tests.unit import utils as test_utils
 
 
 class TestSubnetPool(network_fakes.TestNetworkV2):

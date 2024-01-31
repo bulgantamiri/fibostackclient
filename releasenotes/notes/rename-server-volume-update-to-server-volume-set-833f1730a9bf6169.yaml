@@ -2,5 +2,5 @@
 upgrade:
   - |
     The ``server volume update`` command has been renamed to ``server volume
-    set`` to better match other commands in OSC. An alias is provided for
+    set`` to better match other commands in fsc. An alias is provided for
     backwards compatibility.

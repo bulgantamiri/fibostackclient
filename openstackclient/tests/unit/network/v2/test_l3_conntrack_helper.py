@@ -13,11 +13,11 @@
 
 from unittest import mock
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.network.v2 import l3_conntrack_helper
-from openstackclient.tests.unit.network.v2 import fakes as network_fakes
-from openstackclient.tests.unit import utils as tests_utils
+from fibostackclient.network.v2 import l3_conntrack_helper
+from fibostackclient.tests.unit.network.v2 import fakes as network_fakes
+from fibostackclient.tests.unit import utils as tests_utils
 
 
 class TestConntrackHelper(network_fakes.TestNetworkV2):

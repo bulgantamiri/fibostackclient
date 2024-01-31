@@ -1,4 +1,4 @@
 heat
 ----
 
-.. autoprogram-cliff:: openstack.orchestration.v1
+.. autoprogram-cliff:: fibostack.orchestration.v1

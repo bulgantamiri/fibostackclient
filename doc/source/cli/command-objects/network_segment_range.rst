@@ -10,5 +10,5 @@ administrator to control the segment ranges globally or on a per-tenant basis.
 
 Network v2
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: network segment range *

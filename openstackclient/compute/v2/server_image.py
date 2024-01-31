@@ -1,4 +1,4 @@
-#   Copyright 2012-2013 OpenStack Foundation
+#   Copyright 2012-2013 fibostack Foundation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
 #   not use this file except in compliance with the License. You may obtain
@@ -18,12 +18,12 @@
 import importlib
 import logging
 
-from osc_lib.cli import parseractions
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.cli import parseractions
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 LOG = logging.getLogger(__name__)
@@ -33,8 +33,8 @@ class CreateServerImage(command.ShowOne):
     _description = _("Create a new server disk image from an existing server")
 
     IMAGE_API_VERSIONS = {
-        "1": "openstackclient.image.v1.image",
-        "2": "openstackclient.image.v2.image",
+        "1": "fibostackclient.image.v1.image",
+        "2": "fibostackclient.image.v2.image",
     }
 
     def get_parser(self, prog_name):

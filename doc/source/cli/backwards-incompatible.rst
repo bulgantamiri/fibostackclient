@@ -2,11 +2,11 @@
 Backwards Incompatible Changes
 ==============================
 
-Despite our best efforts, sometimes the OpenStackClient team may introduce a
+Despite our best efforts, sometimes the fibostackClient team may introduce a
 backwards incompatible change. For user convenience we are tracking any such
 changes here (as of the 1.0.0 release).
 
-Should positional arguments for a command need to change, the OpenStackClient
+Should positional arguments for a command need to change, the fibostackClient
 team attempts to make the transition as painless as possible. Look for
 deprecation warnings that indicate the new commands (or options) to use.
 
@@ -119,10 +119,10 @@ Release 3.12
   and volume create/show -c ``display_name`` (Volume v1) to maintain backward
   compatibility until the next major release.
 
-  * In favor of: ``openstack volume list -c Name``
+  * In favor of: ``fibostack volume list -c Name``
   * As of: 3.12.0
   * Removed in: n/a
-  * Bug: https://bugs.launchpad.net/python-openstackclient/+bug/1657956
+  * Bug: https://bugs.launchpad.net/python-fibostackclient/+bug/1657956
   * Commit: https://review.opendev.org/#/c/423081/
 
 Release 3.10
@@ -149,7 +149,7 @@ Release 3.10
 Release 3.0
 -----------
 
-1. Remove the ``osc_password`` authentication plugin.
+1. Remove the ``fsc_password`` authentication plugin.
 
   This was the 'last-resort' plugin default that worked around an old default
   Keystone configuration for the ``admin_endpoint`` and ``public_endpoint``.
@@ -164,41 +164,41 @@ Release 3.0
 Releases Before 3.0
 -------------------
 
-1. Rename command `openstack project usage list`
+1. Rename command `fibostack project usage list`
 
   The `project` part of the command was pointless.
 
-  * In favor of: `openstack usage list` instead.
+  * In favor of: `fibostack usage list` instead.
   * As of: 1.0.2
   * Removed in: TBD
-  * Bug: https://bugs.launchpad.net/python-openstackclient/+bug/1406654
+  * Bug: https://bugs.launchpad.net/python-fibostackclient/+bug/1406654
   * Commit: https://review.opendev.org/#/c/147379/
 
-2. <type> should not be optional for command `openstack service create`
+2. <type> should not be optional for command `fibostack service create`
 
-  Previously, the command was `openstack service create <name> --type <type>`,
-  whereas now it is: `openstack service create <type> --name <name>`.
+  Previously, the command was `fibostack service create <name> --type <type>`,
+  whereas now it is: `fibostack service create <type> --name <name>`.
   This bug also affected python-keystoneclient, and keystone.
 
   * In favor of: making <type> a positional argument.
   * As of: 1.0.2
   * Removed in: TBD
-  * Bug: https://bugs.launchpad.net/python-openstackclient/+bug/1404073
+  * Bug: https://bugs.launchpad.net/python-fibostackclient/+bug/1404073
   * Commit: https://review.opendev.org/#/c/143242/
 
-3. Command `openstack security group rule delete` now requires rule id
+3. Command `fibostack security group rule delete` now requires rule id
 
-  Previously, the command was `openstack security group rule delete --proto
+  Previously, the command was `fibostack security group rule delete --proto
   <proto> [--src-ip <ip-address> --dst-port <port-range>] <group>`,
-  whereas now it is: `openstack security group rule delete <rule>`.
+  whereas now it is: `fibostack security group rule delete <rule>`.
 
-  * In favor of: Using `openstack security group rule delete <rule>`.
+  * In favor of: Using `fibostack security group rule delete <rule>`.
   * As of: 1.2.1
   * Removed in: NA
-  * Bug: https://bugs.launchpad.net/python-openstackclient/+bug/1450872
+  * Bug: https://bugs.launchpad.net/python-fibostackclient/+bug/1450872
   * Commit: https://review.opendev.org/#/c/179446/
 
-4. Command `openstack image create` does not update already existing image
+4. Command `fibostack image create` does not update already existing image
 
   Previously, the image create command updated already existing image if it had
   same name. It disabled possibility to create multiple images with same name
@@ -209,10 +209,10 @@ Releases Before 3.0
   * In favor of: Create multiple images with same name (as glance does).
   * As of: 1.5.0
   * Removed in: NA
-  * Bug: https://bugs.launchpad.net/python-openstackclient/+bug/1461817
+  * Bug: https://bugs.launchpad.net/python-fibostackclient/+bug/1461817
   * Commit: https://review.opendev.org/#/c/194654/
 
-5. Command `openstack network list --dhcp` has been removed
+5. Command `fibostack network list --dhcp` has been removed
 
   The --dhcp option to network list is not a logical use case of listing
   networks, it lists agents.  Another command should be added in the future
@@ -223,7 +223,7 @@ Releases Before 3.0
   * In favor of: Create network agent list command in the future
   * As of: 1.6.0
   * Removed in: NA
-  * Bug: https://bugs.launchpad.net/python-openstackclient/+bug/472613
+  * Bug: https://bugs.launchpad.net/python-fibostackclient/+bug/472613
   * Commit: https://review.opendev.org/#/c/194654/
 
 6. Plugin interface change for default API versions
@@ -238,7 +238,7 @@ Releases Before 3.0
   * In favor of: DEFAULT_API_VERSION
   * As of: 1.2.1
   * Removed in: NA
-  * Bug: https://bugs.launchpad.net/python-openstackclient/+bug/1453229
+  * Bug: https://bugs.launchpad.net/python-fibostackclient/+bug/1453229
   * Commit: https://review.opendev.org/#/c/181514/
 
 7. `image set` commands will no longer return the modified resource
@@ -274,7 +274,7 @@ Releases Before 3.0
   * In favor of: Use `set/unset` then `show`
   * As of: NA
   * Removed in: NA
-  * Bug: https://bugs.launchpad.net/python-openstackclient/+bug/1546065
+  * Bug: https://bugs.launchpad.net/python-fibostackclient/+bug/1546065
   * Commit: https://review.opendev.org/#/c/280663/
 
 10. `security group set` commands will no longer return the modified resource
@@ -286,7 +286,7 @@ Releases Before 3.0
   * In favor of: Use `set` then `show`
   * As of: NA
   * Removed in: NA
-  * Bug: https://bugs.launchpad.net/python-openstackclient/+bug/1546065
+  * Bug: https://bugs.launchpad.net/python-fibostackclient/+bug/1546065
   * Commit: https://review.opendev.org/#/c/281087/
 
 11. `compute agent set` commands will no longer return the modified resource
@@ -298,14 +298,14 @@ Releases Before 3.0
   * In favor of: Use `set` then `show`
   * As of: NA
   * Removed in: NA
-  * Bug: https://bugs.launchpad.net/python-openstackclient/+bug/1546065
+  * Bug: https://bugs.launchpad.net/python-fibostackclient/+bug/1546065
   * Commit: https://review.opendev.org/#/c/281088/
 
-12. `<version> <url> <md5hash>` should be optional for command `openstack
+12. `<version> <url> <md5hash>` should be optional for command `fibostack
     compute agent set`
 
-  Previously, the command was `openstack compute agent set <id> <version> <url>
-  <md5hash>`, whereas now it is: `openstack compute agent set <id> --version
+  Previously, the command was `fibostack compute agent set <id> <version> <url>
+  <md5hash>`, whereas now it is: `fibostack compute agent set <id> --version
   <version> --url <url> --md5hash <md5hash>`.
 
   * In favor of: making <version> <url> <md5hash> optional.
@@ -323,7 +323,7 @@ Releases Before 3.0
   * In favor of: Use `set` then `show`
   * As of: NA
   * Removed in: NA
-  * Bug: https://bugs.launchpad.net/python-openstackclient/+bug/1546065
+  * Bug: https://bugs.launchpad.net/python-fibostackclient/+bug/1546065
   * Commit: https://review.opendev.org/#/c/281089/
 
 14. Output of `ip floating list` command has changed.
@@ -367,7 +367,7 @@ Releases Before 3.0
   * In favor of: Use `ip floating list` command
   * As of: NA
   * Removed in: NA
-  * Bug: https://bugs.launchpad.net/python-openstackclient/+bug/1519502
+  * Bug: https://bugs.launchpad.net/python-fibostackclient/+bug/1519502
   * Commit: https://review.opendev.org/#/c/277720/
 
 For Developers
@@ -379,4 +379,4 @@ update this file.
 
 To review all changes that are affected, use the following query:
 
-https://review.opendev.org/#/q/project:openstack/python-openstackclient+AND+message:BackwardsIncompatibleImpact,n,z
+https://review.opendev.org/#/q/project:fibostack/python-fibostackclient+AND+message:BackwardsIncompatibleImpact,n,z

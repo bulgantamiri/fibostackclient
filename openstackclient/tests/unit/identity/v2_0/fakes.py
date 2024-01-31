@@ -20,8 +20,8 @@ import uuid
 from keystoneauth1 import access
 from keystoneauth1 import fixture
 
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit import utils
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit import utils
 
 
 project_id = '8-9-64'
@@ -211,14 +211,14 @@ class FakeExtension(object):
         extension_info = {
             'name': 'name-' + uuid.uuid4().hex,
             'namespace': (
-                'http://docs.openstack.org/identity/' 'api/ext/OS-KSCRUD/v1.0'
+                'http://docs.fibostack.org/identity/' 'api/ext/OS-KSCRUD/v1.0'
             ),
             'description': 'description-' + uuid.uuid4().hex,
             'updated': '2013-07-07T12:00:0-00:00',
             'alias': 'OS-KSCRUD',
             'links': (
                 '[{"href":'
-                '"https://github.com/openstack/identity-api", "type":'
+                '"https://github.com/fibostack/identity-api", "type":'
                 ' "text/html", "rel": "describedby"}]'
             ),
         }
@@ -489,7 +489,7 @@ class FakeUser(object):
             'id': 'user-id-' + uuid.uuid4().hex,
             'name': 'user-name-' + uuid.uuid4().hex,
             'tenantId': 'project-id-' + uuid.uuid4().hex,
-            'email': 'admin@openstack.org',
+            'email': 'admin@fibostack.org',
             'enabled': True,
         }
         user_info.update(attrs)

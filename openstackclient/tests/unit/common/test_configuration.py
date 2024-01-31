@@ -13,9 +13,9 @@
 
 from unittest import mock
 
-from openstackclient.common import configuration
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit import utils
+from fibostackclient.common import configuration
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit import utils
 
 
 class TestConfiguration(utils.TestCommand):

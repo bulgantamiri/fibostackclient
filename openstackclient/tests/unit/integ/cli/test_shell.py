@@ -14,51 +14,51 @@ import copy
 from unittest import mock
 
 import fixtures
-from osc_lib.tests import utils as osc_lib_utils
+from fsc_lib.tests import utils as fsc_lib_utils
 
-from openstackclient import shell
-from openstackclient.tests.unit.integ import base as test_base
-from openstackclient.tests.unit import test_shell
+from fibostackclient import shell
+from fibostackclient.tests.unit.integ import base as test_base
+from fibostackclient.tests.unit import test_shell
 
 
 class TestIntegShellCliNoAuth(test_base.TestInteg):
     def setUp(self):
         super(TestIntegShellCliNoAuth, self).setUp()
         env = {}
-        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         # self.token = test_base.make_v2_token(self.requests_mock)
 
     def test_shell_args_no_options(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("configuration show".split())
 
         # Check general calls
         self.assertEqual(len(self.requests_mock.request_history), 0)
 
     def test_shell_args_verify(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("--verify configuration show".split())
 
         # Check general calls
         self.assertEqual(len(self.requests_mock.request_history), 0)
 
     def test_shell_args_insecure(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("--insecure configuration show".split())
 
         # Check general calls
         self.assertEqual(len(self.requests_mock.request_history), 0)
 
     def test_shell_args_cacert(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("--os-cacert xyzpdq configuration show".split())
 
         # Check general calls
         self.assertEqual(len(self.requests_mock.request_history), 0)
 
     def test_shell_args_cacert_insecure(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("--os-cacert xyzpdq --insecure configuration show".split())
 
         # Check general calls
@@ -75,12 +75,12 @@ class TestIntegShellCliV2(test_base.TestInteg):
             "OS_PASSWORD": test_shell.DEFAULT_PASSWORD,
             "OS_IDENTITY_API_VERSION": "2",
         }
-        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v2_token(self.requests_mock)
 
     def test_shell_args_no_options(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("extension list".split())
 
         # Check general calls
@@ -109,7 +109,7 @@ class TestIntegShellCliV2(test_base.TestInteg):
         )
 
     def test_shell_args_verify(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("--verify extension list".split())
 
         # Check general calls
@@ -119,7 +119,7 @@ class TestIntegShellCliV2(test_base.TestInteg):
         self.assertTrue(self.requests_mock.request_history[0].verify)
 
     def test_shell_args_insecure(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("--insecure extension list".split())
 
         # Check general calls
@@ -129,7 +129,7 @@ class TestIntegShellCliV2(test_base.TestInteg):
         self.assertFalse(self.requests_mock.request_history[0].verify)
 
     def test_shell_args_cacert(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("--os-cacert xyzpdq extension list".split())
 
         # Check general calls
@@ -142,7 +142,7 @@ class TestIntegShellCliV2(test_base.TestInteg):
         )
 
     def test_shell_args_cacert_insecure(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("--os-cacert xyzpdq --insecure extension list".split())
 
         # Check general calls
@@ -164,12 +164,12 @@ class TestIntegShellCliV2Ignore(test_base.TestInteg):
             "OS_USER_DOMAIN_ID": test_shell.DEFAULT_USER_DOMAIN_ID,
             "OS_IDENTITY_API_VERSION": "2",
         }
-        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v2_token(self.requests_mock)
 
     def test_shell_args_ignore_v3(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("extension list".split())
 
         # Check general calls
@@ -209,12 +209,12 @@ class TestIntegShellCliV3(test_base.TestInteg):
             "OS_PASSWORD": test_shell.DEFAULT_PASSWORD,
             "OS_IDENTITY_API_VERSION": "3",
         }
-        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v3_token(self.requests_mock)
 
     def test_shell_args_no_options(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("extension list".split())
 
         # Check general calls
@@ -243,7 +243,7 @@ class TestIntegShellCliV3(test_base.TestInteg):
         )
 
     def test_shell_args_verify(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("--verify extension list".split())
 
         # Check general calls
@@ -253,7 +253,7 @@ class TestIntegShellCliV3(test_base.TestInteg):
         self.assertTrue(self.requests_mock.request_history[0].verify)
 
     def test_shell_args_insecure(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("--insecure extension list".split())
 
         # Check general calls
@@ -263,7 +263,7 @@ class TestIntegShellCliV3(test_base.TestInteg):
         self.assertFalse(self.requests_mock.request_history[0].verify)
 
     def test_shell_args_cacert(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("--os-cacert xyzpdq extension list".split())
 
         # Check general calls
@@ -277,8 +277,8 @@ class TestIntegShellCliV3(test_base.TestInteg):
 
     def test_shell_args_cacert_insecure(self):
         # This test verifies the outcome of bug 1447784
-        # https://bugs.launchpad.net/python-openstackclient/+bug/1447784
-        _shell = shell.OpenStackShell()
+        # https://bugs.launchpad.net/python-fibostackclient/+bug/1447784
+        _shell = shell.fibostackShell()
         _shell.run("--os-cacert xyzpdq --insecure extension list".split())
 
         # Check general calls
@@ -298,14 +298,14 @@ class TestIntegShellCliV3Prompt(test_base.TestInteg):
             "OS_USERNAME": test_shell.DEFAULT_USERNAME,
             "OS_IDENTITY_API_VERSION": "3",
         }
-        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v3_token(self.requests_mock)
 
-    @mock.patch("osc_lib.shell.prompt_for_password")
+    @mock.patch("fsc_lib.shell.prompt_for_password")
     def test_shell_callback(self, mock_prompt):
         mock_prompt.return_value = "qaz"
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("extension list".split())
 
         # Check general calls
@@ -313,7 +313,7 @@ class TestIntegShellCliV3Prompt(test_base.TestInteg):
 
         # Check password callback set correctly
         self.assertEqual(
-            mock_prompt, _shell.cloud._openstack_config._pw_callback
+            mock_prompt, _shell.cloud._fibostack_config._pw_callback
         )
 
         # Check auth request
@@ -347,7 +347,7 @@ class TestIntegShellCliPrecedence(test_base.TestInteg):
             "OS_USERNAME": test_shell.DEFAULT_USERNAME,
             "OS_IDENTITY_API_VERSION": "3",
         }
-        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v3_token(self.requests_mock)
 
@@ -359,7 +359,7 @@ class TestIntegShellCliPrecedence(test_base.TestInteg):
     def test_shell_args_options(self):
         """Verify command line options override environment variables"""
 
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run(
             "--os-username zarquon --os-password qaz "
             "extension list".split(),
@@ -422,7 +422,7 @@ class TestIntegShellCliPrecedenceOCC(test_base.TestInteg):
             "OS_IDENTITY_API_VERSION": "3",
             "OS_CLOUD_NAME": "qaz",
         }
-        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v3_token(self.requests_mock)
 
@@ -441,8 +441,8 @@ class TestIntegShellCliPrecedenceOCC(test_base.TestInteg):
         temp_dir = self.useFixture(fixtures.TempDir())
         return temp_dir.join(filename)
 
-    @mock.patch("openstack.config.loader.OpenStackConfig._load_vendor_file")
-    @mock.patch("openstack.config.loader.OpenStackConfig._load_config_file")
+    @mock.patch("fibostack.config.loader.fibostackConfig._load_vendor_file")
+    @mock.patch("fibostack.config.loader.fibostackConfig._load_config_file")
     def test_shell_args_precedence_1(self, config_mock, vendor_mock):
         """Precedence run 1
 
@@ -461,7 +461,7 @@ class TestIntegShellCliPrecedenceOCC(test_base.TestInteg):
 
         vendor_mock.side_effect = vendor_mock_return
 
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run(
             "--os-password qaz extension list".split(),
         )
@@ -513,8 +513,8 @@ class TestIntegShellCliPrecedenceOCC(test_base.TestInteg):
         # +env, +cli, +occ
         # see test_shell_args_precedence_2()
 
-    @mock.patch("openstack.config.loader.OpenStackConfig._load_vendor_file")
-    @mock.patch("openstack.config.loader.OpenStackConfig._load_config_file")
+    @mock.patch("fibostack.config.loader.fibostackConfig._load_vendor_file")
+    @mock.patch("fibostack.config.loader.fibostackConfig._load_config_file")
     def test_shell_args_precedence_2(self, config_mock, vendor_mock):
         """Precedence run 2
 
@@ -533,7 +533,7 @@ class TestIntegShellCliPrecedenceOCC(test_base.TestInteg):
 
         vendor_mock.side_effect = vendor_mock_return
 
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run(
             "--os-username zarquon --os-password qaz "
             "--os-project-domain-id 5678 extension list".split(),

@@ -1,4 +1,4 @@
-#   Copyright 2012-2013 OpenStack Foundation
+#   Copyright 2012-2013 fibostack Foundation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
 #   not use this file except in compliance with the License. You may obtain
@@ -22,19 +22,19 @@ import os
 import sys
 
 from cinderclient import api_versions
-from openstack import exceptions as sdk_exceptions
-from openstack.image import image_signer
-from osc_lib.api import utils as api_utils
-from osc_lib.cli import format_columns
-from osc_lib.cli import parseractions
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fibostack import exceptions as sdk_exceptions
+from fibostack.image import image_signer
+from fsc_lib.api import utils as api_utils
+from fsc_lib.cli import format_columns
+from fsc_lib.cli import parseractions
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.common import pagination
-from openstackclient.common import progressbar
-from openstackclient.i18n import _
-from openstackclient.identity import common as identity_common
+from fibostackclient.common import pagination
+from fibostackclient.common import progressbar
+from fibostackclient.i18n import _
+from fibostackclient.identity import common as identity_common
 
 if os.name == "nt":
     import msvcrt
@@ -65,7 +65,7 @@ LOG = logging.getLogger(__name__)
 
 
 def _format_image(image, human_readable=False):
-    """Format an image to make it more consistent with OSC operations."""
+    """Format an image to make it more consistent with fsc operations."""
 
     info = {}
     properties = {}
@@ -128,7 +128,7 @@ _formatters = {
 def _get_member_columns(item):
     column_map = {'image_id': 'image_id'}
     hidden_columns = ['id', 'location', 'name']
-    return utils.get_osc_show_columns_for_sdk_resource(
+    return utils.get_fsc_show_columns_for_sdk_resource(
         item.to_dict(),
         column_map,
         hidden_columns,
@@ -138,11 +138,11 @@ def _get_member_columns(item):
 def get_data_from_stdin():
     # distinguish cases where:
     # (1) stdin is not valid (as in cron jobs):
-    #    openstack ... <&-
+    #    fibostack ... <&-
     # (2) image data is provided through stdin:
-    #    openstack ... < /tmp/file
+    #    fibostack ... < /tmp/file
     # (3) no image data provided
-    #    openstack ...
+    #    fibostack ...
     try:
         os.fstat(0)
     except OSError:

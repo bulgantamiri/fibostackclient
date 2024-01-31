@@ -12,11 +12,11 @@
 
 import copy
 
-from osc_lib.tests import utils as osc_lib_utils
+from fsc_lib.tests import utils as fsc_lib_utils
 
-from openstackclient import shell
-from openstackclient.tests.unit.integ import base as test_base
-from openstackclient.tests.unit import test_shell
+from fibostackclient import shell
+from fibostackclient.tests.unit.integ import base as test_base
+from fibostackclient.tests.unit import test_shell
 
 
 class TestIntegV2ProjectID(test_base.TestInteg):
@@ -29,12 +29,12 @@ class TestIntegV2ProjectID(test_base.TestInteg):
             "OS_PASSWORD": test_shell.DEFAULT_PASSWORD,
             "OS_IDENTITY_API_VERSION": "2",
         }
-        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v2_token(self.requests_mock)
 
     def test_project_id_env(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("extension list".split())
 
         # Check general calls
@@ -55,7 +55,7 @@ class TestIntegV2ProjectID(test_base.TestInteg):
         )
 
     def test_project_id_arg(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("--os-project-id wsx extension list".split())
 
         # Check general calls
@@ -86,12 +86,12 @@ class TestIntegV2ProjectName(test_base.TestInteg):
             "OS_PASSWORD": test_shell.DEFAULT_PASSWORD,
             "OS_IDENTITY_API_VERSION": "2",
         }
-        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v2_token(self.requests_mock)
 
     def test_project_name_env(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("extension list".split())
 
         # Check general calls
@@ -112,7 +112,7 @@ class TestIntegV2ProjectName(test_base.TestInteg):
         )
 
     def test_project_name_arg(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("--os-project-name qaz extension list".split())
 
         # Check general calls
@@ -145,12 +145,12 @@ class TestIntegV3ProjectID(test_base.TestInteg):
             "OS_PASSWORD": test_shell.DEFAULT_PASSWORD,
             "OS_IDENTITY_API_VERSION": "3",
         }
-        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v3_token(self.requests_mock)
 
     def test_project_id_env(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("extension list".split())
 
         # Check general calls
@@ -169,7 +169,7 @@ class TestIntegV3ProjectID(test_base.TestInteg):
         self.assertIsNone(auth_req['auth'].get('tenantName', None))
 
     def test_project_id_arg(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("--os-project-id wsx extension list".split())
 
         # Check general calls
@@ -200,12 +200,12 @@ class TestIntegV3ProjectName(test_base.TestInteg):
             "OS_PASSWORD": test_shell.DEFAULT_PASSWORD,
             "OS_IDENTITY_API_VERSION": "3",
         }
-        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v3_token(self.requests_mock)
 
     def test_project_name_env(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("extension list".split())
 
         # Check general calls
@@ -229,7 +229,7 @@ class TestIntegV3ProjectName(test_base.TestInteg):
         self.assertIsNone(auth_req['auth'].get('tenantName', None))
 
     def test_project_name_arg(self):
-        _shell = shell.OpenStackShell()
+        _shell = shell.fibostackShell()
         _shell.run("--os-project-name wsx extension list".split())
 
         # Check general calls

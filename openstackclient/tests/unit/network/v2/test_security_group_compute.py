@@ -14,15 +14,15 @@
 from unittest import mock
 from unittest.mock import call
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.network.v2 import security_group
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
-from openstackclient.tests.unit import utils as tests_utils
+from fibostackclient.network.v2 import security_group
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.tests.unit import utils as tests_utils
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.security_group_create')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.security_group_create')
 class TestCreateSecurityGroupCompute(compute_fakes.TestComputev2):
     project = identity_fakes.FakeProject.create_one_project()
     domain = identity_fakes.FakeDomain.create_one_domain()
@@ -101,7 +101,7 @@ class TestCreateSecurityGroupCompute(compute_fakes.TestComputev2):
         self.assertCountEqual(self.data, data)
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.security_group_delete')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.security_group_delete')
 class TestDeleteSecurityGroupCompute(compute_fakes.TestComputev2):
     # The security groups to be deleted.
     _security_groups = compute_fakes.create_security_groups()
@@ -183,7 +183,7 @@ class TestDeleteSecurityGroupCompute(compute_fakes.TestComputev2):
         sg_mock.assert_any_call('unexist_security_group')
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.security_group_list')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.security_group_list')
 class TestListSecurityGroupCompute(compute_fakes.TestComputev2):
     # The security group to be listed.
     _security_groups = compute_fakes.create_security_groups(count=3)
@@ -261,7 +261,7 @@ class TestListSecurityGroupCompute(compute_fakes.TestComputev2):
         self.assertCountEqual(self.data_all_projects, list(data))
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.security_group_set')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.security_group_set')
 class TestSetSecurityGroupCompute(compute_fakes.TestComputev2):
     # The security group to be set.
     _security_group = compute_fakes.create_one_security_group()
@@ -328,7 +328,7 @@ class TestSetSecurityGroupCompute(compute_fakes.TestComputev2):
         self.assertIsNone(result)
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.security_group_find')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.security_group_find')
 class TestShowSecurityGroupCompute(compute_fakes.TestComputev2):
     # The security group rule to be shown with the group.
     _security_group_rule = compute_fakes.create_one_security_group_rule()

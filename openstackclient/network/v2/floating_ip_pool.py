@@ -14,11 +14,11 @@
 """Floating IP Pool action implementations"""
 
 
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.i18n import _
-from openstackclient.network import common
+from fibostackclient.i18n import _
+from fibostackclient.network import common
 
 
 class ListFloatingIPPool(common.NetworkAndComputeLister):

@@ -17,10 +17,10 @@
 
 import sys
 
-from osc_lib.command import command
-from osc_lib import utils
+from fsc_lib.command import command
+from fsc_lib import utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 class ListCommand(command.Lister):
@@ -99,15 +99,15 @@ class ListModule(command.ShowOne):
                     parsed_args.all
                     or
                     # Handle xxxclient and openstacksdk
-                    (k.endswith('client') or k == 'openstack')
+                    (k.endswith('client') or k == 'fibostack')
                 ):
                     try:
                         # NOTE(RuiChen): openstacksdk bug/1588823 exist,
                         #                no good way to add __version__ for
-                        #                openstack module properly, hard code
+                        #                fibostack module properly, hard code
                         #                looks bad, but openstacksdk module
                         #                information is important.
-                        if k == 'openstack':
+                        if k == 'fibostack':
                             data[k] = mods[k].version.__version__
                         else:
                             data[k] = mods[k].__version__

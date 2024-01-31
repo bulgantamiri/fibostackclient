@@ -13,14 +13,14 @@
 
 from unittest import mock
 
-from openstackclient.network.v2 import floating_ip_pool
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.network.v2 import floating_ip_pool
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
 
 
 # Tests for Compute network
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.floating_ip_pool_list')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.floating_ip_pool_list')
 class TestListFloatingIPPoolCompute(compute_fakes.TestComputev2):
     # The floating ip pools to list up
     _floating_ip_pools = compute_fakes.create_floating_ip_pools(count=3)

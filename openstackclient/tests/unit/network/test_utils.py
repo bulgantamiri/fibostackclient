@@ -11,10 +11,10 @@
 #   under the License.
 #
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.network import utils
-from openstackclient.tests.unit import utils as tests_utils
+from fibostackclient.network import utils
+from fibostackclient.tests.unit import utils as tests_utils
 
 
 class TestUtils(tests_utils.TestCase):

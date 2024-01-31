@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class TestAgent(common.NetworkTests):
@@ -32,7 +32,7 @@ class TestAgent(common.NetworkTests):
         """
 
         # agent list
-        agent_list = self.openstack(
+        agent_list = self.fibostack(
             'network agent list',
             parse_output=True,
         )
@@ -41,7 +41,7 @@ class TestAgent(common.NetworkTests):
         agent_ids = list([row["ID"] for row in agent_list])
 
         # agent show
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network agent show %s' % agent_ids[0],
             parse_output=True,
         )
@@ -56,12 +56,12 @@ class TestAgent(common.NetworkTests):
             return
 
         # agent set
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'network agent set --disable %s' % agent_ids[0]
         )
         self.assertOutput('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network agent show %s' % agent_ids[0],
             parse_output=True,
         )
@@ -70,12 +70,12 @@ class TestAgent(common.NetworkTests):
             cmd_output['admin_state_up'],
         )
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'network agent set --enable %s' % agent_ids[0]
         )
         self.assertOutput('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network agent show %s' % agent_ids[0],
             parse_output=True,
         )
@@ -101,7 +101,7 @@ class TestAgentList(common.NetworkTests):
             self.skipTest("No dhcp_agent_scheduler extension present")
 
         # Get DHCP Agent ID
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network agent list --agent-type dhcp',
             parse_output=True,
         )
@@ -111,30 +111,30 @@ class TestAgentList(common.NetworkTests):
         agent_id = cmd_output[0]['ID']
 
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network create --description aaaa %s' % name1,
             parse_output=True,
         )
 
-        self.addCleanup(self.openstack, 'network delete %s' % name1)
+        self.addCleanup(self.fibostack, 'network delete %s' % name1)
 
         # Get network ID
         network_id = cmd_output['id']
 
         # Add Agent to Network
-        self.openstack(
+        self.fibostack(
             'network agent add network --dhcp %s %s' % (agent_id, network_id)
         )
 
         # Test network agent list --network
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network agent list --network %s' % network_id,
             parse_output=True,
         )
 
         # Cleanup
         # Remove Agent from Network
-        self.openstack(
+        self.fibostack(
             'network agent remove network --dhcp %s %s'
             % (agent_id, network_id)
         )
@@ -150,16 +150,16 @@ class TestAgentList(common.NetworkTests):
             self.skipTest("No l3_agent_scheduler extension present")
 
         name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router create %s' % name,
             parse_output=True,
         )
 
-        self.addCleanup(self.openstack, 'router delete %s' % name)
+        self.addCleanup(self.fibostack, 'router delete %s' % name)
         # Get router ID
         router_id = cmd_output['id']
         # Get l3 agent id
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network agent list --agent-type l3',
             parse_output=True,
         )
@@ -169,12 +169,12 @@ class TestAgentList(common.NetworkTests):
         agent_id = cmd_output[0]['ID']
 
         # Add router to agent
-        self.openstack(
+        self.fibostack(
             'network agent add router --l3 %s %s' % (agent_id, router_id)
         )
 
         # Test router list --agent
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network agent list --router %s' % router_id,
             parse_output=True,
         )
@@ -183,10 +183,10 @@ class TestAgentList(common.NetworkTests):
         self.assertIn(agent_id, agent_ids)
 
         # Remove router from agent
-        self.openstack(
+        self.fibostack(
             'network agent remove router --l3 %s %s' % (agent_id, router_id)
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network agent list --router %s' % router_id,
             parse_output=True,
         )

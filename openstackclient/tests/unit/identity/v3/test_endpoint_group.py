@@ -13,8 +13,8 @@
 
 from unittest import mock
 
-from openstackclient.identity.v3 import endpoint_group
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.identity.v3 import endpoint_group
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
 
 
 class TestEndpointGroup(identity_fakes.TestIdentityv3):
@@ -81,7 +81,7 @@ class TestEndpointGroupCreate(TestEndpointGroup):
         mocker = mock.Mock()
         mocker.return_value = identity_fakes.endpoint_group_filters
         with mock.patch(
-            "openstackclient.identity.v3.endpoint_group."
+            "fibostackclient.identity.v3.endpoint_group."
             "CreateEndpointGroup._read_filters",
             mocker,
         ):
@@ -318,7 +318,7 @@ class TestEndpointGroupSet(TestEndpointGroup):
         mocker = mock.Mock()
         mocker.return_value = identity_fakes.endpoint_group_filters_2
         with mock.patch(
-            "openstackclient.identity.v3.endpoint_group."
+            "fibostackclient.identity.v3.endpoint_group."
             "SetEndpointGroup._read_filters",
             mocker,
         ):

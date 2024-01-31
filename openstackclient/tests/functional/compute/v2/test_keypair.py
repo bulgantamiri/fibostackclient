@@ -15,7 +15,7 @@ import tempfile
 from tempest.lib.common.utils import data_utils
 from tempest.lib import exceptions
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 
 class KeypairBase(base.TestCase):
@@ -23,21 +23,21 @@ class KeypairBase(base.TestCase):
 
     def keypair_create(self, name=data_utils.rand_uuid()):
         """Create keypair and add cleanup."""
-        raw_output = self.openstack('keypair create ' + name)
+        raw_output = self.fibostack('keypair create ' + name)
         self.addCleanup(self.keypair_delete, name, True)
         if not raw_output:
             self.fail('Keypair has not been created!')
 
     def keypair_list(self, params=''):
         """Return dictionary with list of keypairs."""
-        raw_output = self.openstack('keypair list')
+        raw_output = self.fibostack('keypair list')
         keypairs = self.parse_show_as_object(raw_output)
         return keypairs
 
     def keypair_delete(self, name, ignore_exceptions=False):
         """Try to delete keypair by name."""
         try:
-            self.openstack('keypair delete ' + name)
+            self.fibostack('keypair delete ' + name)
         except exceptions.CommandFailed:
             if not ignore_exceptions:
                 raise
@@ -52,7 +52,7 @@ class KeypairTests(KeypairBase):
         'c4mNwhZcPBVohIFoC1KZJC8kcBTvFZcoz3mdIijxJtywZNpGNh34VRJlZeHyYjg8/D'
         'esHzdoBVd5c/4R36emQSIV9ukY6PHeZ3scAH4B3K9PxItJBwiFtouSRphQG0bJgOv/'
         'gjAjMElAvg5oku98cb4QiHZ8T8WY68id804raHR6pJxpVVJN4TYJmlUs+NOVM+pPKb'
-        'KJttqrIBTkawGK9pLHNfn7z6v1syvUo/4enc1l0Q/Qn2kWiz67 fake@openstack'
+        'KJttqrIBTkawGK9pLHNfn7z6v1syvUo/4enc1l0Q/Qn2kWiz67 fake@fibostack'
     )
 
     def setUp(self):
@@ -70,7 +70,7 @@ class KeypairTests(KeypairBase):
         """
         self.assertRaises(
             exceptions.CommandFailed,
-            self.openstack,
+            self.fibostack,
             'keypair create ' + self.KPName,
         )
 
@@ -81,7 +81,7 @@ class KeypairTests(KeypairBase):
         1) Try to create keypair without a name
         """
         self.assertRaises(
-            exceptions.CommandFailed, self.openstack, 'keypair create'
+            exceptions.CommandFailed, self.fibostack, 'keypair create'
         )
 
     def test_keypair_create_public_key(self):
@@ -95,11 +95,11 @@ class KeypairTests(KeypairBase):
             f.write(self.PUBLIC_KEY)
             f.flush()
 
-            raw_output = self.openstack(
+            raw_output = self.fibostack(
                 'keypair create --public-key %s tmpkey' % f.name,
             )
             self.addCleanup(
-                self.openstack,
+                self.fibostack,
                 'keypair delete tmpkey',
             )
             self.assertIn('tmpkey', raw_output)
@@ -112,11 +112,11 @@ class KeypairTests(KeypairBase):
         2) Delete keypair
         """
         with tempfile.NamedTemporaryFile(mode='w+') as f:
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 'keypair create --private-key %s tmpkey' % f.name,
                 parse_output=True,
             )
-            self.addCleanup(self.openstack, 'keypair delete tmpkey')
+            self.addCleanup(self.fibostack, 'keypair delete tmpkey')
             self.assertEqual('tmpkey', cmd_output.get('name'))
             self.assertIsNotNone(cmd_output.get('user_id'))
             self.assertIsNotNone(cmd_output.get('fingerprint'))
@@ -140,8 +140,8 @@ class KeypairTests(KeypairBase):
         3) Check for new keypair in keypairs list
         """
         NewName = data_utils.rand_name('TestKeyPairCreated')
-        raw_output = self.openstack('keypair create ' + NewName)
-        self.addCleanup(self.openstack, 'keypair delete ' + NewName)
+        raw_output = self.fibostack('keypair create ' + NewName)
+        self.addCleanup(self.fibostack, 'keypair delete ' + NewName)
         self.assertInOutput('-----BEGIN OPENSSH PRIVATE KEY-----', raw_output)
         self.assertRegex(raw_output, "[0-9A-Za-z+/]+[=]{0,3}\n")
         self.assertInOutput('-----END OPENSSH PRIVATE KEY-----', raw_output)
@@ -156,7 +156,7 @@ class KeypairTests(KeypairBase):
         """
         self.assertRaises(
             exceptions.CommandFailed,
-            self.openstack,
+            self.fibostack,
             'keypair delete not_existing',
         )
 
@@ -168,7 +168,7 @@ class KeypairTests(KeypairBase):
         2) Delete keypair
         3) Check that keypair not in keypairs list
         """
-        self.openstack('keypair delete ' + self.KPName)
+        self.fibostack('keypair delete ' + self.KPName)
         self.assertNotIn(self.KPName, self.keypair_list())
 
     def test_keypair_list(self):
@@ -181,7 +181,7 @@ class KeypairTests(KeypairBase):
         4) Check keypair name in output
         """
         HEADERS = ['Name', 'Fingerprint']
-        raw_output = self.openstack('keypair list')
+        raw_output = self.fibostack('keypair list')
         items = self.parse_listing(raw_output)
         self.assert_table_structure(items, HEADERS)
         self.assertIn(self.KPName, raw_output)
@@ -196,7 +196,7 @@ class KeypairTests(KeypairBase):
         4) Check keypair name in output
         """
         HEADERS = ['Field', 'Value']
-        raw_output = self.openstack('keypair show ' + self.KPName)
+        raw_output = self.fibostack('keypair show ' + self.KPName)
         items = self.parse_listing(raw_output)
         self.assert_table_structure(items, HEADERS)
         self.assertInOutput(self.KPName, raw_output)

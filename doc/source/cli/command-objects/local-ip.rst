@@ -8,5 +8,5 @@ reachable within the same physical server/node boundaries
 
 Network v2
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: local ip *

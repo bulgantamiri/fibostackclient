@@ -16,12 +16,12 @@
 
 from unittest import mock
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.network.v2 import network_flavor
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes_v3
-from openstackclient.tests.unit.network.v2 import fakes as network_fakes
-from openstackclient.tests.unit import utils as tests_utils
+from fibostackclient.network.v2 import network_flavor
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes_v3
+from fibostackclient.tests.unit.network.v2 import fakes as network_fakes
+from fibostackclient.tests.unit import utils as tests_utils
 
 
 class TestNetworkFlavor(network_fakes.TestNetworkV2):

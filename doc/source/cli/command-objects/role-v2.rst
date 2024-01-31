@@ -2,5 +2,5 @@
 role (Identity v2)
 ==================
 
-.. autoprogram-cliff:: openstack.identity.v2
+.. autoprogram-cliff:: fibostack.identity.v2
    :command: role *

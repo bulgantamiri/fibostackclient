@@ -10,12 +10,12 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from openstackclient.tests.functional.identity.v3 import common
+from fibostackclient.tests.functional.identity.v3 import common
 
 
 class CatalogTests(common.IdentityTests):
     def test_catalog_list(self):
-        raw_output = self.openstack('catalog list')
+        raw_output = self.fibostack('catalog list')
         items = self.parse_listing(raw_output)
         self.assert_table_structure(items, ['Name', 'Type', 'Endpoints'])
 
@@ -38,7 +38,7 @@ class CatalogTests(common.IdentityTests):
         | type      | identity                               |
         +-----------+----------------------------------------+
         """
-        raw_output = self.openstack('catalog show %s' % 'identity')
+        raw_output = self.fibostack('catalog show %s' % 'identity')
         items = self.parse_show(raw_output)
         # items may have multiple endpoint urls with empty key
         self.assert_show_fields(items, ['endpoints', 'name', 'type', '', 'id'])

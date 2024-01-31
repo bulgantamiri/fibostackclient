@@ -11,13 +11,13 @@
 # under the License.
 
 from cinderclient import api_versions
-from osc_lib.cli import format_columns
-from osc_lib import exceptions
+from fsc_lib.cli import format_columns
+from fsc_lib import exceptions
 
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
-from openstackclient.tests.unit.volume.v3 import fakes as volume_fakes
-from openstackclient.volume.v3 import volume_attachment
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.tests.unit.volume.v3 import fakes as volume_fakes
+from fibostackclient.volume.v3 import volume_attachment
 
 
 class TestVolumeAttachment(volume_fakes.TestVolume):

@@ -12,7 +12,7 @@
 
 from tempest.lib.common.utils import data_utils
 
-from openstackclient.tests.functional.identity.v3 import common
+from fibostackclient.tests.functional.identity.v3 import common
 
 
 class IdentityProviderTests(common.IdentityTests):
@@ -23,7 +23,7 @@ class IdentityProviderTests(common.IdentityTests):
 
     def test_idp_delete(self):
         identity_provider = self._create_dummy_idp(add_clean_up=False)
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'identity provider delete %s' % identity_provider
         )
         self.assertEqual(0, len(raw_output))
@@ -31,14 +31,14 @@ class IdentityProviderTests(common.IdentityTests):
     def test_idp_multi_delete(self):
         idp_1 = self._create_dummy_idp(add_clean_up=False)
         idp_2 = self._create_dummy_idp(add_clean_up=False)
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'identity provider delete %s %s' % (idp_1, idp_2)
         )
         self.assertEqual(0, len(raw_output))
 
     def test_idp_show(self):
         identity_provider = self._create_dummy_idp(add_clean_up=True)
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'identity provider show %s' % identity_provider
         )
         items = self.parse_show(raw_output)
@@ -46,14 +46,14 @@ class IdentityProviderTests(common.IdentityTests):
 
     def test_idp_list(self):
         self._create_dummy_idp(add_clean_up=True)
-        raw_output = self.openstack('identity provider list')
+        raw_output = self.fibostack('identity provider list')
         items = self.parse_listing(raw_output)
         self.assert_table_structure(items, self.IDENTITY_PROVIDER_LIST_HEADERS)
 
     def test_idp_set(self):
         identity_provider = self._create_dummy_idp(add_clean_up=True)
         new_remoteid = data_utils.rand_name('newRemoteId')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'identity provider set '
             '%(identity-provider)s '
             '--remote-id %(remote-id)s '
@@ -63,7 +63,7 @@ class IdentityProviderTests(common.IdentityTests):
             }
         )
         self.assertEqual(0, len(raw_output))
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'identity provider show %s' % identity_provider
         )
         updated_value = self.parse_show_as_object(raw_output)

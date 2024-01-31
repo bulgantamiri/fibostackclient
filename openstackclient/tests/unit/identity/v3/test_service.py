@@ -14,10 +14,10 @@
 #
 
 from keystoneclient import exceptions as identity_exc
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.identity.v3 import service
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.identity.v3 import service
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
 
 
 class TestService(identity_fakes.TestIdentityv3):

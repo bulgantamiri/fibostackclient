@@ -7,5 +7,5 @@ compute and network services.
 
 Block Storage v2, Compute v2, Network v2
 
-.. autoprogram-cliff:: openstack.common
+.. autoprogram-cliff:: fibostack.common
    :command: availability zone list

@@ -19,30 +19,30 @@ from unittest import mock
 import uuid
 
 from novaclient import api_versions
-from openstack.compute.v2 import _proxy
-from openstack.compute.v2 import aggregate as _aggregate
-from openstack.compute.v2 import availability_zone as _availability_zone
-from openstack.compute.v2 import extension as _extension
-from openstack.compute.v2 import flavor as _flavor
-from openstack.compute.v2 import hypervisor as _hypervisor
-from openstack.compute.v2 import keypair as _keypair
-from openstack.compute.v2 import migration as _migration
-from openstack.compute.v2 import server as _server
-from openstack.compute.v2 import server_action as _server_action
-from openstack.compute.v2 import server_group as _server_group
-from openstack.compute.v2 import server_interface as _server_interface
-from openstack.compute.v2 import server_migration as _server_migration
-from openstack.compute.v2 import service as _service
-from openstack.compute.v2 import usage as _usage
-from openstack.compute.v2 import volume_attachment as _volume_attachment
+from fibostack.compute.v2 import _proxy
+from fibostack.compute.v2 import aggregate as _aggregate
+from fibostack.compute.v2 import availability_zone as _availability_zone
+from fibostack.compute.v2 import extension as _extension
+from fibostack.compute.v2 import flavor as _flavor
+from fibostack.compute.v2 import hypervisor as _hypervisor
+from fibostack.compute.v2 import keypair as _keypair
+from fibostack.compute.v2 import migration as _migration
+from fibostack.compute.v2 import server as _server
+from fibostack.compute.v2 import server_action as _server_action
+from fibostack.compute.v2 import server_group as _server_group
+from fibostack.compute.v2 import server_interface as _server_interface
+from fibostack.compute.v2 import server_migration as _server_migration
+from fibostack.compute.v2 import service as _service
+from fibostack.compute.v2 import usage as _usage
+from fibostack.compute.v2 import volume_attachment as _volume_attachment
 
-from openstackclient.api import compute_v2
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
-from openstackclient.tests.unit.image.v2 import fakes as image_fakes
-from openstackclient.tests.unit.network.v2 import fakes as network_fakes
-from openstackclient.tests.unit import utils
-from openstackclient.tests.unit.volume.v3 import fakes as volume_fakes
+from fibostackclient.api import compute_v2
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
+from fibostackclient.tests.unit.image.v2 import fakes as image_fakes
+from fibostackclient.tests.unit.network.v2 import fakes as network_fakes
+from fibostackclient.tests.unit import utils
+from fibostackclient.tests.unit.volume.v3 import fakes as volume_fakes
 
 floating_ip_num = 100
 fix_ip_num = 100
@@ -194,7 +194,7 @@ def create_one_aggregate(attrs=None):
     """Create a fake aggregate.
 
     :param dict attrs: A dictionary with all attributes
-    :return: A fake openstack.compute.v2.aggregate.Aggregate object
+    :return: A fake fibostack.compute.v2.aggregate.Aggregate object
     """
     attrs = attrs or {}
 
@@ -222,7 +222,7 @@ def create_aggregates(attrs=None, count=2):
 
     :param dict attrs: A dictionary with all attributes
     :param int count: The number of aggregates to fake
-    :return: A list of fake openstack.compute.v2.aggregate.Aggregate objects
+    :return: A list of fake fibostack.compute.v2.aggregate.Aggregate objects
     """
     aggregates = []
     for i in range(0, count):
@@ -237,7 +237,7 @@ def get_aggregates(aggregates=None, count=2):
     If aggregates list is provided, then initialize the Mock object
     with the list. Otherwise create one.
 
-    :return: A list of fake openstack.compute.v2.aggregate.Aggregate objects
+    :return: A list of fake fibostack.compute.v2.aggregate.Aggregate objects
     :param int count: The number of aggregates to fake
     :return: An iterable Mock object with side_effect set to a list of faked
         aggregates
@@ -297,7 +297,7 @@ def create_one_extension(attrs=None):
     """Create a fake extension.
 
     :param dict attrs: A dictionary with all attributes
-    :return: A fake openstack.compute.v2.extension.Extension object
+    :return: A fake fibostack.compute.v2.extension.Extension object
     """
     attrs = attrs or {}
 
@@ -307,14 +307,14 @@ def create_one_extension(attrs=None):
         'description': 'description-' + uuid.uuid4().hex,
         'links': [
             {
-                "href": "https://github.com/openstack/compute-api",
+                "href": "https://github.com/fibostack/compute-api",
                 "type": "text/html",
                 "rel": "describedby",
             }
         ],
         'name': 'name-' + uuid.uuid4().hex,
         'namespace': (
-            'http://docs.openstack.org/compute/ext/multinic/api/v1.1'
+            'http://docs.fibostack.org/compute/ext/multinic/api/v1.1'
         ),
         'updated_at': '2014-01-07T12:00:0-00:00',
     }
@@ -489,7 +489,7 @@ def create_one_sdk_server(attrs=None):
     """Create a fake server for testing migration to sdk
 
     :param dict attrs: A dictionary with all attributes
-    :return: A fake openstack.compute.v2.server.Server object,
+    :return: A fake fibostack.compute.v2.server.Server object,
     """
     attrs = attrs or {}
 
@@ -522,7 +522,7 @@ def create_sdk_servers(attrs=None, count=2):
 
     :param dict attrs: A dictionary with all attributes
     :param int count: The number of servers to fake
-    :return: A list of fake openstack.compute.v2.server.Server objects
+    :return: A list of fake fibostack.compute.v2.server.Server objects
     """
     servers = []
     for i in range(0, count):
@@ -537,7 +537,7 @@ def get_servers(servers=None, count=2):
     If servers list is provided, then initialize the Mock object with the
     list. Otherwise create one.
 
-    :param list servers: A list of fake openstack.compute.v2.server.Server
+    :param list servers: A list of fake fibostack.compute.v2.server.Server
         objects
     :param int count:
         The number of servers to fake
@@ -553,7 +553,7 @@ def create_one_server_action(attrs=None):
     """Create a fake server action.
 
     :param attrs: A dictionary with all attributes
-    :return: A fake openstack.compute.v2.server_action.ServerAction object
+    :return: A fake fibostack.compute.v2.server_action.ServerAction object
     """
     attrs = attrs or {}
 
@@ -596,7 +596,7 @@ def create_one_service(attrs=None):
     """Create a fake service.
 
     :param dict attrs: A dictionary with all attributes
-    :return: A fake openstack.compute.v2.service.Service object
+    :return: A fake fibostack.compute.v2.service.Service object
     """
     attrs = attrs or {}
 
@@ -641,7 +641,7 @@ def create_one_flavor(attrs=None):
     """Create a fake flavor.
 
     :param dict attrs: A dictionary with all attributes
-    :return: A fake openstack.compute.v2.flavor.Flavor object
+    :return: A fake fibostack.compute.v2.flavor.Flavor object
     """
     attrs = attrs or {}
 
@@ -674,7 +674,7 @@ def create_flavors(attrs=None, count=2):
 
     :param dict attrs: A dictionary with all attributes
     :param int count: The number of flavors to fake
-    :return: A list of fake openstack.compute.v2.flavor.Flavor objects
+    :return: A list of fake fibostack.compute.v2.flavor.Flavor objects
     """
     flavors = []
     for i in range(0, count):
@@ -689,7 +689,7 @@ def get_flavors(flavors=None, count=2):
     If flavors list is provided, then initialize the Mock object with the
     list. Otherwise create one.
 
-    :param list flavors: A list of fake openstack.compute.v2.flavor.Flavor
+    :param list flavors: A list of fake fibostack.compute.v2.flavor.Flavor
         objects
     :param int count: The number of flavors to fake
     :return: An iterable Mock object with side_effect set to a list of faked
@@ -730,7 +730,7 @@ def create_one_keypair(attrs=None):
     """Create a fake keypair
 
     :param dict attrs: A dictionary with all attributes
-    :return: A fake openstack.compute.v2.keypair.Keypair object
+    :return: A fake fibostack.compute.v2.keypair.Keypair object
     """
     attrs = attrs or {}
 
@@ -754,7 +754,7 @@ def create_keypairs(attrs=None, count=2):
 
     :param dict attrs: A dictionary with all attributes
     :param int count: The number of keypairs to fake
-    :return: A list of fake openstack.compute.v2.keypair.Keypair objects
+    :return: A list of fake fibostack.compute.v2.keypair.Keypair objects
     """
 
     keypairs = []
@@ -770,7 +770,7 @@ def get_keypairs(keypairs=None, count=2):
     If keypairs list is provided, then initialize the Mock object with the
     list. Otherwise create one.
 
-    :param list keypairs: A list of fake openstack.compute.v2.keypair.Keypair
+    :param list keypairs: A list of fake fibostack.compute.v2.keypair.Keypair
         objects
     :param int count: The number of keypairs to fake
     :return: An iterable Mock object with side_effect set to a list of faked
@@ -785,7 +785,7 @@ def create_one_availability_zone(attrs=None):
     """Create a fake AZ.
 
     :param dict attrs: A dictionary with all attributes
-    :return: A fake openstack.compute.v2.availability_zone.AvailabilityZone
+    :return: A fake fibostack.compute.v2.availability_zone.AvailabilityZone
         object
     """
     attrs = attrs or {}
@@ -822,7 +822,7 @@ def create_availability_zones(attrs=None, count=2):
     :param dict attrs: A dictionary with all attributes
     :param int count: The number of availability zones to fake
     :return: A list of fake
-        openstack.compute.v2.availability_zone.AvailabilityZone objects
+        fibostack.compute.v2.availability_zone.AvailabilityZone objects
     """
     availability_zones = []
     for i in range(0, count):
@@ -1340,7 +1340,7 @@ def create_one_migration(attrs=None):
     """Create a fake migration.
 
     :param dict attrs: A dictionary with all attributes
-    :return: A fake openstack.compute.v2.migration.Migration object
+    :return: A fake fibostack.compute.v2.migration.Migration object
     """
     attrs = attrs or {}
 
@@ -1376,7 +1376,7 @@ def create_migrations(attrs=None, count=2):
 
     :param dict attrs: A dictionary with all attributes
     :param int count: The number of migrations to fake
-    :return: A list of fake openstack.compute.v2.migration.Migration objects
+    :return: A list of fake fibostack.compute.v2.migration.Migration objects
     """
     migrations = []
     for i in range(0, count):
@@ -1389,7 +1389,7 @@ def create_one_server_migration(attrs=None):
     """Create a fake server migration.
 
     :param dict attrs: A dictionary with all attributes
-    :return A fake openstack.compute.v2.server_migration.ServerMigration object
+    :return A fake fibostack.compute.v2.server_migration.ServerMigration object
     """
     attrs = attrs or {}
 
@@ -1432,7 +1432,7 @@ def create_server_migrations(attrs=None, methods=None, count=2):
     :param dict attrs: A dictionary with all attributes
     :param int count: The number of server migrations to fake
     :return A list of fake
-        openstack.compute.v2.server_migration.ServerMigration objects
+        fibostack.compute.v2.server_migration.ServerMigration objects
     """
     migrations = []
     for i in range(0, count):
@@ -1445,7 +1445,7 @@ def create_one_volume_attachment(attrs=None):
     """Create a fake volume attachment.
 
     :param dict attrs: A dictionary with all attributes
-    :return: A fake openstack.compute.v2.volume_attachment.VolumeAttachment
+    :return: A fake fibostack.compute.v2.volume_attachment.VolumeAttachment
         object
     """
     attrs = attrs or {}
@@ -1477,7 +1477,7 @@ def create_volume_attachments(attrs=None, count=2):
     :param dict attrs: A dictionary with all attributes
     :param int count: The number of volume attachments to fake
     :return: A list of fake
-        openstack.compute.v2.volume_attachment.VolumeAttachment objects
+        fibostack.compute.v2.volume_attachment.VolumeAttachment objects
     """
     volume_attachments = []
     for i in range(0, count):
@@ -1490,7 +1490,7 @@ def create_one_hypervisor(attrs=None):
     """Create a fake hypervisor.
 
     :param dict attrs: A dictionary with all attributes
-    :return: A fake openstack.compute.v2.hypervisor.Hypervisor object
+    :return: A fake fibostack.compute.v2.hypervisor.Hypervisor object
     """
     attrs = attrs or {}
 
@@ -1536,7 +1536,7 @@ def create_hypervisors(attrs=None, count=2):
 
     :param dict attrs: A dictionary with all attributes
     :param int count: The number of hypervisors to fake
-    :return: A list of fake openstack.compute.v2.hypervisor.Hypervisor objects
+    :return: A list of fake fibostack.compute.v2.hypervisor.Hypervisor objects
     """
     hypervisors = []
     for i in range(0, count):
@@ -1549,7 +1549,7 @@ def create_one_server_group(attrs=None):
     """Create a fake server group
 
     :param dict attrs: A dictionary with all attributes
-    :return: A fake openstack.compute.v2.server_group.ServerGroup object
+    :return: A fake fibostack.compute.v2.server_group.ServerGroup object
     """
     if attrs is None:
         attrs = {}
@@ -1576,7 +1576,7 @@ def create_one_server_interface(attrs=None):
 
     :param dict attrs: A dictionary with all attributes
     :param dict methods: A dictionary with all methods
-    :return: A fake openstack.compute.v2.server_interface.ServerInterface
+    :return: A fake fibostack.compute.v2.server_interface.ServerInterface
         object
     """
     attrs = attrs or {}

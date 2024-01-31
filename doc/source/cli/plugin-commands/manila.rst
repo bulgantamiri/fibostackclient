@@ -1,4 +1,4 @@
 manila
 ------
 
-.. autoprogram-cliff:: openstack.share.v2
+.. autoprogram-cliff:: fibostack.share.v2

@@ -14,12 +14,12 @@
 
 """Compute v2 Server action implementations"""
 
-from openstack import utils as sdk_utils
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fibostack import utils as sdk_utils
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 class ListServerVolume(command.Lister):

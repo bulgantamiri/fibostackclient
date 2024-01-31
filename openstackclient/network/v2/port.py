@@ -19,16 +19,16 @@ import json
 import logging
 
 from cliff import columns as cliff_columns
-from osc_lib.cli import format_columns
-from osc_lib.cli import parseractions
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
-from osc_lib.utils import tags as _tag
+from fsc_lib.cli import format_columns
+from fsc_lib.cli import parseractions
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
+from fsc_lib.utils import tags as _tag
 
-from openstackclient.i18n import _
-from openstackclient.identity import common as identity_common
-from openstackclient.network import common
+from fibostackclient.i18n import _
+from fibostackclient.identity import common as identity_common
+from fibostackclient.network import common
 
 LOG = logging.getLogger(__name__)
 
@@ -371,7 +371,7 @@ def _add_updatable_args(parser):
 
 
 # TODO(abhiraut): Use the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 def _convert_address_pairs(parsed_args):
     ops = []
     for opt in parsed_args.allowed_address_pairs:
@@ -693,7 +693,7 @@ class DeletePort(command.Command):
 
 
 # TODO(abhiraut): Use only the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class ListPort(command.Lister):
     _description = _("List ports")
 
@@ -866,7 +866,7 @@ class ListPort(command.Lister):
 
 
 # TODO(abhiraut): Use the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class SetPort(common.NeutronCommandWithExtraArgs):
     _description = _("Set port properties")
 
@@ -1125,7 +1125,7 @@ class ShowPort(command.ShowOne):
 
 
 # TODO(abhiraut): Use the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class UnsetPort(common.NeutronUnsetCommandWithExtraArgs):
     _description = _("Unset port properties")
 

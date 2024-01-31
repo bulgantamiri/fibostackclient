@@ -14,7 +14,7 @@ import os
 
 from tempest.lib.common.utils import data_utils
 
-from openstackclient.tests.functional.identity.v3 import common
+from fibostackclient.tests.functional.identity.v3 import common
 
 SYSTEM_CLOUD = os.environ.get('OS_SYSTEM_CLOUD', 'devstack-system-admin')
 
@@ -25,13 +25,13 @@ class RegisteredLimitTestCase(common.IdentityTests):
 
     def test_registered_limit_create_with_service_id(self):
         service_name = self._create_dummy_service()
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'service show' ' %(service_name)s' % {'service_name': service_name}
         )
         service_items = self.parse_show(raw_output)
         service_id = self._extract_value_from_items('id', service_items)
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'registered limit create'
             ' --service %(service_id)s'
             ' --default-limit %(default_limit)s'
@@ -46,7 +46,7 @@ class RegisteredLimitTestCase(common.IdentityTests):
         items = self.parse_show(raw_output)
         registered_limit_id = self._extract_value_from_items('id', items)
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'registered limit delete'
             ' %(registered_limit_id)s'
             % {'registered_limit_id': registered_limit_id},
@@ -66,7 +66,7 @@ class RegisteredLimitTestCase(common.IdentityTests):
             'region_id': region_id,
         }
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'registered limit create'
             ' --description \'%(description)s\''
             ' --region %(region_id)s'
@@ -78,7 +78,7 @@ class RegisteredLimitTestCase(common.IdentityTests):
         items = self.parse_show(raw_output)
         registered_limit_id = self._extract_value_from_items('id', items)
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'registered limit delete %(registered_limit_id)s'
             % {'registered_limit_id': registered_limit_id},
             cloud=SYSTEM_CLOUD,
@@ -88,7 +88,7 @@ class RegisteredLimitTestCase(common.IdentityTests):
 
     def test_registered_limit_show(self):
         registered_limit_id = self._create_dummy_registered_limit()
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'registered limit show %(registered_limit_id)s'
             % {'registered_limit_id': registered_limit_id}
         )
@@ -103,7 +103,7 @@ class RegisteredLimitTestCase(common.IdentityTests):
             'registered_limit_id': registered_limit_id,
             'region_id': region_id,
         }
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'registered limit set'
             ' %(registered_limit_id)s'
             ' --region %(region_id)s' % params,
@@ -118,7 +118,7 @@ class RegisteredLimitTestCase(common.IdentityTests):
             'registered_limit_id': registered_limit_id,
             'description': 'updated description',
         }
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'registered limit set'
             ' %(registered_limit_id)s'
             ' --description \'%(description)s\'' % params,
@@ -134,7 +134,7 @@ class RegisteredLimitTestCase(common.IdentityTests):
             'registered_limit_id': registered_limit_id,
             'service': service_name,
         }
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'registered limit set'
             ' %(registered_limit_id)s'
             ' --service %(service)s' % params,
@@ -149,7 +149,7 @@ class RegisteredLimitTestCase(common.IdentityTests):
             'registered_limit_id': registered_limit_id,
             'default_limit': 20,
         }
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'registered limit set'
             ' %(registered_limit_id)s'
             ' --default-limit %(default_limit)s' % params,
@@ -165,7 +165,7 @@ class RegisteredLimitTestCase(common.IdentityTests):
             'registered_limit_id': registered_limit_id,
             'resource_name': resource_name,
         }
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'registered limit set'
             ' %(registered_limit_id)s'
             ' --resource-name %(resource_name)s' % params,
@@ -176,7 +176,7 @@ class RegisteredLimitTestCase(common.IdentityTests):
 
     def test_registered_limit_list(self):
         self._create_dummy_registered_limit()
-        raw_output = self.openstack('registered limit list')
+        raw_output = self.fibostack('registered limit list')
         items = self.parse_listing(raw_output)
         self.assert_table_structure(items, self.REGISTERED_LIMIT_LIST_HEADERS)
 
@@ -184,7 +184,7 @@ class RegisteredLimitTestCase(common.IdentityTests):
         registered_limit_id = self._create_dummy_registered_limit(
             add_clean_up=False
         )
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'registered limit delete'
             ' %(registered_limit_id)s'
             % {'registered_limit_id': registered_limit_id},

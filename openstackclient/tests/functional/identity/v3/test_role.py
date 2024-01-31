@@ -12,7 +12,7 @@
 
 from tempest.lib.common.utils import data_utils
 
-from openstackclient.tests.functional.identity.v3 import common
+from fibostackclient.tests.functional.identity.v3 import common
 
 
 class RoleTests(common.IdentityTests):
@@ -22,13 +22,13 @@ class RoleTests(common.IdentityTests):
     def test_role_create_with_description(self):
         role_name = data_utils.rand_name('TestRole')
         description = data_utils.rand_name('description')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'role create '
             '--description %(description)s '
             '%(name)s' % {'description': description, 'name': role_name}
         )
         role = self.parse_show_as_object(raw_output)
-        self.addCleanup(self.openstack, 'role delete %s' % role['id'])
+        self.addCleanup(self.fibostack, 'role delete %s' % role['id'])
         items = self.parse_show(raw_output)
         self.assert_show_fields(items, self.ROLE_FIELDS)
         self.assertEqual(description, role['description'])
@@ -36,47 +36,47 @@ class RoleTests(common.IdentityTests):
 
     def test_role_delete(self):
         role_name = self._create_dummy_role(add_clean_up=False)
-        raw_output = self.openstack('role delete %s' % role_name)
+        raw_output = self.fibostack('role delete %s' % role_name)
         self.assertEqual(0, len(raw_output))
 
     def test_role_list(self):
         self._create_dummy_role()
-        raw_output = self.openstack('role list')
+        raw_output = self.fibostack('role list')
         items = self.parse_listing(raw_output)
         self.assert_table_structure(items, common.BASIC_LIST_HEADERS)
 
     def test_role_show(self):
         role_name = self._create_dummy_role()
-        raw_output = self.openstack('role show %s' % role_name)
+        raw_output = self.fibostack('role show %s' % role_name)
         items = self.parse_show(raw_output)
         self.assert_show_fields(items, self.ROLE_FIELDS)
 
     def test_role_set(self):
         role_name = self._create_dummy_role()
         new_role_name = data_utils.rand_name('NewTestRole')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'role set --name %s %s' % (new_role_name, role_name)
         )
         self.assertEqual(0, len(raw_output))
-        raw_output = self.openstack('role show %s' % new_role_name)
+        raw_output = self.fibostack('role show %s' % new_role_name)
         role = self.parse_show_as_object(raw_output)
         self.assertEqual(new_role_name, role['name'])
 
     def test_role_set_description(self):
         role_name = self._create_dummy_role()
         description = data_utils.rand_name("NewDescription")
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'role set --description %s %s' % (description, role_name)
         )
         self.assertEqual(0, len(raw_output))
-        raw_output = self.openstack('role show %s' % role_name)
+        raw_output = self.fibostack('role show %s' % role_name)
         role = self.parse_show_as_object(raw_output)
         self.assertEqual(description, role['description'])
 
     def test_role_add(self):
         role_name = self._create_dummy_role()
         username = self._create_dummy_user()
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'role add '
             '--project %(project)s '
             '--project-domain %(project_domain)s '
@@ -92,7 +92,7 @@ class RoleTests(common.IdentityTests):
             }
         )
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'role remove '
             '--project %(project)s '
             '--project-domain %(project_domain)s '
@@ -112,7 +112,7 @@ class RoleTests(common.IdentityTests):
     def test_role_remove(self):
         role_name = self._create_dummy_role()
         username = self._create_dummy_user()
-        add_raw_output = self.openstack(
+        add_raw_output = self.fibostack(
             'role add '
             '--project %(project)s '
             '--project-domain %(project_domain)s '
@@ -127,7 +127,7 @@ class RoleTests(common.IdentityTests):
                 'role': role_name,
             }
         )
-        remove_raw_output = self.openstack(
+        remove_raw_output = self.fibostack(
             'role remove '
             '--project %(project)s '
             '--project-domain %(project_domain)s '
@@ -146,14 +146,14 @@ class RoleTests(common.IdentityTests):
         self.assertEqual(0, len(remove_raw_output))
 
     def test_implied_role_list(self):
-        raw_output = self.openstack('implied role list')
+        raw_output = self.fibostack('implied role list')
         default_roles = self.parse_listing(raw_output)
         self.assert_table_structure(
             default_roles, self.IMPLIED_ROLE_LIST_HEADERS
         )
 
         self._create_dummy_implied_role()
-        raw_output = self.openstack('implied role list')
+        raw_output = self.fibostack('implied role list')
         current_roles = self.parse_listing(raw_output)
         self.assert_table_structure(
             current_roles, self.IMPLIED_ROLE_LIST_HEADERS
@@ -163,7 +163,7 @@ class RoleTests(common.IdentityTests):
     def test_implied_role_create(self):
         role_name = self._create_dummy_role()
         implied_role_name = self._create_dummy_role()
-        self.openstack(
+        self.fibostack(
             'implied role create '
             '--implied-role %(implied_role)s '
             '%(role)s' % {'implied_role': implied_role_name, 'role': role_name}
@@ -171,7 +171,7 @@ class RoleTests(common.IdentityTests):
 
     def test_implied_role_delete(self):
         implied_role_name, role_name = self._create_dummy_implied_role()
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'implied role delete '
             '--implied-role %(implied_role)s '
             '%(role)s' % {'implied_role': implied_role_name, 'role': role_name}

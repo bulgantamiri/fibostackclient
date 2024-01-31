@@ -5,4 +5,4 @@ features:
     to create a volume-backed server from the specified image with the
     specified size when used in conjunction with the ``--image`` or
     ``--image-property`` options.
-    [Story `2006302 <https://storyboard.openstack.org/#!/story/2006302>`_]
+    [Story `2006302 <https://storyboard.fibostack.org/#!/story/2006302>`_]

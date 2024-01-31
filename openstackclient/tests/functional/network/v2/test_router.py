@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class RouterTests(common.NetworkTagTests):
@@ -24,7 +24,7 @@ class RouterTests(common.NetworkTagTests):
         """Test create options, delete multiple"""
         name1 = uuid.uuid4().hex
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router create ' + name1,
             parse_output=True,
         )
@@ -32,7 +32,7 @@ class RouterTests(common.NetworkTagTests):
             name1,
             cmd_output["name"],
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router create ' + name2,
             parse_output=True,
         )
@@ -41,16 +41,16 @@ class RouterTests(common.NetworkTagTests):
             cmd_output["name"],
         )
 
-        del_output = self.openstack('router delete ' + name1 + ' ' + name2)
+        del_output = self.fibostack('router delete ' + name1 + ' ' + name2)
         self.assertOutput('', del_output)
 
     def test_router_list(self):
         """Test create, list filter"""
         # Get project IDs
-        cmd_output = self.openstack('token issue', parse_output=True)
+        cmd_output = self.fibostack('token issue', parse_output=True)
         auth_project_id = cmd_output['project_id']
 
-        cmd_output = self.openstack('project list', parse_output=True)
+        cmd_output = self.fibostack('project list', parse_output=True)
         admin_project_id = None
         demo_project_id = None
         for p in cmd_output:
@@ -70,12 +70,12 @@ class RouterTests(common.NetworkTagTests):
 
         name1 = uuid.uuid4().hex
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router create ' + '--disable ' + name1,
             parse_output=True,
         )
 
-        self.addCleanup(self.openstack, 'router delete ' + name1)
+        self.addCleanup(self.fibostack, 'router delete ' + name1)
         self.assertEqual(
             name1,
             cmd_output["name"],
@@ -88,12 +88,12 @@ class RouterTests(common.NetworkTagTests):
             admin_project_id,
             cmd_output["project_id"],
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router create ' + '--project ' + demo_project_id + ' ' + name2,
             parse_output=True,
         )
 
-        self.addCleanup(self.openstack, 'router delete ' + name2)
+        self.addCleanup(self.fibostack, 'router delete ' + name2)
         self.assertEqual(
             name2,
             cmd_output["name"],
@@ -108,7 +108,7 @@ class RouterTests(common.NetworkTagTests):
         )
 
         # Test list --project
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router list ' + '--project ' + demo_project_id,
             parse_output=True,
         )
@@ -117,7 +117,7 @@ class RouterTests(common.NetworkTagTests):
         self.assertIn(name2, names)
 
         # Test list --disable
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router list ' + '--disable ',
             parse_output=True,
         )
@@ -126,7 +126,7 @@ class RouterTests(common.NetworkTagTests):
         self.assertNotIn(name2, names)
 
         # Test list --name
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router list ' + '--name ' + name1,
             parse_output=True,
         )
@@ -135,7 +135,7 @@ class RouterTests(common.NetworkTagTests):
         self.assertNotIn(name2, names)
 
         # Test list --long
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router list ' + '--long ',
             parse_output=True,
         )
@@ -150,16 +150,16 @@ class RouterTests(common.NetworkTagTests):
             self.skipTest("No l3_agent_scheduler extension present")
 
         name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router create ' + name,
             parse_output=True,
         )
 
-        self.addCleanup(self.openstack, 'router delete ' + name)
+        self.addCleanup(self.fibostack, 'router delete ' + name)
         # Get router ID
         router_id = cmd_output['id']
         # Get l3 agent id
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network agent list --agent-type l3',
             parse_output=True,
         )
@@ -169,11 +169,11 @@ class RouterTests(common.NetworkTagTests):
         agent_id = cmd_output[0]['ID']
 
         # Add router to agent
-        self.openstack(
+        self.fibostack(
             'network agent add router --l3 ' + agent_id + ' ' + router_id
         )
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router list --agent ' + agent_id,
             parse_output=True,
         )
@@ -181,10 +181,10 @@ class RouterTests(common.NetworkTagTests):
         self.assertIn(router_id, router_ids)
 
         # Remove router from agent
-        self.openstack(
+        self.fibostack(
             'network agent remove router --l3 ' + agent_id + ' ' + router_id
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router list --agent ' + agent_id,
             parse_output=True,
         )
@@ -196,11 +196,11 @@ class RouterTests(common.NetworkTagTests):
 
         name = uuid.uuid4().hex
         new_name = name + "_"
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router create ' + '--description aaaa ' + name,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'router delete ' + new_name)
+        self.addCleanup(self.fibostack, 'router delete ' + new_name)
         self.assertEqual(
             name,
             cmd_output["name"],
@@ -211,7 +211,7 @@ class RouterTests(common.NetworkTagTests):
         )
 
         # Test set --disable
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router set '
             + '--name '
             + new_name
@@ -221,7 +221,7 @@ class RouterTests(common.NetworkTagTests):
         )
         self.assertOutput('', cmd_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router show ' + new_name,
             parse_output=True,
         )
@@ -242,10 +242,10 @@ class RouterTests(common.NetworkTagTests):
         self._test_set_router_distributed(new_name)
 
         # Test unset
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router unset ' + '--external-gateway ' + new_name
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router show ' + new_name,
             parse_output=True,
         )
@@ -255,7 +255,7 @@ class RouterTests(common.NetworkTagTests):
         if not self.is_extension_enabled("dvr"):
             return
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router set '
             + '--distributed '
             + '--external-gateway public '
@@ -263,7 +263,7 @@ class RouterTests(common.NetworkTagTests):
         )
         self.assertOutput('', cmd_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'router show ' + router_name,
             parse_output=True,
         )
@@ -275,26 +275,26 @@ class RouterTests(common.NetworkTagTests):
         subnet_name = uuid.uuid4().hex
         router_name = uuid.uuid4().hex
 
-        self.openstack('network create %s' % network_name)
-        self.addCleanup(self.openstack, 'network delete %s' % network_name)
+        self.fibostack('network create %s' % network_name)
+        self.addCleanup(self.fibostack, 'network delete %s' % network_name)
 
-        self.openstack(
+        self.fibostack(
             'subnet create %s '
             '--network %s --subnet-range 10.0.0.0/24'
             % (subnet_name, network_name)
         )
 
-        self.openstack('router create %s' % router_name)
-        self.addCleanup(self.openstack, 'router delete %s' % router_name)
+        self.fibostack('router create %s' % router_name)
+        self.addCleanup(self.fibostack, 'router delete %s' % router_name)
 
-        self.openstack('router add subnet %s %s' % (router_name, subnet_name))
+        self.fibostack('router add subnet %s %s' % (router_name, subnet_name))
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'router remove subnet %s %s' % (router_name, subnet_name),
         )
 
         out1 = (
-            self.openstack(
+            self.fibostack(
                 'router add route %s '
                 '--route destination=10.0.10.0/24,gateway=10.0.0.10'
                 % router_name,
@@ -304,11 +304,11 @@ class RouterTests(common.NetworkTagTests):
         self.assertEqual(1, len(out1[0]['routes']))
 
         self.addCleanup(
-            self.openstack, 'router set %s --no-route' % router_name
+            self.fibostack, 'router set %s --no-route' % router_name
         )
 
         out2 = (
-            self.openstack(
+            self.fibostack(
                 'router add route %s '
                 '--route destination=10.0.10.0/24,gateway=10.0.0.10 '
                 '--route destination=10.0.11.0/24,gateway=10.0.0.11'
@@ -319,7 +319,7 @@ class RouterTests(common.NetworkTagTests):
         self.assertEqual(2, len(out2[0]['routes']))
 
         out3 = (
-            self.openstack(
+            self.fibostack(
                 'router remove route %s '
                 '--route destination=10.0.11.0/24,gateway=10.0.0.11 '
                 '--route destination=10.0.12.0/24,gateway=10.0.0.12'

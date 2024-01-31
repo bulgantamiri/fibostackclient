@@ -15,10 +15,10 @@
 
 from keystoneauth1 import exceptions as ks_exceptions
 from keystoneauth1 import session as ks_session
-from osc_lib import exceptions
+from fsc_lib import exceptions
 import simplejson as json
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 class KeystoneSession(object):

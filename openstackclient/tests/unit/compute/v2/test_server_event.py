@@ -16,11 +16,11 @@ from unittest import mock
 
 import iso8601
 from novaclient import api_versions
-from openstack import utils as sdk_utils
-from osc_lib import exceptions
+from fibostack import utils as sdk_utils
+from fsc_lib import exceptions
 
-from openstackclient.compute.v2 import server_event
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.compute.v2 import server_event
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
 
 
 class TestServerEvent(compute_fakes.TestComputev2):

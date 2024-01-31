@@ -5,15 +5,15 @@ Pre-2.0 Releases
 1.9.0 (17 Nov 2015)
 ===================
 
-* Several updates to `openstack server`
-  Blueprint :oscbp:`servers <cmd-with-multi-servers>`
+* Several updates to `fibostack server`
+  Blueprint :fscbp:`servers <cmd-with-multi-servers>`
 
-  * `openstack server start`
-  * `openstack server stop`
-  * `openstack server pause`
-  * `openstack server unpause`
-  * `openstack server lock`
-  * `openstack server unlock`
+  * `fibostack server start`
+  * `fibostack server stop`
+  * `fibostack server pause`
+  * `fibostack server unpause`
+  * `fibostack server lock`
+  * `fibostack server unlock`
 
 * Obfuscate passwords when used in debug mode
   Bug `1501598 <https://bugs.launchpad.net/bugs/1501598>`_
@@ -30,31 +30,31 @@ Pre-2.0 Releases
 * Log a warning when setting non-ascii object store properties
   Bug `1503898 <https://bugs.launchpad.net/bugs/1503898>`_
 
-* Add 'marker' and 'limit' to `openstack flavor list`
+* Add 'marker' and 'limit' to `fibostack flavor list`
   Bug `1505874 <https://bugs.launchpad.net/bugs/1505874>`_
 
 * Remove `url` from `region create` and `region set`
   Bug `1506841 <https://bugs.launchpad.net/bugs/1506841>`_
 
-* `openstack image add project` fails with AttributeError for image v2
+* `fibostack image add project` fails with AttributeError for image v2
   Bug `1509054 <https://bugs.launchpad.net/bugs/1509054>`_
 
-* Inconsistent output with `openstack usage show`
+* Inconsistent output with `fibostack usage show`
   Bug `1512220 <https://bugs.launchpad.net/bugs/1512220>`_
 
-* Validate --lines with `openstack console log show`
+* Validate --lines with `fibostack console log show`
   Bug `1512263 <https://bugs.launchpad.net/bugs/1512263>`_
 
-* Validate --project does not exist with `openstack quota set`
+* Validate --project does not exist with `fibostack quota set`
   Bug `1512638 <https://bugs.launchpad.net/bugs/1512638>`_
 
-* Cannot list servers while --user specified for `openstack server list`
+* Cannot list servers while --user specified for `fibostack server list`
   Bug `1513701 <https://bugs.launchpad.net/bugs/1513701>`_
 
-* Cannot list volumes while --user specified for `openstack volume list`
+* Cannot list volumes while --user specified for `fibostack volume list`
   Bug `1514145 <https://bugs.launchpad.net/bugs/1514145>`_
 
-* Cannot find volume with --block-device-mapping with `openstack server create`
+* Cannot find volume with --block-device-mapping with `fibostack server create`
   Bug `1514394 <https://bugs.launchpad.net/bugs/1514394>`_
 
 * Fix documentation for `credential set`
@@ -105,10 +105,10 @@ Pre-2.0 Releases
 * Add a blurb about ``pip install -e .`` to the developer docs
   Bug `1483384 <https://bugs.launchpad.net/bugs/1483384>`_
 
-* Add filtering by user for command 'openstack server list'
+* Add filtering by user for command 'fibostack server list'
   Bug `1483974 <https://bugs.launchpad.net/bugs/1483974>`_
 
-* No support for listing servers of other project with openstack server list
+* No support for listing servers of other project with fibostack server list
   Bug `1488486 <https://bugs.launchpad.net/bugs/1488486>`_
 
 * Missing image causes confusing 'server show' response
@@ -124,8 +124,8 @@ Pre-2.0 Releases
   Bug `1492916 <https://bugs.launchpad.net/bugs/1492916>`_
 
 * ERROR: InvocationError:
-  '/opt/stack/new/python-openstackclient/.tox/functional/bin/ostestr'
-  in gate-osc-dsvm-functional
+  '/opt/stack/new/python-fibostackclient/.tox/functional/bin/ostestr'
+  in gate-fsc-dsvm-functional
   Bug `1496337 <https://bugs.launchpad.net/bugs/1496337>`_
 
 * image list --long is broken with v2
@@ -139,7 +139,7 @@ Pre-2.0 Releases
 ===================
 
 * Added support for Block Storage v2 APIs
-  Blueprint `volume-v2 <https://blueprints.launchpad.net/python-openstackclient/+spec/volume-v2>`_
+  Blueprint `volume-v2 <https://blueprints.launchpad.net/python-fibostackclient/+spec/volume-v2>`_
 
   * Backup
   * Snapshot
@@ -170,7 +170,7 @@ Pre-2.0 Releases
 * type should be volume_type
   Bug `1475958 <https://bugs.launchpad.net/bugs/1475958>`_
 
-* openstack volume(v1) type missing show
+* fibostack volume(v1) type missing show
   Bug `1475879 <https://bugs.launchpad.net/bugs/1475879>`_
 
 * property should be required argument in unset cmd
@@ -194,25 +194,25 @@ Pre-2.0 Releases
 * catalog list fails in identity v2
   Bug `1474656 <https://bugs.launchpad.net/bugs/1474656>`_
 
-* openstack flavor unset NoneType error when used without --property
+* fibostack flavor unset NoneType error when used without --property
   Bug `1474237 <https://bugs.launchpad.net/bugs/1474237>`_
 
 * TypeError: 'NoneType' object does not support item assignment with latest os-client-config
   Bug `1473921 <https://bugs.launchpad.net/bugs/1473921>`_
 
-* authentication fails when openstackclient prompts for a password
+* authentication fails when fibostackclient prompts for a password
   Bug `1473862 <https://bugs.launchpad.net/bugs/1473862>`_
 
 * New mock release(1.1.0) broke unit/function tests
   Bug `1473454 <https://bugs.launchpad.net/bugs/1473454>`_
 
-* Cannot create keystone trust with python-openstackclient using trustor/trustee id
+* Cannot create keystone trust with python-fibostackclient using trustor/trustee id
   Bug `1473298 <https://bugs.launchpad.net/bugs/1473298>`_
 
 * "role assignment list" fails if two users in different domains have the same name
   Bug `1472909 <https://bugs.launchpad.net/bugs/1472909>`_
 
-* openstack catalog list always returns publicURL
+* fibostack catalog list always returns publicURL
   Bug `1472629 <https://bugs.launchpad.net/bugs/1472629>`_
 
 * The network list --dhcp option is inconsistent
@@ -221,10 +221,10 @@ Pre-2.0 Releases
 * Add support for showing aggregates in an hypervisor's properties
   Bug `1470875 <https://bugs.launchpad.net/bugs/1470875>`_
 
-* Can't seem to be able to get Openstackclient/examples to work
+* Can't seem to be able to get fibostackclient/examples to work
   Bug `1470272 <https://bugs.launchpad.net/bugs/1470272>`_
 
-* openstack server ssh fails to see floating IP address
+* fibostack server ssh fails to see floating IP address
   Bug `1469843 <https://bugs.launchpad.net/bugs/1469843>`_
 
 * confused domain argument for network create v2
@@ -245,7 +245,7 @@ Pre-2.0 Releases
 * Existing image is updated when call image create
   Bug `1461817 <https://bugs.launchpad.net/bugs/1461817>`_
 
-* ERROR: openstack 'ArgumentParser' object has no attribute 'debug'
+* ERROR: fibostack 'ArgumentParser' object has no attribute 'debug'
   Bug `1459519 <https://bugs.launchpad.net/bugs/1459519>`_
 
 * Add an --os-endpoint-type cli optional argument to be able to select endpoint interface type
@@ -254,7 +254,7 @@ Pre-2.0 Releases
 * API versions are ignored from OCC
   Bug `1453229 <https://bugs.launchpad.net/bugs/1453229>`_
 
-* Issues with OpenStackClient / Locale / OSX
+* Issues with fibostackClient / Locale / OSX
   Bug `1436898 <https://bugs.launchpad.net/bugs/1436898>`_
 
 * Image sharing does not seem to be supported
@@ -266,7 +266,7 @@ Pre-2.0 Releases
 1.5.0 (16 Jun 2015)
 ===================
 
-* openstack 'ListEC2Creds' object has no attribute 'determine_ec2_user'
+* fibostack 'ListEC2Creds' object has no attribute 'determine_ec2_user'
   Bug `1465561 <https://bugs.launchpad.net/bugs/1465561>`_
 
 1.4.0 (11 Jun 2015)
@@ -314,7 +314,7 @@ Pre-2.0 Releases
 * Can't update disk_format and container_format of image
   Bug `1446362 <https://bugs.launchpad.net/bugs/1446362>`_
 
-* Openstack --os-image-api-version 2 image show <image_id> fails
+* fibostack --os-image-api-version 2 image show <image_id> fails
   Bug `1450829 <https://bugs.launchpad.net/bugs/1450829>`_
 
 * The insecure option is ignored for command line options and OCC
@@ -326,7 +326,7 @@ Pre-2.0 Releases
 * Quota set sends invalid messages
   Bug `1451640 <https://bugs.launchpad.net/bugs/1451640>`_
 
-* Keystone Access Log logs "python-keystoneclient" as User-Agent even when request is made by openstack client
+* Keystone Access Log logs "python-keystoneclient" as User-Agent even when request is made by fibostack client
   Bug `1453995 <https://bugs.launchpad.net/bugs/1453995>`_
 
 * Client error while rescuing an instance
@@ -361,7 +361,7 @@ Pre-2.0 Releases
   Bug `1446751 <https://bugs.launchpad.net/bugs/1446751>`_
 
 * Document the backward-compatibility-breaking changes in
-  :oscdoc:`Backwards Incompatible Changes <backwards-incompatible>`.
+  :fscdoc:`Backwards Incompatible Changes <backwards-incompatible>`.
   :lpbug:`1406470`
 
 * Add ``--parent`` option to ``project create`` command
@@ -371,7 +371,7 @@ Pre-2.0 Releases
 ===================
 
 * Add global ``--os-cloud`` option to select from a list of cloud configurations.
-  See :oscdoc:`Configuration <configuration>` for more details.
+  See :fscdoc:`Configuration <configuration>` for more details.
 
 * Fix global ``--timing`` option operation.
   Bug `1402577 <https://bugs.launchpad.net/bugs/1402577>`_
@@ -435,17 +435,17 @@ Pre-2.0 Releases
 * Bug `1366279 <https://bugs.launchpad.net/bugs/1366279>`_: nova lock command description rather terse
 * Bug `1399588 <https://bugs.launchpad.net/bugs/1399588>`_: Authentication needed for help command
 * Bug `1401902 <https://bugs.launchpad.net/bugs/1401902>`_: image filtering not available
-* Bug `1410251 <https://bugs.launchpad.net/bugs/1410251>`_: sort and filter options on openstack image list
+* Bug `1410251 <https://bugs.launchpad.net/bugs/1410251>`_: sort and filter options on fibostack image list
 * Bug `1411160 <https://bugs.launchpad.net/bugs/1411160>`_: Add network support to quota show
 * Bug `1413718 <https://bugs.launchpad.net/bugs/1413718>`_: support keystone v3 trust extension
 * Bug `1413954 <https://bugs.launchpad.net/bugs/1413954>`_: missing volume extend
 * Bug `1415182 <https://bugs.launchpad.net/bugs/1415182>`_: Add extra validation when extending volume
-* Bug `1416542 <https://bugs.launchpad.net/bugs/1416542>`_: openstack client resize verify not completing workflow
+* Bug `1416542 <https://bugs.launchpad.net/bugs/1416542>`_: fibostack client resize verify not completing workflow
 * Bug `1416780 <https://bugs.launchpad.net/bugs/1416780>`_: flavor list missing features
 * Bug `1417614 <https://bugs.launchpad.net/bugs/1417614>`_: tenant_id in server show
 * Bug `1417854 <https://bugs.launchpad.net/bugs/1417854>`_: Fix help messages for `os security group rule create` and `os security group rule list`
 * Bug `1418024 <https://bugs.launchpad.net/bugs/1418024>`_: wrong import of contrib module from novaclient
-* Bug `1418384 <https://bugs.launchpad.net/bugs/1418384>`_: openstack client help shows domain can be changed for a project
+* Bug `1418384 <https://bugs.launchpad.net/bugs/1418384>`_: fibostack client help shows domain can be changed for a project
 * Bug `1418742 <https://bugs.launchpad.net/bugs/1418742>`_: volume create --snapshot-id is wrong
 * Bug `1418810 <https://bugs.launchpad.net/bugs/1418810>`_: auth with os-token fails with unexpected keyword argument 'user_domain_id'
 * Bug `1420080 <https://bugs.launchpad.net/bugs/1420080>`_: functional tests are failing with new keystoneclient release
@@ -458,10 +458,10 @@ Pre-2.0 Releases
 1.0.2 (19 Jan 2015)
 ===================
 
-* The OpenStackClient content from the OpenStack Wiki has been migrated into
-  the OSC source repo.  This includes the :oscdoc:`Command Structure <commands>`,
-  :oscdoc:`Command List <command-list>` and
-  :oscdoc:`Human Interface Guide <humaninterfaceguide>` documents.
+* The fibostackClient content from the fibostack Wiki has been migrated into
+  the fsc source repo.  This includes the :fscdoc:`Command Structure <commands>`,
+  :fscdoc:`Command List <command-list>` and
+  :fscdoc:`Human Interface Guide <humaninterfaceguide>` documents.
 
 * Set a default domain ID when both ``OS_USER_DOMAIN_ID`` and
   ``OS_USER_DOMAIN_NAME`` are not set.  This is also done for
@@ -474,7 +474,7 @@ Pre-2.0 Releases
 
 * Add ``--project`` option to ``user list`` command to filter users by project
   (*Identity API v3 only*).
-  Bug `1397251 <https://bugs.launchpad.net/bugs/1397251>`_: allow `openstack user list` to use other filters
+  Bug `1397251 <https://bugs.launchpad.net/bugs/1397251>`_: allow `fibostack user list` to use other filters
 
 * Add ``--user`` to ``project list`` command to filter projects by user
   (*Identity API v3 only*).
@@ -489,7 +489,7 @@ Pre-2.0 Releases
 * Bug `1385338 <https://bugs.launchpad.net/bugs/1385338>`_: Improve domain related defaults when using v3 identity API
 * Bug `1390507 <https://bugs.launchpad.net/bugs/1390507>`_: Quota show requires cinder in keystone catalog
 * Bug `1394793 <https://bugs.launchpad.net/bugs/1394793>`_: support the keystone api /v3/users/$userid/projects
-* Bug `1397251 <https://bugs.launchpad.net/bugs/1397251>`_: allow `openstack user list` to use other filters
+* Bug `1397251 <https://bugs.launchpad.net/bugs/1397251>`_: allow `fibostack user list` to use other filters
 * Bug `1399757 <https://bugs.launchpad.net/bugs/1399757>`_: ec2 credentials create fails in 1.0.0
 * Bug `1400531 <https://bugs.launchpad.net/bugs/1400531>`_: Authentication failure results in useless error message
 * Bug `1400597 <https://bugs.launchpad.net/bugs/1400597>`_: delete multiple objects
@@ -523,12 +523,12 @@ Pre-2.0 Releases
 * Bug 1292638_: Perhaps API Versions should Match Easier
 * Bug 1390389_: create with a soft fail (create or show) for keystone operations
 * Bug 1387932_: add keystone v3 region object
-* Bug 1378842_: OSC fails to show server details if booted from volume
+* Bug 1378842_: fsc fails to show server details if booted from volume
 * Bug 1383338_: server create problems in boot-from-volume
 * Bug 1337685_: Add the ability to list networks extensions
 * Bug 1355838_: Don't make calls to Keystone for authN if insufficient args are present
 * Bug 1371924_: strings are being treated as numbers
-* Bug 1372070_: help text in error on openstack image save
+* Bug 1372070_: help text in error on fibostack image save
 * Bug 1372744_: v3 credential set always needs --user option
 * Bug 1376833_: odd behavior when editing the domain of a user through Keystone v3 API
 * Bug 1378165_: Domains should be supported for 'user show' command
@@ -662,10 +662,10 @@ Pre-2.0 Releases
 
 .. _1100116: https://bugs.launchpad.net/ubuntu/+source/python-keystoneclient/+bug/1100116
 .. _1198171: https://bugs.launchpad.net/keystone/+bug/1198171
-.. _1241177: https://bugs.launchpad.net/python-openstackclient/+bug/1241177
-.. _1256935: https://bugs.launchpad.net/python-openstackclient/+bug/1256935
-.. _1269821: https://bugs.launchpad.net/python-openstackclient/+bug/1269821
-.. _1284957: https://bugs.launchpad.net/python-openstackclient/+bug/1284957
+.. _1241177: https://bugs.launchpad.net/python-fibostackclient/+bug/1241177
+.. _1256935: https://bugs.launchpad.net/python-fibostackclient/+bug/1256935
+.. _1269821: https://bugs.launchpad.net/python-fibostackclient/+bug/1269821
+.. _1284957: https://bugs.launchpad.net/python-fibostackclient/+bug/1284957
 
 0.3.0 (17 Dec 2013)
 ===================

@@ -17,18 +17,18 @@ import copy
 import datetime
 import logging
 
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 LOG = logging.getLogger(__name__)
 
 
 def _format_image_cache(cached_images):
-    """Format image cache to make it more consistent with OSC operations."""
+    """Format image cache to make it more consistent with fsc operations."""
 
     image_list = []
     for item in cached_images:

@@ -32,15 +32,15 @@ Plugin Commands
 
 .. cue
 .. # cueclient is not in global-requirements
-.. # list-plugins:: openstack.mb.v1
+.. # list-plugins:: fibostack.mb.v1
 .. #   :detailed:
 
 .. murano
 .. # the murano docs cause warnings and a broken docs build
-.. # .. list-plugins:: openstack.application_catalog.v1
+.. # .. list-plugins:: fibostack.application_catalog.v1
 .. #   :detailed:
 
 .. tripleo
 .. # tripleoclient is not in global-requirements
-.. # list-plugins:: openstack.tripleoclient.v1
+.. # list-plugins:: fibostack.tripleoclient.v1
 .. #   :detailed:

@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class SecurityGroupRuleTests(common.NetworkTests):
@@ -24,17 +24,17 @@ class SecurityGroupRuleTests(common.NetworkTests):
         self.SECURITY_GROUP_NAME = uuid.uuid4().hex
 
         # Create the security group to hold the rule
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'security group create ' + self.SECURITY_GROUP_NAME,
             parse_output=True,
         )
         self.addCleanup(
-            self.openstack, 'security group delete ' + self.SECURITY_GROUP_NAME
+            self.fibostack, 'security group delete ' + self.SECURITY_GROUP_NAME
         )
         self.assertEqual(self.SECURITY_GROUP_NAME, cmd_output['name'])
 
         # Create the security group rule.
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'security group rule create '
             + self.SECURITY_GROUP_NAME
             + ' '
@@ -43,12 +43,12 @@ class SecurityGroupRuleTests(common.NetworkTests):
             parse_output=True,
         )
         self.addCleanup(
-            self.openstack, 'security group rule delete ' + cmd_output['id']
+            self.fibostack, 'security group rule delete ' + cmd_output['id']
         )
         self.SECURITY_GROUP_RULE_ID = cmd_output['id']
 
     def test_security_group_rule_list(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'security group rule list ' + self.SECURITY_GROUP_NAME,
             parse_output=True,
         )
@@ -57,7 +57,7 @@ class SecurityGroupRuleTests(common.NetworkTests):
         )
 
     def test_security_group_rule_show(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'security group rule show ' + self.SECURITY_GROUP_RULE_ID,
             parse_output=True,
         )

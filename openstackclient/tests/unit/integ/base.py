@@ -13,8 +13,8 @@
 from keystoneauth1 import fixture as ksa_fixture
 from requests_mock.contrib import fixture
 
-from openstackclient.tests.unit import test_shell
-from openstackclient.tests.unit import utils
+from fibostackclient.tests.unit import test_shell
+from fibostackclient.tests.unit import utils
 
 
 HOST = "192.168.5.41"
@@ -28,7 +28,7 @@ V2_VERSION_RESP = {
         "media-types": [
             {
                 "base": "application/json",
-                "type": "application/vnd.openstack.identity-v2.0+json",
+                "type": "application/vnd.fibostack.identity-v2.0+json",
             },
         ],
         "id": "v2.0",
@@ -38,7 +38,7 @@ V2_VERSION_RESP = {
                 "rel": "self",
             },
             {
-                "href": "http://docs.openstack.org/",
+                "href": "http://docs.fibostack.org/",
                 "type": "text/html",
                 "rel": "describedby",
             },
@@ -54,7 +54,7 @@ V3_VERSION_RESP = {
         "media-types": [
             {
                 "base": "application/json",
-                "type": "application/vnd.openstack.identity-v3+json",
+                "type": "application/vnd.fibostack.identity-v3+json",
             }
         ],
         "id": "v3.6",

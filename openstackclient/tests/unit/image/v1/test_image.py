@@ -15,11 +15,11 @@
 import copy
 from unittest import mock
 
-from osc_lib.cli import format_columns
+from fsc_lib.cli import format_columns
 
-from openstackclient.image.v1 import image
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.image.v1 import fakes as image_fakes
+from fibostackclient.image.v1 import image
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.image.v1 import fakes as image_fakes
 
 
 class TestImageCreate(image_fakes.TestImagev1):
@@ -145,7 +145,7 @@ class TestImageCreate(image_fakes.TestImagev1):
         self.assertEqual(self.columns, columns)
         self.assertCountEqual(self.data, data)
 
-    @mock.patch('openstackclient.image.v1.image.io.open', name='Open')
+    @mock.patch('fibostackclient.image.v1.image.io.open', name='Open')
     def test_image_create_file(self, mock_open):
         mock_file = mock.Mock(name='File')
         mock_open.return_value = mock_file
@@ -381,7 +381,7 @@ class TestImageList(image_fakes.TestImagev1):
         )
         self.assertCountEqual(datalist, tuple(data))
 
-    @mock.patch('osc_lib.api.utils.simple_filter')
+    @mock.patch('fsc_lib.api.utils.simple_filter')
     def test_image_list_property_option(self, sf_mock):
         sf_mock.side_effect = [
             [self.image_info],
@@ -412,7 +412,7 @@ class TestImageList(image_fakes.TestImagev1):
         self.assertEqual(self.columns, columns)
         self.assertEqual(self.datalist, tuple(data))
 
-    @mock.patch('osc_lib.utils.sort_items')
+    @mock.patch('fsc_lib.utils.sort_items')
     def test_image_list_sort_option(self, si_mock):
         si_mock.side_effect = [
             [self._image],

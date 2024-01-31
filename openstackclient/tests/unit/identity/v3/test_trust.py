@@ -14,12 +14,12 @@
 import copy
 from unittest import mock
 
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.identity.v3 import trust
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.identity.v3 import trust
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
 
 
 class TestTrust(identity_fakes.TestIdentityv3):

@@ -15,7 +15,7 @@
 
 from tempest.lib import exceptions as tempest_exc
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 
 class ExtensionTests(base.TestCase):
@@ -28,7 +28,7 @@ class ExtensionTests(base.TestCase):
 
     def test_extension_list_compute(self):
         """Test compute extension list"""
-        output = self.openstack(
+        output = self.fibostack(
             'extension list --compute',
             parse_output=True,
         )
@@ -40,7 +40,7 @@ class ExtensionTests(base.TestCase):
 
     def test_extension_list_volume(self):
         """Test volume extension list"""
-        output = self.openstack(
+        output = self.fibostack(
             'extension list --volume',
             parse_output=True,
         )
@@ -55,7 +55,7 @@ class ExtensionTests(base.TestCase):
         if not self.haz_network:
             self.skipTest("No Network service present")
 
-        output = self.openstack(
+        output = self.fibostack(
             'extension list --network',
             parse_output=True,
         )
@@ -71,7 +71,7 @@ class ExtensionTests(base.TestCase):
             self.skipTest("No Network service present")
 
         name = 'agent'
-        output = self.openstack(
+        output = self.fibostack(
             'extension show ' + name,
             parse_output=True,
         )
@@ -87,7 +87,7 @@ class ExtensionTests(base.TestCase):
 
         name = 'not_existed_ext'
         try:
-            self.openstack('extension show ' + name)
+            self.fibostack('extension show ' + name)
         except tempest_exc.CommandFailed as e:
             self.assertIn('No Extension found for', str(e))
             self.assertIn(name, str(e))

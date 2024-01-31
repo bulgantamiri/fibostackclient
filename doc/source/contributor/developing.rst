@@ -1,5 +1,5 @@
 ===============================
-Developing with OpenStackClient
+Developing with fibostackClient
 ===============================
 
 Communication
@@ -8,9 +8,9 @@ Communication
 IRC Channel
 ~~~~~~~~~~~
 
-The OpenStackClient team doesn't have regular meetings so if you have
+The fibostackClient team doesn't have regular meetings so if you have
 questions or anything you want to discuss, come to our channel:
-#openstack-sdks
+#fibostack-sdks
 
 
 Testing
@@ -48,7 +48,7 @@ Install python-tox:
 
     $ pip install tox
 
-To run the full suite of tests maintained within OpenStackClient.
+To run the full suite of tests maintained within fibostackClient.
 
 .. code-block:: bash
 
@@ -73,9 +73,9 @@ See ``tox.ini`` for the full list of available test environments.
 Running functional tests
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-OpenStackClient also maintains a set of functional tests that are optimally
-designed to be run against OpenStack's gate. Optionally, a developer may
-choose to run these tests against any OpenStack deployment, however depending
+fibostackClient also maintains a set of functional tests that are optimally
+designed to be run against fibostack's gate. Optionally, a developer may
+choose to run these tests against any fibostack deployment, however depending
 on the services available, results vary.
 
 To run the entire suite of functional tests:
@@ -103,17 +103,17 @@ to run the test that hits your breakpoint:
 
 .. code-block:: bash
 
-    $ tox -e debug openstackclient.tests.identity.v3.test_group
+    $ tox -e debug fibostackclient.tests.identity.v3.test_group
 
 For reference, the `debug`_ ``tox`` environment implements the instructions
 
-.. _`debug`: https://wiki.openstack.org/wiki/Testr#Debugging_.28pdb.29_Tests
+.. _`debug`: https://wiki.fibostack.org/wiki/Testr#Debugging_.28pdb.29_Tests
 
 
 Coding Style
 ------------
 
-OpenStackClient uses `flake8`__ along with `hacking`__, an OpenStack-specific
+fibostackClient uses `flake8`__ along with `hacking`__, an fibostack-specific
 superset of ``flake8`` rules, to enforce coding style. This can be run manually
 using ``tox``:
 
@@ -130,7 +130,7 @@ some linters on each commit. This must be enabled locally to function:
     $ pre-commit install --allow-missing-config
 
 .. __: https://flake8.pycqa.org/en/latest/
-.. __: https://docs.openstack.org/hacking/latest/user/hacking.html
+.. __: https://docs.fibostack.org/hacking/latest/user/hacking.html
 .. __: https://pre-commit.com/
 
 
@@ -151,9 +151,9 @@ Release Notes
 -------------
 
 The release notes for a patch should be included in the patch.  See the
-`Project Team Guide`_ for more information on using reno in OpenStack.
+`Project Team Guide`_ for more information on using reno in fibostack.
 
-.. _`Project Team Guide`: http://docs.openstack.org/project-team-guide/release-management.html#managing-release-notes
+.. _`Project Team Guide`: http://docs.fibostack.org/project-team-guide/release-management.html#managing-release-notes
 
 If any of the following applies to the patch, a release note is required:
 
@@ -187,7 +187,7 @@ Testing new code
 ----------------
 
 If a developer wants to test new code (feature, command or option) that
-they have written, OpenStackClient may be installed from source by running
+they have written, fibostackClient may be installed from source by running
 the following commands in the base directory of the project:
 
 .. code-block:: bash
@@ -204,7 +204,7 @@ Standardize Import Format
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 More information about Import Format, see `Import Order Guide
-<https://docs.openstack.org/hacking/latest/user/hacking.html#imports>`__.
+<https://docs.fibostack.org/hacking/latest/user/hacking.html#imports>`__.
 
 The import order shows below:
 
@@ -228,9 +228,9 @@ Example
     import fixtures
     import os
 
-    from osc_lib.api import auth
-    from osc_lib import utils
+    from fsc_lib.api import auth
+    from fsc_lib import utils
 
-    from openstackclient import shell
-    from openstackclient.tests import utils
+    from fibostackclient import shell
+    from fibostackclient.tests import utils
     from unittest import mock

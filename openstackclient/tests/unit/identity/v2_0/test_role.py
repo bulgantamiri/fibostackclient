@@ -16,11 +16,11 @@
 from unittest import mock
 
 from keystoneauth1 import exceptions as ks_exc
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.identity.v2_0 import role
-from openstackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
+from fibostackclient.identity.v2_0 import role
+from fibostackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
 
 
 class TestRole(identity_fakes.TestIdentityv2):

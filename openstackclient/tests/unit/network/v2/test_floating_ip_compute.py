@@ -14,17 +14,17 @@
 from unittest import mock
 from unittest.mock import call
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.network.v2 import floating_ip as fip
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
-from openstackclient.tests.unit import utils as tests_utils
+from fibostackclient.network.v2 import floating_ip as fip
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.tests.unit import utils as tests_utils
 
 
 # Tests for Nova network
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.floating_ip_create')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.floating_ip_create')
 class TestCreateFloatingIPCompute(compute_fakes.TestComputev2):
     # The floating ip to be deleted.
     _floating_ip = compute_fakes.create_one_floating_ip()
@@ -84,7 +84,7 @@ class TestCreateFloatingIPCompute(compute_fakes.TestComputev2):
         self.assertEqual(self.data, data)
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.floating_ip_delete')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.floating_ip_delete')
 class TestDeleteFloatingIPCompute(compute_fakes.TestComputev2):
     # The floating ips to be deleted.
     _floating_ips = compute_fakes.create_floating_ips(count=2)
@@ -160,7 +160,7 @@ class TestDeleteFloatingIPCompute(compute_fakes.TestComputev2):
         fip_mock.assert_any_call('unexist_floating_ip')
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.floating_ip_list')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.floating_ip_list')
 class TestListFloatingIPCompute(compute_fakes.TestComputev2):
     # The floating ips to be list up
     _floating_ips = compute_fakes.create_floating_ips(count=3)
@@ -206,7 +206,7 @@ class TestListFloatingIPCompute(compute_fakes.TestComputev2):
         self.assertEqual(self.data, list(data))
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.floating_ip_find')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.floating_ip_find')
 class TestShowFloatingIPCompute(compute_fakes.TestComputev2):
     # The floating ip to display.
     _floating_ip = compute_fakes.create_one_floating_ip()

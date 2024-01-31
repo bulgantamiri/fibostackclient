@@ -10,7 +10,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from openstackclient.tests.functional.identity.v2 import common
+from fibostackclient.tests.functional.identity.v2 import common
 
 
 class TokenTests(common.IdentityTests):
@@ -19,5 +19,5 @@ class TokenTests(common.IdentityTests):
 
     def test_token_revoke(self):
         token_id = self._create_dummy_token(add_clean_up=False)
-        raw_output = self.openstack('token revoke %s' % token_id)
+        raw_output = self.fibostack('token revoke %s' % token_id)
         self.assertEqual(0, len(raw_output))

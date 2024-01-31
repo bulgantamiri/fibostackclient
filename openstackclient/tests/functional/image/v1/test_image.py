@@ -14,7 +14,7 @@ import uuid
 
 import fixtures
 
-from openstackclient.tests.functional.image import base
+from fibostackclient.tests.functional.image import base
 
 
 class ImageTests(base.BaseImageTests):
@@ -30,7 +30,7 @@ class ImageTests(base.BaseImageTests):
         self.useFixture(ver_fixture)
 
         self.name = uuid.uuid4().hex
-        output = self.openstack(
+        output = self.fibostack(
             'image create ' + self.name,
             parse_output=True,
         )
@@ -39,19 +39,19 @@ class ImageTests(base.BaseImageTests):
 
     def tearDown(self):
         try:
-            self.openstack('image delete ' + self.image_id)
+            self.fibostack('image delete ' + self.image_id)
         finally:
             super().tearDown()
 
     def test_image_list(self):
-        output = self.openstack('image list')
+        output = self.fibostack('image list')
         self.assertIn(self.name, [img['Name'] for img in output])
 
     def test_image_attributes(self):
         """Test set, unset, show on attributes, tags and properties"""
 
         # Test explicit attributes
-        self.openstack(
+        self.fibostack(
             'image set '
             + '--min-disk 4 '
             + '--min-ram 5 '
@@ -59,7 +59,7 @@ class ImageTests(base.BaseImageTests):
             + '--public '
             + self.name
         )
-        output = self.openstack(
+        output = self.fibostack(
             'image show ' + self.name,
             parse_output=True,
         )
@@ -80,14 +80,14 @@ class ImageTests(base.BaseImageTests):
         )
 
         # Test properties
-        self.openstack(
+        self.fibostack(
             'image set '
             + '--property a=b '
             + '--property c=d '
             + '--public '
             + self.name
         )
-        output = self.openstack(
+        output = self.fibostack(
             'image show ' + self.name,
             parse_output=True,
         )

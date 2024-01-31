@@ -15,10 +15,10 @@
 
 """Identity v2 Token action implementations"""
 
-from osc_lib.command import command
-from osc_lib import exceptions
+from fsc_lib.command import command
+from fsc_lib import exceptions
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 class IssueToken(command.ShowOne):

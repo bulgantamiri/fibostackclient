@@ -12,14 +12,14 @@
 
 from tempest.lib.common.utils import data_utils
 
-from openstackclient.tests.functional.identity.v3 import common
+from fibostackclient.tests.functional.identity.v3 import common
 
 
 class ProjectTests(common.IdentityTests):
     def test_project_create(self):
         project_name = data_utils.rand_name('TestProject')
         description = data_utils.rand_name('description')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'project create '
             '--domain %(domain)s '
             '--description %(description)s '
@@ -34,7 +34,7 @@ class ProjectTests(common.IdentityTests):
             }
         )
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'project delete '
             '--domain %(domain)s '
             '%(name)s' % {'domain': self.domain_name, 'name': project_name},
@@ -49,7 +49,7 @@ class ProjectTests(common.IdentityTests):
 
     def test_project_delete(self):
         project_name = self._create_dummy_project(add_clean_up=False)
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'project delete '
             '--domain %(domain)s '
             '%(name)s' % {'domain': self.domain_name, 'name': project_name}
@@ -57,13 +57,13 @@ class ProjectTests(common.IdentityTests):
         self.assertEqual(0, len(raw_output))
 
     def test_project_list(self):
-        raw_output = self.openstack('project list')
+        raw_output = self.fibostack('project list')
         items = self.parse_listing(raw_output)
         self.assert_table_structure(items, common.BASIC_LIST_HEADERS)
 
     def test_project_list_with_domain(self):
         project_name = self._create_dummy_project()
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'project list --domain %s' % self.domain_name
         )
         items = self.parse_listing(raw_output)
@@ -74,7 +74,7 @@ class ProjectTests(common.IdentityTests):
     def test_project_set(self):
         project_name = self._create_dummy_project()
         new_project_name = data_utils.rand_name('NewTestProject')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'project set '
             '--name %(new_name)s '
             '--disable '
@@ -83,7 +83,7 @@ class ProjectTests(common.IdentityTests):
         )
         self.assertEqual(0, len(raw_output))
         # check project details
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'project show '
             '--domain %(domain)s '
             '%(name)s' % {'domain': self.domain_name, 'name': new_project_name}
@@ -97,7 +97,7 @@ class ProjectTests(common.IdentityTests):
         self.assertEqual('False', project['enabled'])
         self.assertEqual('v0', project['k0'])
         # reset project to make sure it will be cleaned up
-        self.openstack(
+        self.fibostack(
             'project set '
             '--name %(new_name)s '
             '--enable '
@@ -105,7 +105,7 @@ class ProjectTests(common.IdentityTests):
         )
 
     def test_project_show(self):
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'project show '
             '--domain %(domain)s '
             '%(name)s'
@@ -115,7 +115,7 @@ class ProjectTests(common.IdentityTests):
         self.assert_show_fields(items, self.PROJECT_FIELDS)
 
     def test_project_show_with_parents_children(self):
-        output = self.openstack(
+        output = self.fibostack(
             'project show '
             '--parents --children '
             '--domain %(domain)s '

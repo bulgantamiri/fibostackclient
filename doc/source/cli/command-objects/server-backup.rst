@@ -7,5 +7,5 @@ instance. The backup command manages the number of archival copies to retain.
 
 Compute v2
 
-.. autoprogram-cliff:: openstack.compute.v2
+.. autoprogram-cliff:: fibostack.compute.v2
    :command: server backup create

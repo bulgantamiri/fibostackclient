@@ -12,10 +12,10 @@
 #   under the License.
 #
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.tests.unit.volume.v1 import fakes as volume_fakes
-from openstackclient.volume.v1 import service
+from fibostackclient.tests.unit.volume.v1 import fakes as volume_fakes
+from fibostackclient.volume.v1 import service
 
 
 class TestService(volume_fakes.TestVolumev1):

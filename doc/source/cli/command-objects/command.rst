@@ -4,7 +4,7 @@ command
 
 Internal
 
-Installed commands in the OSC process.
+Installed commands in the fsc process.
 
-.. autoprogram-cliff:: openstack.cli
+.. autoprogram-cliff:: fibostack.cli
    :command: command *

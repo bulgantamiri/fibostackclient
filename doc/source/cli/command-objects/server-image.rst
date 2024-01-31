@@ -7,5 +7,5 @@ image is created in the Image store.
 
 Compute v2
 
-.. autoprogram-cliff:: openstack.compute.v2
+.. autoprogram-cliff:: fibostack.compute.v2
    :command: server image create

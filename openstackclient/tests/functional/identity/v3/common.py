@@ -15,7 +15,7 @@ import os
 import fixtures
 from tempest.lib.common.utils import data_utils
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 
 BASIC_LIST_HEADERS = ['ID', 'Name']
@@ -145,7 +145,7 @@ class IdentityTests(base.TestCase):
         # create dummy domain
         cls.domain_name = data_utils.rand_name('TestDomain')
         cls.domain_description = data_utils.rand_name('description')
-        cls.openstack(
+        cls.fibostack(
             '--os-identity-api-version 3 '
             'domain create '
             '--description %(description)s '
@@ -157,7 +157,7 @@ class IdentityTests(base.TestCase):
         # create dummy project
         cls.project_name = data_utils.rand_name('TestProject')
         cls.project_description = data_utils.rand_name('description')
-        cls.openstack(
+        cls.fibostack(
             '--os-identity-api-version 3 '
             'project create '
             '--domain %(domain)s '
@@ -175,16 +175,16 @@ class IdentityTests(base.TestCase):
     def tearDownClass(cls):
         try:
             # delete dummy project
-            cls.openstack(
+            cls.fibostack(
                 '--os-identity-api-version 3 '
                 'project delete %s' % cls.project_name
             )
             # disable and delete dummy domain
-            cls.openstack(
+            cls.fibostack(
                 '--os-identity-api-version 3 '
                 'domain set --disable %s' % cls.domain_name
             )
-            cls.openstack(
+            cls.fibostack(
                 '--os-identity-api-version 3 '
                 'domain delete %s' % cls.domain_name
             )
@@ -210,7 +210,7 @@ class IdentityTests(base.TestCase):
         password = data_utils.rand_name('password')
         email = data_utils.rand_name() + '@example.com'
         description = data_utils.rand_name('description')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'user create '
             '--domain %(domain)s '
             '--project %(project)s '
@@ -232,7 +232,7 @@ class IdentityTests(base.TestCase):
         )
         if add_clean_up:
             self.addCleanup(
-                self.openstack,
+                self.fibostack,
                 'user delete %s' % self.parse_show_as_object(raw_output)['id'],
             )
         items = self.parse_show(raw_output)
@@ -241,10 +241,10 @@ class IdentityTests(base.TestCase):
 
     def _create_dummy_role(self, add_clean_up=True):
         role_name = data_utils.rand_name('TestRole')
-        raw_output = self.openstack('role create %s' % role_name)
+        raw_output = self.fibostack('role create %s' % role_name)
         role = self.parse_show_as_object(raw_output)
         if add_clean_up:
-            self.addCleanup(self.openstack, 'role delete %s' % role['id'])
+            self.addCleanup(self.fibostack, 'role delete %s' % role['id'])
         items = self.parse_show(raw_output)
         self.assert_show_fields(items, self.ROLE_FIELDS)
         self.assertEqual(role_name, role['name'])
@@ -253,7 +253,7 @@ class IdentityTests(base.TestCase):
     def _create_dummy_implied_role(self, add_clean_up=True):
         role_name = self._create_dummy_role(add_clean_up)
         implied_role_name = self._create_dummy_role(add_clean_up)
-        self.openstack(
+        self.fibostack(
             'implied role create '
             '--implied-role %(implied_role)s '
             '%(role)s' % {'implied_role': implied_role_name, 'role': role_name}
@@ -264,7 +264,7 @@ class IdentityTests(base.TestCase):
     def _create_dummy_group(self, add_clean_up=True):
         group_name = data_utils.rand_name('TestGroup')
         description = data_utils.rand_name('description')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'group create '
             '--domain %(domain)s '
             '--description %(description)s '
@@ -277,7 +277,7 @@ class IdentityTests(base.TestCase):
         )
         if add_clean_up:
             self.addCleanup(
-                self.openstack,
+                self.fibostack,
                 'group delete '
                 '--domain %(domain)s '
                 '%(name)s' % {'domain': self.domain_name, 'name': group_name},
@@ -289,23 +289,23 @@ class IdentityTests(base.TestCase):
     def _create_dummy_domain(self, add_clean_up=True):
         domain_name = data_utils.rand_name('TestDomain')
         domain_description = data_utils.rand_name('description')
-        self.openstack(
+        self.fibostack(
             'domain create '
             '--description %(description)s '
             '--enable %(name)s'
             % {'description': domain_description, 'name': domain_name}
         )
         if add_clean_up:
-            self.addCleanup(self.openstack, 'domain delete %s' % domain_name)
+            self.addCleanup(self.fibostack, 'domain delete %s' % domain_name)
             self.addCleanup(
-                self.openstack, 'domain set --disable %s' % domain_name
+                self.fibostack, 'domain set --disable %s' % domain_name
             )
         return domain_name
 
     def _create_dummy_project(self, add_clean_up=True):
         project_name = data_utils.rand_name('TestProject')
         project_description = data_utils.rand_name('description')
-        self.openstack(
+        self.fibostack(
             'project create '
             '--domain %(domain)s '
             '--description %(description)s '
@@ -318,7 +318,7 @@ class IdentityTests(base.TestCase):
         )
         if add_clean_up:
             self.addCleanup(
-                self.openstack,
+                self.fibostack,
                 'project delete '
                 '--domain %(domain)s '
                 '%(name)s'
@@ -332,7 +332,7 @@ class IdentityTests(base.TestCase):
         parent_region_arg = ''
         if parent_region is not None:
             parent_region_arg = '--parent-region %s' % parent_region
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'region create '
             '%(parent_region_arg)s '
             '--description %(description)s '
@@ -344,7 +344,7 @@ class IdentityTests(base.TestCase):
             }
         )
         if add_clean_up:
-            self.addCleanup(self.openstack, 'region delete %s' % region_id)
+            self.addCleanup(self.fibostack, 'region delete %s' % region_id)
         items = self.parse_show(raw_output)
         self.assert_show_fields(items, self.REGION_FIELDS)
         return region_id
@@ -353,7 +353,7 @@ class IdentityTests(base.TestCase):
         service_name = data_utils.rand_name('TestService')
         description = data_utils.rand_name('description')
         type_name = data_utils.rand_name('TestType')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'service create '
             '--name %(name)s '
             '--description %(description)s '
@@ -368,7 +368,7 @@ class IdentityTests(base.TestCase):
         if add_clean_up:
             service = self.parse_show_as_object(raw_output)
             self.addCleanup(
-                self.openstack, 'service delete %s' % service['id']
+                self.fibostack, 'service delete %s' % service['id']
             )
         items = self.parse_show(raw_output)
         self.assert_show_fields(items, self.SERVICE_FIELDS)
@@ -378,7 +378,7 @@ class IdentityTests(base.TestCase):
         region_id = self._create_dummy_region()
         service_name = self._create_dummy_service()
         endpoint_url = data_utils.rand_url()
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'endpoint create '
             '--region %(region)s '
             '--enable '
@@ -395,7 +395,7 @@ class IdentityTests(base.TestCase):
         endpoint = self.parse_show_as_object(raw_output)
         if add_clean_up:
             self.addCleanup(
-                self.openstack, 'endpoint delete %s' % endpoint['id']
+                self.fibostack, 'endpoint delete %s' % endpoint['id']
             )
         items = self.parse_show(raw_output)
         self.assert_show_fields(items, self.ENDPOINT_FIELDS)
@@ -404,7 +404,7 @@ class IdentityTests(base.TestCase):
     def _create_dummy_idp(self, add_clean_up=True):
         identity_provider = data_utils.rand_name('IdentityProvider')
         description = data_utils.rand_name('description')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'identity provider create '
             ' %(name)s '
             '--description %(description)s '
@@ -413,7 +413,7 @@ class IdentityTests(base.TestCase):
         )
         if add_clean_up:
             self.addCleanup(
-                self.openstack,
+                self.fibostack,
                 'identity provider delete %s' % identity_provider,
             )
         items = self.parse_show(raw_output)
@@ -423,7 +423,7 @@ class IdentityTests(base.TestCase):
     def _create_dummy_sp(self, add_clean_up=True):
         service_provider = data_utils.rand_name('ServiceProvider')
         description = data_utils.rand_name('description')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'service provider create '
             ' %(name)s '
             '--description %(description)s '
@@ -434,7 +434,7 @@ class IdentityTests(base.TestCase):
         )
         if add_clean_up:
             self.addCleanup(
-                self.openstack, 'service provider delete %s' % service_provider
+                self.fibostack, 'service provider delete %s' % service_provider
             )
         items = self.parse_show(raw_output)
         self.assert_show_fields(items, self.SERVICE_PROVIDER_FIELDS)
@@ -448,7 +448,7 @@ class IdentityTests(base.TestCase):
             'default_limit': 10,
             'resource_name': resource_name,
         }
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'registered limit create'
             ' --service %(service_name)s'
             ' --default-limit %(default_limit)s'
@@ -460,7 +460,7 @@ class IdentityTests(base.TestCase):
 
         if add_clean_up:
             self.addCleanup(
-                self.openstack,
+                self.fibostack,
                 'registered limit delete %s' % registered_limit_id,
                 cloud=SYSTEM_CLOUD,
             )
@@ -477,7 +477,7 @@ class IdentityTests(base.TestCase):
     def _create_dummy_limit(self, add_clean_up=True):
         registered_limit_id = self._create_dummy_registered_limit()
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'registered limit show %s' % registered_limit_id,
             cloud=SYSTEM_CLOUD,
         )
@@ -487,7 +487,7 @@ class IdentityTests(base.TestCase):
         resource_limit = 15
 
         project_name = self._create_dummy_project()
-        raw_output = self.openstack('project show %s' % project_name)
+        raw_output = self.fibostack('project show %s' % project_name)
         items = self.parse_show(raw_output)
         project_id = self._extract_value_from_items('id', items)
 
@@ -498,7 +498,7 @@ class IdentityTests(base.TestCase):
             'resource_limit': resource_limit,
         }
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'limit create'
             ' --project %(project_id)s'
             ' --service %(service_id)s'
@@ -511,7 +511,7 @@ class IdentityTests(base.TestCase):
 
         if add_clean_up:
             self.addCleanup(
-                self.openstack,
+                self.fibostack,
                 'limit delete %s' % limit_id,
                 cloud=SYSTEM_CLOUD,
             )

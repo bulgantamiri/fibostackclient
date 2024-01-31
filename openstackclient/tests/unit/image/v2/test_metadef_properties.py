@@ -12,12 +12,12 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from openstack import exceptions as sdk_exceptions
-from osc_lib import exceptions
+from fibostack import exceptions as sdk_exceptions
+from fsc_lib import exceptions
 
-from openstackclient.image.v2 import metadef_properties
-from openstackclient.tests.unit.image.v2 import fakes as image_fakes
-from openstackclient.tests.unit import utils as tests_utils
+from fibostackclient.image.v2 import metadef_properties
+from fibostackclient.tests.unit.image.v2 import fakes as image_fakes
+from fibostackclient.tests.unit import utils as tests_utils
 
 
 class TestMetadefPropertyCreate(image_fakes.TestImagev2):

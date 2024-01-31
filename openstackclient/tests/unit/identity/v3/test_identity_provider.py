@@ -15,12 +15,12 @@
 import copy
 from unittest import mock
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.identity.v3 import identity_provider
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
-from openstackclient.tests.unit import utils as test_utils
+from fibostackclient.identity.v3 import identity_provider
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.tests.unit import utils as test_utils
 
 
 class TestIdentityProvider(identity_fakes.TestFederatedIdentity):
@@ -192,7 +192,7 @@ class TestIdentityProviderCreate(TestIdentityProvider):
         mocker = mock.Mock()
         mocker.return_value = "\n".join(identity_fakes.idp_remote_ids)
         with mock.patch(
-            "openstackclient.identity.v3.identity_provider."
+            "fibostackclient.identity.v3.identity_provider."
             "utils.read_blob_file_contents",
             mocker,
         ):
@@ -720,7 +720,7 @@ class TestIdentityProviderSet(TestIdentityProvider):
         mocker = mock.Mock()
         mocker.return_value = self.new_remote_id
         with mock.patch(
-            "openstackclient.identity.v3.identity_provider."
+            "fibostackclient.identity.v3.identity_provider."
             "utils.read_blob_file_contents",
             mocker,
         ):

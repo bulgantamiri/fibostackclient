@@ -1,4 +1,4 @@
 senlin
 ------
 
-.. autoprogram-cliff:: openstack.clustering.v1
+.. autoprogram-cliff:: fibostack.clustering.v1

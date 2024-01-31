@@ -15,7 +15,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class TestMeter(common.NetworkTests):
@@ -37,7 +37,7 @@ class TestMeter(common.NetworkTests):
         name1 = uuid.uuid4().hex
         name2 = uuid.uuid4().hex
         description = 'fakedescription'
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network meter create '
             + ' --description '
             + description
@@ -56,7 +56,7 @@ class TestMeter(common.NetworkTests):
             json_output.get('description'),
         )
 
-        json_output_2 = self.openstack(
+        json_output_2 = self.fibostack(
             'network meter create '
             + '--description '
             + description
@@ -75,7 +75,7 @@ class TestMeter(common.NetworkTests):
             json_output_2.get('description'),
         )
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'network meter delete ' + name1 + ' ' + name2,
         )
         self.assertOutput('', raw_output)
@@ -83,14 +83,14 @@ class TestMeter(common.NetworkTests):
     def test_meter_list(self):
         """Test create, list filters, delete"""
         name1 = uuid.uuid4().hex
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network meter create '
             + '--description Test1 '
             + '--share '
             + name1,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'network meter delete ' + name1)
+        self.addCleanup(self.fibostack, 'network meter delete ' + name1)
 
         self.assertEqual(
             'Test1',
@@ -99,14 +99,14 @@ class TestMeter(common.NetworkTests):
         self.assertTrue(json_output.get('shared'))
 
         name2 = uuid.uuid4().hex
-        json_output_2 = self.openstack(
+        json_output_2 = self.fibostack(
             'network meter create '
             + '--description Test2 '
             + '--no-share '
             + name2,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'network meter delete ' + name2)
+        self.addCleanup(self.fibostack, 'network meter delete ' + name2)
 
         self.assertEqual(
             'Test2',
@@ -116,7 +116,7 @@ class TestMeter(common.NetworkTests):
             json_output_2.get('shared'),
         )
 
-        raw_output = self.openstack('network meter list', parse_output=True)
+        raw_output = self.fibostack('network meter list', parse_output=True)
         name_list = [item.get('Name') for item in raw_output]
         self.assertIn(name1, name_list)
         self.assertIn(name2, name_list)
@@ -125,7 +125,7 @@ class TestMeter(common.NetworkTests):
         """Test create, show, delete"""
         name1 = uuid.uuid4().hex
         description = 'fakedescription'
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network meter create '
             + ' --description '
             + description
@@ -134,10 +134,10 @@ class TestMeter(common.NetworkTests):
             parse_output=True,
         )
         meter_id = json_output.get('id')
-        self.addCleanup(self.openstack, 'network meter delete ' + name1)
+        self.addCleanup(self.fibostack, 'network meter delete ' + name1)
 
         # Test show with ID
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network meter show ' + meter_id,
             parse_output=True,
         )
@@ -152,7 +152,7 @@ class TestMeter(common.NetworkTests):
         )
 
         # Test show with name
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network meter show ' + name1,
             parse_output=True,
         )

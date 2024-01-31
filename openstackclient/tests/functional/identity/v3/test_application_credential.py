@@ -16,7 +16,7 @@ import datetime
 
 from tempest.lib.common.utils import data_utils
 
-from openstackclient.tests.functional.identity.v3 import common
+from fibostackclient.tests.functional.identity.v3 import common
 
 
 class ApplicationCredentialTests(common.IdentityTests):
@@ -39,11 +39,11 @@ class ApplicationCredentialTests(common.IdentityTests):
 
     def test_application_credential_create(self):
         name = data_utils.rand_name('name')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'application credential create %(name)s' % {'name': name}
         )
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'application credential delete %(name)s' % {'name': name},
         )
         items = self.parse_show(raw_output)
@@ -51,41 +51,41 @@ class ApplicationCredentialTests(common.IdentityTests):
 
     def _create_role_assignments(self):
         try:
-            user = self.openstack(
+            user = self.fibostack(
                 'configuration show -f value' ' -c auth.username'
             )
         except Exception:
-            user = self.openstack(
+            user = self.fibostack(
                 'configuration show -f value' ' -c auth.user_id'
             )
         try:
-            user_domain = self.openstack(
+            user_domain = self.fibostack(
                 'configuration show -f value' ' -c auth.user_domain_name'
             )
         except Exception:
-            user_domain = self.openstack(
+            user_domain = self.fibostack(
                 'configuration show -f value' ' -c auth.user_domain_id'
             )
         try:
-            project = self.openstack(
+            project = self.fibostack(
                 'configuration show -f value' ' -c auth.project_name'
             )
         except Exception:
-            project = self.openstack(
+            project = self.fibostack(
                 'configuration show -f value' ' -c auth.project_id'
             )
         try:
-            project_domain = self.openstack(
+            project_domain = self.fibostack(
                 'configuration show -f value' ' -c auth.project_domain_name'
             )
         except Exception:
-            project_domain = self.openstack(
+            project_domain = self.fibostack(
                 'configuration show -f value' ' -c auth.project_domain_id'
             )
         role1 = self._create_dummy_role()
         role2 = self._create_dummy_role()
         for role in role1, role2:
-            self.openstack(
+            self.fibostack(
                 'role add'
                 ' --user %(user)s'
                 ' --user-domain %(user_domain)s'
@@ -101,7 +101,7 @@ class ApplicationCredentialTests(common.IdentityTests):
                 }
             )
             self.addCleanup(
-                self.openstack,
+                self.fibostack,
                 'role remove'
                 ' --user %(user)s'
                 ' --user-domain %(user_domain)s'
@@ -126,7 +126,7 @@ class ApplicationCredentialTests(common.IdentityTests):
             datetime.datetime.utcnow() + datetime.timedelta(days=1)
         ).strftime('%Y-%m-%dT%H:%M:%S%z')
         role1, role2 = self._create_role_assignments()
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'application credential create %(name)s'
             ' --secret %(secret)s'
             ' --description %(description)s'
@@ -144,7 +144,7 @@ class ApplicationCredentialTests(common.IdentityTests):
             }
         )
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'application credential delete %(name)s' % {'name': name},
         )
         items = self.parse_show(raw_output)
@@ -152,16 +152,16 @@ class ApplicationCredentialTests(common.IdentityTests):
 
     def test_application_credential_delete(self):
         name = data_utils.rand_name('name')
-        self.openstack(
+        self.fibostack(
             'application credential create %(name)s' % {'name': name}
         )
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'application credential delete ' '%(name)s' % {'name': name}
         )
         self.assertEqual(0, len(raw_output))
 
     def test_application_credential_list(self):
-        raw_output = self.openstack('application credential list')
+        raw_output = self.fibostack('application credential list')
         items = self.parse_listing(raw_output)
         self.assert_table_structure(
             items, self.APPLICATION_CREDENTIAL_LIST_HEADERS
@@ -169,14 +169,14 @@ class ApplicationCredentialTests(common.IdentityTests):
 
     def test_application_credential_show(self):
         name = data_utils.rand_name('name')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'application credential create %(name)s' % {'name': name}
         )
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'application credential delete %(name)s' % {'name': name},
         )
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'application credential show ' '%(name)s' % {'name': name}
         )
         items = self.parse_show(raw_output)

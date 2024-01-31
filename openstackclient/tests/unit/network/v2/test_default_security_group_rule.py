@@ -15,17 +15,17 @@ from unittest import mock
 from unittest.mock import call
 import uuid
 
-from openstack.network.v2 import _proxy
-from openstack.network.v2 import (
+from fibostack.network.v2 import _proxy
+from fibostack.network.v2 import (
     default_security_group_rule as _default_security_group_rule,
 )
-from openstack.test import fakes as sdk_fakes
-from osc_lib import exceptions
+from fibostack.test import fakes as sdk_fakes
+from fsc_lib import exceptions
 
-from openstackclient.network import utils as network_utils
-from openstackclient.network.v2 import default_security_group_rule
-from openstackclient.tests.unit.network.v2 import fakes as network_fakes
-from openstackclient.tests.unit import utils as tests_utils
+from fibostackclient.network import utils as network_utils
+from fibostackclient.network.v2 import default_security_group_rule
+from fibostackclient.tests.unit.network.v2 import fakes as network_fakes
+from fibostackclient.tests.unit import utils as tests_utils
 
 
 class TestDefaultSecurityGroupRule(network_fakes.TestNetworkV2):

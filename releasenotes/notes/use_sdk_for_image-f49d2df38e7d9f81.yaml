@@ -1,4 +1,4 @@
 ---
 features:
   - |
-    Image service for v2 is switched from using glanceclient to OpenStackSDK.
+    Image service for v2 is switched from using glanceclient to openstacksdk.

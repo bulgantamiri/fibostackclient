@@ -1,53 +1,53 @@
 .. _manpage:
 
 ====================
-:program:`openstack`
+:program:`fibostack`
 ====================
 
-OpenStack Command Line
+fibostack Command Line
 
 
 SYNOPSIS
 ========
 
-:program:`openstack` [<global-options>] <command> [<command-arguments>]
+:program:`fibostack` [<global-options>] <command> [<command-arguments>]
 
-:program:`openstack help` <command>
+:program:`fibostack help` <command>
 
-:program:`openstack` :option:`--help`
+:program:`fibostack` :option:`--help`
 
 
 DESCRIPTION
 ===========
 
-:program:`openstack` provides a common command-line interface to OpenStack APIs.  It is generally
-equivalent to the CLIs provided by the OpenStack project client libraries, but with
+:program:`fibostack` provides a common command-line interface to fibostack APIs.  It is generally
+equivalent to the CLIs provided by the fibostack project client libraries, but with
 a distinct and consistent command structure.
 
 
 AUTHENTICATION METHODS
 ======================
 
-:program:`openstack` uses a similar authentication scheme as the OpenStack project CLIs, with
+:program:`fibostack` uses a similar authentication scheme as the fibostack project CLIs, with
 the credential information supplied either as environment variables or as options on the
 command line.  The primary difference is the use of 'project' in the name of the options
 ``OS_PROJECT_NAME``/``OS_PROJECT_ID`` over the old tenant-based names.
 
 ::
 
-    export OS_AUTH_URL=<url-to-openstack-identity>
+    export OS_AUTH_URL=<url-to-fibostack-identity>
     export OS_PROJECT_NAME=<project-name>
     export OS_USERNAME=<user-name>
     export OS_PASSWORD=<password>  # (optional)
 
-:program:`openstack` can use different types of authentication plugins provided by the keystoneclient library. The following default plugins are available:
+:program:`fibostack` can use different types of authentication plugins provided by the keystoneclient library. The following default plugins are available:
 
 * ``token``: Authentication with a token
 * ``password``: Authentication with a username and a password
 * ``openid`` : Authentication using the protocol OpenID Connect
 
 Refer to the keystoneclient library documentation for more details about these plugins and their options, and for a complete list of available plugins.
-Please bear in mind that some plugins might not support all of the functionalities of :program:`openstack`; for example the v3unscopedsaml plugin can deliver only unscoped tokens, some commands might not be available through this authentication method.
+Please bear in mind that some plugins might not support all of the functionalities of :program:`fibostack`; for example the v3unscopedsaml plugin can deliver only unscoped tokens, some commands might not be available through this authentication method.
 
 Additionally, it is possible to use Keystone's service token to authenticate, by setting the options :option:`--os-token` and :option:`--os-endpoint` (or the environment variables :envvar:`OS_TOKEN` and :envvar:`OS_ENDPOINT` respectively). This method takes precedence over authentication plugins.
 
@@ -63,7 +63,7 @@ To use federated authentication, your configuration file needs the following:
 
     export OS_PROJECT_NAME=<project-name>
     export OS_PROJECT_DOMAIN_NAME=<project-domain-name>
-    export OS_AUTH_URL=<url-to-openstack-identity>
+    export OS_AUTH_URL=<url-to-fibostack-identity>
     export OS_IDENTITY_API_VERSION=3
     export OS_AUTH_PLUGIN=openid
     export OS_AUTH_TYPE=v3oidcpassword
@@ -82,13 +82,13 @@ To use federated authentication, your configuration file needs the following:
 OPTIONS
 =======
 
-:program:`openstack` takes global options that control overall behaviour and command-specific options that control the command operation.  Most global options have a corresponding environment variable that may also be used to set the value. If both are present, the command-line option takes priority. The environment variable names are derived from the option name by dropping the leading dashes ('--'), converting each embedded dash ('-') to an underscore ('_'), and converting to upper case.
+:program:`fibostack` takes global options that control overall behaviour and command-specific options that control the command operation.  Most global options have a corresponding environment variable that may also be used to set the value. If both are present, the command-line option takes priority. The environment variable names are derived from the option name by dropping the leading dashes ('--'), converting each embedded dash ('-') to an underscore ('_'), and converting to upper case.
 
-:program:`openstack` recognizes the following global options:
+:program:`fibostack` recognizes the following global options:
 
 .. option:: --os-cloud <cloud-name>
 
-    :program:`openstack` will look for a ``clouds.yaml`` file that contains
+    :program:`fibostack` will look for a ``clouds.yaml`` file that contains
     a cloud configuration to use for authentication.  See CLOUD CONFIGURATION
     below for more information.
 
@@ -96,7 +96,7 @@ OPTIONS
 
     The authentication plugin type to use when connecting to the Identity service.
 
-    If this option is not set, :program:`openstack` will attempt to guess the
+    If this option is not set, :program:`fibostack` will attempt to guess the
     authentication method to use based on the other options.
 
     If this option is set, its version must match
@@ -196,7 +196,7 @@ OPTIONS
     Interface type. Valid options are `public`, `admin` and `internal`.
 
 .. NOTE::
-    If you switch to openstackclient from project specified clients, like:
+    If you switch to fibostackclient from project specified clients, like:
     novaclient, neutronclient and so on, please use `--os-interface` instead of
     `--os-endpoint-type`.
 
@@ -205,7 +205,7 @@ OPTIONS
     Performance profiling HMAC key for encrypting context data
 
     This key should be the value of one of the HMAC keys defined in the
-    configuration files of OpenStack services to be traced.
+    configuration files of fibostack services to be traced.
 
 .. option:: --os-beta-command
 
@@ -240,17 +240,17 @@ COMMANDS
 
 To get a list of the available commands::
 
-    openstack --help
+    fibostack --help
 
 To get a description of a specific command::
 
-    openstack help <command>
+    fibostack help <command>
 
 Note that the set of commands shown will vary depending on the API versions
 that are in effect at that time.  For example, to force the display of the
 Identity v3 commands::
 
-    openstack --os-identity-api-version 3 --help
+    fibostack --os-identity-api-version 3 --help
 
 .. option:: complete
 
@@ -260,15 +260,15 @@ Identity v3 commands::
 
     Print help for an individual command
 
-Additional information on the OpenStackClient command structure and arguments
-is available in the `OpenStackClient Commands`_ wiki page.
+Additional information on the fibostackClient command structure and arguments
+is available in the `fibostackClient Commands`_ wiki page.
 
-.. _`OpenStackClient Commands`: https://wiki.openstack.org/wiki/OpenStackClient/Commands
+.. _`fibostackClient Commands`: https://wiki.fibostack.org/wiki/fibostackClient/Commands
 
 Command Objects
 ---------------
 
-The list of command objects is growing longer with the addition of OpenStack
+The list of command objects is growing longer with the addition of fibostack
 project support.  The object names may consist of multiple words to compose a
 unique name.  Occasionally when multiple APIs have a common name with common
 overlapping purposes there will be options to select which object to use, or
@@ -278,29 +278,29 @@ referring to both Compute and Block Storage quotas.
 Command Actions
 ---------------
 
-The actions used by OpenStackClient are defined with specific meaning to provide a consistent behavior for each object.  Some actions have logical opposite actions, and those pairs will always match for any object that uses them.
+The actions used by fibostackClient are defined with specific meaning to provide a consistent behavior for each object.  Some actions have logical opposite actions, and those pairs will always match for any object that uses them.
 
 
 CLOUD CONFIGURATION
 ===================
 
 Working with multiple clouds can be simplified by keeping the configuration
-information for those clouds in a local file.  :program:`openstack` supports
+information for those clouds in a local file.  :program:`fibostack` supports
 using a ``clouds.yaml`` configuration file.
 
 Config Files
 ------------
 
-:program:`openstack` will look for a file called clouds.yaml in the following
+:program:`fibostack` will look for a file called clouds.yaml in the following
 locations:
 
 * Current Directory
-* ~/.config/openstack
-* /etc/openstack
+* ~/.config/fibostack
+* /etc/fibostack
 
 The first file found wins.
 
-The keys match the :program:`openstack` global options but without the
+The keys match the :program:`fibostack` global options but without the
 ``--os-`` prefix:
 
 ::
@@ -324,7 +324,7 @@ The keys match the :program:`openstack` global options but without the
         cloud: rackspace
         auth:
           project_id: 275610
-          username: openstack
+          username: fibostack
           password: xyzpdq!lazydog
         region_name: DFW,ORD,IAD
 
@@ -341,9 +341,9 @@ from :file:`clouds-public.yaml`:
 Authentication Settings
 -----------------------
 
-OpenStackClient uses the Keystone authentication plugins so the required
+fibostackClient uses the Keystone authentication plugins so the required
 auth settings are not always known until the authentication type is
-selected.  :program:`openstack` will attempt to detect a couple of common
+selected.  :program:`fibostack` will attempt to detect a couple of common
 auth types based on the arguments passed in or found in the configuration
 file, but if those are incomplete it may be impossible to know which
 auth type is intended.  The :option:`--os-auth-type` option can always be
@@ -357,7 +357,7 @@ auth type is selected.
 Logging Settings
 ----------------
 
-:program:`openstack` can record the operation history by logging settings
+:program:`fibostack` can record the operation history by logging settings
 in configuration file. Recording the user operation, it can identify the
 change of the resource and it becomes useful information for troubleshooting.
 
@@ -376,7 +376,7 @@ EXAMPLES
 
 Show the detailed information for server ``appweb01``::
 
-    openstack \
+    fibostack \
         --os-project-name ExampleCo \
         --os-username demo --os-password secret \
         --os-auth-url http://localhost:5000:/v2.0 \
@@ -384,7 +384,7 @@ Show the detailed information for server ``appweb01``::
 
 The same but using openid to authenticate in keystone::
 
-    openstack \
+    fibostack \
         --os-project-name ExampleCo \
         --os-auth-url http://localhost:5000:/v2.0 \
         --os-auth-plugin openid \
@@ -403,11 +403,11 @@ The same but using openid to authenticate in keystone::
 The same command if the auth environment variables (:envvar:`OS_AUTH_URL`, :envvar:`OS_PROJECT_NAME`,
 :envvar:`OS_USERNAME`, :envvar:`OS_PASSWORD`) are set::
 
-    openstack server show appweb01
+    fibostack server show appweb01
 
 Create a new image::
 
-    openstack image create \
+    fibostack image create \
         --disk-format=qcow2 \
         --container-format=bare \
         --public \
@@ -418,23 +418,23 @@ Create a new image::
 FILES
 =====
 
-:file:`~/.config/openstack/clouds.yaml`
+:file:`~/.config/fibostack/clouds.yaml`
     Configuration file used by the :option:`--os-cloud` global option.
 
-:file:`~/.config/openstack/clouds-public.yaml`
+:file:`~/.config/fibostack/clouds-public.yaml`
     Configuration file containing public cloud provider information such as
     authentication URLs and service definitions.  The contents of this file
     should be public and sharable.  ``clouds.yaml`` may contain references
     to clouds defined here as shortcuts.
 
-:file:`~/.openstack`
-    Placeholder for future local state directory.  This directory is intended to be shared among multiple OpenStack-related applications; contents are namespaced with an identifier for the app that owns it.  Shared contents (such as :file:`~/.openstack/cache`) have no prefix and the contents must be portable.
+:file:`~/.fibostack`
+    Placeholder for future local state directory.  This directory is intended to be shared among multiple fibostack-related applications; contents are namespaced with an identifier for the app that owns it.  Shared contents (such as :file:`~/.fibostack/cache`) have no prefix and the contents must be portable.
 
 
 ENVIRONMENT VARIABLES
 =====================
 
-The following environment variables can be set to alter the behaviour of :program:`openstack`.  Most of them have corresponding command-line options that take precedence if set.
+The following environment variables can be set to alter the behaviour of :program:`fibostack`.  Most of them have corresponding command-line options that take precedence if set.
 
 .. envvar:: OS_CLOUD
 
@@ -545,23 +545,23 @@ The following environment variables can be set to alter the behaviour of :progra
     Define the identity provider of your federation that will be used. It is
     used by the Keystone authentication URL generation process. The available
     Identity Providers can be listed using the
-    :program:`openstack identity provider list` command
+    :program:`fibostack identity provider list` command
 
 .. envvar:: OS_CLIENT_ID
 
     Configure the ``CLIENT_ID`` that the CLI will use to authenticate the
-    application (OpenStack) in the Identity Provider. This value is defined on
+    application (fibostack) in the Identity Provider. This value is defined on
     the identity provider side. Do not confuse with the user ID.
 
 .. envvar:: OS_CLIENT_SECRET
 
     Configure the OS_CLIENT_SECRET that the CLI will use to authenticate the
-    CLI (OpenStack secret in the identity provider).
+    CLI (fibostack secret in the identity provider).
 
 .. envvar:: OS_OPENID_SCOPE
 
     Configure the attribute scopes that will be claimed by the Service Provider
-    (SP), in this case OpenStack, from the identity provider. These scopes and
+    (SP), in this case fibostack, from the identity provider. These scopes and
     which attributes each scope contains are defined in the identity provider
     side. This parameter can receive multiple values separated by space.
 
@@ -586,27 +586,27 @@ The following environment variables can be set to alter the behaviour of :progra
     ``OS_DISCOVERY_ENDPOINT`` is configured.
 
 .. NOTE::
-    If you switch to openstackclient from project specified clients, like:
+    If you switch to fibostackclient from project specified clients, like:
     novaclient, neutronclient and so on, please use `OS_INTERFACE` instead of
     `OS_ENDPOINT_TYPE`.
 
 BUGS
 ====
 
-Bug reports are accepted at the python-openstackclient Launchpad project
-"https://bugs.launchpad.net/python-openstackclient".
+Bug reports are accepted at the python-fibostackclient Launchpad project
+"https://bugs.launchpad.net/python-fibostackclient".
 
 
 AUTHORS
 =======
 
-Please refer to the AUTHORS file distributed with OpenStackClient.
+Please refer to the AUTHORS file distributed with fibostackClient.
 
 
 COPYRIGHT
 =========
 
-Copyright 2011-2014 OpenStack Foundation and the authors listed in the AUTHORS file.
+Copyright 2011-2014 fibostack Foundation and the authors listed in the AUTHORS file.
 
 
 LICENSE
@@ -618,8 +618,8 @@ http://www.apache.org/licenses/LICENSE-2.0
 SEE ALSO
 ========
 
-The `OpenStackClient page <https://docs.openstack.org/python-openstackclient/latest/>`_
-in the `OpenStack Docs <https://docs.openstack.org/>`_ contains further
+The `fibostackClient page <https://docs.fibostack.org/python-fibostackclient/latest/>`_
+in the `fibostack Docs <https://docs.fibostack.org/>`_ contains further
 documentation.
 
-The individual OpenStack project CLIs, the OpenStack API references.
+The individual fibostack project CLIs, the fibostack API references.

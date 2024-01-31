@@ -16,14 +16,14 @@
 import argparse
 
 from cliff import columns as cliff_columns
-from osc_lib.command import command
-from osc_lib import utils
-from osc_lib.utils import tags as _tag
+from fsc_lib.command import command
+from fsc_lib import utils
+from fsc_lib.utils import tags as _tag
 
-from openstackclient.i18n import _
-from openstackclient.identity import common as identity_common
-from openstackclient.network import common
-from openstackclient.network import utils as network_utils
+from fibostackclient.i18n import _
+from fibostackclient.identity import common as identity_common
+from fibostackclient.network import common
+from fibostackclient.network import utils as network_utils
 
 
 def _format_network_security_group_rules(sg_rules):
@@ -91,13 +91,13 @@ def _get_columns(item):
         'tenant_id': 'project_id',
     }
     hidden_columns = ['location']
-    return utils.get_osc_show_columns_for_sdk_resource(
+    return utils.get_fsc_show_columns_for_sdk_resource(
         item, column_map, hidden_columns
     )
 
 
 # TODO(abhiraut): Use the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class CreateSecurityGroup(
     common.NetworkAndComputeShowOne, common.NeutronCommandWithExtraArgs
 ):
@@ -216,7 +216,7 @@ class DeleteSecurityGroup(common.NetworkAndComputeDelete):
 
 
 # TODO(rauta): Use the SDK resource mapped attribute names once
-# the OSC minimum requirements include SDK 1.0.
+# the fsc minimum requirements include SDK 1.0.
 class ListSecurityGroup(common.NetworkAndComputeLister):
     _description = _("List security groups")
     FIELDS_TO_RETRIEVE = ['id', 'name', 'description', 'project_id', 'tags']

@@ -12,9 +12,9 @@
 
 import copy
 
-from openstackclient.identity.v3 import unscoped_saml
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.identity.v3 import unscoped_saml
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
 
 
 class TestUnscopedSAML(identity_fakes.TestFederatedIdentity):

@@ -7,5 +7,5 @@ and other resources on the network.
 
 Compute v2, Network v2
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: security group rule *

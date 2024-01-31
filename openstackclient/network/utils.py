@@ -11,9 +11,9 @@
 #   under the License.
 #
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 # Transform compute security group rule for display.
@@ -135,7 +135,7 @@ def convert_ipvx_case(string):
 
 def is_icmp_protocol(protocol):
     # NOTE(rtheis): Neutron has deprecated protocol icmpv6.
-    # However, while the OSC CLI doesn't document the protocol,
+    # However, while the fsc CLI doesn't document the protocol,
     # the code must still handle it. In addition, handle both
     # protocol names and numbers.
     if protocol in ['icmp', 'icmpv6', 'ipv6-icmp', '1', '58']:
@@ -170,7 +170,7 @@ def get_ethertype(parsed_args, protocol):
 
 def is_ipv6_protocol(protocol):
     # NOTE(rtheis): Neutron has deprecated protocol icmpv6.
-    # However, while the OSC CLI doesn't document the protocol,
+    # However, while the fsc CLI doesn't document the protocol,
     # the code must still handle it. In addition, handle both
     # protocol names and numbers.
     if (

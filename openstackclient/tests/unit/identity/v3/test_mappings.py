@@ -15,11 +15,11 @@
 import copy
 from unittest import mock
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.identity.v3 import mapping
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.identity.v3 import mapping
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
 
 
 class TestMapping(identity_fakes.TestFederatedIdentity):
@@ -55,7 +55,7 @@ class TestMappingCreate(TestMapping):
         mocker = mock.Mock()
         mocker.return_value = identity_fakes.MAPPING_RULES
         with mock.patch(
-            "openstackclient.identity.v3.mapping." "CreateMapping._read_rules",
+            "fibostackclient.identity.v3.mapping." "CreateMapping._read_rules",
             mocker,
         ):
             columns, data = self.cmd.take_action(parsed_args)
@@ -166,7 +166,7 @@ class TestMappingSet(TestMapping):
         mocker = mock.Mock()
         mocker.return_value = identity_fakes.MAPPING_RULES_2
         with mock.patch(
-            "openstackclient.identity.v3.mapping." "SetMapping._read_rules",
+            "fibostackclient.identity.v3.mapping." "SetMapping._read_rules",
             mocker,
         ):
             result = self.cmd.take_action(parsed_args)

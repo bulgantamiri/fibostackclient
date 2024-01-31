@@ -5,7 +5,7 @@
 .. toctree::
    :maxdepth: 2
 
-   Manual Page <man/openstack>
+   Manual Page <man/fibostack>
    command-list
    commands
    plugin-commands/index

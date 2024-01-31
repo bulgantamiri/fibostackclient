@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# OpenStackClient Release Notes documentation build configuration file, created
+# fibostackClient Release Notes documentation build configuration file, created
 # by sphinx-quickstart on Tue Nov  3 17:40:50 2015.
 #
 # This file is execfile()d with the current directory set to its
@@ -46,31 +46,31 @@ linklogger = logging.getLogger('sphinx.ext.extlinks')
 linklogger.setLevel(40)  # Ignore messages less severe than ERROR
 
 extensions = [
-    'openstackdocstheme',
+    'fibostackdocstheme',
     'reno.sphinxext',
     'sphinx.ext.extlinks',
 ]
 
-# openstackdocstheme options
-openstackdocs_repo_name = 'openstack/python-openstackclient'
-openstackdocs_use_storyboard = False
-openstackdocs_auto_name = False
+# fibostackdocstheme options
+fibostackdocs_repo_name = 'fibostack/python-fibostackclient'
+fibostackdocs_use_storyboard = False
+fibostackdocs_auto_name = False
 
 # Set aliases for extlinks
 # * lpbug - generic Launchpad bug        :lpbug:`123456`
-# * oscbp - OSC blueprints               :oscbp:`Blue Print <bp-name>`
-# * oscdoc - OSC Docs                    :oscdoc:`Comamnd List <command-list>`
+# * fscbp - fsc blueprints               :fscbp:`Blue Print <bp-name>`
+# * fscdoc - fsc Docs                    :fscdoc:`Comamnd List <command-list>`
 extlinks = {
     'lpbug': (
         'https://bugs.launchpad.net/bugs/%s',
         'Bug %s',
     ),
-    'oscbp': (
-        'https://blueprints.launchpad.net/python-openstackclient/+spec/%s',
+    'fscbp': (
+        'https://blueprints.launchpad.net/python-fibostackclient/+spec/%s',
         None,
     ),
-    'oscdoc': (
-        'https://docs.openstack.org/python-openstackclient/latest/%s.html',
+    'fscdoc': (
+        'https://docs.fibostack.org/python-fibostackclient/latest/%s.html',
         None,
     ),
 }
@@ -88,8 +88,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'OpenStackClient Release Notes'
-copyright = '2015, OpenStackClient Developers'
+project = 'fibostackClient Release Notes'
+copyright = '2015, fibostackClient Developers'
 
 # Release notes are version independent.
 # The full version, including alpha/beta/rc tags.
@@ -140,7 +140,7 @@ pygments_style = 'native'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'openstackdocs'
+html_theme = 'fibostackdocs'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -216,7 +216,7 @@ html_static_path = ['_static']
 # html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'OpenStackClientReleaseNotesdoc'
+htmlhelp_basename = 'fibostackClientReleaseNotesdoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -236,9 +236,9 @@ latex_elements = {
 latex_documents = [
     (
         'index',
-        'OpenStackClientReleaseNotes.tex',
-        'OpenStackClient Release Notes Documentation',
-        'OpenStackClient  Developers',
+        'fibostackClientReleaseNotes.tex',
+        'fibostackClient Release Notes Documentation',
+        'fibostackClient  Developers',
         'manual',
     )
 ]
@@ -271,9 +271,9 @@ latex_documents = [
 man_pages = [
     (
         'index',
-        'openstackclientreleasenotes',
-        'OpenStackClient Release Notes Documentation',
-        ['OpenStackClient Developers'],
+        'fibostackclientreleasenotes',
+        'fibostackClient Release Notes Documentation',
+        ['fibostackClient Developers'],
         1,
     )
 ]
@@ -290,11 +290,11 @@ man_pages = [
 texinfo_documents = [
     (
         'index',
-        'OpenStackClientReleaseNotes',
-        'OpenStackclient Release Notes Documentation',
-        'OpenStackclient Developers',
-        'OpenStackClientReleaseNotes',
-        'A unified command-line client for OpenStack.',
+        'fibostackClientReleaseNotes',
+        'fibostackclient Release Notes Documentation',
+        'fibostackclient Developers',
+        'fibostackClientReleaseNotes',
+        'A unified command-line client for fibostack.',
         'Miscellaneous',
     )
 ]

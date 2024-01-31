@@ -17,7 +17,7 @@ import fixtures
 from tempest.lib.common.utils import data_utils
 from tempest.lib import exceptions as tempest_exceptions
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 BASIC_LIST_HEADERS = ['ID', 'Name']
 
@@ -64,7 +64,7 @@ class IdentityTests(base.TestCase):
         cls.project_name = data_utils.rand_name('TestProject')
         cls.project_description = data_utils.rand_name('description')
         try:
-            cls.openstack(
+            cls.fibostack(
                 '--os-identity-api-version 2 '
                 'project create '
                 '--description %(description)s '
@@ -78,14 +78,14 @@ class IdentityTests(base.TestCase):
         except tempest_exceptions.CommandFailed:
             # Good chance this is due to Identity v2 admin not being enabled
             # TODO(dtroyer): Actually determine if Identity v2 admin is
-            #                enabled in the target cloud.  Tuens out OSC
+            #                enabled in the target cloud.  Tuens out fsc
             #                doesn't make this easy as it should (yet).
             raise unittest.case.SkipTest('No Identity v2 admin endpoint?')
 
     @classmethod
     def tearDownClass(cls):
         try:
-            cls.openstack(
+            cls.fibostack(
                 '--os-identity-api-version 2 '
                 'project delete %s' % cls.project_name
             )
@@ -109,7 +109,7 @@ class IdentityTests(base.TestCase):
     def _create_dummy_project(self, add_clean_up=True):
         project_name = data_utils.rand_name('TestProject')
         project_description = data_utils.rand_name('description')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'project create '
             '--description %(description)s '
             '--enable %(name)s'
@@ -118,7 +118,7 @@ class IdentityTests(base.TestCase):
         project = self.parse_show_as_object(raw_output)
         if add_clean_up:
             self.addCleanup(
-                self.openstack, 'project delete %s' % project['id']
+                self.fibostack, 'project delete %s' % project['id']
             )
         items = self.parse_show(raw_output)
         self.assert_show_fields(items, self.PROJECT_FIELDS)
@@ -128,7 +128,7 @@ class IdentityTests(base.TestCase):
         username = data_utils.rand_name('TestUser')
         password = data_utils.rand_name('password')
         email = data_utils.rand_name() + '@example.com'
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'user create '
             '--project %(project)s '
             '--password %(password)s '
@@ -144,7 +144,7 @@ class IdentityTests(base.TestCase):
         )
         if add_clean_up:
             self.addCleanup(
-                self.openstack,
+                self.fibostack,
                 'user delete %s' % self.parse_show_as_object(raw_output)['id'],
             )
         items = self.parse_show(raw_output)
@@ -153,32 +153,32 @@ class IdentityTests(base.TestCase):
 
     def _create_dummy_role(self, add_clean_up=True):
         role_name = data_utils.rand_name('TestRole')
-        raw_output = self.openstack('role create %s' % role_name)
+        raw_output = self.fibostack('role create %s' % role_name)
         role = self.parse_show_as_object(raw_output)
         if add_clean_up:
-            self.addCleanup(self.openstack, 'role delete %s' % role['id'])
+            self.addCleanup(self.fibostack, 'role delete %s' % role['id'])
         items = self.parse_show(raw_output)
         self.assert_show_fields(items, self.ROLE_FIELDS)
         self.assertEqual(role_name, role['name'])
         return role_name
 
     def _create_dummy_ec2_credentials(self, add_clean_up=True):
-        raw_output = self.openstack('ec2 credentials create')
+        raw_output = self.fibostack('ec2 credentials create')
         ec2_credentials = self.parse_show_as_object(raw_output)
         access_key = ec2_credentials['access']
         if add_clean_up:
             self.addCleanup(
-                self.openstack, 'ec2 credentials delete %s' % access_key
+                self.fibostack, 'ec2 credentials delete %s' % access_key
             )
         items = self.parse_show(raw_output)
         self.assert_show_fields(items, self.EC2_CREDENTIALS_FIELDS)
         return access_key
 
     def _create_dummy_token(self, add_clean_up=True):
-        raw_output = self.openstack('token issue')
+        raw_output = self.fibostack('token issue')
         token = self.parse_show_as_object(raw_output)
         if add_clean_up:
-            self.addCleanup(self.openstack, 'token revoke %s' % token['id'])
+            self.addCleanup(self.fibostack, 'token revoke %s' % token['id'])
         items = self.parse_show(raw_output)
         self.assert_show_fields(items, self.TOKEN_FIELDS)
         return token['id']
@@ -187,7 +187,7 @@ class IdentityTests(base.TestCase):
         service_name = data_utils.rand_name('TestService')
         description = data_utils.rand_name('description')
         type_name = data_utils.rand_name('TestType')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'service create '
             '--name %(name)s '
             '--description %(description)s '
@@ -201,7 +201,7 @@ class IdentityTests(base.TestCase):
         if add_clean_up:
             service = self.parse_show_as_object(raw_output)
             self.addCleanup(
-                self.openstack, 'service delete %s' % service['id']
+                self.fibostack, 'service delete %s' % service['id']
             )
         items = self.parse_show(raw_output)
         self.assert_show_fields(items, self.SERVICE_FIELDS)
@@ -213,7 +213,7 @@ class IdentityTests(base.TestCase):
         public_url = data_utils.rand_url()
         admin_url = data_utils.rand_url()
         internal_url = data_utils.rand_url()
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'endpoint create '
             '--publicurl %(publicurl)s '
             '--adminurl %(adminurl)s '
@@ -231,7 +231,7 @@ class IdentityTests(base.TestCase):
         endpoint = self.parse_show_as_object(raw_output)
         if add_clean_up:
             self.addCleanup(
-                self.openstack, 'endpoint delete %s' % endpoint['id']
+                self.fibostack, 'endpoint delete %s' % endpoint['id']
             )
         items = self.parse_show(raw_output)
         self.assert_show_fields(items, self.ENDPOINT_FIELDS)

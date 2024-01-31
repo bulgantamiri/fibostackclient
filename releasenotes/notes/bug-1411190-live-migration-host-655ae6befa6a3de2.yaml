@@ -1,7 +1,7 @@
 ---
 deprecations:
   - |
-    The ``--live`` option on the ``openstack server migrate`` command has
+    The ``--live`` option on the ``fibostack server migrate`` command has
     been deprecated and is being replaced with two new options:
 
     * ``--live-migration``: This will signal that the migration is a live
@@ -22,6 +22,6 @@ deprecations:
 fixes:
   - |
     `Bug 1411190`_ has been fixed by providing a ``--live-migration`` and
-    ``--host`` option to the ``openstack server migrate`` command.
+    ``--host`` option to the ``fibostack server migrate`` command.
 
-    .. _Bug 1411190: https://bugs.launchpad.net/python-openstackclient/+bug/1411190
+    .. _Bug 1411190: https://bugs.launchpad.net/python-fibostackclient/+bug/1411190

@@ -22,18 +22,18 @@ from unittest.mock import call
 
 import iso8601
 from novaclient import api_versions
-from openstack import exceptions as sdk_exceptions
-from openstack import utils as sdk_utils
-from osc_lib.cli import format_columns
-from osc_lib import exceptions
-from osc_lib import utils as common_utils
+from fibostack import exceptions as sdk_exceptions
+from fibostack import utils as sdk_utils
+from fsc_lib.cli import format_columns
+from fsc_lib import exceptions
+from fsc_lib import utils as common_utils
 
-from openstackclient.compute.v2 import server
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
-from openstackclient.tests.unit.image.v2 import fakes as image_fakes
-from openstackclient.tests.unit.network.v2 import fakes as network_fakes
-from openstackclient.tests.unit import utils as test_utils
-from openstackclient.tests.unit.volume.v3 import fakes as volume_fakes
+from fibostackclient.compute.v2 import server
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.tests.unit.image.v2 import fakes as image_fakes
+from fibostackclient.tests.unit.network.v2 import fakes as network_fakes
+from fibostackclient.tests.unit import utils as test_utils
+from fibostackclient.tests.unit.volume.v3 import fakes as volume_fakes
 
 
 class TestPowerStateColumn(test_utils.TestCase):
@@ -449,7 +449,7 @@ class TestServerAddFixedIP(TestServer):
             )
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.floating_ip_add')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.floating_ip_add')
 class TestServerAddFloatingIPCompute(compute_fakes.TestComputev2):
     def setUp(self):
         super(TestServerAddFloatingIPCompute, self).setUp()
@@ -1265,7 +1265,7 @@ class TestServerAddNetwork(TestServer):
         )
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.security_group_find')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.security_group_find')
 class TestServerAddSecurityGroup(TestServer):
     def setUp(self):
         super(TestServerAddSecurityGroup, self).setUp()
@@ -2360,7 +2360,7 @@ class TestServerCreate(TestServer):
             self.new_server.name, self.image, self.flavor, **kwargs
         )
 
-    @mock.patch('openstackclient.compute.v2.server.io.open')
+    @mock.patch('fibostackclient.compute.v2.server.io.open')
     def test_server_create_userdata(self, mock_open):
         mock_file = mock.Mock(name='File')
         mock_open.return_value = mock_file
@@ -3552,7 +3552,7 @@ class TestServerCreate(TestServer):
     def test_server_create_image_property_with_image_list(self):
         arglist = [
             '--image-property',
-            'owner_specified.openstack.object=image/cirros',
+            'owner_specified.fibostack.object=image/cirros',
             '--flavor',
             'flavor1',
             self.new_server.name,
@@ -3561,14 +3561,14 @@ class TestServerCreate(TestServer):
         verifylist = [
             (
                 'image_properties',
-                {'owner_specified.openstack.object': 'image/cirros'},
+                {'owner_specified.fibostack.object': 'image/cirros'},
             ),
             ('flavor', 'flavor1'),
             ('server_name', self.new_server.name),
         ]
         # create a image_info as the side_effect of the fake image_list()
         image_info = {
-            'properties': {'owner_specified.openstack.object': 'image/cirros'}
+            'properties': {'owner_specified.fibostack.object': 'image/cirros'}
         }
 
         target_image = image_fakes.create_one_image(image_info)
@@ -6558,7 +6558,7 @@ class TestServerRebuild(TestServer):
             verifylist,
         )
 
-    @mock.patch('openstackclient.compute.v2.server.io.open')
+    @mock.patch('fibostackclient.compute.v2.server.io.open')
     def test_rebuild_with_user_data(self, mock_open):
         self.compute_client.api_version = api_versions.APIVersion('2.57')
 
@@ -7142,7 +7142,7 @@ class TestServerRescue(TestServer):
         self.server.rescue.assert_called_with(image=None, password=password)
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.floating_ip_remove')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.floating_ip_remove')
 class TestServerRemoveFloatingIPCompute(compute_fakes.TestComputev2):
     def setUp(self):
         super(TestServerRemoveFloatingIPCompute, self).setUp()
@@ -7317,7 +7317,7 @@ class TestServerRemoveNetwork(TestServer):
         self.find_network.assert_not_called()
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.security_group_find')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.security_group_find')
 class TestServerRemoveSecurityGroup(TestServer):
     def setUp(self):
         super(TestServerRemoveSecurityGroup, self).setUp()
@@ -7588,7 +7588,7 @@ class TestServerResizeConfirm(TestServer):
         self.server.confirm_resize.assert_called_with()
 
 
-# TODO(stephenfin): Remove in OSC 7.0
+# TODO(stephenfin): Remove in fsc 7.0
 class TestServerMigrateConfirm(TestServer):
     def setUp(self):
         super().setUp()
@@ -7692,7 +7692,7 @@ class TestServerResizeRevert(TestServer):
         self.server.revert_resize.assert_called_with()
 
 
-# TODO(stephenfin): Remove in OSC 7.0
+# TODO(stephenfin): Remove in fsc 7.0
 class TestServerMigrateRevert(TestServer):
     def setUp(self):
         super().setUp()
@@ -8365,7 +8365,7 @@ class TestServerShow(TestServer):
         )
 
 
-@mock.patch('openstackclient.compute.v2.server.os.system')
+@mock.patch('fibostackclient.compute.v2.server.os.system')
 class TestServerSsh(TestServer):
     def setUp(self):
         super().setUp()
@@ -9042,7 +9042,7 @@ class TestServerGeneral(TestServer):
             [6],
         )
 
-    @mock.patch('osc_lib.utils.find_resource')
+    @mock.patch('fsc_lib.utils.find_resource')
     def test_prep_server_detail(self, find_resource):
         # Setup mock method return value. utils.find_resource() will be called
         # three times in _prep_server_detail():

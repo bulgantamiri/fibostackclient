@@ -9,5 +9,5 @@ access to their cloud resources. Once created, users can authenticate with an
 application credential by using the ``v3applicationcredential`` auth type.
 
 
-.. autoprogram-cliff:: openstack.identity.v3
+.. autoprogram-cliff:: fibostack.identity.v3
    :command: application credential *

@@ -13,9 +13,9 @@
 
 import copy
 
-from openstackclient.identity.v3 import region
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.identity.v3 import region
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
 
 
 class TestRegion(identity_fakes.TestIdentityv3):

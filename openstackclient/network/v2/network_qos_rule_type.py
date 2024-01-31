@@ -13,10 +13,10 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from osc_lib.command import command
-from osc_lib import utils
+from fsc_lib.command import command
+from fsc_lib import utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 def _get_columns(item):
@@ -25,7 +25,7 @@ def _get_columns(item):
         "drivers": "drivers",
     }
     hidden_columns = ["id", "location", "name", 'tenant_id']
-    return utils.get_osc_show_columns_for_sdk_resource(
+    return utils.get_fsc_show_columns_for_sdk_resource(
         item, column_map, hidden_columns
     )
 

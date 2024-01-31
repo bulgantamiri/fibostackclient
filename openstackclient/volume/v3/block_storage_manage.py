@@ -16,11 +16,11 @@
 import argparse
 
 from cinderclient import api_versions
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 SORT_MANAGEABLE_KEY_VALUES = ('size', 'reference')

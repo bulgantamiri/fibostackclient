@@ -15,7 +15,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class NetworkQosTests(common.NetworkTests):
@@ -34,12 +34,12 @@ class NetworkQosRuleTestsMinimumBandwidth(NetworkQosTests):
 
         self.QOS_POLICY_NAME = 'qos_policy_%s' % uuid.uuid4().hex
 
-        self.openstack('network qos policy create %s' % self.QOS_POLICY_NAME)
+        self.fibostack('network qos policy create %s' % self.QOS_POLICY_NAME)
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'network qos policy delete %s' % self.QOS_POLICY_NAME,
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule create '
             '--type minimum-bandwidth '
             '--min-kbps 2800 '
@@ -48,7 +48,7 @@ class NetworkQosRuleTestsMinimumBandwidth(NetworkQosTests):
         )
         self.RULE_ID = cmd_output['id']
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'network qos rule delete %s %s'
             % (self.QOS_POLICY_NAME, self.RULE_ID),
         )
@@ -57,31 +57,31 @@ class NetworkQosRuleTestsMinimumBandwidth(NetworkQosTests):
     def test_qos_rule_create_delete(self):
         # This is to check the output of qos rule delete
         policy_name = uuid.uuid4().hex
-        self.openstack('network qos policy create %s' % policy_name)
+        self.fibostack('network qos policy create %s' % policy_name)
         self.addCleanup(
-            self.openstack, 'network qos policy delete %s' % policy_name
+            self.fibostack, 'network qos policy delete %s' % policy_name
         )
-        rule = self.openstack(
+        rule = self.fibostack(
             'network qos rule create '
             '--type minimum-bandwidth '
             '--min-kbps 2800 '
             '--egress %s' % policy_name,
             parse_output=True,
         )
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'network qos rule delete %s %s' % (policy_name, rule['id'])
         )
         self.assertEqual('', raw_output)
 
     def test_qos_rule_list(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule list %s' % self.QOS_POLICY_NAME,
             parse_output=True,
         )
         self.assertIn(self.RULE_ID, [rule['ID'] for rule in cmd_output])
 
     def test_qos_rule_show(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule show %s %s'
             % (self.QOS_POLICY_NAME, self.RULE_ID),
             parse_output=True,
@@ -89,11 +89,11 @@ class NetworkQosRuleTestsMinimumBandwidth(NetworkQosTests):
         self.assertEqual(self.RULE_ID, cmd_output['id'])
 
     def test_qos_rule_set(self):
-        self.openstack(
+        self.fibostack(
             'network qos rule set --min-kbps 7500 %s %s'
             % (self.QOS_POLICY_NAME, self.RULE_ID)
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule show %s %s'
             % (self.QOS_POLICY_NAME, self.RULE_ID),
             parse_output=True,
@@ -109,12 +109,12 @@ class NetworkQosRuleTestsMinimumPacketRate(NetworkQosTests):
 
         self.QOS_POLICY_NAME = 'qos_policy_%s' % uuid.uuid4().hex
 
-        self.openstack('network qos policy create %s' % self.QOS_POLICY_NAME)
+        self.fibostack('network qos policy create %s' % self.QOS_POLICY_NAME)
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'network qos policy delete %s' % self.QOS_POLICY_NAME,
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule create '
             '--type minimum-packet-rate '
             '--min-kpps 2800 '
@@ -123,7 +123,7 @@ class NetworkQosRuleTestsMinimumPacketRate(NetworkQosTests):
         )
         self.RULE_ID = cmd_output['id']
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'network qos rule delete %s %s'
             % (self.QOS_POLICY_NAME, self.RULE_ID),
         )
@@ -132,31 +132,31 @@ class NetworkQosRuleTestsMinimumPacketRate(NetworkQosTests):
     def test_qos_rule_create_delete(self):
         # This is to check the output of qos rule delete
         policy_name = uuid.uuid4().hex
-        self.openstack('network qos policy create %s' % policy_name)
+        self.fibostack('network qos policy create %s' % policy_name)
         self.addCleanup(
-            self.openstack, 'network qos policy delete %s' % policy_name
+            self.fibostack, 'network qos policy delete %s' % policy_name
         )
-        rule = self.openstack(
+        rule = self.fibostack(
             'network qos rule create '
             '--type minimum-packet-rate '
             '--min-kpps 2800 '
             '--egress %s' % policy_name,
             parse_output=True,
         )
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'network qos rule delete %s %s' % (policy_name, rule['id'])
         )
         self.assertEqual('', raw_output)
 
     def test_qos_rule_list(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule list %s' % self.QOS_POLICY_NAME,
             parse_output=True,
         )
         self.assertIn(self.RULE_ID, [rule['ID'] for rule in cmd_output])
 
     def test_qos_rule_show(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule show %s %s'
             % (self.QOS_POLICY_NAME, self.RULE_ID),
             parse_output=True,
@@ -164,11 +164,11 @@ class NetworkQosRuleTestsMinimumPacketRate(NetworkQosTests):
         self.assertEqual(self.RULE_ID, cmd_output['id'])
 
     def test_qos_rule_set(self):
-        self.openstack(
+        self.fibostack(
             'network qos rule set --min-kpps 7500 --any %s %s'
             % (self.QOS_POLICY_NAME, self.RULE_ID)
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule show %s %s'
             % (self.QOS_POLICY_NAME, self.RULE_ID),
             parse_output=True,
@@ -184,12 +184,12 @@ class NetworkQosRuleTestsDSCPMarking(NetworkQosTests):
         super().setUp()
 
         self.QOS_POLICY_NAME = 'qos_policy_%s' % uuid.uuid4().hex
-        self.openstack('network qos policy create %s' % self.QOS_POLICY_NAME)
+        self.fibostack('network qos policy create %s' % self.QOS_POLICY_NAME)
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'network qos policy delete %s' % self.QOS_POLICY_NAME,
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule create '
             '--type dscp-marking '
             '--dscp-mark 8 %s' % self.QOS_POLICY_NAME,
@@ -197,7 +197,7 @@ class NetworkQosRuleTestsDSCPMarking(NetworkQosTests):
         )
         self.RULE_ID = cmd_output['id']
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'network qos rule delete %s %s'
             % (self.QOS_POLICY_NAME, self.RULE_ID),
         )
@@ -206,30 +206,30 @@ class NetworkQosRuleTestsDSCPMarking(NetworkQosTests):
     def test_qos_rule_create_delete(self):
         # This is to check the output of qos rule delete
         policy_name = uuid.uuid4().hex
-        self.openstack('network qos policy create %s' % policy_name)
+        self.fibostack('network qos policy create %s' % policy_name)
         self.addCleanup(
-            self.openstack, 'network qos policy delete %s' % policy_name
+            self.fibostack, 'network qos policy delete %s' % policy_name
         )
-        rule = self.openstack(
+        rule = self.fibostack(
             'network qos rule create '
             '--type dscp-marking '
             '--dscp-mark 8 %s' % policy_name,
             parse_output=True,
         )
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'network qos rule delete %s %s' % (policy_name, rule['id'])
         )
         self.assertEqual('', raw_output)
 
     def test_qos_rule_list(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule list %s' % self.QOS_POLICY_NAME,
             parse_output=True,
         )
         self.assertIn(self.RULE_ID, [rule['ID'] for rule in cmd_output])
 
     def test_qos_rule_show(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule show %s %s'
             % (self.QOS_POLICY_NAME, self.RULE_ID),
             parse_output=True,
@@ -237,11 +237,11 @@ class NetworkQosRuleTestsDSCPMarking(NetworkQosTests):
         self.assertEqual(self.RULE_ID, cmd_output['id'])
 
     def test_qos_rule_set(self):
-        self.openstack(
+        self.fibostack(
             'network qos rule set --dscp-mark 32 %s %s'
             % (self.QOS_POLICY_NAME, self.RULE_ID)
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule show %s %s'
             % (self.QOS_POLICY_NAME, self.RULE_ID),
             parse_output=True,
@@ -256,12 +256,12 @@ class NetworkQosRuleTestsBandwidthLimit(NetworkQosTests):
         super().setUp()
 
         self.QOS_POLICY_NAME = 'qos_policy_%s' % uuid.uuid4().hex
-        self.openstack('network qos policy create %s' % self.QOS_POLICY_NAME)
+        self.fibostack('network qos policy create %s' % self.QOS_POLICY_NAME)
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'network qos policy delete %s' % self.QOS_POLICY_NAME,
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule create '
             '--type bandwidth-limit '
             '--max-kbps 10000 '
@@ -270,7 +270,7 @@ class NetworkQosRuleTestsBandwidthLimit(NetworkQosTests):
         )
         self.RULE_ID = cmd_output['id']
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'network qos rule delete %s %s'
             % (self.QOS_POLICY_NAME, self.RULE_ID),
         )
@@ -279,11 +279,11 @@ class NetworkQosRuleTestsBandwidthLimit(NetworkQosTests):
     def test_qos_rule_create_delete(self):
         # This is to check the output of qos rule delete
         policy_name = uuid.uuid4().hex
-        self.openstack('network qos policy create %s' % policy_name)
+        self.fibostack('network qos policy create %s' % policy_name)
         self.addCleanup(
-            self.openstack, 'network qos policy delete %s' % policy_name
+            self.fibostack, 'network qos policy delete %s' % policy_name
         )
-        rule = self.openstack(
+        rule = self.fibostack(
             'network qos rule create '
             '--type bandwidth-limit '
             '--max-kbps 10000 '
@@ -291,20 +291,20 @@ class NetworkQosRuleTestsBandwidthLimit(NetworkQosTests):
             '--egress %s' % policy_name,
             parse_output=True,
         )
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'network qos rule delete %s %s' % (policy_name, rule['id'])
         )
         self.assertEqual('', raw_output)
 
     def test_qos_rule_list(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule list %s' % self.QOS_POLICY_NAME,
             parse_output=True,
         )
         self.assertIn(self.RULE_ID, [rule['ID'] for rule in cmd_output])
 
     def test_qos_rule_show(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule show %s %s'
             % (self.QOS_POLICY_NAME, self.RULE_ID),
             parse_output=True,
@@ -312,12 +312,12 @@ class NetworkQosRuleTestsBandwidthLimit(NetworkQosTests):
         self.assertEqual(self.RULE_ID, cmd_output['id'])
 
     def test_qos_rule_set(self):
-        self.openstack(
+        self.fibostack(
             'network qos rule set --max-kbps 15000 '
             '--max-burst-kbits 1800 '
             '--ingress %s %s' % (self.QOS_POLICY_NAME, self.RULE_ID)
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule show %s %s'
             % (self.QOS_POLICY_NAME, self.RULE_ID),
             parse_output=True,

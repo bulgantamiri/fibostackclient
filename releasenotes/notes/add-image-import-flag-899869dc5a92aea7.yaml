@@ -1,5 +1,5 @@
 ---
 features:
   - |
-    Added ``--import`` flag to ``openstack image create`` to allow
+    Added ``--import`` flag to ``fibostack image create`` to allow
     the user to force use of the image import codepath.

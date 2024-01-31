@@ -2,4 +2,4 @@
 fixes:
   - |
     Fix ``endpoint group delete`` command to properly delete endpoint groups.
-    [Story `2005521 <https://storyboard.openstack.org/#!/story/2005521>`_]
+    [Story `2005521 <https://storyboard.fibostack.org/#!/story/2005521>`_]

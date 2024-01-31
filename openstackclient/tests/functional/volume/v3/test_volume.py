@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.volume.v3 import common
+from fibostackclient.tests.functional.volume.v3 import common
 
 
 class VolumeTests(common.BaseVolumeTests):
@@ -21,7 +21,7 @@ class VolumeTests(common.BaseVolumeTests):
     def test_volume_delete(self):
         """Test create, delete multiple"""
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create --size 1 ' + name1,
             parse_output=True,
         )
@@ -31,7 +31,7 @@ class VolumeTests(common.BaseVolumeTests):
         )
 
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create --size 2 ' + name2,
             parse_output=True,
         )
@@ -42,17 +42,17 @@ class VolumeTests(common.BaseVolumeTests):
 
         self.wait_for_status("volume", name1, "available")
         self.wait_for_status("volume", name2, "available")
-        del_output = self.openstack('volume delete ' + name1 + ' ' + name2)
+        del_output = self.fibostack('volume delete ' + name1 + ' ' + name2)
         self.assertOutput('', del_output)
 
     def test_volume_list(self):
         """Test create, list filter"""
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create --size 1 ' + name1,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'volume delete ' + name1)
+        self.addCleanup(self.fibostack, 'volume delete ' + name1)
         self.assertEqual(
             1,
             cmd_output["size"],
@@ -60,21 +60,21 @@ class VolumeTests(common.BaseVolumeTests):
         self.wait_for_status("volume", name1, "available")
 
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create --size 2 ' + name2,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'volume delete ' + name2)
+        self.addCleanup(self.fibostack, 'volume delete ' + name2)
         self.assertEqual(
             2,
             cmd_output["size"],
         )
         self.wait_for_status("volume", name2, "available")
-        raw_output = self.openstack('volume set ' + '--state error ' + name2)
+        raw_output = self.fibostack('volume set ' + '--state error ' + name2)
         self.assertOutput('', raw_output)
 
         # Test list --long
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume list --long',
             parse_output=True,
         )
@@ -83,7 +83,7 @@ class VolumeTests(common.BaseVolumeTests):
         self.assertIn(name2, names)
 
         # Test list --status
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume list --status error',
             parse_output=True,
         )
@@ -98,7 +98,7 @@ class VolumeTests(common.BaseVolumeTests):
         """Tests create volume, set, unset, show, delete"""
         name = uuid.uuid4().hex
         new_name = name + "_"
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create '
             + '--size 1 '
             + '--description aaaa '
@@ -106,7 +106,7 @@ class VolumeTests(common.BaseVolumeTests):
             + name,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'volume delete ' + new_name)
+        self.addCleanup(self.fibostack, 'volume delete ' + new_name)
         self.assertEqual(
             name,
             cmd_output["name"],
@@ -130,7 +130,7 @@ class VolumeTests(common.BaseVolumeTests):
         self.wait_for_status("volume", name, "available")
 
         # Test volume set
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume set '
             + '--name '
             + new_name
@@ -147,7 +147,7 @@ class VolumeTests(common.BaseVolumeTests):
         self.assertOutput('', raw_output)
         self.wait_for_status("volume", new_name, "available")
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume show ' + new_name,
             parse_output=True,
         )
@@ -177,7 +177,7 @@ class VolumeTests(common.BaseVolumeTests):
         )
 
         # Test volume unset
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume unset '
             + '--property Beta '
             + '--image-property a '
@@ -185,7 +185,7 @@ class VolumeTests(common.BaseVolumeTests):
         )
         self.assertOutput('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume show ' + new_name,
             parse_output=True,
         )
@@ -204,7 +204,7 @@ class VolumeTests(common.BaseVolumeTests):
         volume_name = uuid.uuid4().hex
         snapshot_name = uuid.uuid4().hex
         # Make a snapshot
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create --size 1 ' + volume_name,
             parse_output=True,
         )
@@ -213,7 +213,7 @@ class VolumeTests(common.BaseVolumeTests):
             volume_name,
             cmd_output["name"],
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume snapshot create '
             + snapshot_name
             + ' --volume '
@@ -224,12 +224,12 @@ class VolumeTests(common.BaseVolumeTests):
 
         name = uuid.uuid4().hex
         # Create volume from snapshot
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create ' + '--snapshot ' + snapshot_name + ' ' + name,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'volume delete ' + name)
-        self.addCleanup(self.openstack, 'volume delete ' + volume_name)
+        self.addCleanup(self.fibostack, 'volume delete ' + name)
+        self.addCleanup(self.fibostack, 'volume delete ' + volume_name)
         self.assertEqual(
             name,
             cmd_output["name"],
@@ -237,7 +237,7 @@ class VolumeTests(common.BaseVolumeTests):
         self.wait_for_status("volume", name, "available")
 
         # Delete snapshot
-        raw_output = self.openstack('volume snapshot delete ' + snapshot_name)
+        raw_output = self.fibostack('volume snapshot delete ' + snapshot_name)
         self.assertOutput('', raw_output)
         # Deleting snapshot may take time. If volume snapshot still exists when
         # a parent volume delete is requested, the volume deletion will fail.
@@ -246,11 +246,11 @@ class VolumeTests(common.BaseVolumeTests):
     def test_volume_list_backward_compatibility(self):
         """Test backward compatibility of list command"""
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create --size 1 ' + name1,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'volume delete ' + name1)
+        self.addCleanup(self.fibostack, 'volume delete ' + name1)
         self.assertEqual(
             1,
             cmd_output["size"],
@@ -258,7 +258,7 @@ class VolumeTests(common.BaseVolumeTests):
         self.wait_for_status("volume", name1, "available")
 
         # Test list -c "Display Name"
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume list -c "Display Name"',
             parse_output=True,
         )
@@ -266,7 +266,7 @@ class VolumeTests(common.BaseVolumeTests):
             self.assertIn('Display Name', each_volume)
 
         # Test list -c "Name"
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume list -c "Name"',
             parse_output=True,
         )

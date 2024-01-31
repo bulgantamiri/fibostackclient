@@ -1,6 +1,6 @@
 ---
 fixes:
   - |
-    Work around a bug in OpenStackSDK 0.9.11 and 0.9.12 that causes
+    Work around a bug in openstacksdk 0.9.11 and 0.9.12 that causes
     ``quota set --network`` to fail.
-    [Bug `1655445 <https://bugs.launchpad.net/python-openstackclient/+bug/1655445>`_]
+    [Bug `1655445 <https://bugs.launchpad.net/python-fibostackclient/+bug/1655445>`_]

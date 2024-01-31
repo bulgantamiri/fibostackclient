@@ -15,13 +15,13 @@
 
 import logging
 
-from osc_lib.cli import format_columns
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.cli import format_columns
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.i18n import _
-from openstackclient.identity import common
+from fibostackclient.i18n import _
+from fibostackclient.identity import common
 
 
 LOG = logging.getLogger(__name__)

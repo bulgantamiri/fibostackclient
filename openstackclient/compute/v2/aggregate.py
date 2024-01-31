@@ -1,4 +1,4 @@
-#   Copyright 2012 OpenStack Foundation
+#   Copyright 2012 fibostack Foundation
 #   Copyright 2013 Nebula Inc.
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -18,14 +18,14 @@
 
 import logging
 
-from openstack import utils as sdk_utils
-from osc_lib.cli import format_columns
-from osc_lib.cli import parseractions
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fibostack import utils as sdk_utils
+from fsc_lib.cli import format_columns
+from fsc_lib.cli import parseractions
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 LOG = logging.getLogger(__name__)
@@ -41,12 +41,12 @@ _aggregate_formatters = {
 
 def _get_aggregate_columns(item):
     # To maintain backwards compatibility we need to rename sdk props to
-    # whatever OSC was using before
+    # whatever fsc was using before
     column_map = {
         'metadata': 'properties',
     }
     hidden_columns = ['links', 'location']
-    return utils.get_osc_show_columns_for_sdk_resource(
+    return utils.get_fsc_show_columns_for_sdk_resource(
         item, column_map, hidden_columns
     )
 

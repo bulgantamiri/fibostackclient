@@ -1,4 +1,4 @@
 sahara
 ------
 
-.. autoprogram-cliff:: openstack.data_processing.v1
+.. autoprogram-cliff:: fibostack.data_processing.v1

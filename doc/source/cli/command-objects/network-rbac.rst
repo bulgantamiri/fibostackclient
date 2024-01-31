@@ -8,5 +8,5 @@ to network resources for specific projects.
 
 Network v2
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: network rbac *

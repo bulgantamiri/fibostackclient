@@ -1,4 +1,4 @@
 cyborg
 ------
 
-.. autoprogram-cliff:: openstack.accelerator.v2
+.. autoprogram-cliff:: fibostack.accelerator.v2

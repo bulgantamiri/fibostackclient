@@ -9,11 +9,11 @@ printed directly to standard out.
 
 Typical usage for this command is::
 
-  openstack complete | sudo tee /etc/bash_completion.d/osc.bash_completion > /dev/null
+  fibostack complete | sudo tee /etc/bash_completion.d/fsc.bash_completion > /dev/null
 
-It is highly recommended to install ``python-openstackclient`` from a package
+It is highly recommended to install ``python-fibostackclient`` from a package
 (``apt-get`` or ``yum``). In some distributions the package ``bash-completion`` is shipped
-as dependency, and the `openstack complete` command will be run as a post-install action,
+as dependency, and the `fibostack complete` command will be run as a post-install action,
 however not every distribution include this dependency and you might need to install
 ``bash-completion`` package to enable autocomplete feature.
 
@@ -25,4 +25,4 @@ print bash completion command
 .. program:: complete
 .. code:: bash
 
-    openstack complete
+    fibostack complete

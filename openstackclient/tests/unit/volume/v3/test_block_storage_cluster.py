@@ -11,10 +11,10 @@
 # under the License.
 
 from cinderclient import api_versions
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.tests.unit.volume.v3 import fakes as volume_fakes
-from openstackclient.volume.v3 import block_storage_cluster
+from fibostackclient.tests.unit.volume.v3 import fakes as volume_fakes
+from fibostackclient.volume.v3 import block_storage_cluster
 
 
 class TestBlockStorageCluster(volume_fakes.TestVolume):

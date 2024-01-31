@@ -16,11 +16,11 @@ from unittest import mock
 from unittest.mock import call
 
 from cinderclient import api_versions
-from openstack import utils as sdk_utils
-from osc_lib import exceptions
+from fibostack import utils as sdk_utils
+from fsc_lib import exceptions
 
-from openstackclient.tests.unit.volume.v2 import fakes as volume_fakes
-from openstackclient.volume.v2 import volume_backup
+from fibostackclient.tests.unit.volume.v2 import fakes as volume_fakes
+from fibostackclient.volume.v2 import volume_backup
 
 
 class TestBackupLegacy(volume_fakes.TestVolume):

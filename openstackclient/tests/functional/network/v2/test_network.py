@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class NetworkTests(common.NetworkTagTests):
@@ -27,11 +27,11 @@ class NetworkTests(common.NetworkTagTests):
 
         # Network create with minimum options
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network create ' + '--subnet 1.2.3.4/28 ' + name1,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'network delete ' + name1)
+        self.addCleanup(self.fibostack, 'network delete ' + name1)
         self.assertIsNotNone(cmd_output["id"])
 
         self.assertEqual(
@@ -45,11 +45,11 @@ class NetworkTests(common.NetworkTagTests):
 
         # Network create with more options
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network create ' + '--subnet 1.2.4.4/28 ' + '--share ' + name2,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'network delete ' + name2)
+        self.addCleanup(self.fibostack, 'network delete ' + name2)
         self.assertIsNotNone(cmd_output["id"])
 
         self.assertEqual(
@@ -70,10 +70,10 @@ class NetworkTests(common.NetworkTagTests):
             self.skipTest("No Network service present")
 
         # Get project IDs
-        cmd_output = self.openstack('token issue ', parse_output=True)
+        cmd_output = self.fibostack('token issue ', parse_output=True)
         auth_project_id = cmd_output['project_id']
 
-        cmd_output = self.openstack('project list ', parse_output=True)
+        cmd_output = self.fibostack('project list ', parse_output=True)
         admin_project_id = None
         demo_project_id = None
         for p in cmd_output:
@@ -93,11 +93,11 @@ class NetworkTests(common.NetworkTagTests):
 
         # Network create with no options
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network create ' + name1,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'network delete ' + name1)
+        self.addCleanup(self.fibostack, 'network delete ' + name1)
         self.assertIsNotNone(cmd_output["id"])
 
         # Check the default values
@@ -123,11 +123,11 @@ class NetworkTests(common.NetworkTagTests):
 
         # Network create with options
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network create ' + '--project demo ' + name2,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'network delete ' + name2)
+        self.addCleanup(self.fibostack, 'network delete ' + name2)
         self.assertIsNotNone(cmd_output["id"])
         self.assertEqual(
             demo_project_id,
@@ -144,7 +144,7 @@ class NetworkTests(common.NetworkTagTests):
             self.skipTest("Skip Nova-net test")
 
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network create ' + '--subnet 9.8.7.6/28 ' + name1,
             parse_output=True,
         )
@@ -155,7 +155,7 @@ class NetworkTests(common.NetworkTagTests):
         )
 
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network create ' + '--subnet 8.7.6.5/28 ' + name2,
             parse_output=True,
         )
@@ -171,7 +171,7 @@ class NetworkTests(common.NetworkTagTests):
             self.skipTest("No Network service present")
 
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network create ' + '--description aaaa ' + name1,
             parse_output=True,
         )
@@ -182,7 +182,7 @@ class NetworkTests(common.NetworkTagTests):
         )
 
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network create ' + '--description bbbb ' + name2,
             parse_output=True,
         )
@@ -192,7 +192,7 @@ class NetworkTests(common.NetworkTagTests):
             cmd_output["description"],
         )
 
-        del_output = self.openstack('network delete %s %s' % (name1, name2))
+        del_output = self.fibostack('network delete %s %s' % (name1, name2))
         self.assertOutput('', del_output)
 
     def test_network_list(self):
@@ -202,11 +202,11 @@ class NetworkTests(common.NetworkTagTests):
             network_options = '--description aaaa --no-default '
         else:
             network_options = '--subnet 3.4.5.6/28 '
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network create ' + network_options + name1,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'network delete %s' % name1)
+        self.addCleanup(self.fibostack, 'network delete %s' % name1)
         self.assertIsNotNone(cmd_output["id"])
         if self.haz_network:
             self.assertEqual(
@@ -236,11 +236,11 @@ class NetworkTests(common.NetworkTagTests):
             network_options = '--description bbbb --disable '
         else:
             network_options = '--subnet 4.5.6.7/28 '
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network create --share %s%s' % (network_options, name2),
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'network delete ' + name2)
+        self.addCleanup(self.fibostack, 'network delete ' + name2)
         self.assertIsNotNone(cmd_output["id"])
         if self.haz_network:
             self.assertEqual(
@@ -262,7 +262,7 @@ class NetworkTests(common.NetworkTagTests):
             self.assertTrue(cmd_output["share_address"])
 
         # Test list
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             "network list ",
             parse_output=True,
         )
@@ -272,7 +272,7 @@ class NetworkTests(common.NetworkTagTests):
 
         # Test list --long
         if self.haz_network:
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 "network list --long",
                 parse_output=True,
             )
@@ -282,7 +282,7 @@ class NetworkTests(common.NetworkTagTests):
 
         # Test list --long --enable
         if self.haz_network:
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 "network list --enable --long",
                 parse_output=True,
             )
@@ -292,7 +292,7 @@ class NetworkTests(common.NetworkTagTests):
 
         # Test list --long --disable
         if self.haz_network:
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 "network list --disable --long",
                 parse_output=True,
             )
@@ -302,7 +302,7 @@ class NetworkTests(common.NetworkTagTests):
 
         # Test list --share
         if self.haz_network:
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 "network list --share ",
                 parse_output=True,
             )
@@ -312,7 +312,7 @@ class NetworkTests(common.NetworkTagTests):
 
         # Test list --no-share
         if self.haz_network:
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 "network list --no-share ",
                 parse_output=True,
             )
@@ -331,7 +331,7 @@ class NetworkTests(common.NetworkTagTests):
             self.skipTest("No dhcp_agent_scheduler extension present")
 
         # Get DHCP Agent ID
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network agent list --agent-type dhcp',
             parse_output=True,
         )
@@ -341,30 +341,30 @@ class NetworkTests(common.NetworkTagTests):
         agent_id = cmd_output[0]['ID']
 
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network create --description aaaa %s' % name1,
             parse_output=True,
         )
 
-        self.addCleanup(self.openstack, 'network delete %s' % name1)
+        self.addCleanup(self.fibostack, 'network delete %s' % name1)
 
         # Get network ID
         network_id = cmd_output['id']
 
         # Add Agent to Network
-        self.openstack(
+        self.fibostack(
             'network agent add network --dhcp %s %s' % (agent_id, network_id)
         )
 
         # Test network list --agent
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network list --agent %s' % agent_id,
             parse_output=True,
         )
 
         # Cleanup
         # Remove Agent from Network
-        self.openstack(
+        self.fibostack(
             'network agent remove network --dhcp %s %s'
             % (agent_id, network_id)
         )
@@ -379,7 +379,7 @@ class NetworkTests(common.NetworkTagTests):
             self.skipTest("No Network service present")
 
         name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network create '
             '--description aaaa '
             '--enable '
@@ -389,7 +389,7 @@ class NetworkTests(common.NetworkTagTests):
             '--enable-port-security %s' % name,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'network delete %s' % name)
+        self.addCleanup(self.fibostack, 'network delete %s' % name)
         self.assertIsNotNone(cmd_output["id"])
         self.assertEqual(
             'aaaa',
@@ -408,7 +408,7 @@ class NetworkTests(common.NetworkTagTests):
         self.assertFalse(cmd_output["is_default"])
         self.assertTrue(cmd_output["port_security_enabled"])
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'network set '
             '--description cccc '
             '--disable '
@@ -418,7 +418,7 @@ class NetworkTests(common.NetworkTagTests):
         )
         self.assertOutput('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network show ' + name,
             parse_output=True,
         )

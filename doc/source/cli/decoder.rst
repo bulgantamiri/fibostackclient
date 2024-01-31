@@ -2,16 +2,16 @@
 Mapping Guide
 =============
 
-The following is an incomplete mapping between legacy OpenStack CLIs and
-OpenStackClient. Think of it as a magic decoder ring if you were using the
-legacy CLIs and want to transition to OpenStack CLI. Command options are only
+The following is an incomplete mapping between legacy fibostack CLIs and
+fibostackClient. Think of it as a magic decoder ring if you were using the
+legacy CLIs and want to transition to fibostack CLI. Command options are only
 shown when necessary.
 
 ``cinder CLI``
 --------------
 
 .. csv-table::
-   :header: "Cinder CLI", "OSC Equivalent", "Description"
+   :header: "Cinder CLI", "fsc Equivalent", "Description"
    :widths: 25, 25, 50
    :file: data/cinder.csv
 
@@ -19,7 +19,7 @@ shown when necessary.
 --------------
 
 .. csv-table::
-   :header: "Glance CLI", "OSC Equivalent", "Description"
+   :header: "Glance CLI", "fsc Equivalent", "Description"
    :widths: 25, 25, 50
    :file: data/glance.csv
 
@@ -27,7 +27,7 @@ shown when necessary.
 ----------------
 
 .. csv-table::
-   :header: "Keystone CLI", "OSC Equivalent", "Description"
+   :header: "Keystone CLI", "fsc Equivalent", "Description"
    :widths: 25, 25, 50
    :file: data/keystone.csv
 
@@ -35,7 +35,7 @@ shown when necessary.
 ---------------
 
 .. csv-table::
-   :header: "Neutron CLI", "OSC Equivalent", "Description"
+   :header: "Neutron CLI", "fsc Equivalent", "Description"
    :widths: 25, 25, 50
    :file: data/neutron.csv
 
@@ -43,7 +43,7 @@ shown when necessary.
 ------------
 
 .. csv-table::
-   :header: "Nova CLI", "OSC Equivalent", "Description"
+   :header: "Nova CLI", "fsc Equivalent", "Description"
    :widths: 25, 25, 50
    :file: data/nova.csv
 
@@ -51,6 +51,6 @@ shown when necessary.
 -------------
 
 .. csv-table::
-   :header: "Swift CLI", "OSC Equivalent", "Description"
+   :header: "Swift CLI", "fsc Equivalent", "Description"
    :widths: 25, 25, 50
    :file: data/swift.csv

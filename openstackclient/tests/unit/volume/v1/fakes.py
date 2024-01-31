@@ -18,11 +18,11 @@ import random
 from unittest import mock
 import uuid
 
-from openstack.image.v1 import _proxy as image_v1_proxy
+from fibostack.image.v1 import _proxy as image_v1_proxy
 
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
-from openstackclient.tests.unit import utils
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
+from fibostackclient.tests.unit import utils
 
 
 class FakeVolumev1Client:
@@ -74,7 +74,7 @@ class TestVolumev1(FakeClientMixin, utils.TestCommand):
         )
 
         # avoid circular imports by defining this manually rather than using
-        # openstackclient.tests.unit.image.v1.fakes.FakeClientMixin
+        # fibostackclient.tests.unit.image.v1.fakes.FakeClientMixin
         self.app.client_manager.image = mock.Mock(spec=image_v1_proxy.Proxy)
         self.image_client = self.app.client_manager.image
 

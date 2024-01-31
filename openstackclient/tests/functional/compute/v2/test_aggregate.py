@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 
 class AggregateTests(base.TestCase):
@@ -22,18 +22,18 @@ class AggregateTests(base.TestCase):
         """Test create, delete multiple"""
         name1 = uuid.uuid4().hex
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'aggregate delete ' + name1,
             fail_ok=True,
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'aggregate create ' + '--zone nova ' + '--property a=b ' + name1,
             parse_output=True,
         )
         self.assertEqual(name1, cmd_output['name'])
         self.assertEqual('nova', cmd_output['availability_zone'])
         self.assertIn('a', cmd_output['properties'])
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'aggregate show ' + name1,
             parse_output=True,
         )
@@ -41,17 +41,17 @@ class AggregateTests(base.TestCase):
 
         name2 = uuid.uuid4().hex
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'aggregate delete ' + name2,
             fail_ok=True,
         )
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'aggregate create ' + '--zone external ' + name2,
             parse_output=True,
         )
         self.assertEqual(name2, cmd_output['name'])
         self.assertEqual('external', cmd_output['availability_zone'])
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'aggregate show ' + name2,
             parse_output=True,
         )
@@ -60,11 +60,11 @@ class AggregateTests(base.TestCase):
         # Test aggregate set
         name3 = uuid.uuid4().hex
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'aggregate delete ' + name3,
             fail_ok=True,
         )
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'aggregate set '
             + '--name '
             + name3
@@ -76,7 +76,7 @@ class AggregateTests(base.TestCase):
         )
         self.assertOutput('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'aggregate show ' + name3,
             parse_output=True,
         )
@@ -86,7 +86,7 @@ class AggregateTests(base.TestCase):
         self.assertNotIn('a', cmd_output['properties'])
 
         # Test aggregate list
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'aggregate list',
             parse_output=True,
         )
@@ -98,7 +98,7 @@ class AggregateTests(base.TestCase):
         self.assertIn('internal', zones)
 
         # Test aggregate list --long
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'aggregate list --long',
             parse_output=True,
         )
@@ -113,25 +113,25 @@ class AggregateTests(base.TestCase):
         self.assertIn({'c': 'd'}, properties)
 
         # Test unset
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'aggregate unset ' + '--property c ' + name3
         )
         self.assertOutput('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'aggregate show ' + name3,
             parse_output=True,
         )
         self.assertNotIn("c='d'", cmd_output['properties'])
 
         # test aggregate delete
-        del_output = self.openstack('aggregate delete ' + name3 + ' ' + name2)
+        del_output = self.fibostack('aggregate delete ' + name3 + ' ' + name2)
         self.assertOutput('', del_output)
 
     def test_aggregate_add_and_remove_host(self):
         """Test aggregate add and remove host"""
         # Get a host
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'host list',
             parse_output=True,
         )
@@ -143,18 +143,18 @@ class AggregateTests(base.TestCase):
             self.skipTest("Skip aggregates in a Nova cells v1 configuration")
 
         name = uuid.uuid4().hex
-        self.addCleanup(self.openstack, 'aggregate delete ' + name)
-        self.openstack('aggregate create ' + name)
+        self.addCleanup(self.fibostack, 'aggregate delete ' + name)
+        self.fibostack('aggregate create ' + name)
 
         # Test add host
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'aggregate add host ' + name + ' ' + host_name,
             parse_output=True,
         )
         self.assertIn(host_name, cmd_output['hosts'])
 
         # Test remove host
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'aggregate remove host ' + name + ' ' + host_name,
             parse_output=True,
         )

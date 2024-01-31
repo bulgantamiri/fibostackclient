@@ -10,4 +10,4 @@ fixes:
     Support a mapping for volume list -c ``Display Name`` (Volume v1 and v2)
     and volume create/show -c ``display_name`` (Volume v1) to maintain backward
     compatibility until the next major release.
-    [Bug `1657956 <https://bugs.launchpad.net/python-openstackclient/+bug/1657956>`_]
+    [Bug `1657956 <https://bugs.launchpad.net/python-fibostackclient/+bug/1657956>`_]

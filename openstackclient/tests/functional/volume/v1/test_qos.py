@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.volume.v1 import common
+from fibostackclient.tests.functional.volume.v1 import common
 
 
 class QosTests(common.BaseVolumeTests):
@@ -21,21 +21,21 @@ class QosTests(common.BaseVolumeTests):
     def test_volume_qos_create_list(self):
         """Test create, list, delete multiple"""
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume qos create ' + name1,
             parse_output=True,
         )
         self.assertEqual(name1, cmd_output['name'])
 
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume qos create ' + name2,
             parse_output=True,
         )
         self.assertEqual(name2, cmd_output['name'])
 
         # Test list
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume qos list',
             parse_output=True,
         )
@@ -44,27 +44,27 @@ class QosTests(common.BaseVolumeTests):
         self.assertIn(name2, names)
 
         # Test delete multiple
-        del_output = self.openstack('volume qos delete ' + name1 + ' ' + name2)
+        del_output = self.fibostack('volume qos delete ' + name1 + ' ' + name2)
         self.assertOutput('', del_output)
 
     def test_volume_qos_set_show_unset(self):
         """Tests create volume qos, set, unset, show, delete"""
 
         name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume qos create '
             + '--consumer front-end '
             + '--property Alpha=a '
             + name,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'volume qos delete ' + name)
+        self.addCleanup(self.fibostack, 'volume qos delete ' + name)
         self.assertEqual(name, cmd_output['name'])
 
         self.assertEqual("front-end", cmd_output['consumer'])
 
         # Test volume qos set
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume qos set '
             + '--no-property '
             + '--property Beta=b '
@@ -74,7 +74,7 @@ class QosTests(common.BaseVolumeTests):
         self.assertOutput('', raw_output)
 
         # Test volume qos show
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume qos show ' + name,
             parse_output=True,
         )
@@ -85,12 +85,12 @@ class QosTests(common.BaseVolumeTests):
         )
 
         # Test volume qos unset
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume qos unset ' + '--property Charlie ' + name,
         )
         self.assertOutput('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume qos show ' + name,
             parse_output=True,
         )

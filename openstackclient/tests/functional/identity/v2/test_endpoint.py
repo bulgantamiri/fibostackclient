@@ -10,7 +10,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from openstackclient.tests.functional.identity.v2 import common
+from fibostackclient.tests.functional.identity.v2 import common
 
 
 class EndpointTests(common.IdentityTests):
@@ -19,26 +19,26 @@ class EndpointTests(common.IdentityTests):
 
     def test_endpoint_delete(self):
         endpoint_id = self._create_dummy_endpoint(add_clean_up=False)
-        raw_output = self.openstack('endpoint delete %s' % endpoint_id)
+        raw_output = self.fibostack('endpoint delete %s' % endpoint_id)
         self.assertEqual(0, len(raw_output))
 
     def test_endpoint_multi_delete(self):
         endpoint_id_1 = self._create_dummy_endpoint(add_clean_up=False)
         endpoint_id_2 = self._create_dummy_endpoint(add_clean_up=False)
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'endpoint delete ' + endpoint_id_1 + ' ' + endpoint_id_2
         )
         self.assertEqual(0, len(raw_output))
 
     def test_endpoint_list(self):
         endpoint_id = self._create_dummy_endpoint()
-        raw_output = self.openstack('endpoint list')
+        raw_output = self.fibostack('endpoint list')
         self.assertIn(endpoint_id, raw_output)
         items = self.parse_listing(raw_output)
         self.assert_table_structure(items, self.ENDPOINT_LIST_HEADERS)
 
     def test_endpoint_show(self):
         endpoint_id = self._create_dummy_endpoint()
-        raw_output = self.openstack('endpoint show %s' % endpoint_id)
+        raw_output = self.fibostack('endpoint show %s' % endpoint_id)
         items = self.parse_show(raw_output)
         self.assert_show_fields(items, self.ENDPOINT_FIELDS)

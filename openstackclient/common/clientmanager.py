@@ -1,4 +1,4 @@
-#   Copyright 2012-2013 OpenStack Foundation
+#   Copyright 2012-2013 fibostack Foundation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
 #   not use this file except in compliance with the License. You may obtain
@@ -19,8 +19,8 @@ import importlib
 import logging
 import sys
 
-from osc_lib import clientmanager
-from osc_lib import shell
+from fsc_lib import clientmanager
+from fsc_lib import shell
 import stevedore
 
 
@@ -28,15 +28,15 @@ LOG = logging.getLogger(__name__)
 
 PLUGIN_MODULES = []
 
-USER_AGENT = 'python-openstackclient'
+USER_AGENT = 'python-fibostackclient'
 
 
 class ClientManager(clientmanager.ClientManager):
     """Manages access to API clients, including authentication
 
-    Wrap osc_lib's ClientManager to maintain compatibility for the existing
+    Wrap fsc_lib's ClientManager to maintain compatibility for the existing
     plugin V2 interface.  Some currently private attributes become public
-    in osc-lib so we need to maintain a transition period.
+    in fsc-lib so we need to maintain a transition period.
     """
 
     # A simple incrementing version for the plugin to know what is available
@@ -73,21 +73,21 @@ class ClientManager(clientmanager.ClientManager):
             return
 
         # NOTE(dtroyer): Validate the auth args; this is protected with 'if'
-        #                because openstack_config is an optional argument to
+        #                because fibostack_config is an optional argument to
         #                CloudConfig.__init__() and we'll die if it was not
         #                passed.
         if (
             self._auth_required
-            and self._cli_options._openstack_config is not None
+            and self._cli_options._fibostack_config is not None
         ):
-            self._cli_options._openstack_config._pw_callback = (
+            self._cli_options._fibostack_config._pw_callback = (
                 shell.prompt_for_password
             )
             try:
                 # We might already get auth from SDK caching
                 if not self._cli_options._auth:
                     self._cli_options._auth = (
-                        self._cli_options._openstack_config.load_auth_plugin(
+                        self._cli_options._fibostack_config.load_auth_plugin(
                             self._cli_options.config,
                         )
                     )
@@ -107,7 +107,7 @@ class ClientManager(clientmanager.ClientManager):
             del self._cli_options.config['auth']['token']
             del self._cli_options.config['auth']['endpoint']
             self._cli_options._auth = (
-                self._cli_options._openstack_config.load_auth_plugin(
+                self._cli_options._fibostack_config.load_auth_plugin(
                     self._cli_options.config,
                 )
             )
@@ -201,11 +201,11 @@ def build_plugin_option_parser(parser):
 
 # Get list of base plugin modules
 PLUGIN_MODULES = get_plugin_modules(
-    'openstack.cli.base',
+    'fibostack.cli.base',
 )
 # Append list of external plugin modules
 PLUGIN_MODULES.extend(
     get_plugin_modules(
-        'openstack.cli.extension',
+        'fibostack.cli.extension',
     )
 )

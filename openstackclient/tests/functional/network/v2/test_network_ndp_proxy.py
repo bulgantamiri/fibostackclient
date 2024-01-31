@@ -10,7 +10,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class L3NDPProxyTests(common.NetworkTests):
@@ -30,14 +30,14 @@ class L3NDPProxyTests(common.NetworkTests):
         self.SUBNET_P_NAME = self.getUniqueString()
         self.created_ndp_proxies = []
 
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'address scope create --ip-version 6 '
             '%(address_s_name)s' % {'address_s_name': self.ADDR_SCOPE_NAME},
             parse_output=True,
         )
         self.assertIsNotNone(json_output['id'])
         self.ADDRESS_SCOPE_ID = json_output['id']
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'subnet pool create %(subnet_p_name)s '
             '--address-scope %(address_scope)s '
             '--pool-prefix 2001:db8::/96 --default-prefix-length 112'
@@ -49,13 +49,13 @@ class L3NDPProxyTests(common.NetworkTests):
         )
         self.assertIsNotNone(json_output['id'])
         self.SUBNET_POOL_ID = json_output['id']
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network create --external ' + self.EXT_NET_NAME,
             parse_output=True,
         )
         self.assertIsNotNone(json_output['id'])
         self.EXT_NET_ID = json_output['id']
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'subnet create --ip-version 6 --subnet-pool '
             '%(subnet_pool)s --network %(net_id)s %(sub_name)s'
             % {
@@ -67,31 +67,31 @@ class L3NDPProxyTests(common.NetworkTests):
         )
         self.assertIsNotNone(json_output['id'])
         self.EXT_SUB_ID = json_output['id']
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'router create ' + self.ROT_NAME,
             parse_output=True,
         )
         self.assertIsNotNone(json_output['id'])
         self.ROT_ID = json_output['id']
-        output = self.openstack(
+        output = self.fibostack(
             'router set %(router_id)s --external-gateway %(net_id)s'
             % {'router_id': self.ROT_ID, 'net_id': self.EXT_NET_ID}
         )
         self.assertEqual('', output)
-        output = self.openstack('router set --enable-ndp-proxy ' + self.ROT_ID)
+        output = self.fibostack('router set --enable-ndp-proxy ' + self.ROT_ID)
         self.assertEqual('', output)
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'router show -c enable_ndp_proxy ' + self.ROT_ID,
             parse_output=True,
         )
         self.assertTrue(json_output['enable_ndp_proxy'])
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network create ' + self.INT_NET_NAME,
             parse_output=True,
         )
         self.assertIsNotNone(json_output['id'])
         self.INT_NET_ID = json_output['id']
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'subnet create --ip-version 6 --subnet-pool '
             '%(subnet_pool)s --network %(net_id)s %(sub_name)s'
             % {
@@ -103,7 +103,7 @@ class L3NDPProxyTests(common.NetworkTests):
         )
         self.assertIsNotNone(json_output['id'])
         self.INT_SUB_ID = json_output['id']
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'port create --network %(net_id)s '
             '%(port_name)s'
             % {
@@ -115,44 +115,44 @@ class L3NDPProxyTests(common.NetworkTests):
         self.assertIsNotNone(json_output['id'])
         self.INT_PORT_ID = json_output['id']
         self.INT_PORT_ADDRESS = json_output['fixed_ips'][0]['ip_address']
-        output = self.openstack(
+        output = self.fibostack(
             'router add subnet ' + self.ROT_ID + ' ' + self.INT_SUB_ID
         )
         self.assertEqual('', output)
 
     def tearDown(self):
         for ndp_proxy in self.created_ndp_proxies:
-            output = self.openstack(
+            output = self.fibostack(
                 'router ndp proxy delete ' + ndp_proxy['id']
             )
             self.assertEqual('', output)
-        output = self.openstack('port delete ' + self.INT_PORT_ID)
+        output = self.fibostack('port delete ' + self.INT_PORT_ID)
         self.assertEqual('', output)
-        output = self.openstack(
+        output = self.fibostack(
             'router set --disable-ndp-proxy ' + self.ROT_ID
         )
         self.assertEqual('', output)
-        output = self.openstack(
+        output = self.fibostack(
             'router remove subnet ' + self.ROT_ID + ' ' + self.INT_SUB_ID
         )
         self.assertEqual('', output)
-        output = self.openstack('subnet delete ' + self.INT_SUB_ID)
+        output = self.fibostack('subnet delete ' + self.INT_SUB_ID)
         self.assertEqual('', output)
-        output = self.openstack('network delete ' + self.INT_NET_ID)
+        output = self.fibostack('network delete ' + self.INT_NET_ID)
         self.assertEqual('', output)
-        output = self.openstack(
+        output = self.fibostack(
             'router unset ' + self.ROT_ID + ' ' + '--external-gateway'
         )
         self.assertEqual('', output)
-        output = self.openstack('router delete ' + self.ROT_ID)
+        output = self.fibostack('router delete ' + self.ROT_ID)
         self.assertEqual('', output)
-        output = self.openstack('subnet delete ' + self.EXT_SUB_ID)
+        output = self.fibostack('subnet delete ' + self.EXT_SUB_ID)
         self.assertEqual('', output)
-        output = self.openstack('network delete ' + self.EXT_NET_ID)
+        output = self.fibostack('network delete ' + self.EXT_NET_ID)
         self.assertEqual('', output)
-        output = self.openstack('subnet pool delete ' + self.SUBNET_POOL_ID)
+        output = self.fibostack('subnet pool delete ' + self.SUBNET_POOL_ID)
         self.assertEqual('', output)
-        output = self.openstack(
+        output = self.fibostack(
             'address scope delete ' + self.ADDRESS_SCOPE_ID
         )
         self.assertEqual('', output)
@@ -160,7 +160,7 @@ class L3NDPProxyTests(common.NetworkTests):
 
     def _create_ndp_proxies(self, ndp_proxies):
         for ndp_proxy in ndp_proxies:
-            output = self.openstack(
+            output = self.fibostack(
                 'router ndp proxy create %(router)s --name %(name)s '
                 '--port %(port)s --ip-address %(address)s'
                 % {
@@ -195,7 +195,7 @@ class L3NDPProxyTests(common.NetworkTests):
             'address': self.INT_PORT_ADDRESS,
         }
         self._create_ndp_proxies([ndp_proxies])
-        ndp_proxy = self.openstack(
+        ndp_proxy = self.fibostack(
             'router ndp proxy list',
             parse_output=True,
         )[0]
@@ -213,12 +213,12 @@ class L3NDPProxyTests(common.NetworkTests):
         description = 'balala'
         self._create_ndp_proxies([ndp_proxies])
         ndp_proxy_id = self.created_ndp_proxies[0]['id']
-        output = self.openstack(
+        output = self.fibostack(
             'router ndp proxy set --description %s %s'
             % (description, ndp_proxy_id)
         )
         self.assertEqual('', output)
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'router ndp proxy show ' + ndp_proxy_id,
             parse_output=True,
         )

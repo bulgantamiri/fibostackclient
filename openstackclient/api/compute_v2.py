@@ -14,12 +14,12 @@
 """Compute v2 API Library"""
 
 from keystoneauth1 import exceptions as ksa_exceptions
-from osc_lib.api import api
-from osc_lib import exceptions
-from osc_lib.i18n import _
+from fsc_lib.api import api
+from fsc_lib import exceptions
+from fsc_lib.i18n import _
 
 
-# TODO(dtroyer): Mingrate this to osc-lib
+# TODO(dtroyer): Mingrate this to fsc-lib
 class InvalidValue(Exception):
     """An argument value is not valid: wrong type, out of range, etc"""
 
@@ -57,7 +57,7 @@ class APIv2(api.BaseAPI):
             raise InvalidValue(msg)
         return value
 
-    # TODO(dtroyer): Override find() until these fixes get into an osc-lib
+    # TODO(dtroyer): Override find() until these fixes get into an fsc-lib
     #                minimum release
     def find(
         self,
@@ -146,7 +146,7 @@ class APIv2(api.BaseAPI):
     ):
         """Create a new floating ip
 
-        https://docs.openstack.org/api-ref/compute/#create-allocate-floating-ip-address
+        https://docs.fibostack.org/api-ref/compute/#create-allocate-floating-ip-address
 
         :param pool: Name of floating IP pool
         """
@@ -171,7 +171,7 @@ class APIv2(api.BaseAPI):
     ):
         """Delete a floating IP
 
-        https://docs.openstack.org/api-ref/compute/#delete-deallocate-floating-ip-address
+        https://docs.fibostack.org/api-ref/compute/#delete-deallocate-floating-ip-address
 
         :param string floating_ip_id:
             Floating IP ID
@@ -190,7 +190,7 @@ class APIv2(api.BaseAPI):
     ):
         """Return a security group given name or ID
 
-        https://docs.openstack.org/api-ref/compute/#list-floating-ip-addresses
+        https://docs.fibostack.org/api-ref/compute/#list-floating-ip-addresses
 
         :param string floating_ip:
             Floating IP address
@@ -210,7 +210,7 @@ class APIv2(api.BaseAPI):
     ):
         """Get floating IPs
 
-        https://docs.openstack.org/api-ref/compute/#show-floating-ip-address-details
+        https://docs.fibostack.org/api-ref/compute/#show-floating-ip-address-details
 
         :returns:
             list of floating IPs
@@ -259,7 +259,7 @@ class APIv2(api.BaseAPI):
     ):
         """Get floating IP pools
 
-        https://docs.openstack.org/api-ref/compute/?expanded=#list-floating-ip-pools
+        https://docs.fibostack.org/api-ref/compute/?expanded=#list-floating-ip-pools
 
         :returns:
             list of floating IP pools
@@ -277,7 +277,7 @@ class APIv2(api.BaseAPI):
     ):
         """Lists hypervisor Hosts
 
-        https://docs.openstack.org/api-ref/compute/#list-hosts
+        https://docs.fibostack.org/api-ref/compute/#list-hosts
         Valid for Compute 2.0 - 2.42
 
         :param string zone:
@@ -296,7 +296,7 @@ class APIv2(api.BaseAPI):
     ):
         """Modify host properties
 
-        https://docs.openstack.org/api-ref/compute/#update-host-status
+        https://docs.fibostack.org/api-ref/compute/#update-host-status
         Valid for Compute 2.0 - 2.42
 
         status
@@ -326,7 +326,7 @@ class APIv2(api.BaseAPI):
     ):
         """Show host
 
-        https://docs.openstack.org/api-ref/compute/#show-host-details
+        https://docs.fibostack.org/api-ref/compute/#show-host-details
         Valid for Compute 2.0 - 2.42
         """
 
@@ -353,7 +353,7 @@ class APIv2(api.BaseAPI):
     ):
         """Create a new network
 
-        https://docs.openstack.org/api-ref/compute/#create-network
+        https://docs.fibostack.org/api-ref/compute/#create-network
 
         :param string name:
             Network label (required)
@@ -384,7 +384,7 @@ class APIv2(api.BaseAPI):
     ):
         """Delete a network
 
-        https://docs.openstack.org/api-ref/compute/#delete-network
+        https://docs.fibostack.org/api-ref/compute/#delete-network
 
         :param string network:
             Network name or ID
@@ -408,7 +408,7 @@ class APIv2(api.BaseAPI):
     ):
         """Return a network given name or ID
 
-        https://docs.openstack.org/api-ref/compute/#show-network-details
+        https://docs.fibostack.org/api-ref/compute/#show-network-details
 
         :param string network:
             Network name or ID
@@ -428,7 +428,7 @@ class APIv2(api.BaseAPI):
     ):
         """Get networks
 
-        https://docs.openstack.org/api-ref/compute/#list-networks
+        https://docs.fibostack.org/api-ref/compute/#list-networks
 
         :returns:
             list of networks
@@ -447,7 +447,7 @@ class APIv2(api.BaseAPI):
     ):
         """Create a new security group
 
-        https://docs.openstack.org/api-ref/compute/#create-security-group
+        https://docs.fibostack.org/api-ref/compute/#create-security-group
 
         :param string name:
             Security group name
@@ -473,7 +473,7 @@ class APIv2(api.BaseAPI):
     ):
         """Delete a security group
 
-        https://docs.openstack.org/api-ref/compute/#delete-security-group
+        https://docs.fibostack.org/api-ref/compute/#delete-security-group
 
         :param string security_group:
             Security group name or ID
@@ -497,7 +497,7 @@ class APIv2(api.BaseAPI):
     ):
         """Return a security group given name or ID
 
-        https://docs.openstack.org/api-ref/compute/#show-security-group-details
+        https://docs.fibostack.org/api-ref/compute/#show-security-group-details
 
         :param string security_group:
             Security group name or ID
@@ -520,7 +520,7 @@ class APIv2(api.BaseAPI):
     ):
         """Get security groups
 
-        https://docs.openstack.org/api-ref/compute/#list-security-groups
+        https://docs.fibostack.org/api-ref/compute/#list-security-groups
 
         :param integer limit:
             query return count limit
@@ -553,12 +553,12 @@ class APIv2(api.BaseAPI):
     ):
         """Update a security group
 
-        https://docs.openstack.org/api-ref/compute/#update-security-group
+        https://docs.fibostack.org/api-ref/compute/#update-security-group
 
         :param string security_group:
             Security group name or ID
 
-        TODO(dtroyer): Create an update method in osc-lib
+        TODO(dtroyer): Create an update method in fsc-lib
         """
 
         # Short-circuit no-op
@@ -597,7 +597,7 @@ class APIv2(api.BaseAPI):
     ):
         """Create a new security group rule
 
-        https://docs.openstack.org/api-ref/compute/#create-security-group-rule
+        https://docs.fibostack.org/api-ref/compute/#create-security-group-rule
 
         :param string security_group_id:
             Security group ID
@@ -640,7 +640,7 @@ class APIv2(api.BaseAPI):
     ):
         """Delete a security group rule
 
-        https://docs.openstack.org/api-ref/compute/#delete-security-group-rule
+        https://docs.fibostack.org/api-ref/compute/#delete-security-group-rule
 
         :param string security_group_rule_id:
             Security group rule ID

@@ -7,5 +7,5 @@ This is a sub-resource of the Local IP resource.
 
 Network v2
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: local ip association *

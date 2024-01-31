@@ -1,5 +1,5 @@
 ---
 features:
-  - Add ``--force`` options to the ``openstack quota set`` command for network
+  - Add ``--force`` options to the ``fibostack quota set`` command for network
     service commands. Neutron quota engine now accepts "force" flag to set
     a new resource quota limit, regardless of the current resource usage.

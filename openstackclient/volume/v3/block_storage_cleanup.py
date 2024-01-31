@@ -11,10 +11,10 @@
 # under the License.
 
 from cinderclient import api_versions
-from osc_lib.command import command
-from osc_lib import exceptions
+from fsc_lib.command import command
+from fsc_lib import exceptions
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 def _format_cleanup_response(cleaning, unavailable):

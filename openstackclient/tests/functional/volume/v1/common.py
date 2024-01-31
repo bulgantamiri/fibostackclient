@@ -12,7 +12,7 @@
 
 import fixtures
 
-from openstackclient.tests.functional.volume import base as volume_base
+from fibostackclient.tests.functional.volume import base as volume_base
 
 
 class BaseVolumeTests(volume_base.BaseVolumeTests):

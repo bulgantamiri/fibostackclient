@@ -1,4 +1,4 @@
-#   Copyright 2013 OpenStack Foundation
+#   Copyright 2013 fibostack Foundation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
 #   not use this file except in compliance with the License. You may obtain
@@ -22,14 +22,14 @@ import os
 
 from cryptography.hazmat.primitives.asymmetric import ed25519
 from cryptography.hazmat.primitives import serialization
-from openstack import utils as sdk_utils
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fibostack import utils as sdk_utils
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.common import pagination
-from openstackclient.i18n import _
-from openstackclient.identity import common as identity_common
+from fibostackclient.common import pagination
+from fibostackclient.i18n import _
+from fibostackclient.identity import common as identity_common
 
 
 LOG = logging.getLogger(__name__)
@@ -61,14 +61,14 @@ def _generate_keypair():
 
 def _get_keypair_columns(item, hide_pub_key=False, hide_priv_key=False):
     # To maintain backwards compatibility we need to rename sdk props to
-    # whatever OSC was using before
+    # whatever fsc was using before
     column_map = {}
     hidden_columns = ['links', 'location']
     if hide_pub_key:
         hidden_columns.append('public_key')
     if hide_priv_key:
         hidden_columns.append('private_key')
-    return utils.get_osc_show_columns_for_sdk_resource(
+    return utils.get_fsc_show_columns_for_sdk_resource(
         item, column_map, hidden_columns
     )
 

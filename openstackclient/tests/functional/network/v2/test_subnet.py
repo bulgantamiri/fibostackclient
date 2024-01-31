@@ -13,7 +13,7 @@
 import random
 import uuid
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class SubnetTests(common.NetworkTagTests):
@@ -28,7 +28,7 @@ class SubnetTests(common.NetworkTagTests):
             cls.NETWORK_NAME = uuid.uuid4().hex
 
             # Create a network for the all subnet tests
-            cmd_output = cls.openstack(
+            cmd_output = cls.fibostack(
                 'network create ' + cls.NETWORK_NAME,
                 parse_output=True,
             )
@@ -39,7 +39,7 @@ class SubnetTests(common.NetworkTagTests):
     def tearDownClass(cls):
         try:
             if cls.haz_network:
-                raw_output = cls.openstack(
+                raw_output = cls.fibostack(
                     'network delete ' + cls.NETWORK_NAME
                 )
                 cls.assertOutput('', raw_output)
@@ -75,7 +75,7 @@ class SubnetTests(common.NetworkTagTests):
             cmd_output["network_id"],
         )
 
-        del_output = self.openstack('subnet delete ' + name1 + ' ' + name2)
+        del_output = self.fibostack('subnet delete ' + name1 + ' ' + name2)
         self.assertOutput('', del_output)
 
     def test_subnet_list(self):
@@ -90,7 +90,7 @@ class SubnetTests(common.NetworkTagTests):
         )
         cmd_output = self._subnet_create(cmd, name1)
 
-        self.addCleanup(self.openstack, 'subnet delete ' + name1)
+        self.addCleanup(self.fibostack, 'subnet delete ' + name1)
         self.assertEqual(
             name1,
             cmd_output["name"],
@@ -117,7 +117,7 @@ class SubnetTests(common.NetworkTagTests):
         )
         cmd_output = self._subnet_create(cmd, name2, is_type_ipv4=False)
 
-        self.addCleanup(self.openstack, 'subnet delete ' + name2)
+        self.addCleanup(self.fibostack, 'subnet delete ' + name2)
         self.assertEqual(
             name2,
             cmd_output["name"],
@@ -136,7 +136,7 @@ class SubnetTests(common.NetworkTagTests):
         )
 
         # Test list --long
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'subnet list ' + '--long ',
             parse_output=True,
         )
@@ -145,7 +145,7 @@ class SubnetTests(common.NetworkTagTests):
         self.assertIn(name2, names)
 
         # Test list --name
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'subnet list ' + '--name ' + name1,
             parse_output=True,
         )
@@ -154,7 +154,7 @@ class SubnetTests(common.NetworkTagTests):
         self.assertNotIn(name2, names)
 
         # Test list --ip-version
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'subnet list ' + '--ip-version 6',
             parse_output=True,
         )
@@ -163,7 +163,7 @@ class SubnetTests(common.NetworkTagTests):
         self.assertIn(name2, names)
 
         # Test list --network
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'subnet list ' + '--network ' + self.NETWORK_ID,
             parse_output=True,
         )
@@ -172,7 +172,7 @@ class SubnetTests(common.NetworkTagTests):
         self.assertIn(name2, names)
 
         # Test list --no-dhcp
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'subnet list ' + '--no-dhcp ',
             parse_output=True,
         )
@@ -193,7 +193,7 @@ class SubnetTests(common.NetworkTagTests):
         )
         cmd_output = self._subnet_create(cmd, name)
 
-        self.addCleanup(self.openstack, 'subnet delete ' + new_name)
+        self.addCleanup(self.fibostack, 'subnet delete ' + new_name)
         self.assertEqual(
             name,
             cmd_output["name"],
@@ -204,7 +204,7 @@ class SubnetTests(common.NetworkTagTests):
         )
 
         # Test set --no-dhcp --name --gateway --description
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'subnet set '
             + '--name '
             + new_name
@@ -215,7 +215,7 @@ class SubnetTests(common.NetworkTagTests):
         )
         self.assertOutput('', cmd_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'subnet show ' + new_name,
             parse_output=True,
         )
@@ -237,10 +237,10 @@ class SubnetTests(common.NetworkTagTests):
         )
 
         # Test unset
-        cmd_output = self.openstack('subnet unset --gateway ' + new_name)
+        cmd_output = self.fibostack('subnet unset --gateway ' + new_name)
         self.assertOutput('', cmd_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'subnet show ' + new_name,
             parse_output=True,
         )
@@ -273,7 +273,7 @@ class SubnetTests(common.NetworkTagTests):
                     + ":0/112"
                 )
             try:
-                cmd_output = self.openstack(
+                cmd_output = self.fibostack(
                     cmd + ' ' + subnet + ' ' + name,
                     parse_output=True,
                 )

@@ -1,4 +1,4 @@
-#   Copyright 2012-2013 OpenStack Foundation
+#   Copyright 2012-2013 fibostack Foundation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
 #   not use this file except in compliance with the License. You may obtain
@@ -25,18 +25,18 @@ import os
 from cliff import columns as cliff_columns
 import iso8601
 from novaclient import api_versions
-from openstack import exceptions as sdk_exceptions
-from openstack import utils as sdk_utils
-from osc_lib.cli import format_columns
-from osc_lib.cli import parseractions
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fibostack import exceptions as sdk_exceptions
+from fibostack import utils as sdk_utils
+from fsc_lib.cli import format_columns
+from fsc_lib.cli import parseractions
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.common import pagination
-from openstackclient.i18n import _
-from openstackclient.identity import common as identity_common
-from openstackclient.network import common as network_common
+from fibostackclient.common import pagination
+from fibostackclient.i18n import _
+from fibostackclient.identity import common as identity_common
+from fibostackclient.network import common as network_common
 
 LOG = logging.getLogger(__name__)
 
@@ -3162,7 +3162,7 @@ revert to release the new server and restart the old one."""
                 if kwargs['disk_over_commit'] is None:
                     kwargs['disk_over_commit'] = False
             elif parsed_args.disk_overcommit is not None:
-                # TODO(stephenfin): Raise an error here in OSC 7.0
+                # TODO(stephenfin): Raise an error here in fsc 7.0
                 msg = _(
                     'The --disk-overcommit and --no-disk-overcommit '
                     'options are only supported by '
@@ -3276,7 +3276,7 @@ class RebootServer(command.Command):
         compute_client.reboot_server(server_id, parsed_args.reboot_type)
 
         if parsed_args.wait:
-            # We use osc-lib's wait_for_status since that allows for a callback
+            # We use fsc-lib's wait_for_status since that allows for a callback
             if utils.wait_for_status(
                 compute_client.get_server,
                 server_id,
@@ -4076,8 +4076,8 @@ release the new server and restart the old one."""
             action="store_true",
             help=_(
                 "**Deprecated** Confirm server resize is complete. "
-                "Replaced by the 'openstack server resize confirm' and "
-                "'openstack server migration confirm' commands"
+                "Replaced by the 'fibostack server resize confirm' and "
+                "'fibostack server migration confirm' commands"
             ),
         )
         phase_group.add_argument(
@@ -4085,8 +4085,8 @@ release the new server and restart the old one."""
             action="store_true",
             help=_(
                 '**Deprecated** Restore server state before resize'
-                "Replaced by the 'openstack server resize revert' and "
-                "'openstack server migration revert' commands"
+                "Replaced by the 'fibostack server resize revert' and "
+                "'fibostack server migration revert' commands"
             ),
         )
         parser.add_argument(
@@ -4135,7 +4135,7 @@ release the new server and restart the old one."""
             self.log.warning(
                 _(
                     "The --confirm option has been deprecated. Please use the "
-                    "'openstack server resize confirm' command instead."
+                    "'fibostack server resize confirm' command instead."
                 )
             )
             compute_client.servers.confirm_resize(server)
@@ -4143,7 +4143,7 @@ release the new server and restart the old one."""
             self.log.warning(
                 _(
                     "The --revert option has been deprecated. Please use the "
-                    "'openstack server resize revert' command instead."
+                    "'fibostack server resize revert' command instead."
                 )
             )
             compute_client.servers.revert_resize(server)
@@ -4174,7 +4174,7 @@ Confirm (verify) success of resize operation and release the old server."""
         server.confirm_resize()
 
 
-# TODO(stephenfin): Remove in OSC 7.0
+# TODO(stephenfin): Remove in fsc 7.0
 class MigrateConfirm(ResizeConfirm):
     _description = _("DEPRECATED: Use 'server migration confirm' instead.")
 
@@ -4223,7 +4223,7 @@ one."""
         server.revert_resize()
 
 
-# TODO(stephenfin): Remove in OSC 7.0
+# TODO(stephenfin): Remove in fsc 7.0
 class MigrateRevert(ResizeRevert):
     _description = _("DEPRECATED: Use 'server migration revert' instead.")
 
@@ -4522,9 +4522,9 @@ class ShelveServer(command.Command):
             return
 
         for server_id in server_ids:
-            # We use osc-lib's wait_for_status since that allows for a callback
+            # We use fsc-lib's wait_for_status since that allows for a callback
             # TODO(stephenfin): We should wait for these in parallel using e.g.
-            # https://review.opendev.org/c/openstack/osc-lib/+/762503/
+            # https://review.opendev.org/c/fibostack/fsc-lib/+/762503/
             if not utils.wait_for_status(
                 compute_client.get_server,
                 server_id,
@@ -4548,9 +4548,9 @@ class ShelveServer(command.Command):
             return
 
         for server_id in server_ids:
-            # We use osc-lib's wait_for_status since that allows for a callback
+            # We use fsc-lib's wait_for_status since that allows for a callback
             # TODO(stephenfin): We should wait for these in parallel using e.g.
-            # https://review.opendev.org/c/openstack/osc-lib/+/762503/
+            # https://review.opendev.org/c/fibostack/fsc-lib/+/762503/
             if not utils.wait_for_status(
                 compute_client.get_server,
                 server_id,
@@ -4726,7 +4726,7 @@ class SshServer(command.Command):
             metavar='-- <standard ssh args>',
             help=(
                 'Any argument or option that ssh allows. '
-                'Use -- once between openstackclient args and SSH args.'
+                'Use -- once between fibostackclient args and SSH args.'
             ),
         )
         return parser

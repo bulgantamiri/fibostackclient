@@ -8,5 +8,5 @@ network access for servers on project networks.
 
 Network v2
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: router *

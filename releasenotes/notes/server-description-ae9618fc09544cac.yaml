@@ -3,4 +3,4 @@ features:
   - |
     Add ``--description`` option to ``server create``, ``server rebuild``,
     ``server set`` and ``server unset`` commands.
-    [Bug `2002005 <https://storyboard.openstack.org/#!/story/2002005>`_]
+    [Bug `2002005 <https://storyboard.fibostack.org/#!/story/2002005>`_]

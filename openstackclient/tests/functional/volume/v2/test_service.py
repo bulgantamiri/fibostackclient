@@ -10,21 +10,21 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from openstackclient.tests.functional.volume.v2 import common
+from fibostackclient.tests.functional.volume.v2 import common
 
 
 class VolumeServiceTests(common.BaseVolumeTests):
     """Functional tests for volume service."""
 
     def test_volume_service_list(self):
-        cmd_output = self.openstack('volume service list', parse_output=True)
+        cmd_output = self.fibostack('volume service list', parse_output=True)
 
         # Get the nonredundant services and hosts
         services = list(set([x['Binary'] for x in cmd_output]))
         hosts = list(set([x['Host'] for x in cmd_output]))
 
         # Test volume service list --service
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume service list ' + '--service ' + services[0],
             parse_output=True,
         )
@@ -32,7 +32,7 @@ class VolumeServiceTests(common.BaseVolumeTests):
             self.assertEqual(services[0], x['Binary'])
 
         # Test volume service list --host
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume service list ' + '--host ' + hosts[0],
             parse_output=True,
         )
@@ -41,7 +41,7 @@ class VolumeServiceTests(common.BaseVolumeTests):
 
     def test_volume_service_set(self):
         # Get a service and host
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume service list',
             parse_output=True,
         )
@@ -49,12 +49,12 @@ class VolumeServiceTests(common.BaseVolumeTests):
         host_1 = cmd_output[0]['Host']
 
         # Test volume service set --enable
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume service set --enable ' + host_1 + ' ' + service_1
         )
         self.assertOutput('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume service list --long',
             parse_output=True,
         )
@@ -63,7 +63,7 @@ class VolumeServiceTests(common.BaseVolumeTests):
 
         # Test volume service set --disable and --disable-reason
         disable_reason = 'disable_reason'
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume service set --disable '
             + '--disable-reason '
             + disable_reason
@@ -74,7 +74,7 @@ class VolumeServiceTests(common.BaseVolumeTests):
         )
         self.assertOutput('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume service list --long',
             parse_output=True,
         )

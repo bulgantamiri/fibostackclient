@@ -20,10 +20,10 @@ import uuid
 
 from keystoneauth1 import access
 from keystoneauth1 import fixture
-from osc_lib.cli import format_columns
+from fsc_lib.cli import format_columns
 
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit import utils
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit import utils
 
 base_url = 'http://identity:5000/v3/'
 
@@ -52,7 +52,7 @@ GROUP = {
 mapping_id = 'test_mapping'
 mapping_rules_file_path = '/tmp/path/to/file'
 # Copied from
-# (https://github.com/openstack/keystone/blob\
+# (https://github.com/fibostack/keystone/blob\
 # master/keystone/tests/mapping_fixtures.py
 EMPLOYEE_GROUP_ID = "0cd5e9"
 DEVELOPER_GROUP_ID = "xyz"

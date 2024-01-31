@@ -12,8 +12,8 @@
 
 import os
 
-from openstackclient.common import configuration
-from openstackclient.tests.functional import base
+from fibostackclient.common import configuration
+from fibostackclient.tests.functional import base
 
 
 BASIC_CONFIG_HEADERS = ['Field', 'Value']
@@ -24,11 +24,11 @@ class ConfigurationTests(base.TestCase):
 
     def test_configuration_show(self):
         # Test show without option
-        raw_output = self.openstack('configuration show')
+        raw_output = self.fibostack('configuration show')
         items = self.parse_listing(raw_output)
         self.assert_table_structure(items, BASIC_CONFIG_HEADERS)
 
-        cmd_output = self.openstack('configuration show', parse_output=True)
+        cmd_output = self.fibostack('configuration show', parse_output=True)
         self.assertEqual(configuration.REDACTED, cmd_output['auth.password'])
         self.assertIn(
             'auth.password',
@@ -36,14 +36,14 @@ class ConfigurationTests(base.TestCase):
         )
 
         # Test show --mask
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'configuration show --mask',
             parse_output=True,
         )
         self.assertEqual(configuration.REDACTED, cmd_output['auth.password'])
 
         # Test show --unmask
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'configuration show --unmask',
             parse_output=True,
         )
@@ -64,14 +64,14 @@ class ConfigurationTestsNoAuth(base.TestCase):
 
     def test_configuration_show(self):
         # Test show without option
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'configuration show',
             cloud=None,
         )
         items = self.parse_listing(raw_output)
         self.assert_table_structure(items, BASIC_CONFIG_HEADERS)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'configuration show',
             cloud=None,
             parse_output=True,

@@ -14,14 +14,14 @@
 
 import uuid
 
-from openstack import utils as sdk_utils
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fibostack import utils as sdk_utils
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.common import pagination
-from openstackclient.i18n import _
-from openstackclient.identity import common as identity_common
+from fibostackclient.common import pagination
+from fibostackclient.i18n import _
+from fibostackclient.identity import common as identity_common
 
 
 class ListMigration(command.Lister):
@@ -263,7 +263,7 @@ class ShowMigration(command.ShowOne):
     """Show an in-progress live migration for a given server.
 
     Note that it is not possible to show cold migrations or completed
-    live-migrations. Use 'openstack server migration list' to get details for
+    live-migrations. Use 'fibostack server migration list' to get details for
     these.
     """
 

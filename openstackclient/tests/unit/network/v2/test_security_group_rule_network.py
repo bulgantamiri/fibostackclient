@@ -14,13 +14,13 @@
 from unittest import mock
 from unittest.mock import call
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.network import utils as network_utils
-from openstackclient.network.v2 import security_group_rule
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
-from openstackclient.tests.unit.network.v2 import fakes as network_fakes
-from openstackclient.tests.unit import utils as tests_utils
+from fibostackclient.network import utils as network_utils
+from fibostackclient.network.v2 import security_group_rule
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.tests.unit.network.v2 import fakes as network_fakes
+from fibostackclient.tests.unit import utils as tests_utils
 
 
 class TestSecurityGroupRuleNetwork(network_fakes.TestNetworkV2):

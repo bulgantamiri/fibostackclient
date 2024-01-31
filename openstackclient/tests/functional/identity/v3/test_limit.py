@@ -14,7 +14,7 @@ import os
 
 from tempest.lib.common.utils import data_utils
 
-from openstackclient.tests.functional.identity.v3 import common
+from fibostackclient.tests.functional.identity.v3 import common
 
 SYSTEM_CLOUD = os.environ.get('OS_SYSTEM_CLOUD', 'devstack-system-admin')
 
@@ -22,7 +22,7 @@ SYSTEM_CLOUD = os.environ.get('OS_SYSTEM_CLOUD', 'devstack-system-admin')
 class LimitTestCase(common.IdentityTests):
     def test_limit_create_with_service_name(self):
         registered_limit_id = self._create_dummy_registered_limit()
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'registered limit show %s' % registered_limit_id,
             cloud=SYSTEM_CLOUD,
         )
@@ -30,12 +30,12 @@ class LimitTestCase(common.IdentityTests):
         service_id = self._extract_value_from_items('service_id', items)
         resource_name = self._extract_value_from_items('resource_name', items)
 
-        raw_output = self.openstack('service show %s' % service_id)
+        raw_output = self.fibostack('service show %s' % service_id)
         items = self.parse_show(raw_output)
         service_name = self._extract_value_from_items('name', items)
 
         project_name = self._create_dummy_project()
-        raw_output = self.openstack('project show %s' % project_name)
+        raw_output = self.fibostack('project show %s' % project_name)
         items = self.parse_show(raw_output)
         project_id = self._extract_value_from_items('id', items)
 
@@ -45,7 +45,7 @@ class LimitTestCase(common.IdentityTests):
             'resource_name': resource_name,
             'resource_limit': 15,
         }
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'limit create'
             ' --project %(project_id)s'
             ' --service %(service_name)s'
@@ -56,14 +56,14 @@ class LimitTestCase(common.IdentityTests):
         items = self.parse_show(raw_output)
         limit_id = self._extract_value_from_items('id', items)
         self.addCleanup(
-            self.openstack, 'limit delete %s' % limit_id, cloud=SYSTEM_CLOUD
+            self.fibostack, 'limit delete %s' % limit_id, cloud=SYSTEM_CLOUD
         )
 
         self.assert_show_fields(items, self.LIMIT_FIELDS)
 
     def test_limit_create_with_project_name(self):
         registered_limit_id = self._create_dummy_registered_limit()
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'registered limit show %s' % registered_limit_id,
             cloud=SYSTEM_CLOUD,
         )
@@ -71,7 +71,7 @@ class LimitTestCase(common.IdentityTests):
         service_id = self._extract_value_from_items('service_id', items)
         resource_name = self._extract_value_from_items('resource_name', items)
 
-        raw_output = self.openstack('service show %s' % service_id)
+        raw_output = self.fibostack('service show %s' % service_id)
         items = self.parse_show(raw_output)
         service_name = self._extract_value_from_items('name', items)
 
@@ -83,7 +83,7 @@ class LimitTestCase(common.IdentityTests):
             'resource_name': resource_name,
             'resource_limit': 15,
         }
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'limit create'
             ' --project %(project_name)s'
             ' --service %(service_name)s'
@@ -94,7 +94,7 @@ class LimitTestCase(common.IdentityTests):
         items = self.parse_show(raw_output)
         limit_id = self._extract_value_from_items('id', items)
         self.addCleanup(
-            self.openstack, 'limit delete %s' % limit_id, cloud=SYSTEM_CLOUD
+            self.fibostack, 'limit delete %s' % limit_id, cloud=SYSTEM_CLOUD
         )
 
         self.assert_show_fields(items, self.LIMIT_FIELDS)
@@ -115,7 +115,7 @@ class LimitTestCase(common.IdentityTests):
             'registered_limit_id': registered_limit_id,
         }
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'registered limit set'
             ' %(registered_limit_id)s'
             ' --region %(region_id)s' % params,
@@ -126,7 +126,7 @@ class LimitTestCase(common.IdentityTests):
         resource_name = self._extract_value_from_items('resource_name', items)
 
         project_name = self._create_dummy_project()
-        raw_output = self.openstack('project show %s' % project_name)
+        raw_output = self.fibostack('project show %s' % project_name)
         items = self.parse_show(raw_output)
         project_id = self._extract_value_from_items('id', items)
         description = data_utils.arbitrary_string()
@@ -139,7 +139,7 @@ class LimitTestCase(common.IdentityTests):
             'region_id': region_id,
             'description': description,
         }
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'limit create'
             ' --project %(project_id)s'
             ' --service %(service_id)s'
@@ -152,14 +152,14 @@ class LimitTestCase(common.IdentityTests):
         items = self.parse_show(raw_output)
         limit_id = self._extract_value_from_items('id', items)
         self.addCleanup(
-            self.openstack, 'limit delete %s' % limit_id, cloud=SYSTEM_CLOUD
+            self.fibostack, 'limit delete %s' % limit_id, cloud=SYSTEM_CLOUD
         )
 
         self.assert_show_fields(items, self.LIMIT_FIELDS)
 
     def test_limit_show(self):
         limit_id = self._create_dummy_limit()
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'limit show %s' % limit_id, cloud=SYSTEM_CLOUD
         )
         items = self.parse_show(raw_output)
@@ -173,7 +173,7 @@ class LimitTestCase(common.IdentityTests):
             'limit_id': limit_id,
         }
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'limit set'
             ' --description %(description)s'
             ' %(limit_id)s' % params,
@@ -187,7 +187,7 @@ class LimitTestCase(common.IdentityTests):
 
         params = {'resource_limit': 5, 'limit_id': limit_id}
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'limit set'
             ' --resource-limit %(resource_limit)s'
             ' %(limit_id)s' % params,
@@ -198,13 +198,13 @@ class LimitTestCase(common.IdentityTests):
 
     def test_limit_list(self):
         self._create_dummy_limit()
-        raw_output = self.openstack('limit list', cloud=SYSTEM_CLOUD)
+        raw_output = self.fibostack('limit list', cloud=SYSTEM_CLOUD)
         items = self.parse_listing(raw_output)
         self.assert_table_structure(items, self.LIMIT_LIST_HEADERS)
 
     def test_limit_delete(self):
         limit_id = self._create_dummy_limit(add_clean_up=False)
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'limit delete %s' % limit_id, cloud=SYSTEM_CLOUD
         )
         self.assertEqual(0, len(raw_output))

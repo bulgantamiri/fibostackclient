@@ -13,11 +13,11 @@
 from unittest import mock
 
 from cinderclient import api_versions
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.tests.unit import utils as tests_utils
-from openstackclient.tests.unit.volume.v3 import fakes as volume_fakes
-from openstackclient.volume.v3 import volume_group
+from fibostackclient.tests.unit import utils as tests_utils
+from fibostackclient.tests.unit.volume.v3 import fakes as volume_fakes
+from fibostackclient.volume.v3 import volume_group
 
 
 class TestVolumeGroup(volume_fakes.TestVolume):

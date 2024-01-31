@@ -19,9 +19,9 @@ import os
 import sys
 import urllib
 
-from osc_lib import utils
+from fsc_lib import utils
 
-from openstackclient.api import api
+from fibostackclient.api import api
 
 
 GLOBAL_READ_ACL = ".r:*"
@@ -599,7 +599,7 @@ class APIv1(api.BaseAPI):
 
     def _get_properties(self, headers, header_tag):
         # Add in properties as a top level key, this is consistent with other
-        # OSC commands
+        # fsc commands
         properties = {}
         for k, v in headers.items():
             if k.lower().startswith(header_tag):

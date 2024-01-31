@@ -18,7 +18,7 @@ Create new example
 .. program:: example create
 .. code:: bash
 
-    openstack example create
+    fibostack example create
         <name>
 
 .. describe:: <name>
@@ -33,7 +33,7 @@ Delete example(s)
 .. program:: example delete
 .. code:: bash
 
-    openstack example delete
+    fibostack example delete
         <example> [<example> ...]
 
 .. describe:: <example>
@@ -48,7 +48,7 @@ List examples
 .. program:: example list
 .. code:: bash
 
-    openstack example list
+    fibostack example list
 
 example set
 -----------
@@ -58,7 +58,7 @@ Set example properties
 .. program:: example set
 .. code:: bash
 
-    openstack example set
+    fibostack example set
         [--name <new-name>]
         <example>
 
@@ -78,7 +78,7 @@ Display example details
 .. program:: example show
 .. code:: bash
 
-    openstack example show
+    fibostack example show
         <example>
 
 .. describe:: <example>

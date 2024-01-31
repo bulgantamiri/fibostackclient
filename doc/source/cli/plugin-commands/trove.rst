@@ -1,4 +1,4 @@
 trove
 -----
 
-.. autoprogram-cliff:: openstack.database.v1
+.. autoprogram-cliff:: fibostack.database.v1

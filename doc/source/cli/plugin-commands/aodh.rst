@@ -1,4 +1,4 @@
 aodh
 ----
 
-.. autoprogram-cliff:: openstack.alarming.v2
+.. autoprogram-cliff:: fibostack.alarming.v2

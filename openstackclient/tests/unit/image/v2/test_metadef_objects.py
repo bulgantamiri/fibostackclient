@@ -12,8 +12,8 @@
 #   License for the specific language governing permissions and limitations
 #   under the License.
 
-from openstackclient.image.v2 import metadef_objects
-from openstackclient.tests.unit.image.v2 import fakes
+from fibostackclient.image.v2 import metadef_objects
+from fibostackclient.tests.unit.image.v2 import fakes
 
 
 class TestMetadefObjectsCreate(fakes.TestImagev2):

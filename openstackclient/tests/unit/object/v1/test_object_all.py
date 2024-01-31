@@ -15,11 +15,11 @@ import copy
 import io
 from unittest import mock
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 from requests_mock.contrib import fixture
 
-from openstackclient.object.v1 import object as object_cmds
-from openstackclient.tests.unit.object.v1 import fakes as object_fakes
+from fibostackclient.object.v1 import object as object_cmds
+from fibostackclient.tests.unit.object.v1 import fakes as object_fakes
 
 
 class TestObjectAll(object_fakes.TestObjectv1):

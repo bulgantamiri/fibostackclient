@@ -12,7 +12,7 @@
 
 from tempest.lib.common.utils import data_utils
 
-from openstackclient.tests.functional.identity.v3 import common
+from fibostackclient.tests.functional.identity.v3 import common
 
 
 class UserTests(common.IdentityTests):
@@ -21,7 +21,7 @@ class UserTests(common.IdentityTests):
 
     def test_user_delete(self):
         username = self._create_dummy_user(add_clean_up=False)
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'user delete '
             '--domain %(domain)s '
             '%(name)s' % {'domain': self.domain_name, 'name': username}
@@ -29,13 +29,13 @@ class UserTests(common.IdentityTests):
         self.assertEqual(0, len(raw_output))
 
     def test_user_list(self):
-        raw_output = self.openstack('user list')
+        raw_output = self.fibostack('user list')
         items = self.parse_listing(raw_output)
         self.assert_table_structure(items, common.BASIC_LIST_HEADERS)
 
     def test_user_set(self):
         username = self._create_dummy_user()
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'user show '
             '--domain %(domain)s '
             '%(name)s' % {'domain': self.domain_name, 'name': username}
@@ -43,7 +43,7 @@ class UserTests(common.IdentityTests):
         user = self.parse_show_as_object(raw_output)
         new_username = data_utils.rand_name('NewTestUser')
         new_email = data_utils.rand_name() + '@example.com'
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'user set '
             '--email %(email)s '
             '--name %(new_name)s '
@@ -51,7 +51,7 @@ class UserTests(common.IdentityTests):
             % {'email': new_email, 'new_name': new_username, 'id': user['id']}
         )
         self.assertEqual(0, len(raw_output))
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'user show '
             '--domain %(domain)s '
             '%(name)s' % {'domain': self.domain_name, 'name': new_username}
@@ -64,14 +64,14 @@ class UserTests(common.IdentityTests):
         username = self._create_dummy_user()
         project_name = self._create_dummy_project()
         # get original user details
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'user show '
             '--domain %(domain)s '
             '%(name)s' % {'domain': self.domain_name, 'name': username}
         )
         user = self.parse_show_as_object(raw_output)
         # update user
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'user set '
             '--project %(project)s '
             '--project-domain %(project_domain)s '
@@ -84,14 +84,14 @@ class UserTests(common.IdentityTests):
         )
         self.assertEqual(0, len(raw_output))
         # get updated user details
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'user show '
             '--domain %(domain)s '
             '%(name)s' % {'domain': self.domain_name, 'name': username}
         )
         updated_user = self.parse_show_as_object(raw_output)
         # get project details
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'project show '
             '--domain %(domain)s '
             '%(name)s' % {'domain': self.domain_name, 'name': project_name}
@@ -103,7 +103,7 @@ class UserTests(common.IdentityTests):
 
     def test_user_show(self):
         username = self._create_dummy_user()
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'user show '
             '--domain %(domain)s '
             '%(name)s' % {'domain': self.domain_name, 'name': username}

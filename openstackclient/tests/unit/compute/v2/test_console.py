@@ -15,9 +15,9 @@
 
 from unittest import mock
 
-from openstackclient.compute.v2 import console
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
-from openstackclient.tests.unit import utils
+from fibostackclient.compute.v2 import console
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.tests.unit import utils
 
 
 class TestConsoleLog(compute_fakes.TestComputev2):

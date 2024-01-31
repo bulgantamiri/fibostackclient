@@ -13,7 +13,7 @@
 
 """Image v2 API Library"""
 
-from openstackclient.api import image_v1
+from fibostackclient.api import image_v1
 
 
 class APIv2(image_v1.APIv1):
@@ -56,7 +56,7 @@ class APIv2(image_v1.APIv1):
         that includes all public, private, community and shared images which
         is the same set as all images.
 
-        http://docs.openstack.org/api/openstack-image-service/2.0/content/list-images.html
+        http://docs.fibostack.org/api/fibostack-image-service/2.0/content/list-images.html
         """
 
         if not public and not private and not community and not shared:

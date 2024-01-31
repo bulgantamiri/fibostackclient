@@ -16,11 +16,11 @@
 import copy
 import logging
 
-from openstack import exceptions as sdk_exceptions
-from osc_lib.command import command
-from osc_lib import utils
+from fibostack import exceptions as sdk_exceptions
+from fsc_lib.command import command
+from fsc_lib import utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 LOG = logging.getLogger(__name__)

@@ -24,6 +24,6 @@ COPY --from=builder /output/ /output
 RUN /output/install-from-bindep
 
 # Trigger entrypoint loading to trigger stevedore entrypoint caching
-RUN openstack --help >/dev/null 2>&1
+RUN fibostack --help >/dev/null 2>&1
 
-CMD ["/usr/local/bin/openstack"]
+CMD ["/usr/local/bin/fibostack"]

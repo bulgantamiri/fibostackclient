@@ -14,9 +14,9 @@
 
 import copy
 
-from openstackclient.identity.v3 import federation_protocol
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.identity.v3 import federation_protocol
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
 
 
 class TestProtocol(identity_fakes.TestFederatedIdentity):

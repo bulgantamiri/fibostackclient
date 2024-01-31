@@ -14,11 +14,11 @@
 
 from cinderclient import api_versions
 import ddt
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.tests.unit import utils as tests_utils
-from openstackclient.tests.unit.volume.v3 import fakes as volume_fakes
-from openstackclient.volume.v3 import block_storage_log_level as service
+from fibostackclient.tests.unit import utils as tests_utils
+from fibostackclient.tests.unit.volume.v3 import fakes as volume_fakes
+from fibostackclient.volume.v3 import block_storage_log_level as service
 
 
 class TestService(volume_fakes.TestVolume):

@@ -12,5 +12,5 @@ features:
     - ``--power-state``
 upgrade:
   - |
-    The ``openstack server list --status`` parameter will now validate the
+    The ``fibostack server list --status`` parameter will now validate the
     requested status.

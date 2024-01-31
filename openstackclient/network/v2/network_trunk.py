@@ -18,14 +18,14 @@
 import logging
 
 from cliff import columns as cliff_columns
-from osc_lib.cli import format_columns
-from osc_lib.cli import identity as identity_utils
-from osc_lib.cli import parseractions
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils as osc_utils
+from fsc_lib.cli import format_columns
+from fsc_lib.cli import identity as identity_utils
+from fsc_lib.cli import parseractions
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils as fsc_utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 LOG = logging.getLogger(__name__)
 
@@ -90,7 +90,7 @@ class CreateNetworkTrunk(command.ShowOne):
         attrs = _get_attrs_for_trunk(self.app.client_manager, parsed_args)
         obj = client.create_trunk(**attrs)
         display_columns, columns = _get_columns(obj)
-        data = osc_utils.get_dict_properties(
+        data = fsc_utils.get_dict_properties(
             obj, columns, formatters=_formatters
         )
         return display_columns, data
@@ -163,7 +163,7 @@ class ListNetworkTrunk(command.Lister):
         return (
             headers,
             (
-                osc_utils.get_item_properties(
+                fsc_utils.get_item_properties(
                     s,
                     columns,
                     formatters=_formatters,
@@ -253,7 +253,7 @@ class ShowNetworkTrunk(command.ShowOne):
         trunk_id = client.find_trunk(parsed_args.trunk).id
         obj = client.get_trunk(trunk_id)
         display_columns, columns = _get_columns(obj)
-        data = osc_utils.get_dict_properties(
+        data = fsc_utils.get_dict_properties(
             obj, columns, formatters=_formatters
         )
         return display_columns, data
@@ -281,7 +281,7 @@ class ListNetworkSubport(command.Lister):
         return (
             headers,
             (
-                osc_utils.get_dict_properties(
+                fsc_utils.get_dict_properties(
                     s,
                     columns,
                 )
@@ -329,7 +329,7 @@ _formatters = {
 def _get_columns(item):
     column_map = {}
     hidden_columns = ['location', 'tenant_id']
-    return osc_utils.get_osc_show_columns_for_sdk_resource(
+    return fsc_utils.get_fsc_show_columns_for_sdk_resource(
         item, column_map, hidden_columns
     )
 

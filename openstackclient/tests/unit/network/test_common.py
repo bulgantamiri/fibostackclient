@@ -14,11 +14,11 @@
 import argparse
 from unittest import mock
 
-import openstack
-from osc_lib import exceptions
+import fibostack
+from fsc_lib import exceptions
 
-from openstackclient.network import common
-from openstackclient.tests.unit import utils
+from fibostackclient.network import common
+from fibostackclient.tests.unit import utils
 
 
 def _add_common_argument(parser):
@@ -184,7 +184,7 @@ class TestNetworkAndComputeShowOne(TestNetworkAndCompute):
 
     def test_take_action_with_http_exception(self):
         with mock.patch.object(self.cmd, 'take_action_network') as m_action:
-            m_action.side_effect = openstack.exceptions.HttpException("bar")
+            m_action.side_effect = fibostack.exceptions.HttpException("bar")
             self.assertRaisesRegex(
                 exceptions.CommandError,
                 "bar",
@@ -194,7 +194,7 @@ class TestNetworkAndComputeShowOne(TestNetworkAndCompute):
 
         self.app.client_manager.network_endpoint_enabled = False
         with mock.patch.object(self.cmd, 'take_action_compute') as m_action:
-            m_action.side_effect = openstack.exceptions.HttpException("bar")
+            m_action.side_effect = fibostack.exceptions.HttpException("bar")
             self.assertRaisesRegex(
                 exceptions.CommandError,
                 "bar",

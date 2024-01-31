@@ -1,4 +1,4 @@
 ---
 fixes:
   - |
-    Add missing ``openstack subnet unset --gateway <subnet-id>``.
+    Add missing ``fibostack subnet unset --gateway <subnet-id>``.

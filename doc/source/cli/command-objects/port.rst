@@ -8,5 +8,5 @@ configuration, such as the MAC and IP addresses to be used on that port.
 
 Network v2
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: port *

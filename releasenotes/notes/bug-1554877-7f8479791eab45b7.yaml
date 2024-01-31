@@ -7,5 +7,5 @@ features:
     The properties are immutable on the image itself but may be updated
     or removed from the volume created from that image.
 
-    [Bug `1554877 <https://bugs.launchpad.net/python-openstackclient/+bug/1554877>`_]
-    [Bug `1554879 <https://bugs.launchpad.net/python-openstackclient/+bug/1554879>`_]
+    [Bug `1554877 <https://bugs.launchpad.net/python-fibostackclient/+bug/1554877>`_]
+    [Bug `1554879 <https://bugs.launchpad.net/python-fibostackclient/+bug/1554879>`_]

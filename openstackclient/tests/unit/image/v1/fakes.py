@@ -15,12 +15,12 @@
 from unittest import mock
 import uuid
 
-from openstack.image.v1 import _proxy
-from openstack.image.v1 import image
+from fibostack.image.v1 import _proxy
+from fibostack.image.v1 import image
 
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit import utils
-from openstackclient.tests.unit.volume.v1 import fakes as volume_fakes
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit import utils
+from fibostackclient.tests.unit.volume.v1 import fakes as volume_fakes
 
 
 class FakeClientMixin:

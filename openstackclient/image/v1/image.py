@@ -1,4 +1,4 @@
-#   Copyright 2012-2013 OpenStack Foundation
+#   Copyright 2012-2013 fibostack Foundation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
 #   not use this file except in compliance with the License. You may obtain
@@ -22,13 +22,13 @@ import os
 import sys
 
 from cliff import columns as cliff_columns
-from osc_lib.api import utils as api_utils
-from osc_lib.cli import format_columns
-from osc_lib.cli import parseractions
-from osc_lib.command import command
-from osc_lib import utils
+from fsc_lib.api import utils as api_utils
+from fsc_lib.cli import format_columns
+from fsc_lib.cli import parseractions
+from fsc_lib.command import command
+from fsc_lib import utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 if os.name == "nt":
     import msvcrt
@@ -67,7 +67,7 @@ def _get_columns(item):
         'status',
         'updated_at',
     ]
-    return utils.get_osc_show_columns_for_sdk_resource(
+    return utils.get_fsc_show_columns_for_sdk_resource(
         item.to_dict(),
         column_map,
         hidden_columns,

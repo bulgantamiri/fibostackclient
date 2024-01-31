@@ -4,15 +4,15 @@
 Human Interface Guide
 =====================
 
-*Note: This page covers the OpenStackClient CLI only but looks familiar
+*Note: This page covers the fibostackClient CLI only but looks familiar
 because it was derived from the Horizon HIG.*
 
 Overview
 ========
 
 What is a HIG?
-The Human Interface Guidelines document was created for OpenStack developers
-in order to direct the creation of new OpenStackClient command interfaces.
+The Human Interface Guidelines document was created for fibostack developers
+in order to direct the creation of new fibostackClient command interfaces.
 
 Personas
 ========
@@ -23,14 +23,14 @@ mind when designing the interface.
 Alice the admin
 ---------------
 
-Alice is an administrator who is responsible for maintaining the OpenStack
+Alice is an administrator who is responsible for maintaining the fibostack
 cloud installation. She has many years of experience with Linux systems
 administration.
 
 Darren the deployer
 -------------------
 
-Darren is responsible for doing the initial OpenStack deployment on the
+Darren is responsible for doing the initial fibostack deployment on the
 host machines.
 
 Emile the end-user
@@ -44,20 +44,20 @@ Principles
 ==========
 
 The principles established in this section define the high-level priorities
-to be used when designing and evaluating interactions for the OpenStack
+to be used when designing and evaluating interactions for the fibostack
 command line interface. Principles are broad in scope and can be considered
-the philosophical foundation for the OpenStack experience; while they may
+the philosophical foundation for the fibostack experience; while they may
 not describe the tactical implementation of design, they should be used
 when deciding between multiple courses of design.
 
-A significant theme for designing for the OpenStack experience concerns
+A significant theme for designing for the fibostack experience concerns
 focusing on common uses of the system rather than adding complexity to support
 functionality that is rarely used.
 
 Consistency
 -----------
 
-Consistency between OpenStack experiences will ensure that the command line
+Consistency between fibostack experiences will ensure that the command line
 interface feels like a single experience instead of a jumble of disparate
 products. Fractured experiences only serve to undermine user expectations
 about how they should interact with the system, creating an unreliable user
@@ -91,7 +91,7 @@ nonessential data, overabundance of possible actions and so on. Designs should
 focus on the intent of the command, requiring only the necessary components
 and either removing superfluous elements or making
 them accessible through optional arguments. An example of this principle occurs
-in OpenStack's use of tables: only the most often used columns are shown by
+in fibostack's use of tables: only the most often used columns are shown by
 default. Further data may be accessed through the output control options,
 allowing users to specify the types of data that they find useful in their
 day-to-day work.
@@ -122,13 +122,13 @@ To determine a list of available commands, use the ``-h`` or
 
 .. code-block:: bash
 
-    $ openstack --help
+    $ fibostack --help
 
 For help with an individual command, use the ``help`` command:
 
 .. code-block:: bash
 
-    $ openstack help server create
+    $ fibostack help server create
 
 Example Review Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -165,14 +165,14 @@ Architecture
 Command Structure
 -----------------
 
-OpenStackClient has a consistent and predictable format for all of its commands.
+fibostackClient has a consistent and predictable format for all of its commands.
 
-* The top level command name is ``openstack``
+* The top level command name is ``fibostack``
 * Sub-commands take the form:
 
 .. code-block:: bash
 
-    openstack [<global-options>] <object-1> <action> [<object-2>] [<command-arguments>]
+    fibostack [<global-options>] <object-1> <action> [<object-2>] [<command-arguments>]
 
 Subcommands shall have three distinct parts to its commands (in order that they appear):
 
@@ -189,7 +189,7 @@ Output formats:
 
    A note on terminology. An **argument** is a positional parameter to the
    command. As discussed later, these should be used sparingly in
-   OpenStackClient. An **option** - also known as a **flag** - is a named
+   fibostackClient. An **option** - also known as a **flag** - is a named
    parameter denoted with either a hyphen and a single-letter name (``-r``) or
    a double hyphen and a multiple-letter name (``--recursive``). They may or
    may not also include a user-specified value (``--file foo.txt`` or
@@ -373,7 +373,7 @@ present Identity API v3 commands are shown.
 Common Actions
 ==============
 
-There are a number of common actions or patterns in use across OpenStackClient.
+There are a number of common actions or patterns in use across fibostackClient.
 When adding new commands, they should aim to match one of these action formats.
 
 ``create``
@@ -506,17 +506,17 @@ For example:
 .. note::
 
     The guidelines below are best practices but exceptions do exist in
-    OpenStackClient and in various plugins. Where possible, these exceptions
+    fibostackClient and in various plugins. Where possible, these exceptions
     should be addressed over time.
 
 
 API versioning
 ==============
 
-OpenStackClient will strive to behave sensibly for services that version their
+fibostackClient will strive to behave sensibly for services that version their
 API. The API versioning schemes in use vary between services and have evolved
-since the early days of OpenStack. There are two types of API versioning to
-consider: the major version and the minor version. Today, most OpenStack
+since the early days of fibostack. There are two types of API versioning to
+consider: the major version and the minor version. Today, most fibostack
 services have settled on a single major API version and have chosen to evolve
 the API without bumping the major API version any further. There are three API
 "minor" versioning schemes in common use.
@@ -587,26 +587,26 @@ Major API version support
 -------------------------
 
 Major API version support has become less important over time as the various
-OpenStack services have chosen to focus on the "minor" versioning mechanisms
-described above. However, OpenStackClient aims to support **all** OpenStack
-clouds, not just those running the most recent OpenStack release. This means it
+fibostack services have chosen to focus on the "minor" versioning mechanisms
+described above. However, fibostackClient aims to support **all** fibostack
+clouds, not just those running the most recent fibostack release. This means it
 must aim to support older major API versions that have since been removed from
 the services in question. For example, the Volume service's (cinder) v2 API was
 deprecated in cinder 11.0.0 (Pike) and was removed in cinder 19.0.0 (Xena),
-however, OpenStackClient continues to support this API since not all OpenStack
+however, fibostackClient continues to support this API since not all fibostack
 deployments have updated or will update to Xena or later. This should remain
 the case for as long as this support is technically feasible.
 
 .. note::
 
-    While OpenStackClient will continue to support existing command
+    While fibostackClient will continue to support existing command
     implementations for older APIs, there is no requirement to add **new**
     commands that implement support for deprecated or removed APIs.
 
-OpenStackClient provides different command implementations depending on the API
-version used. On startup, OpenStackClient will attempt to identify the API
+fibostackClient provides different command implementations depending on the API
+version used. On startup, fibostackClient will attempt to identify the API
 version using the service catalog. Where a service provides multiple API major
-versions, OpenStackClient defaults to the latest one. This can be configured by
+versions, fibostackClient defaults to the latest one. This can be configured by
 the user using options (``--os-{service}-api-version``), environment variables
 (``OS_{service}_API_VERSION``) or configuration in the ``clouds.yaml`` file.
 
@@ -615,13 +615,13 @@ Minor API version and extension support
 
 As most services implement some form of versioning and use this to both add new
 functionality and to modify or remove existing functionality, it is imperative
-that OpenStackClient provides a mechanism to configure the API version used.
+that fibostackClient provides a mechanism to configure the API version used.
 Unlike major API versions, support for API microversions or API extensions is
-implemented via logic in the command itself. OpenStackClient commands should
+implemented via logic in the command itself. fibostackClient commands should
 indicate the minimum or maximum API microversion or the API extension required
 for given actions and options in the help string for same. Where a user
 attempts to use a feature that requires a particular microversion or extension
-that the service does not support, OpenStackClient should fail with an error
+that the service does not support, fibostackClient should fail with an error
 message describing these requirements. Like API versions, the requested can be
 configured by the user using options (``--os-{service}-api-version``),
 environment variables (``OS_{service}_API_VERSION``) or configuration in
@@ -629,7 +629,7 @@ environment variables (``OS_{service}_API_VERSION``) or configuration in
 
 .. important::
 
-   Historically, OpenStackClient has defaulted to the lowest supported
+   Historically, fibostackClient has defaulted to the lowest supported
    microversion for each service. This was not by design but rather a side
    effect of relying on legacy clients who implement this behavior.
    openstacksdk does not implement this behavior and instead auto-negotiates a
@@ -645,7 +645,7 @@ Examples
 ========
 
 The following examples depict common command and output formats expected to be
-produces by the OpenStackClient.
+produces by the fibostackClient.
 
 Authentication
 --------------
@@ -654,7 +654,7 @@ Using global options:
 
 .. code-block:: bash
 
-    $ openstack --os-tenant-name ExampleCo --os-username demo --os-password secret --os-auth-url http://localhost:5000:/v2.0 server show appweb01
+    $ fibostack --os-tenant-name ExampleCo --os-username demo --os-password secret --os-auth-url http://localhost:5000:/v2.0 server show appweb01
     +------------------------+-----------------------------------------------------+
     |        Property        |                Value                                |
     +------------------------+-----------------------------------------------------+
@@ -678,7 +678,7 @@ Using environment variables:
     $ export OS_USERNAME=demo
     $ export OS_PASSWORD=secret
     $ export OS_AUTH_URL=http://localhost:5000:/v2.0
-    $ openstack server show appweb01
+    $ fibostack server show appweb01
     +------------------------+-----------------------------------------------------+
     |        Property        |                Value                                |
     +------------------------+-----------------------------------------------------+
@@ -701,7 +701,7 @@ Using the CSV output format with a list command:
 
 .. code-block:: bash
 
-    $ openstack server list --format csv
+    $ fibostack server list --format csv
     "ID","Name","Status","Private_Address"
     "ead97d84-6988-47fc-9637-3564fc36bc4b","appweb01","ACTIVE","10.4.128.13"
 
@@ -710,7 +710,7 @@ Using the show command options of  shell output format and adding a prefix of
 
 .. code-block:: bash
 
-    $ openstack server show --format shell --prefix my_ appweb01
+    $ fibostack server show --format shell --prefix my_ appweb01
     my_OS-DCF:diskConfig="MANUAL"
     my_OS-EXT-STS:power_state="1"
     my_flavor="m1.small"

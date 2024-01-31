@@ -17,13 +17,13 @@ import uuid
 
 from tempest.lib import exceptions
 
-from openstackclient.compute.v2 import server as v2_server
-from openstackclient.tests.functional.compute.v2 import common
-from openstackclient.tests.functional.volume.v2 import common as volume_common
+from fibostackclient.compute.v2 import server as v2_server
+from fibostackclient.tests.functional.compute.v2 import common
+from fibostackclient.tests.functional.volume.v2 import common as volume_common
 
 
 class ServerTests(common.ComputeTestCase):
-    """Functional tests for openstack server commands"""
+    """Functional tests for fibostack server commands"""
 
     @classmethod
     def setUpClass(cls):
@@ -39,7 +39,7 @@ class ServerTests(common.ComputeTestCase):
         self.wait_for_status(name1, "ACTIVE")
         self.wait_for_status(name2, "ACTIVE")
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server list',
             parse_output=True,
         )
@@ -48,17 +48,17 @@ class ServerTests(common.ComputeTestCase):
         self.assertIn(name2, col_name)
 
         # Test list --status PAUSED
-        raw_output = self.openstack('server pause ' + name2)
+        raw_output = self.fibostack('server pause ' + name2)
         self.assertEqual("", raw_output)
         self.wait_for_status(name2, "PAUSED")
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server list ' + '--status ACTIVE',
             parse_output=True,
         )
         col_name = [x["Name"] for x in cmd_output]
         self.assertIn(name1, col_name)
         self.assertNotIn(name2, col_name)
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server list ' + '--status PAUSED',
             parse_output=True,
         )
@@ -77,7 +77,7 @@ class ServerTests(common.ComputeTestCase):
         self.wait_for_status(name2, "ACTIVE")
 
         # Test list --marker with ID
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server list --marker ' + id2,
             parse_output=True,
         )
@@ -85,18 +85,18 @@ class ServerTests(common.ComputeTestCase):
         self.assertIn(name1, col_name)
 
         # Test list --marker with Name
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server list --marker ' + name2,
             parse_output=True,
         )
         col_name = [x["Name"] for x in cmd_output]
         self.assertIn(name1, col_name)
 
-        self.openstack('server delete --wait ' + name1)
-        self.openstack('server delete --wait ' + name2)
+        self.fibostack('server delete --wait ' + name1)
+        self.fibostack('server delete --wait ' + name2)
 
         # Test list --deleted --marker with ID
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server list --deleted --marker ' + id2,
             parse_output=True,
         )
@@ -105,7 +105,7 @@ class ServerTests(common.ComputeTestCase):
 
         # Test list --deleted --marker with Name
         try:
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 'server list --deleted --marker ' + name2,
                 parse_output=True,
             )
@@ -130,7 +130,7 @@ class ServerTests(common.ComputeTestCase):
         cmd_output = self.server_create()
         server_name3 = cmd_output['name']
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             '--os-compute-api-version 2.66 ' + 'server list '
             '--changes-before ' + updated_at2,
             parse_output=True,
@@ -155,7 +155,7 @@ class ServerTests(common.ComputeTestCase):
         cmd_output = self.server_create()
         server_name3 = cmd_output['name']
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server list ' '--changes-since ' + updated_at2,
             parse_output=True,
         )
@@ -180,7 +180,7 @@ class ServerTests(common.ComputeTestCase):
         server_name3 = cmd_output['name']
         updated_at3 = cmd_output['updated']
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             '--os-compute-api-version 2.66 '
             + 'server list '
             + '--changes-since '
@@ -202,7 +202,7 @@ class ServerTests(common.ComputeTestCase):
         # self.wait_for_status(name, "ACTIVE")
 
         # Have a look at some other fields
-        flavor = self.openstack(
+        flavor = self.fibostack(
             'flavor show ' + self.flavor_name,
             parse_output=True,
         )
@@ -214,7 +214,7 @@ class ServerTests(common.ComputeTestCase):
             '%s (%s)' % (flavor['name'], flavor['id']),
             cmd_output["flavor"],
         )
-        image = self.openstack(
+        image = self.fibostack(
             'image show ' + self.image_name,
             parse_output=True,
         )
@@ -228,12 +228,12 @@ class ServerTests(common.ComputeTestCase):
         )
 
         # Test properties set
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'server set ' + '--property a=b --property c=d ' + name
         )
         self.assertOutput('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server show ' + name,
             parse_output=True,
         )
@@ -243,8 +243,8 @@ class ServerTests(common.ComputeTestCase):
             cmd_output['properties'],
         )
 
-        raw_output = self.openstack('server unset ' + '--property a ' + name)
-        cmd_output = self.openstack(
+        raw_output = self.fibostack('server unset ' + '--property a ' + name)
+        cmd_output = self.fibostack(
             'server show ' + name,
             parse_output=True,
         )
@@ -255,11 +255,11 @@ class ServerTests(common.ComputeTestCase):
 
         # Test set --name
         new_name = uuid.uuid4().hex
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'server set ' + '--name ' + new_name + ' ' + name
         )
         self.assertOutput("", raw_output)
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server show ' + new_name,
             parse_output=True,
         )
@@ -268,7 +268,7 @@ class ServerTests(common.ComputeTestCase):
             cmd_output["name"],
         )
         # Put it back so we clean up properly
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'server set ' + '--name ' + name + ' ' + new_name
         )
         self.assertOutput("", raw_output)
@@ -279,7 +279,7 @@ class ServerTests(common.ComputeTestCase):
         name = cmd_output['name']
 
         # Simple show
-        cmd_output = json.loads(self.openstack(f'server show -f json {name}'))
+        cmd_output = json.loads(self.fibostack(f'server show -f json {name}'))
         self.assertEqual(
             name,
             cmd_output["name"],
@@ -287,13 +287,13 @@ class ServerTests(common.ComputeTestCase):
 
         # Show diagnostics
         cmd_output = json.loads(
-            self.openstack(f'server show -f json {name} --diagnostics')
+            self.fibostack(f'server show -f json {name} --diagnostics')
         )
         self.assertIn('driver', cmd_output)
 
         # Show topology
         cmd_output = json.loads(
-            self.openstack(
+            self.fibostack(
                 f'server show -f json {name} --topology '
                 f'--os-compute-api-version 2.78'
             )
@@ -312,54 +312,54 @@ class ServerTests(common.ComputeTestCase):
         name = cmd_output['name']
 
         # suspend
-        raw_output = self.openstack('server suspend ' + name)
+        raw_output = self.fibostack('server suspend ' + name)
         self.assertEqual("", raw_output)
         self.wait_for_status(name, "SUSPENDED")
 
         # resume
-        raw_output = self.openstack('server resume ' + name)
+        raw_output = self.fibostack('server resume ' + name)
         self.assertEqual("", raw_output)
         self.wait_for_status(name, "ACTIVE")
 
         # pause
-        raw_output = self.openstack('server pause ' + name)
+        raw_output = self.fibostack('server pause ' + name)
         self.assertEqual("", raw_output)
         self.wait_for_status(name, "PAUSED")
 
         # unpause
-        raw_output = self.openstack('server unpause ' + name)
+        raw_output = self.fibostack('server unpause ' + name)
         self.assertEqual("", raw_output)
         self.wait_for_status(name, "ACTIVE")
 
         # rescue
-        raw_output = self.openstack('server rescue ' + name)
+        raw_output = self.fibostack('server rescue ' + name)
         self.assertEqual("", raw_output)
         self.wait_for_status(name, "RESCUE")
 
         # unrescue
-        raw_output = self.openstack('server unrescue ' + name)
+        raw_output = self.fibostack('server unrescue ' + name)
         self.assertEqual("", raw_output)
         self.wait_for_status(name, "ACTIVE")
 
         # rescue with image
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'server rescue --image ' + self.image_name + ' ' + name
         )
         self.assertEqual("", raw_output)
         self.wait_for_status(name, "RESCUE")
 
         # unrescue
-        raw_output = self.openstack('server unrescue ' + name)
+        raw_output = self.fibostack('server unrescue ' + name)
         self.assertEqual("", raw_output)
         self.wait_for_status(name, "ACTIVE")
 
         # lock
-        raw_output = self.openstack('server lock ' + name)
+        raw_output = self.fibostack('server lock ' + name)
         self.assertEqual("", raw_output)
         # NOTE(dtroyer): No way to verify this status???
 
         # unlock
-        raw_output = self.openstack('server unlock ' + name)
+        raw_output = self.fibostack('server unlock ' + name)
         self.assertEqual("", raw_output)
         # NOTE(dtroyer): No way to verify this status???
 
@@ -387,7 +387,7 @@ class ServerTests(common.ComputeTestCase):
         self.wait_for_status(name, "ACTIVE")
 
         # attach ip
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'floating ip create ' + 'public',
             parse_output=True,
         )
@@ -403,10 +403,10 @@ class ServerTests(common.ComputeTestCase):
         self.assertNotEqual('', cmd_output['id'])
         self.assertNotEqual('', floating_ip)
         self.addCleanup(
-            self.openstack, 'floating ip delete ' + str(cmd_output['id'])
+            self.fibostack, 'floating ip delete ' + str(cmd_output['id'])
         )
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'server add floating ip ' + name + ' ' + floating_ip
         )
         self.assertEqual("", raw_output)
@@ -416,7 +416,7 @@ class ServerTests(common.ComputeTestCase):
         # racy we shouldn't have to wait too long, a minute seems reasonable
         wait_time = 0
         while wait_time < 60:
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 'server show ' + name,
                 parse_output=True,
             )
@@ -434,7 +434,7 @@ class ServerTests(common.ComputeTestCase):
         )
 
         # detach ip
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'server remove floating ip ' + name + ' ' + floating_ip
         )
         self.assertEqual("", raw_output)
@@ -444,7 +444,7 @@ class ServerTests(common.ComputeTestCase):
         # racy we shouldn't have to wait too long, a minute seems reasonable
         wait_time = 0
         while wait_time < 60:
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 'server show ' + name,
                 parse_output=True,
             )
@@ -456,7 +456,7 @@ class ServerTests(common.ComputeTestCase):
             else:
                 break
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server show ' + name,
             parse_output=True,
         )
@@ -471,7 +471,7 @@ class ServerTests(common.ComputeTestCase):
         name = cmd_output['name']
 
         # reboot
-        raw_output = self.openstack('server reboot ' + name)
+        raw_output = self.fibostack('server reboot ' + name)
         self.assertEqual("", raw_output)
         self.wait_for_status(name, "ACTIVE")
 
@@ -481,7 +481,7 @@ class ServerTests(common.ComputeTestCase):
         volume_wait_for = volume_common.BaseVolumeTests.wait_for_status
 
         # get image size
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'image show ' + self.image_name,
             parse_output=True,
         )
@@ -494,7 +494,7 @@ class ServerTests(common.ComputeTestCase):
 
         # create volume from image
         volume_name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create '
             + '--image '
             + self.image_name
@@ -506,7 +506,7 @@ class ServerTests(common.ComputeTestCase):
             parse_output=True,
         )
         self.assertIsNotNone(cmd_output["id"])
-        self.addCleanup(self.openstack, 'volume delete ' + volume_name)
+        self.addCleanup(self.fibostack, 'volume delete ' + volume_name)
         self.assertEqual(
             volume_name,
             cmd_output['name'],
@@ -515,7 +515,7 @@ class ServerTests(common.ComputeTestCase):
 
         # create empty volume
         empty_volume_name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create '
             + '--size '
             + str(image_size)
@@ -524,7 +524,7 @@ class ServerTests(common.ComputeTestCase):
             parse_output=True,
         )
         self.assertIsNotNone(cmd_output["id"])
-        self.addCleanup(self.openstack, 'volume delete ' + empty_volume_name)
+        self.addCleanup(self.fibostack, 'volume delete ' + empty_volume_name)
         self.assertEqual(
             empty_volume_name,
             cmd_output['name'],
@@ -533,7 +533,7 @@ class ServerTests(common.ComputeTestCase):
 
         # create server
         server_name = uuid.uuid4().hex
-        server = self.openstack(
+        server = self.fibostack(
             'server create '
             + '--flavor '
             + self.flavor_name
@@ -551,7 +551,7 @@ class ServerTests(common.ComputeTestCase):
             parse_output=True,
         )
         self.assertIsNotNone(server["id"])
-        self.addCleanup(self.openstack, 'server delete --wait ' + server_name)
+        self.addCleanup(self.fibostack, 'server delete --wait ' + server_name)
         self.assertEqual(
             server_name,
             server['name'],
@@ -563,14 +563,14 @@ class ServerTests(common.ComputeTestCase):
             server['image'],
         )
         # check server list too
-        servers = self.openstack(
+        servers = self.fibostack(
             'server list',
             parse_output=True,
         )
         self.assertEqual(v2_server.IMAGE_STRING_FOR_BFV, servers[0]['Image'])
 
         # check volumes
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume show ' + volume_name,
             parse_output=True,
         )
@@ -592,7 +592,7 @@ class ServerTests(common.ComputeTestCase):
         #                --block-device-mapping was ignored if --volume
         #                present on the command line.  Now we should see the
         #                attachment.
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume show ' + empty_volume_name,
             parse_output=True,
         )
@@ -617,13 +617,13 @@ class ServerTests(common.ComputeTestCase):
 
         # create source empty volume
         volume_name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create ' + '--size 1 ' + volume_name,
             parse_output=True,
         )
         volume_id = cmd_output["id"]
         self.assertIsNotNone(volume_id)
-        self.addCleanup(self.openstack, 'volume delete ' + volume_name)
+        self.addCleanup(self.fibostack, 'volume delete ' + volume_name)
         self.assertEqual(volume_name, cmd_output['name'])
         volume_wait_for("volume", volume_name, "available")
 
@@ -638,7 +638,7 @@ class ServerTests(common.ComputeTestCase):
 
         # create server
         server_name = uuid.uuid4().hex
-        server = self.openstack(
+        server = self.fibostack(
             'server create '
             + '--flavor '
             + self.flavor_name
@@ -655,7 +655,7 @@ class ServerTests(common.ComputeTestCase):
             parse_output=True,
         )
         self.assertIsNotNone(server["id"])
-        self.addCleanup(self.openstack, 'server delete --wait ' + server_name)
+        self.addCleanup(self.fibostack, 'server delete --wait ' + server_name)
         self.assertEqual(
             server_name,
             server['name'],
@@ -663,7 +663,7 @@ class ServerTests(common.ComputeTestCase):
 
         # check server volumes_attached, format is
         # {"volumes_attached": "id='2518bc76-bf0b-476e-ad6b-571973745bb5'",}
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server show ' + server_name,
             parse_output=True,
         )
@@ -671,7 +671,7 @@ class ServerTests(common.ComputeTestCase):
         self.assertIsNotNone(volumes_attached)
 
         # check volumes
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume show ' + volume_name,
             parse_output=True,
         )
@@ -707,18 +707,18 @@ class ServerTests(common.ComputeTestCase):
 
         # create source empty volume
         empty_volume_name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create ' + '--size 1 ' + empty_volume_name,
             parse_output=True,
         )
         self.assertIsNotNone(cmd_output["id"])
-        self.addCleanup(self.openstack, 'volume delete ' + empty_volume_name)
+        self.addCleanup(self.fibostack, 'volume delete ' + empty_volume_name)
         self.assertEqual(empty_volume_name, cmd_output['name'])
         volume_wait_for("volume", empty_volume_name, "available")
 
         # create snapshot of source empty volume
         empty_snapshot_name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume snapshot create '
             + '--volume '
             + empty_volume_name
@@ -735,7 +735,7 @@ class ServerTests(common.ComputeTestCase):
             volume_wait_for_delete, 'volume snapshot', empty_snapshot_name
         )
         self.addCleanup(
-            self.openstack, 'volume snapshot delete ' + empty_snapshot_name
+            self.fibostack, 'volume snapshot delete ' + empty_snapshot_name
         )
         self.assertEqual(
             empty_snapshot_name,
@@ -758,7 +758,7 @@ class ServerTests(common.ComputeTestCase):
 
         # create server with bdm snapshot
         server_name = uuid.uuid4().hex
-        server = self.openstack(
+        server = self.fibostack(
             'server create '
             + '--flavor '
             + self.flavor_name
@@ -783,7 +783,7 @@ class ServerTests(common.ComputeTestCase):
 
         # check server volumes_attached, format is
         # {"volumes_attached": "id='2518bc76-bf0b-476e-ad6b-571973745bb5'",}
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server show ' + server_name,
             parse_output=True,
         )
@@ -792,7 +792,7 @@ class ServerTests(common.ComputeTestCase):
         attached_volume_id = volumes_attached[0]["id"]
 
         # check the volume that attached on server
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume show ' + attached_volume_id,
             parse_output=True,
         )
@@ -812,8 +812,8 @@ class ServerTests(common.ComputeTestCase):
 
         # delete server, then check the attached volume had been deleted,
         # <delete-on-terminate>=true
-        self.openstack('server delete --wait ' + server_name)
-        cmd_output = self.openstack(
+        self.fibostack('server delete --wait ' + server_name)
+        cmd_output = self.fibostack(
             'volume list',
             parse_output=True,
         )
@@ -857,7 +857,7 @@ class ServerTests(common.ComputeTestCase):
             )
         else:
             # get image ID
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 'image show ' + self.image_name,
                 parse_output=True,
             )
@@ -880,7 +880,7 @@ class ServerTests(common.ComputeTestCase):
         # as expected where nova creates a volume from the image and attaches
         # that volume to the server.
         server_name = uuid.uuid4().hex
-        server = self.openstack(
+        server = self.fibostack(
             'server create '
             + '--flavor '
             + self.flavor_name
@@ -905,7 +905,7 @@ class ServerTests(common.ComputeTestCase):
 
         # check server volumes_attached, format is
         # {"volumes_attached": "id='2518bc76-bf0b-476e-ad6b-571973745bb5'",}
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server show ' + server_name,
             parse_output=True,
         )
@@ -914,7 +914,7 @@ class ServerTests(common.ComputeTestCase):
         attached_volume_id = volumes_attached[0]["id"]
 
         # check the volume that attached on server
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume show ' + attached_volume_id,
             parse_output=True,
         )
@@ -941,8 +941,8 @@ class ServerTests(common.ComputeTestCase):
         # u'size': u'12716032'}
 
         # delete server, then check the attached volume has been deleted
-        self.openstack('server delete --wait ' + server_name)
-        cmd_output = self.openstack(
+        self.fibostack('server delete --wait ' + server_name)
+        cmd_output = self.fibostack(
             'volume list',
             parse_output=True,
         )
@@ -972,7 +972,7 @@ class ServerTests(common.ComputeTestCase):
         # using the provided image, attach it as the root disk for the server
         # and not delete the volume when the server is deleted.
         server_name = uuid.uuid4().hex
-        server = self.openstack(
+        server = self.fibostack(
             'server create '
             + '--flavor '
             + self.flavor_name
@@ -996,7 +996,7 @@ class ServerTests(common.ComputeTestCase):
 
         # check server volumes_attached, format is
         # {"volumes_attached": "id='2518bc76-bf0b-476e-ad6b-571973745bb5'",}
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server show ' + server_name,
             parse_output=True,
         )
@@ -1006,14 +1006,14 @@ class ServerTests(common.ComputeTestCase):
         for vol in volumes_attached:
             self.assertIsNotNone(vol['id'])
             # Don't leak the volume when the test exits.
-            self.addCleanup(self.openstack, 'volume delete ' + vol['id'])
+            self.addCleanup(self.fibostack, 'volume delete ' + vol['id'])
 
         # Since the server is volume-backed the GET /servers/{server_id}
         # response will have image='N/A (booted from volume)'.
         self.assertEqual(v2_server.IMAGE_STRING_FOR_BFV, cmd_output['image'])
 
         # check the volume that attached on server
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume show ' + volumes_attached[0]["id"],
             parse_output=True,
         )
@@ -1042,8 +1042,8 @@ class ServerTests(common.ComputeTestCase):
         # u'size': u'12716032'}
 
         # delete server, then check the attached volume was not deleted
-        self.openstack('server delete --wait ' + server_name)
-        cmd_output = self.openstack(
+        self.fibostack('server delete --wait ' + server_name)
+        cmd_output = self.fibostack(
             'volume show ' + attached_volume_id,
             parse_output=True,
         )
@@ -1053,7 +1053,7 @@ class ServerTests(common.ComputeTestCase):
     def test_server_create_with_none_network(self):
         """Test server create with none network option."""
         server_name = uuid.uuid4().hex
-        server = self.openstack(
+        server = self.fibostack(
             # auto/none enable in nova micro version (v2.37+)
             '--os-compute-api-version 2.37 '
             + 'server create '
@@ -1068,10 +1068,10 @@ class ServerTests(common.ComputeTestCase):
             parse_output=True,
         )
         self.assertIsNotNone(server["id"])
-        self.addCleanup(self.openstack, 'server delete --wait ' + server_name)
+        self.addCleanup(self.fibostack, 'server delete --wait ' + server_name)
         self.assertEqual(server_name, server['name'])
         self.wait_for_status(server_name, "ACTIVE")
-        server = self.openstack(
+        server = self.fibostack(
             'server show ' + server_name,
             parse_output=True,
         )
@@ -1089,20 +1089,20 @@ class ServerTests(common.ComputeTestCase):
             self.skipTest("No Network service present")
         # Create two security group, use name and ID to create server
         sg_name1 = uuid.uuid4().hex
-        security_group1 = self.openstack(
+        security_group1 = self.fibostack(
             'security group create ' + sg_name1,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'security group delete ' + sg_name1)
+        self.addCleanup(self.fibostack, 'security group delete ' + sg_name1)
         sg_name2 = uuid.uuid4().hex
-        security_group2 = self.openstack(
+        security_group2 = self.fibostack(
             'security group create ' + sg_name2,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'security group delete ' + sg_name2)
+        self.addCleanup(self.fibostack, 'security group delete ' + sg_name2)
 
         server_name = uuid.uuid4().hex
-        server = self.openstack(
+        server = self.fibostack(
             'server create '
             + '--flavor '
             + self.flavor_name
@@ -1123,7 +1123,7 @@ class ServerTests(common.ComputeTestCase):
             + server_name,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'server delete --wait ' + server_name)
+        self.addCleanup(self.fibostack, 'server delete --wait ' + server_name)
 
         self.assertIsNotNone(server['id'])
         self.assertEqual(server_name, server['name'])
@@ -1133,7 +1133,7 @@ class ServerTests(common.ComputeTestCase):
         self.assertIn(str(security_group1['id']), sec_grp)
         self.assertIn(str(security_group2['id']), sec_grp)
         self.wait_for_status(server_name, 'ACTIVE')
-        server = self.openstack(
+        server = self.fibostack(
             'server show ' + server_name,
             parse_output=True,
         )
@@ -1148,7 +1148,7 @@ class ServerTests(common.ComputeTestCase):
         """Test server create with empty network option in nova 2.latest."""
         server_name = uuid.uuid4().hex
         try:
-            self.openstack(
+            self.fibostack(
                 # auto/none enable in nova micro version (v2.37+)
                 '--os-compute-api-version 2.37 '
                 + 'server create '
@@ -1171,7 +1171,7 @@ class ServerTests(common.ComputeTestCase):
 
     def test_server_add_remove_network(self):
         name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server create '
             + '--network private '
             + '--flavor '
@@ -1187,14 +1187,14 @@ class ServerTests(common.ComputeTestCase):
 
         self.assertIsNotNone(cmd_output['id'])
         self.assertEqual(name, cmd_output['name'])
-        self.addCleanup(self.openstack, 'server delete --wait ' + name)
+        self.addCleanup(self.fibostack, 'server delete --wait ' + name)
 
         # add network and check 'public' is in server show
-        self.openstack('server add network ' + name + ' public')
+        self.fibostack('server add network ' + name + ' public')
 
         wait_time = 0
         while wait_time < 60:
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 'server show ' + name,
                 parse_output=True,
             )
@@ -1209,11 +1209,11 @@ class ServerTests(common.ComputeTestCase):
         self.assertIn('public', addresses)
 
         # remove network and check 'public' is not in server show
-        self.openstack('server remove network ' + name + ' public')
+        self.fibostack('server remove network ' + name + ' public')
 
         wait_time = 0
         while wait_time < 60:
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 'server show ' + name,
                 parse_output=True,
             )
@@ -1230,7 +1230,7 @@ class ServerTests(common.ComputeTestCase):
 
     def test_server_add_remove_port(self):
         name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server create '
             + '--network private '
             + '--flavor '
@@ -1246,31 +1246,31 @@ class ServerTests(common.ComputeTestCase):
 
         self.assertIsNotNone(cmd_output['id'])
         self.assertEqual(name, cmd_output['name'])
-        self.addCleanup(self.openstack, 'server delete --wait ' + name)
+        self.addCleanup(self.fibostack, 'server delete --wait ' + name)
 
         # create port, record one of its ip address
         port_name = uuid.uuid4().hex
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'port list',
             parse_output=True,
         )
         self.assertNotIn(port_name, cmd_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'port create ' + '--network private ' + port_name,
             parse_output=True,
         )
         self.assertIsNotNone(cmd_output['id'])
         ip_address = cmd_output['fixed_ips'][0]['ip_address']
-        self.addCleanup(self.openstack, 'port delete ' + port_name)
+        self.addCleanup(self.fibostack, 'port delete ' + port_name)
 
         # add port to server, assert the ip address of the port appears
-        self.openstack('server add port ' + name + ' ' + port_name)
+        self.fibostack('server add port ' + name + ' ' + port_name)
 
         wait_time = 0
         while wait_time < 60:
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 'server show ' + name,
                 parse_output=True,
             )
@@ -1285,11 +1285,11 @@ class ServerTests(common.ComputeTestCase):
         self.assertIn(ip_address, addresses)
 
         # remove port, assert the ip address of the port doesn't appear
-        self.openstack('server remove port ' + name + ' ' + port_name)
+        self.fibostack('server remove port ' + name + ' ' + port_name)
 
         wait_time = 0
         while wait_time < 60:
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 'server show ' + name,
                 parse_output=True,
             )
@@ -1305,7 +1305,7 @@ class ServerTests(common.ComputeTestCase):
 
     def test_server_add_fixed_ip(self):
         name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server create '
             + '--network private '
             + '--flavor '
@@ -1321,29 +1321,29 @@ class ServerTests(common.ComputeTestCase):
 
         self.assertIsNotNone(cmd_output['id'])
         self.assertEqual(name, cmd_output['name'])
-        self.addCleanup(self.openstack, 'server delete --wait ' + name)
+        self.addCleanup(self.fibostack, 'server delete --wait ' + name)
 
         # create port, record its ip address to use in later call,
         # then delete - this is to figure out what should be a free ip
         # in the subnet
         port_name = uuid.uuid4().hex
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'port list',
             parse_output=True,
         )
         self.assertNotIn(port_name, cmd_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'port create ' + '--network private ' + port_name,
             parse_output=True,
         )
         self.assertIsNotNone(cmd_output['id'])
         ip_address = cmd_output['fixed_ips'][0]['ip_address']
-        self.openstack('port delete ' + port_name)
+        self.fibostack('port delete ' + port_name)
 
         # add fixed ip to server, assert the ip address appears
-        self.openstack(
+        self.fibostack(
             'server add fixed ip --fixed-ip-address '
             + ip_address
             + ' '
@@ -1353,7 +1353,7 @@ class ServerTests(common.ComputeTestCase):
 
         wait_time = 0
         while wait_time < 60:
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 'server show ' + name,
                 parse_output=True,
             )
@@ -1371,7 +1371,7 @@ class ServerTests(common.ComputeTestCase):
         volume_wait_for = volume_common.BaseVolumeTests.wait_for_status
 
         server_name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server create '
             + '--network private '
             + '--flavor '
@@ -1387,11 +1387,11 @@ class ServerTests(common.ComputeTestCase):
 
         self.assertIsNotNone(cmd_output['id'])
         self.assertEqual(server_name, cmd_output['name'])
-        self.addCleanup(self.openstack, 'server delete --wait ' + server_name)
+        self.addCleanup(self.fibostack, 'server delete --wait ' + server_name)
         server_id = cmd_output['id']
 
         volume_name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create ' + '--size 1 ' + volume_name,
             parse_output=True,
         )
@@ -1399,10 +1399,10 @@ class ServerTests(common.ComputeTestCase):
         self.assertIsNotNone(cmd_output['id'])
         self.assertEqual(volume_name, cmd_output['name'])
         volume_wait_for('volume', volume_name, 'available')
-        self.addCleanup(self.openstack, 'volume delete ' + volume_name)
+        self.addCleanup(self.fibostack, 'volume delete ' + volume_name)
         volume_id = cmd_output['id']
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server add volume '
             + server_name
             + ' '
@@ -1415,7 +1415,7 @@ class ServerTests(common.ComputeTestCase):
         self.assertEqual(server_id, cmd_output['Server ID'])
         self.assertEqual(volume_id, cmd_output['Volume ID'])
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server volume list ' + server_name,
             parse_output=True,
         )
@@ -1425,32 +1425,32 @@ class ServerTests(common.ComputeTestCase):
 
         volume_wait_for('volume', volume_name, 'in-use')
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server event list ' + server_name,
             parse_output=True,
         )
         self.assertEqual(2, len(cmd_output))
         self.assertIn('attach_volume', {x['Action'] for x in cmd_output})
 
-        self.openstack(
+        self.fibostack(
             'server remove volume ' + server_name + ' ' + volume_name
         )
         volume_wait_for('volume', volume_name, 'available')
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server event list ' + server_name,
             parse_output=True,
         )
         self.assertEqual(3, len(cmd_output))
         self.assertIn('detach_volume', {x['Action'] for x in cmd_output})
 
-        raw_output = self.openstack('server volume list ' + server_name)
+        raw_output = self.fibostack('server volume list ' + server_name)
         self.assertEqual('\n', raw_output)
 
     def test_server_stop_start(self):
         """Test server stop, start"""
         server_name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server create '
             + '--network private '
             + '--flavor '
@@ -1466,10 +1466,10 @@ class ServerTests(common.ComputeTestCase):
 
         self.assertIsNotNone(cmd_output['id'])
         self.assertEqual(server_name, cmd_output['name'])
-        self.addCleanup(self.openstack, 'server delete --wait ' + server_name)
+        self.addCleanup(self.fibostack, 'server delete --wait ' + server_name)
         server_id = cmd_output['id']
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server stop ' + server_name,
         )
         self.assertEqual("", cmd_output)
@@ -1478,7 +1478,7 @@ class ServerTests(common.ComputeTestCase):
         # to SHUTOFF then it didn't work.
         self.wait_for_status(server_id, "SHUTOFF")
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server start ' + server_name,
         )
         self.assertEqual("", cmd_output)
@@ -1490,5 +1490,5 @@ class ServerTests(common.ComputeTestCase):
     def test_server_migration_list(self):
         # Verify that the command does not raise an exception when we list
         # migrations, including when we specify a query.
-        self.openstack('server migration list')
-        self.openstack('server migration list --limit 1')
+        self.fibostack('server migration list')
+        self.fibostack('server migration list --limit 1')

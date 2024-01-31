@@ -13,10 +13,10 @@
 
 """Hypervisor Stats action implementations"""
 
-from osc_lib.command import command
-from osc_lib import utils
+from fsc_lib.command import command
+from fsc_lib import utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 def _get_hypervisor_stat_columns(item):
@@ -31,7 +31,7 @@ def _get_hypervisor_stat_columns(item):
         'memory_used': 'memory_mb_used',
     }
     hidden_columns = ['id', 'links', 'location', 'name']
-    return utils.get_osc_show_columns_for_sdk_resource(
+    return utils.get_fsc_show_columns_for_sdk_resource(
         item, column_map, hidden_columns
     )
 
@@ -44,7 +44,7 @@ class ShowHypervisorStats(command.ShowOne):
         self.log.warning(_("This command is deprecated."))
         compute_client = self.app.client_manager.sdk_connection.compute
         # We do API request directly cause this deprecated method is not and
-        # will not be supported by OpenStackSDK.
+        # will not be supported by openstacksdk.
         response = compute_client.get(
             '/os-hypervisors/statistics', microversion='2.1'
         )

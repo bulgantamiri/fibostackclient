@@ -3,4 +3,4 @@ features:
   - |
     Add ``--security-group`` and ``--no-security-group`` options to
     ``port create``, ``port set`` and ``port unset`` commands.
-    [Bug `1612136 <https://bugs.launchpad.net/python-openstackclient/+bug/1612136>`_]
+    [Bug `1612136 <https://bugs.launchpad.net/python-fibostackclient/+bug/1612136>`_]

@@ -15,8 +15,8 @@
 
 from keystoneauth1 import session
 
-from openstackclient.api import object_store_v1 as object_store
-from openstackclient.tests.unit import utils
+from fibostackclient.api import object_store_v1 as object_store
+from fibostackclient.tests.unit import utils
 
 
 ACCOUNT_ID = 'tqbfjotld'

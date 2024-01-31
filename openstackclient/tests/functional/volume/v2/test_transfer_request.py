@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.volume.v2 import common
+from fibostackclient.tests.functional.volume.v2 import common
 
 
 class TransferRequestTests(common.BaseVolumeTests):
@@ -25,13 +25,13 @@ class TransferRequestTests(common.BaseVolumeTests):
         xfer_name = uuid.uuid4().hex
 
         # create a volume
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create ' + '--size 1 ' + volume_name,
             parse_output=True,
         )
         self.assertEqual(volume_name, cmd_output['name'])
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             '--os-volume-api-version '
             + self.API_VERSION
             + ' '
@@ -42,7 +42,7 @@ class TransferRequestTests(common.BaseVolumeTests):
 
         # create volume transfer request for the volume
         # and get the auth_key of the new transfer request
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             '--os-volume-api-version '
             + self.API_VERSION
             + ' '
@@ -60,7 +60,7 @@ class TransferRequestTests(common.BaseVolumeTests):
         self.wait_for_status("volume", volume_name, "awaiting-transfer")
 
         # accept the volume transfer request
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             '--os-volume-api-version '
             + self.API_VERSION
             + ' '
@@ -79,13 +79,13 @@ class TransferRequestTests(common.BaseVolumeTests):
         xfer_name = uuid.uuid4().hex
 
         # create a volume
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create ' + '--size 1 ' + volume_name,
             parse_output=True,
         )
         self.assertEqual(volume_name, cmd_output['name'])
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             '--os-volume-api-version '
             + self.API_VERSION
             + ' '
@@ -94,7 +94,7 @@ class TransferRequestTests(common.BaseVolumeTests):
         )
         self.wait_for_status("volume", volume_name, "available")
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             '--os-volume-api-version '
             + self.API_VERSION
             + ' '
@@ -111,7 +111,7 @@ class TransferRequestTests(common.BaseVolumeTests):
         self.assertTrue(auth_key)
         self.wait_for_status("volume", volume_name, "awaiting-transfer")
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             '--os-volume-api-version '
             + self.API_VERSION
             + ' '
@@ -120,7 +120,7 @@ class TransferRequestTests(common.BaseVolumeTests):
         )
         self.assertIn(xfer_name, [req['Name'] for req in cmd_output])
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             '--os-volume-api-version '
             + self.API_VERSION
             + ' '
@@ -135,7 +135,7 @@ class TransferRequestTests(common.BaseVolumeTests):
         #                not have a mechanism to wait for the volume status
         #                to become 'available' before attempting to  delete
         #                the volume.
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             '--os-volume-api-version '
             + self.API_VERSION
             + ' '

@@ -12,14 +12,14 @@
 
 from tempest.lib.common.utils import data_utils
 
-from openstackclient.tests.functional.identity.v2 import common
+from fibostackclient.tests.functional.identity.v2 import common
 
 
 class ProjectTests(common.IdentityTests):
     def test_project_create(self):
         project_name = data_utils.rand_name('TestProject')
         description = data_utils.rand_name('description')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'project create '
             '--description %(description)s '
             '--enable '
@@ -27,7 +27,7 @@ class ProjectTests(common.IdentityTests):
             '--property k2=v2 '
             '%(name)s' % {'description': description, 'name': project_name}
         )
-        self.addCleanup(self.openstack, 'project delete %s' % project_name)
+        self.addCleanup(self.fibostack, 'project delete %s' % project_name)
         items = self.parse_show(raw_output)
         show_fields = list(self.PROJECT_FIELDS)
         show_fields.extend(['k1', 'k2'])
@@ -38,18 +38,18 @@ class ProjectTests(common.IdentityTests):
 
     def test_project_delete(self):
         project_name = self._create_dummy_project(add_clean_up=False)
-        raw_output = self.openstack('project delete %s' % project_name)
+        raw_output = self.fibostack('project delete %s' % project_name)
         self.assertEqual(0, len(raw_output))
 
     def test_project_list(self):
-        raw_output = self.openstack('project list')
+        raw_output = self.fibostack('project list')
         items = self.parse_listing(raw_output)
         self.assert_table_structure(items, common.BASIC_LIST_HEADERS)
 
     def test_project_set(self):
         project_name = self._create_dummy_project()
         new_project_name = data_utils.rand_name('NewTestProject')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'project set '
             '--name %(new_name)s '
             '--disable '
@@ -58,7 +58,7 @@ class ProjectTests(common.IdentityTests):
         )
         self.assertEqual(0, len(raw_output))
         # check project details
-        raw_output = self.openstack('project show %s' % new_project_name)
+        raw_output = self.fibostack('project show %s' % new_project_name)
         items = self.parse_show(raw_output)
         fields = list(self.PROJECT_FIELDS)
         fields.extend(['properties'])
@@ -70,7 +70,7 @@ class ProjectTests(common.IdentityTests):
 
     def test_project_show(self):
         project_name = self._create_dummy_project()
-        raw_output = self.openstack('project show %s' % project_name)
+        raw_output = self.fibostack('project show %s' % project_name)
         items = self.parse_show(raw_output)
         fields = list(self.PROJECT_FIELDS)
         fields.extend(['properties'])

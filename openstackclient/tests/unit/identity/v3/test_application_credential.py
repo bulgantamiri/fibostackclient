@@ -17,12 +17,12 @@ import copy
 import json
 from unittest import mock
 
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.identity.v3 import application_credential
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.identity.v3 import application_credential
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
 
 
 class TestApplicationCredential(identity_fakes.TestIdentityv3):
@@ -230,8 +230,8 @@ class TestApplicationCredentialCreate(TestApplicationCredential):
         )
         self.assertEqual(datalist, data)
 
-    @mock.patch('openstackclient.identity.v3.application_credential.json.load')
-    @mock.patch('openstackclient.identity.v3.application_credential.open')
+    @mock.patch('fibostackclient.identity.v3.application_credential.json.load')
+    @mock.patch('fibostackclient.identity.v3.application_credential.open')
     def test_application_credential_create_with_access_rules_file(
         self, _, mock_json_load
     ):

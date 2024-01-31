@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class SecurityGroupTests(common.NetworkTests):
@@ -23,22 +23,22 @@ class SecurityGroupTests(common.NetworkTests):
 
         self.NAME = uuid.uuid4().hex
         self.OTHER_NAME = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'security group create ' + self.NAME,
             parse_output=True,
         )
         self.addCleanup(
-            self.openstack, 'security group delete ' + cmd_output['id']
+            self.fibostack, 'security group delete ' + cmd_output['id']
         )
         self.assertEqual(self.NAME, cmd_output['name'])
 
     def test_security_group_list(self):
-        cmd_output = self.openstack('security group list', parse_output=True)
+        cmd_output = self.fibostack('security group list', parse_output=True)
         self.assertIn(self.NAME, [sg['Name'] for sg in cmd_output])
 
     def test_security_group_set(self):
         other_name = uuid.uuid4().hex
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'security group set --description NSA --stateless --name '
             + other_name
             + ' '
@@ -46,7 +46,7 @@ class SecurityGroupTests(common.NetworkTests):
         )
         self.assertEqual('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'security group show ' + other_name,
             parse_output=True,
         )
@@ -54,7 +54,7 @@ class SecurityGroupTests(common.NetworkTests):
         self.assertFalse(cmd_output['stateful'])
 
     def test_security_group_show(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'security group show ' + self.NAME,
             parse_output=True,
         )

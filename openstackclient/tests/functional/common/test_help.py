@@ -14,11 +14,11 @@ import os
 
 import fixtures
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 
 class HelpTests(base.TestCase):
-    """Functional tests for openstackclient help output."""
+    """Functional tests for fibostackclient help output."""
 
     SERVER_COMMANDS = [
         ('server add security group', 'Add security group to server'),
@@ -58,7 +58,7 @@ class HelpTests(base.TestCase):
 
     def test_server_commands_main_help(self):
         """Check server commands in main help message."""
-        raw_output = self.openstack('help')
+        raw_output = self.fibostack('help')
         for command, description in self.SERVER_COMMANDS:
             msg = 'Command: %s not found in help output:\n%s' % (
                 command,
@@ -73,15 +73,15 @@ class HelpTests(base.TestCase):
 
     def test_server_only_help(self):
         """Check list of server-related commands only."""
-        raw_output = self.openstack('help server')
+        raw_output = self.fibostack('help server')
         for command in [row[0] for row in self.SERVER_COMMANDS]:
             self.assertIn(command, raw_output)
 
     def test_networking_commands_help(self):
         """Check networking related commands in help message."""
-        raw_output = self.openstack('help network list')
+        raw_output = self.fibostack('help network list')
         self.assertIn('List networks', raw_output)
-        raw_output = self.openstack('network create --help')
+        raw_output = self.fibostack('network create --help')
         self.assertIn('Create new network', raw_output)
 
     def test_commands_help_no_auth(self):
@@ -92,37 +92,37 @@ class HelpTests(base.TestCase):
             if key.startswith('OS_'):
                 self.useFixture(fixtures.EnvironmentVariable(key, None))
 
-        raw_output = self.openstack('help')
-        self.assertIn('usage: openstack', raw_output)
-        raw_output = self.openstack('--help')
-        self.assertIn('usage: openstack', raw_output)
+        raw_output = self.fibostack('help')
+        self.assertIn('usage: fibostack', raw_output)
+        raw_output = self.fibostack('--help')
+        self.assertIn('usage: fibostack', raw_output)
 
-        raw_output = self.openstack('help network list')
+        raw_output = self.fibostack('help network list')
         self.assertIn('List networks', raw_output)
-        raw_output = self.openstack('network list --help')
+        raw_output = self.fibostack('network list --help')
         self.assertIn('List networks', raw_output)
 
-        raw_output = self.openstack('help volume list')
+        raw_output = self.fibostack('help volume list')
         self.assertIn('List volumes', raw_output)
-        raw_output = self.openstack('volume list --help')
+        raw_output = self.fibostack('volume list --help')
         self.assertIn('List volumes', raw_output)
 
-        raw_output = self.openstack('help server list')
+        raw_output = self.fibostack('help server list')
         self.assertIn('List servers', raw_output)
-        raw_output = self.openstack('server list --help')
+        raw_output = self.fibostack('server list --help')
         self.assertIn('List servers', raw_output)
 
-        raw_output = self.openstack('help user list')
+        raw_output = self.fibostack('help user list')
         self.assertIn('List users', raw_output)
-        raw_output = self.openstack('user list --help')
+        raw_output = self.fibostack('user list --help')
         self.assertIn('List users', raw_output)
 
-        raw_output = self.openstack('help image list')
+        raw_output = self.fibostack('help image list')
         self.assertIn('List available images', raw_output)
-        raw_output = self.openstack('image list --help')
+        raw_output = self.fibostack('image list --help')
         self.assertIn('List available images', raw_output)
 
-        raw_output = self.openstack('help container list')
+        raw_output = self.fibostack('help container list')
         self.assertIn('List containers', raw_output)
-        raw_output = self.openstack('container list --help')
+        raw_output = self.fibostack('container list --help')
         self.assertIn('List containers', raw_output)

@@ -14,9 +14,9 @@
 """Configuration action implementations"""
 
 from keystoneauth1.loading import base
-from osc_lib.command import command
+from fsc_lib.command import command
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 REDACTED = "<redacted>"
 

@@ -16,12 +16,12 @@
 import logging
 
 from cliff import columns as cliff_columns
-from osc_lib.cli import format_columns
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.cli import format_columns
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 LOG = logging.getLogger(__name__)
 
@@ -51,7 +51,7 @@ def _get_network_columns(item):
         'is_alive': 'alive',
     }
     hidden_columns = ['location', 'name', 'tenant_id']
-    return utils.get_osc_show_columns_for_sdk_resource(
+    return utils.get_fsc_show_columns_for_sdk_resource(
         item, column_map, hidden_columns
     )
 
@@ -163,7 +163,7 @@ class DeleteNetworkAgent(command.Command):
 
 
 # TODO(huanxuan): Use the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class ListNetworkAgent(command.Lister):
     _description = _("List network agents")
 
@@ -359,7 +359,7 @@ class RemoveRouterFromAgent(command.Command):
 
 
 # TODO(huanxuan): Use the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class SetNetworkAgent(command.Command):
     _description = _("Set network agent properties")
 

@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class NetworkSegmentTests(common.NetworkTests):
@@ -26,7 +26,7 @@ class NetworkSegmentTests(common.NetworkTests):
             cls.PHYSICAL_NETWORK_NAME = uuid.uuid4().hex
 
             # Create a network for the all subnet tests
-            cmd_output = cls.openstack(
+            cmd_output = cls.fibostack(
                 'network create ' + cls.NETWORK_NAME,
                 parse_output=True,
             )
@@ -37,7 +37,7 @@ class NetworkSegmentTests(common.NetworkTests):
     def tearDownClass(cls):
         try:
             if cls.haz_network:
-                raw_output = cls.openstack(
+                raw_output = cls.fibostack(
                     'network delete ' + cls.NETWORK_NAME
                 )
                 cls.assertOutput('', raw_output)
@@ -52,7 +52,7 @@ class NetworkSegmentTests(common.NetworkTests):
 
     def test_network_segment_create_delete(self):
         name = uuid.uuid4().hex
-        json_output = self.openstack(
+        json_output = self.fibostack(
             ' network segment create '
             + '--network '
             + self.NETWORK_ID
@@ -67,14 +67,14 @@ class NetworkSegmentTests(common.NetworkTests):
             json_output["name"],
         )
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'network segment delete ' + name,
         )
         self.assertOutput('', raw_output)
 
     def test_network_segment_list(self):
         name = uuid.uuid4().hex
-        json_output = self.openstack(
+        json_output = self.fibostack(
             ' network segment create '
             + '--network '
             + self.NETWORK_ID
@@ -87,14 +87,14 @@ class NetworkSegmentTests(common.NetworkTests):
         network_segment_id = json_output.get('id')
         network_segment_name = json_output.get('name')
         self.addCleanup(
-            self.openstack, 'network segment delete ' + network_segment_id
+            self.fibostack, 'network segment delete ' + network_segment_id
         )
         self.assertEqual(
             name,
             json_output["name"],
         )
 
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network segment list',
             parse_output=True,
         )
@@ -104,7 +104,7 @@ class NetworkSegmentTests(common.NetworkTests):
 
     def test_network_segment_set_show(self):
         name = uuid.uuid4().hex
-        json_output = self.openstack(
+        json_output = self.fibostack(
             ' network segment create '
             + '--network '
             + self.NETWORK_ID
@@ -114,7 +114,7 @@ class NetworkSegmentTests(common.NetworkTests):
             + name,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'network segment delete ' + name)
+        self.addCleanup(self.fibostack, 'network segment delete ' + name)
 
         if self.is_extension_enabled('standard-attr-segment'):
             self.assertEqual(
@@ -127,7 +127,7 @@ class NetworkSegmentTests(common.NetworkTests):
             )
 
         new_description = 'new_description'
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network segment set '
             + '--description '
             + new_description
@@ -136,7 +136,7 @@ class NetworkSegmentTests(common.NetworkTests):
         )
         self.assertOutput('', cmd_output)
 
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network segment show ' + name,
             parse_output=True,
         )

@@ -1,4 +1,4 @@
 zun
 ---
 
-.. autoprogram-cliff:: openstack.container.v1
+.. autoprogram-cliff:: fibostack.container.v1

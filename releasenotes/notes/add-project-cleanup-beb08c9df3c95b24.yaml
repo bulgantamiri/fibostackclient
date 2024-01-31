@@ -1,6 +1,6 @@
 ---
 features:
   - |
-    Add support for project cleanup based on the OpenStackSDK with
+    Add support for project cleanup based on the openstacksdk with
     create/update time filters. In the long run this will replace
-    `openstack project purge` command.
+    `fibostack project purge` command.

@@ -12,7 +12,7 @@
 
 import random
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class SecurityGroupRuleTests(common.NetworkTests):
@@ -28,7 +28,7 @@ class SecurityGroupRuleTests(common.NetworkTests):
         self.protocol = random.choice(["tcp", "udp"])
         self.direction = random.choice(["ingress", "egress"])
         # Create the default security group rule.
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'default security group rule create '
             '--protocol %(protocol)s '
             '--dst-port %(port)s:%(port)s '
@@ -41,13 +41,13 @@ class SecurityGroupRuleTests(common.NetworkTests):
             parse_output=True,
         )
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'default security group rule delete ' + cmd_output['id'],
         )
         self.DEFAULT_SG_RULE_ID = cmd_output['id']
 
     def test_security_group_rule_list(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'default security group rule list ',
             parse_output=True,
         )
@@ -56,7 +56,7 @@ class SecurityGroupRuleTests(common.NetworkTests):
         )
 
     def test_security_group_rule_show(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'default security group rule show ' + self.DEFAULT_SG_RULE_ID,
             parse_output=True,
         )

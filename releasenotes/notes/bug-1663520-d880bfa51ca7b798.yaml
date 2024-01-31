@@ -5,4 +5,4 @@ fixes:
     ``auto`` and ``none`` options was added into --nic argument of server
     create command, but that don't work and raise internal error when execute
     command. The patch fix that issue.
-    [Bug `1663520 <https://bugs.launchpad.net/python-openstackclient/+bug/1663520>`_]
+    [Bug `1663520 <https://bugs.launchpad.net/python-fibostackclient/+bug/1663520>`_]

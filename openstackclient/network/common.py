@@ -15,13 +15,13 @@ import abc
 import contextlib
 import logging
 
-import openstack.exceptions
-from osc_lib.cli import parseractions
-from osc_lib.command import command
-from osc_lib import exceptions
+import fibostack.exceptions
+from fsc_lib.cli import parseractions
+from fsc_lib.command import command
+from fsc_lib import exceptions
 
-from openstackclient.i18n import _
-from openstackclient.network import utils
+from fibostackclient.i18n import _
+from fibostackclient.network import utils
 
 
 LOG = logging.getLogger(__name__)
@@ -48,7 +48,7 @@ def check_missing_extension_if_error(client_manager, attrs):
     # will be thrown from within client.find_extension
     try:
         yield
-    except openstack.exceptions.HttpException:
+    except fibostack.exceptions.HttpException:
         for opt, ext in _required_opt_extensions_map.items():
             if opt in attrs:
                 client_manager.find_extension(ext, ignore_missing=False)
@@ -269,7 +269,7 @@ class NetworkAndComputeShowOne(
                 return self.take_action_compute(
                     self.app.client_manager.compute, parsed_args
                 )
-        except openstack.exceptions.HttpException as exc:
+        except fibostack.exceptions.HttpException as exc:
             msg = _("Error while executing command: %s") % exc.message
             if exc.details:
                 msg += ", " + str(exc.details)

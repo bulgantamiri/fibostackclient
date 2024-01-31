@@ -17,29 +17,29 @@ from random import randint
 from unittest import mock
 import uuid
 
-from openstack.network.v2 import _proxy
-from openstack.network.v2 import address_group as _address_group
-from openstack.network.v2 import address_scope as _address_scope
-from openstack.network.v2 import agent as network_agent
-from openstack.network.v2 import auto_allocated_topology as allocated_topology
-from openstack.network.v2 import availability_zone as _availability_zone
-from openstack.network.v2 import extension as _extension
-from openstack.network.v2 import flavor as _flavor
-from openstack.network.v2 import local_ip as _local_ip
-from openstack.network.v2 import local_ip_association as _local_ip_association
-from openstack.network.v2 import ndp_proxy as _ndp_proxy
-from openstack.network.v2 import network as _network
-from openstack.network.v2 import network_ip_availability as _ip_availability
-from openstack.network.v2 import network_segment_range as _segment_range
-from openstack.network.v2 import port as _port
-from openstack.network.v2 import rbac_policy as network_rbac
-from openstack.network.v2 import segment as _segment
-from openstack.network.v2 import service_profile as _flavor_profile
-from openstack.network.v2 import trunk as _trunk
+from fibostack.network.v2 import _proxy
+from fibostack.network.v2 import address_group as _address_group
+from fibostack.network.v2 import address_scope as _address_scope
+from fibostack.network.v2 import agent as network_agent
+from fibostack.network.v2 import auto_allocated_topology as allocated_topology
+from fibostack.network.v2 import availability_zone as _availability_zone
+from fibostack.network.v2 import extension as _extension
+from fibostack.network.v2 import flavor as _flavor
+from fibostack.network.v2 import local_ip as _local_ip
+from fibostack.network.v2 import local_ip_association as _local_ip_association
+from fibostack.network.v2 import ndp_proxy as _ndp_proxy
+from fibostack.network.v2 import network as _network
+from fibostack.network.v2 import network_ip_availability as _ip_availability
+from fibostack.network.v2 import network_segment_range as _segment_range
+from fibostack.network.v2 import port as _port
+from fibostack.network.v2 import rbac_policy as network_rbac
+from fibostack.network.v2 import segment as _segment
+from fibostack.network.v2 import service_profile as _flavor_profile
+from fibostack.network.v2 import trunk as _trunk
 
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes_v3
-from openstackclient.tests.unit import utils
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes_v3
+from fibostackclient.tests.unit import utils
 
 
 QUOTA = {
@@ -177,7 +177,7 @@ class FakeNetworkQosPolicy(object):
             info=copy.deepcopy(qos_policy_attrs), loaded=True
         )
 
-        # Set attributes with special mapping in OpenStack SDK.
+        # Set attributes with special mapping in fibostack SDK.
         qos_policy.is_shared = qos_policy_attrs['shared']
 
         return qos_policy
@@ -420,7 +420,7 @@ class FakeRouter(object):
             info=copy.deepcopy(router_attrs), loaded=True
         )
 
-        # Set attributes with special mapping in OpenStack SDK.
+        # Set attributes with special mapping in fibostack SDK.
         router.is_admin_state_up = router_attrs['admin_state_up']
         router.is_distributed = router_attrs['distributed']
         router.is_ha = router_attrs['ha']
@@ -665,7 +665,7 @@ class FakeSubnet(object):
             info=copy.deepcopy(subnet_attrs), loaded=True
         )
 
-        # Set attributes with special mappings in OpenStack SDK.
+        # Set attributes with special mappings in fibostack SDK.
         subnet.is_dhcp_enabled = subnet_attrs['enable_dhcp']
         subnet.subnet_pool_id = subnet_attrs['subnetpool_id']
 
@@ -912,7 +912,7 @@ class FakeSubnetPool(object):
             info=copy.deepcopy(subnet_pool_attrs), loaded=True
         )
 
-        # Set attributes with special mapping in OpenStack SDK.
+        # Set attributes with special mapping in fibostack SDK.
         subnet_pool.default_prefix_length = subnet_pool_attrs[
             'default_prefixlen'
         ]
@@ -1337,7 +1337,7 @@ def create_one_address_scope(attrs=None):
 
     address_scope = _address_scope.AddressScope(**address_scope_attrs)
 
-    # Set attributes with special mapping in OpenStack SDK.
+    # Set attributes with special mapping in fibostack SDK.
     address_scope.is_shared = address_scope_attrs['shared']
 
     return address_scope

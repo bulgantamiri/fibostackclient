@@ -1,4 +1,4 @@
-#   Copyright 2012-2013 OpenStack Foundation
+#   Copyright 2012-2013 fibostack Foundation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
 #   not use this file except in compliance with the License. You may obtain
@@ -15,9 +15,9 @@
 
 import logging
 
-from osc_lib import utils
+from fsc_lib import utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 LOG = logging.getLogger(__name__)
@@ -26,14 +26,14 @@ DEFAULT_API_VERSION = '2'
 API_VERSION_OPTION = 'os_image_api_version'
 API_NAME = "image"
 API_VERSIONS = {
-    "1": "openstack.connection.Connection",
-    "2": "openstack.connection.Connection",
+    "1": "fibostack.connection.Connection",
+    "2": "fibostack.connection.Connection",
 }
 
 
 def make_client(instance):
     LOG.debug(
-        'Image client initialized using OpenStack SDK: %s',
+        'Image client initialized using fibostack SDK: %s',
         instance.sdk_connection.image,
     )
     return instance.sdk_connection.image

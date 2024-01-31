@@ -18,14 +18,14 @@ import tempfile
 from unittest import mock
 
 from cinderclient import api_versions
-from openstack import exceptions as sdk_exceptions
-from osc_lib.cli import format_columns
-from osc_lib import exceptions
+from fibostack import exceptions as sdk_exceptions
+from fsc_lib.cli import format_columns
+from fsc_lib import exceptions
 
-from openstackclient.image.v2 import image as _image
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
-from openstackclient.tests.unit.image.v2 import fakes as image_fakes
-from openstackclient.tests.unit.volume.v3 import fakes as volume_fakes
+from fibostackclient.image.v2 import image as _image
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.tests.unit.image.v2 import fakes as image_fakes
+from fibostackclient.tests.unit.volume.v3 import fakes as volume_fakes
 
 
 class TestImage(image_fakes.TestImagev2, volume_fakes.TestVolume):
@@ -247,7 +247,7 @@ class TestImageCreate(TestImage):
         self.assertEqual(self.expected_columns, columns)
         self.assertCountEqual(self.expected_data, data)
 
-    @mock.patch('openstackclient.image.v2.image.get_data_from_stdin')
+    @mock.patch('fibostackclient.image.v2.image.get_data_from_stdin')
     def test_image_create__progress_ignore_with_stdin(
         self,
         mock_get_data_from_stdin,
@@ -316,8 +316,8 @@ class TestImageCreate(TestImage):
             use_import=True,
         )
 
-    @mock.patch('osc_lib.utils.find_resource')
-    @mock.patch('openstackclient.image.v2.image.get_data_from_stdin')
+    @mock.patch('fsc_lib.utils.find_resource')
+    @mock.patch('fibostackclient.image.v2.image.get_data_from_stdin')
     def test_image_create_from_volume(self, mock_get_data_f, mock_get_vol):
         fake_vol_id = 'fake-volume-id'
         mock_get_data_f.return_value = None
@@ -343,8 +343,8 @@ class TestImageCreate(TestImage):
             fake_vol_id, False, self.new_image.name, 'bare', 'raw'
         )
 
-    @mock.patch('osc_lib.utils.find_resource')
-    @mock.patch('openstackclient.image.v2.image.get_data_from_stdin')
+    @mock.patch('fsc_lib.utils.find_resource')
+    @mock.patch('fibostackclient.image.v2.image.get_data_from_stdin')
     def test_image_create_from_volume_fail(
         self, mock_get_data_f, mock_get_vol
     ):
@@ -366,8 +366,8 @@ class TestImageCreate(TestImage):
             exceptions.CommandError, self.cmd.take_action, parsed_args
         )
 
-    @mock.patch('osc_lib.utils.find_resource')
-    @mock.patch('openstackclient.image.v2.image.get_data_from_stdin')
+    @mock.patch('fsc_lib.utils.find_resource')
+    @mock.patch('fibostackclient.image.v2.image.get_data_from_stdin')
     def test_image_create_from_volume_v31(self, mock_get_data_f, mock_get_vol):
         self.volume_client.api_version = api_versions.APIVersion('3.1')
 
@@ -831,7 +831,7 @@ class TestImageList(TestImage):
         )
         self.assertCountEqual(datalist, tuple(data))
 
-    @mock.patch('osc_lib.api.utils.simple_filter')
+    @mock.patch('fsc_lib.api.utils.simple_filter')
     def test_image_list_property_option(self, sf_mock):
         sf_mock.return_value = [copy.deepcopy(self._image)]
 
@@ -859,7 +859,7 @@ class TestImageList(TestImage):
         self.assertEqual(self.columns, columns)
         self.assertCountEqual(self.datalist, tuple(data))
 
-    @mock.patch('osc_lib.utils.sort_items')
+    @mock.patch('fsc_lib.utils.sort_items')
     def test_image_list_sort_option(self, si_mock):
         si_mock.return_value = [copy.deepcopy(self._image)]
 
@@ -917,7 +917,7 @@ class TestImageList(TestImage):
         self.assertEqual(self.columns, columns)
         self.assertCountEqual(self.datalist, tuple(data))
 
-    @mock.patch('osc_lib.utils.find_resource')
+    @mock.patch('fsc_lib.utils.find_resource')
     def test_image_list_marker_option(self, fr_mock):
         self.image_client.find_image = mock.Mock(return_value=self._image)
 
@@ -1826,7 +1826,7 @@ class TestImageStage(TestImage):
             filename=imagefile.name,
         )
 
-    @mock.patch('openstackclient.image.v2.image.get_data_from_stdin')
+    @mock.patch('fibostackclient.image.v2.image.get_data_from_stdin')
     def test_stage_image__from_stdin(self, mock_get_data_from_stdin):
         fake_stdin = io.BytesIO(b"some initial binary data: \x00\x01")
         mock_get_data_from_stdin.return_value = fake_stdin

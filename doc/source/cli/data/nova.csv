@@ -18,7 +18,7 @@ boot,server create,Boot a new server.
 clear-password,server set --root-password,Clear the admin password for a server from the metadata server. This action does not actually change the instance server password.
 console-log,console log show,Get console log output of a server.
 delete,server delete,Immediately shut down and delete specified server(s).
-diagnostics,openstack server show --diagnostics,Retrieve server diagnostics.
+diagnostics,fibostack server show --diagnostics,Retrieve server diagnostics.
 evacuate,server evacuate,Evacuate server from failed host.
 flavor-access-add,flavor set --project,Add flavor access for the given tenant.
 flavor-access-list,flavor show,Print access information about the given flavor.
@@ -96,7 +96,7 @@ server-tag-delete,server unset --tag,Delete one or more tags from a server.
 server-tag-delete-all,server unset --tag,Delete all tags from a server.
 server-tag-list,server list --tag,Get list of tags from a server.
 server-tag-set,server set --tag,Set list of tags to a server.
-server-topology,openstack server show --topology,Retrieve server topology. (Supported by API versions '2.78' - '2.latest') [hint: use '-- os-compute-api-version' flag to show help message for proper version]
+server-topology,fibostack server show --topology,Retrieve server topology. (Supported by API versions '2.78' - '2.latest') [hint: use '-- os-compute-api-version' flag to show help message for proper version]
 service-delete,compute service delete,Delete the service.
 service-disable,compute service set --disable,Disable the service.
 service-enable,compute service set --enable,Enable the service.

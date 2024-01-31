@@ -12,14 +12,14 @@
 
 from tempest.lib import exceptions as tempest_exc
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 
 class ArgumentTests(base.TestCase):
     """Functional tests for command line arguments"""
 
     def test_default_auth_type(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'configuration show',
             cloud='',
             parse_output=True,
@@ -35,7 +35,7 @@ class ArgumentTests(base.TestCase):
         )
 
     def test_auth_type_none(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'configuration show',
             cloud=None,
             parse_output=True,
@@ -53,7 +53,7 @@ class ArgumentTests(base.TestCase):
     def test_auth_type_token_endpoint_opt(self):
         # Make sure token_endpoint is really gone
         try:
-            self.openstack(
+            self.fibostack(
                 'configuration show --os-auth-type token_endpoint',
                 cloud=None,
             )
@@ -64,7 +64,7 @@ class ArgumentTests(base.TestCase):
             self.fail('CommandFailed should be raised')
 
     def test_auth_type_password_opt(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'configuration show --os-auth-type password',
             cloud=None,
             parse_output=True,

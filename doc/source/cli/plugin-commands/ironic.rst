@@ -1,4 +1,4 @@
 ironic
 ------
 
-.. autoprogram-cliff:: openstack.baremetal.v1
+.. autoprogram-cliff:: fibostack.baremetal.v1

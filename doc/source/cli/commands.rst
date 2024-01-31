@@ -4,11 +4,11 @@
 Command Structure
 =================
 
-OpenStackClient has a consistent and predictable format for all of its commands.
+fibostackClient has a consistent and predictable format for all of its commands.
 
 Commands take the form::
 
-    openstack [<global-options>] <object-1> <action> [<object-2>] [<command-arguments>]
+    fibostack [<global-options>] <object-1> <action> [<object-2>] [<command-arguments>]
 
 .. NOTE::
 
@@ -79,10 +79,10 @@ referring to both Compute and Volume quotas.
 * ``block storage cluster``: (**Volume**) clusters of volume services
 * ``block storage resource filter``: (**Volume**) filters for volume service resources
 * ``catalog``: (**Identity**) service catalog
-* ``command``: (**Internal**) installed commands in the OSC process
+* ``command``: (**Internal**) installed commands in the fsc process
 * ``compute agent``: (**Compute**) a cloud Compute agent available to a hypervisor
 * ``compute service``: (**Compute**) a cloud Compute process running on a host
-* ``configuration``: (**Internal**) OpenStack client configuration
+* ``configuration``: (**Internal**) fibostack client configuration
 * ``consistency group``: (**Volume**) a consistency group of volumes
 * ``consistency group snapshot``: (**Volume**) a point-in-time copy of a consistency group
 * ``console log``: (**Compute**) server console text dump
@@ -94,7 +94,7 @@ referring to both Compute and Volume quotas.
 * ``ec2 credentials``: (**Identity**) AWS EC2-compatible credentials
 * ``endpoint``: (**Identity**) the base URL used to contact a specific service
 * ``endpoint group``: (**Identity**) group endpoints to be used as filters
-* ``extension``: (**Compute**, **Identity**, **Network**, **Volume**) OpenStack server API extensions
+* ``extension``: (**Compute**, **Identity**, **Network**, **Volume**) fibostack server API extensions
 * ``federation protocol``: (**Identity**) the underlying protocol used while federating identities
 * ``flavor``: (**Compute**) predefined server configurations: ram, root disk and so on
 * ``fixed ip``: (**Compute**) - an internal IP address assigned to a server
@@ -111,7 +111,7 @@ referring to both Compute and Volume quotas.
 * ``keypair``: (**Compute**) an SSH public key
 * ``limits``: (**Compute**, **Volume**) resource usage limits
 * ``mapping``: (**Identity**) a definition to translate identity provider attributes to Identity concepts
-* ``module``: (**Internal**) - installed Python modules in the OSC process
+* ``module``: (**Internal**) - installed Python modules in the fsc process
 * ``network``: (**Compute**, **Network**) - a virtual network for connecting servers and other resources
 * ``network agent``: (**Network**) - A network agent is an agent that handles various tasks used to implement virtual networks
 * ``network auto allocated topology``: (**Network**) - an auto-allocated topology for a project
@@ -132,7 +132,7 @@ referring to both Compute and Volume quotas.
 * ``port``: (**Network**) - a virtual port for connecting servers and other resources to a network
 * ``project``: (**Identity**) owns a group of resources
 * ``quota``: (**Compute**, **Volume**) resource usage restrictions
-* ``region``: (**Identity**) a subset of an OpenStack deployment
+* ``region``: (**Identity**) a subset of an fibostack deployment
 * ``request token``: (**Identity**) temporary OAuth-based token
 * ``role``: (**Identity**) a policy object used to determine authorization
 * ``role assignment``: (**Identity**) a relationship between roles, users or groups, and domains or projects
@@ -175,7 +175,7 @@ referring to both Compute and Volume quotas.
 Plugin Objects
 --------------
 
-The following are known `Objects` used by OpenStack
+The following are known `Objects` used by fibostack
 :ref:`plugins`. These are listed here to avoid name
 conflicts when creating new plugins. For a complete list check out
 :ref:`plugin-commands`.
@@ -283,7 +283,7 @@ conflicts when creating new plugins. For a complete list check out
 Actions
 -------
 
-The actions used by OpenStackClient are defined below to provide a consistent
+The actions used by fibostackClient are defined below to provide a consistent
 meaning to each action. Many of them have logical opposite actions.
 Those actions with an opposite action are noted in parens if applicable.
 
@@ -339,10 +339,10 @@ Command Entry Points
 --------------------
 
 Commands are added to the client using ``setuptools`` entry points in ``setup.cfg``.
-There is a single common group ``openstack.cli`` for commands that are not versioned,
-and a group for each combination of OpenStack API and version that is
+There is a single common group ``fibostack.cli`` for commands that are not versioned,
+and a group for each combination of fibostack API and version that is
 supported.  For example, to support Identity API v3 there is a group called
-``openstack.identity.v3`` that contains the individual commands.  The command
+``fibostack.identity.v3`` that contains the individual commands.  The command
 entry points have the form::
 
     action_object = fully.qualified.module.vXX.object:ActionObject
@@ -350,7 +350,7 @@ entry points have the form::
 For example, the ``list user`` command for the Identity API is identified in
 ``setup.cfg`` with::
 
-    openstack.identity.v3 =
+    fibostack.identity.v3 =
         # ...
-        list_user = openstackclient.identity.v3.user:ListUser
+        list_user = fibostackclient.identity.v3.user:ListUser
         # ...

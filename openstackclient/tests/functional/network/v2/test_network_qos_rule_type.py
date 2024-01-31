@@ -13,7 +13,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class NetworkQosRuleTypeTests(common.NetworkTests):
@@ -36,7 +36,7 @@ class NetworkQosRuleTypeTests(common.NetworkTests):
             self.skipTest("No qos extension present")
 
     def test_qos_rule_type_list(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule type list -f json',
             parse_output=True,
         )
@@ -47,7 +47,7 @@ class NetworkQosRuleTypeTests(common.NetworkTests):
         if not self.is_extension_enabled('qos-rule-type-filter'):
             self.skipTest('No "qos-rule-type-filter" extension present')
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule type list --all-supported -f json',
             parse_output=True,
         )
@@ -58,7 +58,7 @@ class NetworkQosRuleTypeTests(common.NetworkTests):
         if not self.is_extension_enabled('qos-rule-type-filter'):
             self.skipTest('No "qos-rule-type-filter" extension present')
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network qos rule type list --all-rules -f json', parse_output=True
         )
         for rule_type in self.ALL_AVAILABLE_RULE_TYPES:
@@ -66,7 +66,7 @@ class NetworkQosRuleTypeTests(common.NetworkTests):
 
     def test_qos_rule_type_details(self):
         for rule_type in self.AVAILABLE_RULE_TYPES:
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 'network qos rule type show %s -f json' % rule_type,
                 parse_output=True,
             )

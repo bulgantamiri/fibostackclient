@@ -16,20 +16,20 @@ import random
 from unittest import mock
 import uuid
 
-from openstack.image.v2 import _proxy
-from openstack.image.v2 import cache
-from openstack.image.v2 import image
-from openstack.image.v2 import member
-from openstack.image.v2 import metadef_namespace
-from openstack.image.v2 import metadef_object
-from openstack.image.v2 import metadef_property
-from openstack.image.v2 import metadef_resource_type
-from openstack.image.v2 import service_info as _service_info
-from openstack.image.v2 import task
+from fibostack.image.v2 import _proxy
+from fibostack.image.v2 import cache
+from fibostack.image.v2 import image
+from fibostack.image.v2 import member
+from fibostack.image.v2 import metadef_namespace
+from fibostack.image.v2 import metadef_object
+from fibostack.image.v2 import metadef_property
+from fibostack.image.v2 import metadef_resource_type
+from fibostack.image.v2 import service_info as _service_info
+from fibostack.image.v2 import task
 
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
-from openstackclient.tests.unit import utils
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.tests.unit import utils
 
 
 class FakeClientMixin:
@@ -56,7 +56,7 @@ def create_one_image(attrs=None):
     :param attrs: A dictionary with all attributes of image
     :type attrs: dict
     :return: A fake Image object.
-    :rtype: `openstack.image.v2.image.Image`
+    :rtype: `fibostack.image.v2.image.Image`
     """
     attrs = attrs or {}
 
@@ -99,7 +99,7 @@ def create_one_image_member(attrs=None):
     :param attrs: A dictionary with all attributes of image member
     :type attrs: dict
     :return: A fake Member object.
-    :rtype: `openstack.image.v2.member.Member`
+    :rtype: `fibostack.image.v2.member.Member`
     """
     attrs = attrs or {}
 
@@ -122,7 +122,7 @@ def create_one_import_info(attrs=None):
     :param attrs: A dictionary with all attributes of import info
     :type attrs: dict
     :return: A fake Import object.
-    :rtype: `openstack.image.v2.service_info.Import`
+    :rtype: `fibostack.image.v2.service_info.Import`
     """
     attrs = attrs or {}
 
@@ -149,7 +149,7 @@ def create_one_stores_info(attrs=None):
     :param attrs: A dictionary with all attributes of stores
     :type attrs: dict
     :return: A fake Store object list.
-    :rtype: `openstack.image.v2.service_info.Store`
+    :rtype: `fibostack.image.v2.service_info.Store`
     """
     attrs = attrs or {}
 
@@ -181,7 +181,7 @@ def create_one_task(attrs=None):
     :param attrs: A dictionary with all attributes of task
     :type attrs: dict
     :return: A fake Task object.
-    :rtype: `openstack.image.v2.task.Task`
+    :rtype: `fibostack.image.v2.task.Task`
     """
     attrs = attrs or {}
 
@@ -195,7 +195,7 @@ def create_one_task(attrs=None):
                 'container_format': 'ovf',
                 'disk_format': 'vhd',
             },
-            'import_from': 'https://apps.openstack.org/excellent-image',
+            'import_from': 'https://apps.fibostack.org/excellent-image',
             'import_from_format': 'qcow2',
         },
         'message': '',
@@ -213,7 +213,7 @@ def create_one_task(attrs=None):
             ]
         ),
         # though not documented, the API only allows 'import'
-        # https://github.com/openstack/glance/blob/24.0.0/glance/api/v2/tasks.py#L186-L190
+        # https://github.com/fibostack/glance/blob/24.0.0/glance/api/v2/tasks.py#L186-L190
         'type': 'import',
         'updated_at': '2016-06-29T16:13:07Z',
     }

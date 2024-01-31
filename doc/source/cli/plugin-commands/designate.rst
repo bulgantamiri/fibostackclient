@@ -1,4 +1,4 @@
 designate
 ---------
 
-.. autoprogram-cliff:: openstack.dns.v2
+.. autoprogram-cliff:: fibostack.dns.v2

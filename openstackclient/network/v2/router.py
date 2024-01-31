@@ -18,16 +18,16 @@ import json
 import logging
 
 from cliff import columns as cliff_columns
-from osc_lib.cli import format_columns
-from osc_lib.cli import parseractions
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
-from osc_lib.utils import tags as _tag
+from fsc_lib.cli import format_columns
+from fsc_lib.cli import parseractions
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
+from fsc_lib.utils import tags as _tag
 
-from openstackclient.i18n import _
-from openstackclient.identity import common as identity_common
-from openstackclient.network import common
+from fibostackclient.i18n import _
+from fibostackclient.identity import common as identity_common
+from fibostackclient.network import common
 
 LOG = logging.getLogger(__name__)
 
@@ -80,7 +80,7 @@ def _get_columns(item):
     if item.is_distributed is None:
         invisible_columns.append('is_distributed')
         column_map.pop('is_distributed')
-    return utils.get_osc_show_columns_for_sdk_resource(
+    return utils.get_fsc_show_columns_for_sdk_resource(
         item, column_map, invisible_columns
     )
 
@@ -297,7 +297,7 @@ class RemoveExtraRoutesFromRouter(command.ShowOne):
 
 
 # TODO(yanxing'an): Use the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class CreateRouter(command.ShowOne, common.NeutronCommandWithExtraArgs):
     _description = _("Create a new router")
 
@@ -494,7 +494,7 @@ class DeleteRouter(command.Command):
 
 
 # TODO(yanxing'an): Use the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class ListRouter(command.Lister):
     _description = _("List routers")
 
@@ -632,7 +632,7 @@ class ListRouter(command.Lister):
                     return False
             except AttributeError:
                 # Some filter attributes like tenant_id or admin_state_up
-                # are backward compatibility in older OpenStack SDK support.
+                # are backward compatibility in older fibostack SDK support.
                 # They does not exist in the latest release.
                 # In this case we just skip checking such filter condition.
                 continue
@@ -694,7 +694,7 @@ class RemoveSubnetFromRouter(command.Command):
 
 
 # TODO(yanxing'an): Use the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class SetRouter(common.NeutronCommandWithExtraArgs):
     _description = _("Set router properties")
 

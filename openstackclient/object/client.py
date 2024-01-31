@@ -15,15 +15,15 @@
 
 """Object client"""
 
-from osc_lib import utils
+from fsc_lib import utils
 
-from openstackclient.api import object_store_v1
+from fibostackclient.api import object_store_v1
 
 DEFAULT_API_VERSION = '1'
 API_VERSION_OPTION = 'os_object_api_version'
 API_NAME = 'object_store'
 API_VERSIONS = {
-    '1': 'openstackclient.object.client.ObjectClientv1',
+    '1': 'fibostackclient.object.client.ObjectClientv1',
 }
 
 

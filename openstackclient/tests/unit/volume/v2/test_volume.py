@@ -15,15 +15,15 @@ from unittest import mock
 from unittest.mock import call
 
 from cinderclient import api_versions
-from osc_lib.cli import format_columns
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.cli import format_columns
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
-from openstackclient.tests.unit.image.v2 import fakes as image_fakes
-from openstackclient.tests.unit import utils as test_utils
-from openstackclient.tests.unit.volume.v2 import fakes as volume_fakes
-from openstackclient.volume.v2 import volume
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.tests.unit.image.v2 import fakes as image_fakes
+from fibostackclient.tests.unit import utils as test_utils
+from fibostackclient.tests.unit.volume.v2 import fakes as volume_fakes
+from fibostackclient.volume.v2 import volume
 
 
 class TestVolume(volume_fakes.TestVolume):

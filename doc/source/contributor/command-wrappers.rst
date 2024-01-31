@@ -6,7 +6,7 @@ When we want to deprecate a command, policy says we need to alert the user.
 We do this with a message logged at WARNING level before any command output
 is emitted.
 
-OpenStackClient command classes are derived from the ``cliff`` classes.
+fibostackClient command classes are derived from the ``cliff`` classes.
 Cliff uses Python's *entry points* mechanism for dispatching the parsed command
 to the respective handler classes.  This lends itself to modifying the
 command execution at run-time.

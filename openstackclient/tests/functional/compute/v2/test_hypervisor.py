@@ -12,7 +12,7 @@
 
 import json
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 
 class HypervisorTests(base.TestCase):
@@ -22,21 +22,21 @@ class HypervisorTests(base.TestCase):
         """Test create defaults, list filters, delete"""
         # Test list
         cmd_output = json.loads(
-            self.openstack(
+            self.fibostack(
                 "hypervisor list -f json --os-compute-api-version 2.1"
             )
         )
         ids1 = [x["ID"] for x in cmd_output]
         self.assertIsNotNone(cmd_output)
 
-        cmd_output = json.loads(self.openstack("hypervisor list -f json"))
+        cmd_output = json.loads(self.fibostack("hypervisor list -f json"))
         ids2 = [x["ID"] for x in cmd_output]
         self.assertIsNotNone(cmd_output)
 
         # Show test - old microversion
         for i in ids1:
             cmd_output = json.loads(
-                self.openstack(
+                self.fibostack(
                     "hypervisor show %s -f json "
                     " --os-compute-api-version 2.1" % (i)
                 )
@@ -47,6 +47,6 @@ class HypervisorTests(base.TestCase):
         # Show test - latest microversion
         for i in ids2:
             cmd_output = json.loads(
-                self.openstack("hypervisor show %s -f json" % (i))
+                self.fibostack("hypervisor show %s -f json" % (i))
             )
             self.assertIsNotNone(cmd_output)

@@ -17,12 +17,12 @@ import copy
 from unittest import mock
 from unittest.mock import call
 
-from osc_lib.cli import format_columns
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.cli import format_columns
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.tests.unit.volume.v2 import fakes as volume_fakes
-from openstackclient.volume.v2 import qos_specs
+from fibostackclient.tests.unit.volume.v2 import fakes as volume_fakes
+from fibostackclient.volume.v2 import qos_specs
 
 
 class TestQos(volume_fakes.TestVolume):
@@ -64,11 +64,11 @@ class TestQosAssociate(TestQos):
         self.assertIsNone(result)
 
 
-class TestQosCreate(TestQos):
+class TestQfscreate(TestQos):
     columns = ('consumer', 'id', 'name', 'properties')
 
     def setUp(self):
-        super(TestQosCreate, self).setUp()
+        super(TestQfscreate, self).setUp()
 
         self.new_qos_spec = volume_fakes.create_one_qos()
         self.qos_mock.create.return_value = self.new_qos_spec

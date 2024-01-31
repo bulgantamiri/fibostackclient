@@ -16,13 +16,13 @@
 import copy
 from unittest import mock
 
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.identity import common
-from openstackclient.identity.v3 import role
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.identity import common
+from fibostackclient.identity.v3 import role
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
 
 
 class TestRole(identity_fakes.TestIdentityv3):

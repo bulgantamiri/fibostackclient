@@ -14,7 +14,7 @@ import os
 import tempfile
 import uuid
 
-from openstackclient.tests.functional.object.v1 import common
+from fibostackclient.tests.functional.object.v1 import common
 
 BASIC_LIST_HEADERS = ['Name']
 CONTAINER_FIELDS = ['account', 'container', 'x-trans-id']
@@ -39,62 +39,62 @@ class ObjectTests(common.ObjectStoreTests):
             self._test_object(f.name)
 
     def _test_object(self, object_file):
-        raw_output = self.openstack('container create ' + self.CONTAINER_NAME)
+        raw_output = self.fibostack('container create ' + self.CONTAINER_NAME)
         items = self.parse_listing(raw_output)
         self.assert_show_fields(items, CONTAINER_FIELDS)
 
-        raw_output = self.openstack('container list')
+        raw_output = self.fibostack('container list')
         items = self.parse_listing(raw_output)
         self.assert_table_structure(items, BASIC_LIST_HEADERS)
 
-        self.openstack('container show ' + self.CONTAINER_NAME)
+        self.fibostack('container show ' + self.CONTAINER_NAME)
         # TODO(stevemar): Assert returned fields
 
-        self.openstack('container save ' + self.CONTAINER_NAME)
+        self.fibostack('container save ' + self.CONTAINER_NAME)
         # TODO(stevemar): Assert returned fields
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'object create %s %s' % (self.CONTAINER_NAME, object_file)
         )
         items = self.parse_listing(raw_output)
         self.assert_show_fields(items, OBJECT_FIELDS)
 
-        raw_output = self.openstack('object list %s' % self.CONTAINER_NAME)
+        raw_output = self.fibostack('object list %s' % self.CONTAINER_NAME)
         items = self.parse_listing(raw_output)
         self.assert_table_structure(items, BASIC_LIST_HEADERS)
 
-        self.openstack(
+        self.fibostack(
             'object save %s %s' % (self.CONTAINER_NAME, object_file)
         )
         # TODO(stevemar): Assert returned fields
 
         tmp_file = 'tmp.txt'
         self.addCleanup(os.remove, tmp_file)
-        self.openstack(
+        self.fibostack(
             'object save %s %s --file %s'
             % (self.CONTAINER_NAME, object_file, tmp_file)
         )
         # TODO(stevemar): Assert returned fields
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'object save %s %s --file -' % (self.CONTAINER_NAME, object_file)
         )
         self.assertEqual(raw_output, 'test content')
 
-        self.openstack(
+        self.fibostack(
             'object show %s %s' % (self.CONTAINER_NAME, object_file)
         )
         # TODO(stevemar): Assert returned fields
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'object delete %s %s' % (self.CONTAINER_NAME, object_file)
         )
         self.assertEqual(0, len(raw_output))
 
-        self.openstack(
+        self.fibostack(
             'object create %s %s' % (self.CONTAINER_NAME, object_file)
         )
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'container delete -r %s' % self.CONTAINER_NAME
         )
         self.assertEqual(0, len(raw_output))

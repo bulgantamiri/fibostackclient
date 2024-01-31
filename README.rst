@@ -2,25 +2,25 @@
 Team and repository tags
 ========================
 
-.. image:: https://governance.openstack.org/tc/badges/python-openstackclient.svg
-    :target: https://governance.openstack.org/tc/reference/tags/index.html
+.. image:: https://governance.fibostack.org/tc/badges/python-fibostackclient.svg
+    :target: https://governance.fibostack.org/tc/reference/tags/index.html
 
 .. Change things from this point on
 
 ===============
-OpenStackClient
+fibostackClient
 ===============
 
-.. image:: https://img.shields.io/pypi/v/python-openstackclient.svg
-    :target: https://pypi.org/project/python-openstackclient/
+.. image:: https://img.shields.io/pypi/v/python-fibostackclient.svg
+    :target: https://pypi.org/project/python-fibostackclient/
     :alt: Latest Version
 
-OpenStackClient (aka OSC) is a command-line client for OpenStack that brings
+fibostackClient (aka fsc) is a command-line client for fibostack that brings
 the command set for Compute, Identity, Image, Network, Object Store and Block
 Storage APIs together in a single shell with a uniform command structure.
 
 The primary goal is to provide a unified shell command structure and a common
-language to describe operations in OpenStack.
+language to describe operations in fibostack.
 
 * `PyPi`_ - package installation
 * `Online Documentation`_
@@ -30,38 +30,38 @@ language to describe operations in OpenStack.
 * `Developer`_ - getting started as a developer
 * `Contributing`_ - contributing code
 * `Testing`_ - testing code
-* IRC: #openstack-sdks on OFTC (irc.oftc.net)
+* IRC: #fibostack-sdks on OFTC (irc.oftc.net)
 * License: Apache 2.0
 
-.. _PyPi: https://pypi.org/project/python-openstackclient
-.. _Online Documentation: https://docs.openstack.org/python-openstackclient/latest/
-.. _Blueprints: https://blueprints.launchpad.net/python-openstackclient
-.. _`Launchpad project`: https://bugs.launchpad.net/python-openstackclient
-.. _Source: https://opendev.org/openstack/python-openstackclient
-.. _Developer: https://docs.openstack.org/project-team-guide/project-setup/python.html
-.. _Contributing: https://docs.openstack.org/infra/manual/developers.html
-.. _Testing: https://docs.openstack.org/python-openstackclient/latest/contributor/developing.html#testing
-.. _Release Notes: https://docs.openstack.org/releasenotes/python-openstackclient
+.. _PyPi: https://pypi.org/project/python-fibostackclient
+.. _Online Documentation: https://docs.fibostack.org/python-fibostackclient/latest/
+.. _Blueprints: https://blueprints.launchpad.net/python-fibostackclient
+.. _`Launchpad project`: https://bugs.launchpad.net/python-fibostackclient
+.. _Source: https://opendev.org/fibostack/python-fibostackclient
+.. _Developer: https://docs.fibostack.org/project-team-guide/project-setup/python.html
+.. _Contributing: https://docs.fibostack.org/infra/manual/developers.html
+.. _Testing: https://docs.fibostack.org/python-fibostackclient/latest/contributor/developing.html#testing
+.. _Release Notes: https://docs.fibostack.org/releasenotes/python-fibostackclient
 
 Getting Started
 ===============
 
-OpenStack Client can be installed from PyPI using pip::
+fibostack Client can be installed from PyPI using pip::
 
-    pip install python-openstackclient
+    pip install python-fibostackclient
 
 There are a few variants on getting help.  A list of global options and supported
 commands is shown with ``--help``::
 
-   openstack --help
+   fibostack --help
 
 There is also a ``help`` command that can be used to get help text for a specific
 command::
 
-    openstack help
-    openstack help server create
+    fibostack help
+    fibostack help server create
 
-If you want to make changes to the OpenStackClient for testing and contribution,
+If you want to make changes to the fibostackClient for testing and contribution,
 make any changes and then run::
 
     python setup.py develop
@@ -74,13 +74,13 @@ Configuration
 =============
 
 The CLI is configured via environment variables and command-line
-options as listed in  https://docs.openstack.org/python-openstackclient/latest/cli/authentication.html.
+options as listed in  https://docs.fibostack.org/python-fibostackclient/latest/cli/authentication.html.
 
 Authentication using username/password is most commonly used:
 
 - For a local user, your configuration will look like the one below::
 
-    export OS_AUTH_URL=<url-to-openstack-identity>
+    export OS_AUTH_URL=<url-to-fibostack-identity>
     export OS_IDENTITY_API_VERSION=3
     export OS_PROJECT_NAME=<project-name>
     export OS_PROJECT_DOMAIN_NAME=<project-domain-name>
@@ -102,7 +102,7 @@ Authentication using username/password is most commonly used:
 
     export OS_PROJECT_NAME=<project-name>
     export OS_PROJECT_DOMAIN_NAME=<project-domain-name>
-    export OS_AUTH_URL=<url-to-openstack-identity>
+    export OS_AUTH_URL=<url-to-fibostack-identity>
     export OS_IDENTITY_API_VERSION=3
     export OS_AUTH_PLUGIN=openid
     export OS_AUTH_TYPE=v3oidcpassword
@@ -120,7 +120,7 @@ Authentication using username/password is most commonly used:
 
     --os-project-name <project-name>
     --os-project-domain-name <project-domain-name>
-    --os-auth-url <url-to-openstack-identity>
+    --os-auth-url <url-to-fibostack-identity>
     --os-identity-api-version 3
     --os-auth-plugin openid
     --os-auth-type v3oidcpassword

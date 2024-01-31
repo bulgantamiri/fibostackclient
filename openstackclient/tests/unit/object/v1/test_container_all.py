@@ -15,8 +15,8 @@ import copy
 
 from requests_mock.contrib import fixture
 
-from openstackclient.object.v1 import container as container_cmds
-from openstackclient.tests.unit.object.v1 import fakes as object_fakes
+from fibostackclient.object.v1 import container as container_cmds
+from fibostackclient.tests.unit.object.v1 import fakes as object_fakes
 
 
 class TestContainerAll(object_fakes.TestObjectv1):
@@ -324,29 +324,29 @@ class TestContainerSave(TestContainerAll):
 #         # Initial container list request
 #         self.requests_mock.register_uri(
 #             'GET',
-#             object_fakes.ENDPOINT + '/oscar?format=json',
+#             object_fakes.ENDPOINT + '/fscar?format=json',
 #             json=return_body,
 #             status_code=200,
 #         )
 #         # Individual object save requests
 #         self.requests_mock.register_uri(
 #             'GET',
-#             object_fakes.ENDPOINT + '/oscar/' + object_fakes.object_name_1,
+#             object_fakes.ENDPOINT + '/fscar/' + object_fakes.object_name_1,
 #             json=object_fakes.OBJECT,
 #             status_code=200,
 #         )
 #         self.requests_mock.register_uri(
 #             'GET',
-#             object_fakes.ENDPOINT + '/oscar/' + object_fakes.object_name_2,
+#             object_fakes.ENDPOINT + '/fscar/' + object_fakes.object_name_2,
 #             json=object_fakes.OBJECT_2,
 #             status_code=200,
 #         )
 #
 #         arglist = [
-#             'oscar',
+#             'fscar',
 #         ]
 #         verifylist = [(
-#             'container', 'oscar',
+#             'container', 'fscar',
 #         )]
 #         parsed_args = self.check_parser(self.cmd, arglist, verifylist)
 #

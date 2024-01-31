@@ -13,11 +13,11 @@
 
 """Account v1 action implementations"""
 
-from osc_lib.cli import format_columns
-from osc_lib.cli import parseractions
-from osc_lib.command import command
+from fsc_lib.cli import format_columns
+from fsc_lib.cli import parseractions
+from fsc_lib.command import command
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 class SetAccount(command.Command):

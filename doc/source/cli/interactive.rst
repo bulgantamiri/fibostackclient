@@ -2,13 +2,13 @@
 Interactive Mode
 ================
 
-OpenStackClient has an interactive mode, similar to the :program:`virsh(1)` or
+fibostackClient has an interactive mode, similar to the :program:`virsh(1)` or
 :program:`lvm(8)` commands on Linux.  This mode is useful for executing a
 series of commands without having to reload the CLI, or more importantly,
 without having to re-authenticate to the cloud.
 
-Enter interactive mode by issuing the :command:`openstack` command with no
-subcommand.  An :code:`(openstack)` prompt will be displayed.  Interactive mode
+Enter interactive mode by issuing the :command:`fibostack` command with no
+subcommand.  An :code:`(fibostack)` prompt will be displayed.  Interactive mode
 is terminated with :command:`exit`.
 
 Authentication
@@ -24,7 +24,7 @@ Scripting
 =========
 
 Using interactive mode inside scripts sounds counter-intuitive, but the same
-single-authentication benefit can be achieved by passing OSC commands to
+single-authentication benefit can be achieved by passing fsc commands to
 the CLI via :code:`stdin`.
 
 Sample session:
@@ -32,15 +32,15 @@ Sample session:
 .. code-block:: bash
 
     # assume auth credentials are in the environment
-    $ openstack
-    (openstack) keypair list
+    $ fibostack
+    (fibostack) keypair list
     +--------+-------------------------------------------------+
     | Name   | Fingerprint                                     |
     +--------+-------------------------------------------------+
     | bunsen | a5:da:0c:52:e8:52:42:a3:4f:b8:22:62:7b:e4:e8:89 |
     | beaker | 45:9c:50:56:7c:fc:3a:b6:b5:60:02:2f:41:fb:a9:4c |
     +--------+-------------------------------------------------+
-    (openstack) image list
+    (fibostack) image list
     +--------------------------------------+----------------+
     | ID                                   | Name           |
     +--------------------------------------+----------------+
@@ -48,14 +48,14 @@ Sample session:
     | 2e45d43a-7c25-45f1-b012-06ac313e2f6b | Fedora 20      |
     | de3a8396-3bae-42de-84bd-f4e398b8c320 | CirrOS         |
     +--------------------------------------+----------------+
-    (openstack) flavor list
+    (fibostack) flavor list
     +--------------------------------------+----------+--------+--------+-----------+------+-------+-------------+-----------+-------------+
     | ID                                   | Name     |    RAM |   Disk | Ephemeral | Swap | VCPUs | RXTX Factor | Is Public | Extra Specs |
     +--------------------------------------+----------+--------+--------+-----------+------+-------+-------------+-----------+-------------+
     | 12594680-56f7-4da2-8322-7266681b3070 | m1.small |   2048 |     20 |         0 |      |     1 |             | True      |             |
     | 9274f903-0cc7-4a95-9124-1968018e355d | m1.tiny  |    512 |      5 |         0 |      |     1 |             | True      |             |
     +--------------------------------------+----------+--------+--------+-----------+------+-------+-------------+-----------+-------------+
-    (openstack) server create --image CirrOS --flavor m1.small --key-name beaker sample-server
+    (fibostack) server create --image CirrOS --flavor m1.small --key-name beaker sample-server
     +-----------------------------+-------------------------------------------------+
     | Field                       | Value                                           |
     +-----------------------------+-------------------------------------------------+
@@ -79,17 +79,17 @@ A similar session can be issued all at once:
 
 .. code-block:: bash
 
-    $ openstack <<EOF
+    $ fibostack <<EOF
     > keypair list
     > flavor show m1.small
     > EOF
-    (openstack) +--------+-------------------------------------------------+
+    (fibostack) +--------+-------------------------------------------------+
     | Name   | Fingerprint                                     |
     +--------+-------------------------------------------------+
     | bunsen | a5:da:0c:52:e8:52:42:a3:4f:b8:22:62:7b:e4:e8:89 |
     | beaker | 45:9c:50:56:7c:fc:3a:b6:b5:60:02:2f:41:fb:a9:4c |
     +--------+-------------------------------------------------+
-    (openstack) +----------------------------+--------------------------------------+
+    (fibostack) +----------------------------+--------------------------------------+
     | Field                      | Value                                |
     +----------------------------+--------------------------------------+
     | OS-FLV-DISABLED:disabled   | False                                |

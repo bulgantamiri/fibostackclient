@@ -14,16 +14,16 @@
 from unittest import mock
 from unittest.mock import call
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.network import utils as network_utils
-from openstackclient.network.v2 import security_group_rule
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
-from openstackclient.tests.unit import utils as tests_utils
+from fibostackclient.network import utils as network_utils
+from fibostackclient.network.v2 import security_group_rule
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.tests.unit import utils as tests_utils
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.security_group_rule_create')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.security_group_rule_create')
 class TestCreateSecurityGroupRuleCompute(compute_fakes.TestComputev2):
     project = identity_fakes.FakeProject.create_one_project()
     domain = identity_fakes.FakeDomain.create_one_domain()
@@ -296,7 +296,7 @@ class TestCreateSecurityGroupRuleCompute(compute_fakes.TestComputev2):
         self.assertEqual(expected_data, data)
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.security_group_rule_delete')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.security_group_rule_delete')
 class TestDeleteSecurityGroupRuleCompute(compute_fakes.TestComputev2):
     # The security group rule to be deleted.
     _security_group_rules = compute_fakes.create_security_group_rules(count=2)

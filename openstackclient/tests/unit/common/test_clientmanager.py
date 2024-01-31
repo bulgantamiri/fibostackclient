@@ -1,4 +1,4 @@
-#   Copyright 2012-2013 OpenStack Foundation
+#   Copyright 2012-2013 fibostack Foundation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
 #   not use this file except in compliance with the License. You may obtain
@@ -16,13 +16,13 @@
 import copy
 
 from keystoneauth1 import token_endpoint
-from osc_lib.tests import utils as osc_lib_test_utils
+from fsc_lib.tests import utils as fsc_lib_test_utils
 
-from openstackclient.common import clientmanager
-from openstackclient.tests.unit import fakes
+from fibostackclient.common import clientmanager
+from fibostackclient.tests.unit import fakes
 
 
-class TestClientManager(osc_lib_test_utils.TestClientManager):
+class TestClientManager(fsc_lib_test_utils.TestClientManager):
     def _clientmanager_class(self):
         """Allow subclasses to override the ClientManager class"""
         return clientmanager.ClientManager

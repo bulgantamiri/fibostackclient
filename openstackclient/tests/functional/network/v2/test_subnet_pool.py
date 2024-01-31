@@ -13,7 +13,7 @@
 import random
 import uuid
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class SubnetPoolTests(common.NetworkTagTests):
@@ -35,17 +35,17 @@ class SubnetPoolTests(common.NetworkTagTests):
         self.assertEqual(name2, cmd_output["name"])
         self.assertEqual([pool_prefix], cmd_output["prefixes"])
 
-        del_output = self.openstack(
+        del_output = self.fibostack(
             'subnet pool delete ' + name1 + ' ' + name2,
         )
         self.assertOutput('', del_output)
 
     def test_subnet_pool_list(self):
         """Test create, list filter"""
-        cmd_output = self.openstack('token issue', parse_output=True)
+        cmd_output = self.fibostack('token issue', parse_output=True)
         auth_project_id = cmd_output['project_id']
 
-        cmd_output = self.openstack('project list', parse_output=True)
+        cmd_output = self.fibostack('project list', parse_output=True)
         admin_project_id = None
         demo_project_id = None
         for p in cmd_output:
@@ -70,7 +70,7 @@ class SubnetPoolTests(common.NetworkTagTests):
             '--project ' + demo_project_id + ' --no-share ',
             name1,
         )
-        self.addCleanup(self.openstack, 'subnet pool delete ' + name1)
+        self.addCleanup(self.fibostack, 'subnet pool delete ' + name1)
         self.assertEqual(
             name1,
             cmd_output["name"],
@@ -92,7 +92,7 @@ class SubnetPoolTests(common.NetworkTagTests):
             ' --share ',
             name2,
         )
-        self.addCleanup(self.openstack, 'subnet pool delete ' + name2)
+        self.addCleanup(self.fibostack, 'subnet pool delete ' + name2)
         self.assertEqual(
             name2,
             cmd_output["name"],
@@ -111,7 +111,7 @@ class SubnetPoolTests(common.NetworkTagTests):
         )
 
         # Test list --project
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'subnet pool list ' + '--project ' + demo_project_id,
             parse_output=True,
         )
@@ -120,7 +120,7 @@ class SubnetPoolTests(common.NetworkTagTests):
         self.assertNotIn(name2, names)
 
         # Test list --share
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'subnet pool list ' + '--share',
             parse_output=True,
         )
@@ -129,7 +129,7 @@ class SubnetPoolTests(common.NetworkTagTests):
         self.assertIn(name2, names)
 
         # Test list --name
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'subnet pool list ' + '--name ' + name1,
             parse_output=True,
         )
@@ -138,7 +138,7 @@ class SubnetPoolTests(common.NetworkTagTests):
         self.assertNotIn(name2, names)
 
         # Test list --long
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'subnet pool list ' + '--long ',
             parse_output=True,
         )
@@ -161,7 +161,7 @@ class SubnetPoolTests(common.NetworkTagTests):
         )
 
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'subnet pool delete ' + cmd_output['id'],
         )
         self.assertEqual(
@@ -194,7 +194,7 @@ class SubnetPoolTests(common.NetworkTagTests):
         )
 
         # Test set
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'subnet pool set '
             + '--name '
             + new_name
@@ -208,7 +208,7 @@ class SubnetPoolTests(common.NetworkTagTests):
         )
         self.assertOutput('', cmd_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'subnet pool show ' + new_name,
             parse_output=True,
         )
@@ -250,7 +250,7 @@ class SubnetPoolTests(common.NetworkTagTests):
         #                The unset command of --pool-prefixes also doesn't work
         #                right now. It would be fixed in a separate patch once
         #                the lower layer is fixed.
-        # cmd_output = self.openstack(
+        # cmd_output = self.fibostack(
         #    '--debug ' +
         #    'subnet pool unset ' +
         #    ' --pool-prefix 10.110.0.0/16 ' +
@@ -301,7 +301,7 @@ class SubnetPoolTests(common.NetworkTagTests):
                 )
 
             try:
-                cmd_output = self.openstack(
+                cmd_output = self.fibostack(
                     'subnet pool create '
                     + cmd
                     + ' '

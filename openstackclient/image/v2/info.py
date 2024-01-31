@@ -11,10 +11,10 @@
 # under the License.
 
 
-from osc_lib.cli import format_columns
-from osc_lib.command import command
+from fsc_lib.cli import format_columns
+from fsc_lib.command import command
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 class ImportInfo(command.ShowOne):

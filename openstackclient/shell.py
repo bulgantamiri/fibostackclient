@@ -1,4 +1,4 @@
-#   Copyright 2012-2013 OpenStack Foundation
+#   Copyright 2012-2013 fibostack Foundation
 #   Copyright 2015 Dean Troyer
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -14,28 +14,28 @@
 #   under the License.
 #
 
-"""Command-line interface to the OpenStack APIs"""
+"""Command-line interface to the fibostack APIs"""
 
 import sys
 import warnings
 
-from osc_lib.api import auth
-from osc_lib.command import commandmanager
-from osc_lib import shell
+from fsc_lib.api import auth
+from fsc_lib.command import commandmanager
+from fsc_lib import shell
 
-import openstackclient
-from openstackclient.common import clientmanager
+import fibostackclient
+from fibostackclient.common import clientmanager
 
 
 DEFAULT_DOMAIN = 'default'
 
 
-class OpenStackShell(shell.OpenStackShell):
+class fibostackShell(shell.fibostackShell):
     def __init__(self):
-        super(OpenStackShell, self).__init__(
+        super(fibostackShell, self).__init__(
             description=__doc__.strip(),
-            version=openstackclient.__version__,
-            command_manager=commandmanager.CommandManager('openstack.cli'),
+            version=fibostackclient.__version__,
+            command_manager=commandmanager.CommandManager('fibostack.cli'),
             deferred_help=True,
         )
 
@@ -46,10 +46,10 @@ class OpenStackShell(shell.OpenStackShell):
 
         # ignore warnings from openstacksdk since our users can't do anything
         # about them
-        warnings.filterwarnings('ignore', module='openstack')
+        warnings.filterwarnings('ignore', module='fibostack')
 
     def build_option_parser(self, description, version):
-        parser = super(OpenStackShell, self).build_option_parser(
+        parser = super(fibostackShell, self).build_option_parser(
             description, version
         )
         parser = clientmanager.build_plugin_option_parser(parser)
@@ -57,7 +57,7 @@ class OpenStackShell(shell.OpenStackShell):
         return parser
 
     def _final_defaults(self):
-        super(OpenStackShell, self)._final_defaults()
+        super(fibostackShell, self)._final_defaults()
 
         # Set the default plugin to admin_token if endpoint and token are given
         if self.options.endpoint and self.options.token:
@@ -69,7 +69,7 @@ class OpenStackShell(shell.OpenStackShell):
     def _load_plugins(self):
         """Load plugins via stevedore
 
-        osc-lib has no opinion on what plugins should be loaded
+        fsc-lib has no opinion on what plugins should be loaded
         """
         # Loop through extensions to get API versions
         for mod in clientmanager.PLUGIN_MODULES:
@@ -104,7 +104,7 @@ class OpenStackShell(shell.OpenStackShell):
 
                 # Command groups deal only with major versions
                 version = '.v' + version_opt.replace('.', '_').split('_')[0]
-                cmd_group = 'openstack.' + api.replace('-', '_') + version
+                cmd_group = 'fibostack.' + api.replace('-', '_') + version
                 self.command_manager.add_command_group(cmd_group)
                 self.log.debug(
                     '%(name)s API version %(version)s, cmd group %(group)s',
@@ -114,25 +114,25 @@ class OpenStackShell(shell.OpenStackShell):
     def _load_commands(self):
         """Load commands via cliff/stevedore
 
-        osc-lib has no opinion on what commands should be loaded
+        fsc-lib has no opinion on what commands should be loaded
         """
         # Commands that span multiple APIs
-        self.command_manager.add_command_group('openstack.common')
+        self.command_manager.add_command_group('fibostack.common')
 
         # This is the naive extension implementation referred to in
         # blueprint 'client-extensions'
         # Extension modules can register their commands in an
-        # 'openstack.extension' entry point group:
+        # 'fibostack.extension' entry point group:
         # entry_points={
-        #     'openstack.extension': [
+        #     'fibostack.extension': [
         #         'list_repo=qaz.github.repo:ListRepo',
         #         'show_repo=qaz.github.repo:ShowRepo',
         #     ],
         # }
-        self.command_manager.add_command_group('openstack.extension')
+        self.command_manager.add_command_group('fibostack.extension')
 
     def initialize_app(self, argv):
-        super(OpenStackShell, self).initialize_app(argv)
+        super(fibostackShell, self).initialize_app(argv)
 
         # Re-create the client_manager with our subclass
         self.client_manager = clientmanager.ClientManager(
@@ -146,7 +146,7 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv[1:]
 
-    return OpenStackShell().run(argv)
+    return fibostackShell().run(argv)
 
 
 if __name__ == "__main__":

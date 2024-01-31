@@ -12,7 +12,7 @@
 
 import time
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 
 class BaseVolumeTests(base.TestCase):
@@ -33,7 +33,7 @@ class BaseVolumeTests(base.TestCase):
             failures = ['error']
         total_sleep = 0
         while total_sleep < wait:
-            output = cls.openstack(
+            output = cls.fibostack(
                 check_type + ' show ' + check_name,
                 parse_output=True,
             )
@@ -67,7 +67,7 @@ class BaseVolumeTests(base.TestCase):
         total_sleep = 0
         name_field = name_field or 'Name'
         while total_sleep < wait:
-            result = cls.openstack(check_type + ' list', parse_output=True)
+            result = cls.fibostack(check_type + ' list', parse_output=True)
             names = [x[name_field] for x in result]
             if check_name not in names:
                 print('{} {} is now deleted'.format(check_type, check_name))

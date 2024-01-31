@@ -54,7 +54,7 @@ def execute(cmd, *, fail_ok=False):
 
 class TestCase(testtools.TestCase):
     @classmethod
-    def openstack(
+    def fibostack(
         cls,
         cmd,
         *,
@@ -62,7 +62,7 @@ class TestCase(testtools.TestCase):
         fail_ok=False,
         parse_output=False,
     ):
-        """Executes openstackclient command for the given action
+        """Executes fibostackclient command for the given action
 
         :param cmd: A string representation of the command to execute.
         :param cloud: The cloud to execute against. This can be a string, empty
@@ -92,7 +92,7 @@ class TestCase(testtools.TestCase):
             format_args.append('-f json')
 
         output = execute(
-            ' '.join(['openstack'] + auth_args + [cmd] + format_args),
+            ' '.join(['fibostack'] + auth_args + [cmd] + format_args),
             fail_ok=fail_ok,
         )
 
@@ -113,7 +113,7 @@ class TestCase(testtools.TestCase):
         :returns: True if the service is enabled and optionally provides the
             specified API version, else False
         """
-        ret = cls.openstack(
+        ret = cls.fibostack(
             f'versions show --service {service} -f value -c Version'
         ).splitlines()
         if version:
@@ -124,16 +124,16 @@ class TestCase(testtools.TestCase):
     @classmethod
     def is_extension_enabled(cls, alias, *, service='network'):
         """Ask client cloud if extension is enabled"""
-        extensions = cls.openstack(
+        extensions = cls.fibostack(
             f'extension list --{service}',
             parse_output=True,
         )
         return alias in [x['Alias'] for x in extensions]
 
     @classmethod
-    def get_openstack_configuration_value(cls, configuration):
+    def get_fibostack_configuration_value(cls, configuration):
         opts = cls.get_opts([configuration])
-        return cls.openstack('configuration show ' + opts)
+        return cls.fibostack('configuration show ' + opts)
 
     @classmethod
     def get_opts(cls, fields, output_format='value'):

@@ -13,8 +13,8 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from openstackclient.image.v2 import info
-from openstackclient.tests.unit.image.v2 import fakes as image_fakes
+from fibostackclient.image.v2 import info
+from fibostackclient.tests.unit.image.v2 import fakes as image_fakes
 
 
 class TestImportInfo(image_fakes.TestImagev2):

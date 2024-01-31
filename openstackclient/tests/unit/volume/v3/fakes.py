@@ -15,16 +15,16 @@ from unittest import mock
 import uuid
 
 from cinderclient import api_versions
-from openstack.block_storage.v3 import _proxy
-from openstack.block_storage.v3 import availability_zone as _availability_zone
-from openstack.block_storage.v3 import extension as _extension
-from openstack.block_storage.v3 import resource_filter as _filters
-from openstack.block_storage.v3 import volume as _volume
+from fibostack.block_storage.v3 import _proxy
+from fibostack.block_storage.v3 import availability_zone as _availability_zone
+from fibostack.block_storage.v3 import extension as _extension
+from fibostack.block_storage.v3 import resource_filter as _filters
+from fibostack.block_storage.v3 import volume as _volume
 
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
-from openstackclient.tests.unit import utils
-from openstackclient.tests.unit.volume.v2 import fakes as volume_v2_fakes
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.tests.unit import utils
+from fibostackclient.tests.unit.volume.v2 import fakes as volume_v2_fakes
 
 
 class FakeVolumeClient:
@@ -91,7 +91,7 @@ class TestVolume(FakeClientMixin, utils.TestCommand):
         )
 
         # avoid circular imports
-        from openstackclient.tests.unit.compute.v2 import (
+        from fibostackclient.tests.unit.compute.v2 import (
             fakes as compute_fakes,
         )
 
@@ -113,7 +113,7 @@ def create_one_availability_zone(attrs=None):
 
     :param dict attrs: A dictionary with all attributes
     :return: A fake
-        openstack.block_storage.v3.availability_zone.AvailabilityZone object
+        fibostack.block_storage.v3.availability_zone.AvailabilityZone object
     """
     attrs = attrs or {}
 
@@ -138,7 +138,7 @@ def create_availability_zones(attrs=None, count=2):
     :param dict attrs: A dictionary with all attributes
     :param int count: The number of availability zones to fake
     :return: A list of fake
-        openstack.block_storage.v3.availability_zone.AvailabilityZone objects
+        fibostack.block_storage.v3.availability_zone.AvailabilityZone objects
     """
     availability_zones = []
     for i in range(0, count):
@@ -153,7 +153,7 @@ def create_one_extension(attrs=None):
 
     :param dict attrs: A dictionary with all attributes
     :return: A fake
-        openstack.block_storage.v3.extension.Extension object
+        fibostack.block_storage.v3.extension.Extension object
     """
     attrs = attrs or {}
 
@@ -163,7 +163,7 @@ def create_one_extension(attrs=None):
         'description': 'description-' + uuid.uuid4().hex,
         'links': [
             {
-                "href": "https://github.com/openstack/block-api",
+                "href": "https://github.com/fibostack/block-api",
                 "type": "text/html",
                 "rel": "describedby",
             }
@@ -557,7 +557,7 @@ def create_one_volume_attachment(attrs=None):
             'encrypted': False,
             'qos_specs': None,
             'target_discovered': False,
-            'target_iqn': f'iqn.2010-10.org.openstack:volume-{attachment_id}',
+            'target_iqn': f'iqn.2010-10.org.fibostack:volume-{attachment_id}',
             'target_lun': '1',
             'target_portal': '192.168.122.170:3260',
             'volume_id': volume_id,

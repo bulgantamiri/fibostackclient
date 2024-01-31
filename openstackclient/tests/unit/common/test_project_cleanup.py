@@ -13,9 +13,9 @@
 from io import StringIO
 from unittest import mock
 
-from openstackclient.common import project_cleanup
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
-from openstackclient.tests.unit import utils as test_utils
+from fibostackclient.common import project_cleanup
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.tests.unit import utils as test_utils
 
 
 class TestProjectCleanup(test_utils.TestCommand):

@@ -13,7 +13,7 @@
 import time
 import uuid
 
-from openstackclient.tests.functional.volume.v2 import common
+from fibostackclient.tests.functional.volume.v2 import common
 
 
 class VolumeTypeTests(common.BaseVolumeTests):
@@ -21,26 +21,26 @@ class VolumeTypeTests(common.BaseVolumeTests):
 
     def test_volume_type_create_list(self):
         name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume type create --private ' + name,
             parse_output=True,
         )
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'volume type delete ' + name,
         )
         self.assertEqual(name, cmd_output['name'])
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume type show %s' % name,
             parse_output=True,
         )
         self.assertEqual(name, cmd_output['name'])
 
-        cmd_output = self.openstack('volume type list', parse_output=True)
+        cmd_output = self.fibostack('volume type list', parse_output=True)
         self.assertIn(name, [t['Name'] for t in cmd_output])
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume type list --default',
             parse_output=True,
         )
@@ -49,26 +49,26 @@ class VolumeTypeTests(common.BaseVolumeTests):
 
     def test_volume_type_set_unset_properties(self):
         name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume type create --private ' + name,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'volume type delete ' + name)
+        self.addCleanup(self.fibostack, 'volume type delete ' + name)
         self.assertEqual(name, cmd_output['name'])
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume type set --property a=b --property c=d %s' % name
         )
         self.assertEqual("", raw_output)
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume type show %s' % name,
             parse_output=True,
         )
         self.assertEqual({'a': 'b', 'c': 'd'}, cmd_output['properties'])
 
-        raw_output = self.openstack('volume type unset --property a %s' % name)
+        raw_output = self.fibostack('volume type unset --property a %s' % name)
         self.assertEqual("", raw_output)
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume type show %s' % name,
             parse_output=True,
         )
@@ -76,28 +76,28 @@ class VolumeTypeTests(common.BaseVolumeTests):
 
     def test_volume_type_set_unset_multiple_properties(self):
         name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume type create --private ' + name,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'volume type delete ' + name)
+        self.addCleanup(self.fibostack, 'volume type delete ' + name)
         self.assertEqual(name, cmd_output['name'])
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume type set --property a=b --property c=d %s' % name
         )
         self.assertEqual("", raw_output)
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume type show %s' % name,
             parse_output=True,
         )
         self.assertEqual({'a': 'b', 'c': 'd'}, cmd_output['properties'])
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume type unset --property a --property c %s' % name
         )
         self.assertEqual("", raw_output)
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume type show %s' % name,
             parse_output=True,
         )
@@ -105,19 +105,19 @@ class VolumeTypeTests(common.BaseVolumeTests):
 
     def test_volume_type_set_unset_project(self):
         name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume type create --private ' + name,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'volume type delete ' + name)
+        self.addCleanup(self.fibostack, 'volume type delete ' + name)
         self.assertEqual(name, cmd_output['name'])
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume type set --project admin %s' % name
         )
         self.assertEqual("", raw_output)
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume type unset --project admin %s' % name
         )
         self.assertEqual("", raw_output)
@@ -125,12 +125,12 @@ class VolumeTypeTests(common.BaseVolumeTests):
     def test_multi_delete(self):
         vol_type1 = uuid.uuid4().hex
         vol_type2 = uuid.uuid4().hex
-        self.openstack('volume type create %s' % vol_type1)
+        self.fibostack('volume type create %s' % vol_type1)
         time.sleep(5)
-        self.openstack('volume type create %s' % vol_type2)
+        self.fibostack('volume type create %s' % vol_type2)
         time.sleep(5)
         cmd = 'volume type delete %s %s' % (vol_type1, vol_type2)
-        raw_output = self.openstack(cmd)
+        raw_output = self.fibostack(cmd)
         self.assertOutput('', raw_output)
 
     # NOTE: Add some basic functional tests with the old format to
@@ -141,7 +141,7 @@ class VolumeTypeTests(common.BaseVolumeTests):
         name = uuid.uuid4().hex
         encryption_type = uuid.uuid4().hex
         # test create new encryption type
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume type create '
             '--encryption-provider LuksEncryptor '
             '--encryption-cipher aes-xts-plain64 '
@@ -158,7 +158,7 @@ class VolumeTypeTests(common.BaseVolumeTests):
         for attr, value in expected.items():
             self.assertEqual(value, cmd_output['encryption'][attr])
         # test show encryption type
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume type show --encryption-type ' + encryption_type,
             parse_output=True,
         )
@@ -171,7 +171,7 @@ class VolumeTypeTests(common.BaseVolumeTests):
         for attr, value in expected.items():
             self.assertEqual(value, cmd_output['encryption'][attr])
         # test list encryption type
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume type list --encryption-type',
             parse_output=True,
         )
@@ -187,13 +187,13 @@ class VolumeTypeTests(common.BaseVolumeTests):
         for attr, value in expected.items():
             self.assertEqual(value, encryption_output[attr])
         # test set existing encryption type
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume type set '
             '--encryption-key-size 256 '
             '--encryption-control-location back-end ' + encryption_type
         )
         self.assertEqual('', raw_output)
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume type show --encryption-type ' + encryption_type,
             parse_output=True,
         )
@@ -206,17 +206,17 @@ class VolumeTypeTests(common.BaseVolumeTests):
         for attr, value in expected.items():
             self.assertEqual(value, cmd_output['encryption'][attr])
         # test set new encryption type
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume type create --private ' + name,
             parse_output=True,
         )
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'volume type delete ' + name,
         )
         self.assertEqual(name, cmd_output['name'])
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume type set '
             '--encryption-provider LuksEncryptor '
             '--encryption-cipher aes-xts-plain64 '
@@ -225,7 +225,7 @@ class VolumeTypeTests(common.BaseVolumeTests):
         )
         self.assertEqual('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume type show --encryption-type ' + name,
             parse_output=True,
         )
@@ -238,15 +238,15 @@ class VolumeTypeTests(common.BaseVolumeTests):
         for attr, value in expected.items():
             self.assertEqual(value, cmd_output['encryption'][attr])
         # test unset encryption type
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume type unset --encryption-type ' + name
         )
         self.assertEqual('', raw_output)
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume type show --encryption-type ' + name,
             parse_output=True,
         )
         self.assertEqual({}, cmd_output['encryption'])
         # test delete encryption type
-        raw_output = self.openstack('volume type delete ' + encryption_type)
+        raw_output = self.fibostack('volume type delete ' + encryption_type)
         self.assertEqual('', raw_output)

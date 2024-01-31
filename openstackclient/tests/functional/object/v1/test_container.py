@@ -12,8 +12,8 @@
 
 import uuid
 
-# from openstackclient.tests.functional import base
-from openstackclient.tests.functional.object.v1 import common
+# from fibostackclient.tests.functional import base
+from fibostackclient.tests.functional.object.v1 import common
 
 
 class ContainerTests(common.ObjectStoreTests):
@@ -26,14 +26,14 @@ class ContainerTests(common.ObjectStoreTests):
         super(ContainerTests, cls).setUpClass()
         if cls.haz_object_store:
             opts = cls.get_opts(['container'])
-            raw_output = cls.openstack('container create ' + cls.NAME + opts)
+            raw_output = cls.fibostack('container create ' + cls.NAME + opts)
             cls.assertOutput(cls.NAME + '\n', raw_output)
 
     @classmethod
     def tearDownClass(cls):
         try:
             if cls.haz_object_store:
-                raw_output = cls.openstack('container delete ' + cls.NAME)
+                raw_output = cls.fibostack('container delete ' + cls.NAME)
                 cls.assertOutput('', raw_output)
         finally:
             super(ContainerTests, cls).tearDownClass()
@@ -46,10 +46,10 @@ class ContainerTests(common.ObjectStoreTests):
 
     def test_container_list(self):
         opts = self.get_opts(['Name'])
-        raw_output = self.openstack('container list' + opts)
+        raw_output = self.fibostack('container list' + opts)
         self.assertIn(self.NAME, raw_output)
 
     def test_container_show(self):
         opts = self.get_opts(['container'])
-        raw_output = self.openstack('container show ' + self.NAME + opts)
+        raw_output = self.fibostack('container show ' + self.NAME + opts)
         self.assertEqual(self.NAME + "\n", raw_output)

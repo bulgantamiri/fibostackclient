@@ -1,4 +1,4 @@
 zaqar
 -----
 
-.. autoprogram-cliff:: openstack.messaging.v2
+.. autoprogram-cliff:: fibostack.messaging.v2

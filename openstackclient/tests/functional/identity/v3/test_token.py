@@ -10,11 +10,11 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from openstackclient.tests.functional.identity.v3 import common
+from fibostackclient.tests.functional.identity.v3 import common
 
 
 class TokenTests(common.IdentityTests):
     def test_token_issue(self):
-        raw_output = self.openstack('token issue')
+        raw_output = self.fibostack('token issue')
         items = self.parse_show(raw_output)
         self.assert_show_fields(items, self.TOKEN_FIELDS)

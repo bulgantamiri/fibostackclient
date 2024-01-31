@@ -7,5 +7,5 @@ rules which will be used by neutron to create rules in every new security group.
 
 Network v2
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: default security group rule *

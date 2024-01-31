@@ -10,11 +10,11 @@
 #   License for the specific language governing permissions and limitations
 #   under the License.
 
-from openstackclient.common import availability_zone
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
-from openstackclient.tests.unit.network.v2 import fakes as network_fakes
-from openstackclient.tests.unit import utils
-from openstackclient.tests.unit.volume.v3 import fakes as volume_fakes
+from fibostackclient.common import availability_zone
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.tests.unit.network.v2 import fakes as network_fakes
+from fibostackclient.tests.unit import utils
+from fibostackclient.tests.unit.volume.v3 import fakes as volume_fakes
 
 
 def _build_compute_az_datalist(compute_az, long_datalist=False):

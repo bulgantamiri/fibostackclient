@@ -12,9 +12,9 @@
 
 import copy
 
-from openstackclient.identity.v3 import token
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.identity.v3 import token
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
 
 
 class TestOAuth1(identity_fakes.TestOAuth1):

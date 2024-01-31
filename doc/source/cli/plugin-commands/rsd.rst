@@ -1,4 +1,4 @@
 rsd
 ---
 
-.. autoprogram-cliff:: openstack.rsd.v2
+.. autoprogram-cliff:: fibostack.rsd.v2

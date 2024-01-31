@@ -10,14 +10,14 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 
 class AvailabilityZoneTests(base.TestCase):
     """Functional tests for availability zone."""
 
     def test_availability_zone_list(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'availability zone list',
             parse_output=True,
         )

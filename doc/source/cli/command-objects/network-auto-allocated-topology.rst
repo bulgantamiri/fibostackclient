@@ -10,5 +10,5 @@ for auto allocated topology review :neutron-doc:`the documentation
 
 Network v2
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: network auto allocated topology *

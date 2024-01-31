@@ -16,11 +16,11 @@
 from unittest import mock
 from unittest.mock import call
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.compute.v2 import agent
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
-from openstackclient.tests.unit import utils as tests_utils
+from fibostackclient.compute.v2 import agent
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.tests.unit import utils as tests_utils
 
 
 class TestAgent(compute_fakes.TestComputev2):

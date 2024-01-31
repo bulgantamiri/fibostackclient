@@ -15,13 +15,13 @@
 
 from unittest import mock
 
-from openstackclient.compute.v2 import host
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit import utils as tests_utils
+from fibostackclient.compute.v2 import host
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit import utils as tests_utils
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.host_list')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.host_list')
 class TestHostList(compute_fakes.TestComputev2):
     _host = compute_fakes.create_one_host()
 
@@ -80,7 +80,7 @@ class TestHostList(compute_fakes.TestComputev2):
         self.assertEqual(self.data, list(data))
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.host_set')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.host_set')
 class TestHostSet(compute_fakes.TestComputev2):
     def setUp(self):
         super(TestHostSet, self).setUp()
@@ -130,7 +130,7 @@ class TestHostSet(compute_fakes.TestComputev2):
         )
 
 
-@mock.patch('openstackclient.api.compute_v2.APIv2.host_show')
+@mock.patch('fibostackclient.api.compute_v2.APIv2.host_show')
 class TestHostShow(compute_fakes.TestComputev2):
     _host = compute_fakes.create_one_host()
 

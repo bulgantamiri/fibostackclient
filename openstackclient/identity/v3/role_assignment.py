@@ -13,11 +13,11 @@
 
 """Identity v3 Assignment action implementations"""
 
-from osc_lib.command import command
-from osc_lib import utils
+from fsc_lib.command import command
+from fsc_lib import utils
 
-from openstackclient.i18n import _
-from openstackclient.identity import common
+from fibostackclient.i18n import _
+from fibostackclient.identity import common
 
 
 class ListRoleAssignment(command.Lister):

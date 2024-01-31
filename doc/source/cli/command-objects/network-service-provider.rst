@@ -9,5 +9,5 @@ Network v2
 
 .. _network_service_provider_list:
 
-.. autoprogram-cliff:: openstack.network.v2
+.. autoprogram-cliff:: fibostack.network.v2
    :command: network service provider list

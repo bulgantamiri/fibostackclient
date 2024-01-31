@@ -1,4 +1,4 @@
-#   Copyright 2012-2013 OpenStack Foundation
+#   Copyright 2012-2013 fibostack Foundation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
 #   not use this file except in compliance with the License. You may obtain
@@ -20,11 +20,11 @@ import logging
 
 from cliff import columns as cliff_columns
 from keystoneauth1 import exceptions as ks_exc
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 
 LOG = logging.getLogger(__name__)
@@ -35,7 +35,7 @@ class ProjectColumn(cliff_columns.FormattableColumn):
 
     Unlike the parent FormattableColumn class, the initializer of the
     class takes project_cache as the second argument.
-    osc_lib.utils.get_item_properties instantiate cliff FormattableColumn
+    fsc_lib.utils.get_item_properties instantiate cliff FormattableColumn
     object with a single parameter "column value", so you need to pass
     a partially initialized class like
     ``functools.partial(ProjectColumn, project_cache)``.
@@ -149,7 +149,7 @@ class CreateUser(command.ShowOne):
 
         # NOTE(dtroyer): The users.create() method wants 'tenant_id' but
         #                the returned resource has 'tenantId'.  Sigh.
-        #                We're using project_id now inside OSC so there.
+        #                We're using project_id now inside fsc so there.
         if 'tenantId' in user._info:
             user._info.update({'project_id': user._info.pop('tenantId')})
 

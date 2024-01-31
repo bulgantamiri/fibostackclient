@@ -14,7 +14,7 @@ import uuid
 
 import fixtures
 
-from openstackclient.tests.functional.image import base
+from fibostackclient.tests.functional.image import base
 
 
 class ImageTests(base.BaseImageTests):
@@ -29,7 +29,7 @@ class ImageTests(base.BaseImageTests):
         self.name = uuid.uuid4().hex
         self.image_tag = 'my_tag'
         self.image_tag1 = 'random'
-        output = self.openstack(
+        output = self.fibostack(
             'image create --tag {tag} {name}'.format(
                 tag=self.image_tag, name=self.name
             ),
@@ -40,30 +40,30 @@ class ImageTests(base.BaseImageTests):
 
     def tearDown(self):
         try:
-            self.openstack('image delete ' + self.image_id)
+            self.fibostack('image delete ' + self.image_id)
         finally:
             super().tearDown()
 
     def test_image_list(self):
-        output = self.openstack('image list', parse_output=True)
+        output = self.fibostack('image list', parse_output=True)
         self.assertIn(self.name, [img['Name'] for img in output])
 
     def test_image_list_with_name_filter(self):
-        output = self.openstack(
+        output = self.fibostack(
             'image list --name ' + self.name,
             parse_output=True,
         )
         self.assertIn(self.name, [img['Name'] for img in output])
 
     def test_image_list_with_status_filter(self):
-        output = self.openstack(
+        output = self.fibostack(
             'image list --status active',
             parse_output=True,
         )
         self.assertIn('active', [img['Status'] for img in output])
 
     def test_image_list_with_tag_filter(self):
-        output = self.openstack(
+        output = self.fibostack(
             'image list --tag '
             + self.image_tag
             + ' --tag '
@@ -79,14 +79,14 @@ class ImageTests(base.BaseImageTests):
         """Test set, unset, show on attributes, tags and properties"""
 
         # Test explicit attributes
-        self.openstack(
+        self.fibostack(
             'image set '
             + '--min-disk 4 '
             + '--min-ram 5 '
             + '--public '
             + self.name
         )
-        output = self.openstack(
+        output = self.fibostack(
             'image show ' + self.name,
             parse_output=True,
         )
@@ -104,7 +104,7 @@ class ImageTests(base.BaseImageTests):
         )
 
         # Test properties
-        self.openstack(
+        self.fibostack(
             'image set '
             + '--property a=b '
             + '--property c=d '
@@ -112,21 +112,21 @@ class ImageTests(base.BaseImageTests):
             + '--public '
             + self.name
         )
-        output = self.openstack(
+        output = self.fibostack(
             'image show ' + self.name,
             parse_output=True,
         )
         self.assertIn("a", output["properties"])
         self.assertIn("c", output["properties"])
 
-        self.openstack(
+        self.fibostack(
             'image unset '
             + '--property a '
             + '--property c '
             + '--property hw_rng_model '
             + self.name
         )
-        output = self.openstack(
+        output = self.fibostack(
             'image show ' + self.name,
             parse_output=True,
         )
@@ -135,15 +135,15 @@ class ImageTests(base.BaseImageTests):
 
         # Test tags
         self.assertNotIn('01', output["tags"])
-        self.openstack('image set ' + '--tag 01 ' + self.name)
-        output = self.openstack(
+        self.fibostack('image set ' + '--tag 01 ' + self.name)
+        output = self.fibostack(
             'image show ' + self.name,
             parse_output=True,
         )
         self.assertIn('01', output["tags"])
 
-        self.openstack('image unset ' + '--tag 01 ' + self.name)
-        output = self.openstack(
+        self.fibostack('image unset ' + '--tag 01 ' + self.name)
+        output = self.fibostack(
             'image show ' + self.name,
             parse_output=True,
         )
@@ -151,7 +151,7 @@ class ImageTests(base.BaseImageTests):
 
     def test_image_set_rename(self):
         name = uuid.uuid4().hex
-        output = self.openstack(
+        output = self.fibostack(
             'image create ' + name,
             parse_output=True,
         )
@@ -160,8 +160,8 @@ class ImageTests(base.BaseImageTests):
             name,
             output["name"],
         )
-        self.openstack('image set ' + '--name ' + name + 'xx ' + image_id)
-        output = self.openstack(
+        self.fibostack('image set ' + '--name ' + name + 'xx ' + image_id)
+        output = self.fibostack(
             'image show ' + name + 'xx',
             parse_output=True,
         )
@@ -175,39 +175,39 @@ class ImageTests(base.BaseImageTests):
     #                properly added.
     def test_image_members(self):
         """Test member add, remove, accept"""
-        output = self.openstack(
+        output = self.fibostack(
             'token issue',
             parse_output=True,
         )
         my_project_id = output['project_id']
 
-        output = self.openstack(
+        output = self.fibostack(
             'image show -f json ' + self.name,
             parse_output=True,
         )
-        # NOTE(dtroyer): Until OSC supports --shared flags in create and set
+        # NOTE(dtroyer): Until fsc supports --shared flags in create and set
         #                we can not properly test membership.  Sometimes the
         #                images are shared and sometimes they are not.
         if output["visibility"] == 'shared':
-            self.openstack(
+            self.fibostack(
                 'image add project ' + self.name + ' ' + my_project_id
             )
             # self.addCleanup(
-            #     self.openstack,
+            #     self.fibostack,
             #     'image remove project ' +
             #     self.name + ' ' +
             #     my_project_id
             # )
 
-            self.openstack('image set ' + '--accept ' + self.name)
-            output = self.openstack(
+            self.fibostack('image set ' + '--accept ' + self.name)
+            output = self.fibostack(
                 'image list -f json ' + '--shared',
                 parse_output=True,
             )
             self.assertIn(self.name, [img['Name'] for img in output])
 
-            self.openstack('image set ' + '--reject ' + self.name)
-            output = self.openstack(
+            self.fibostack('image set ' + '--reject ' + self.name)
+            output = self.fibostack(
                 'image list -f json ' + '--shared',
                 parse_output=True,
             )
@@ -216,7 +216,7 @@ class ImageTests(base.BaseImageTests):
             #     [img['Name'] for img in output]
             # )
 
-            self.openstack(
+            self.fibostack(
                 'image remove project ' + self.name + ' ' + my_project_id
             )
 
@@ -224,12 +224,12 @@ class ImageTests(base.BaseImageTests):
         #     # Test not shared
         #     self.assertRaises(
         #         image_exceptions.HTTPForbidden,
-        #         self.openstack,
+        #         self.fibostack,
         #         'image add project ' +
         #         self.name + ' ' +
         #         my_project_id
         #     )
-        #     self.openstack(
+        #     self.fibostack(
         #         'image set ' +
         #         '--share ' +
         #         self.name

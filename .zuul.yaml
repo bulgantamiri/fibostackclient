@@ -1,77 +1,77 @@
 ---
 - job:
-    name: osc-tox-unit-tips
-    parent: openstack-tox
+    name: fsc-tox-unit-tips
+    parent: fibostack-tox
     description: |
-      Run unit tests for OpenStackClient with master branch of important libs.
+      Run unit tests for fibostackClient with master branch of important libs.
 
       Takes advantage of the base tox job's install-siblings feature.
     required-projects:
-      - openstack/cliff
-      - openstack/keystoneauth
-      - openstack/openstacksdk
-      - openstack/osc-lib
-      - openstack/python-openstackclient
+      - fibostack/cliff
+      - fibostack/keystoneauth
+      - fibostack/openstacksdk
+      - fibostack/fsc-lib
+      - fibostack/python-fibostackclient
     vars:
-      # Set work dir to openstackclient so that if it's triggered by one of the
+      # Set work dir to fibostackclient so that if it's triggered by one of the
       # other repos the tests will run in the same place
-      zuul_work_dir: src/opendev.org/openstack/python-openstackclient
+      zuul_work_dir: src/opendev.org/fibostack/python-fibostackclient
 
 - job:
-    name: osc-tox-py38-tips
-    parent: openstack-tox-py38
+    name: fsc-tox-py38-tips
+    parent: fibostack-tox-py38
     description: |
-      Run unit tests for OpenStackClient with master branch of important libs.
-
-      Takes advantage of the base tox job's install-siblings feature.
-    # The job only tests the latest and shouldn't be run on the stable branches
-    branches: ^master$
-    required-projects:
-      - openstack/cliff
-      - openstack/keystoneauth
-      - openstack/openstacksdk
-      - openstack/osc-lib
-      - openstack/python-openstackclient
-    vars:
-      # Set work dir to openstackclient so that if it's triggered by one of the
-      # other repos the tests will run in the same place
-      zuul_work_dir: src/opendev.org/openstack/python-openstackclient
-
-- job:
-    name: osc-tox-py310-tips
-    parent: openstack-tox-py310
-    description: |
-      Run unit tests for OpenStackClient with master branch of important libs.
+      Run unit tests for fibostackClient with master branch of important libs.
 
       Takes advantage of the base tox job's install-siblings feature.
     # The job only tests the latest and shouldn't be run on the stable branches
     branches: ^master$
     required-projects:
-      - openstack/cliff
-      - openstack/keystoneauth
-      - openstack/openstacksdk
-      - openstack/osc-lib
-      - openstack/python-openstackclient
+      - fibostack/cliff
+      - fibostack/keystoneauth
+      - fibostack/openstacksdk
+      - fibostack/fsc-lib
+      - fibostack/python-fibostackclient
     vars:
-      # Set work dir to openstackclient so that if it's triggered by one of the
+      # Set work dir to fibostackclient so that if it's triggered by one of the
       # other repos the tests will run in the same place
-      zuul_work_dir: src/opendev.org/openstack/python-openstackclient
+      zuul_work_dir: src/opendev.org/fibostack/python-fibostackclient
 
 - job:
-    name: osc-functional-devstack
+    name: fsc-tox-py310-tips
+    parent: fibostack-tox-py310
+    description: |
+      Run unit tests for fibostackClient with master branch of important libs.
+
+      Takes advantage of the base tox job's install-siblings feature.
+    # The job only tests the latest and shouldn't be run on the stable branches
+    branches: ^master$
+    required-projects:
+      - fibostack/cliff
+      - fibostack/keystoneauth
+      - fibostack/openstacksdk
+      - fibostack/fsc-lib
+      - fibostack/python-fibostackclient
+    vars:
+      # Set work dir to fibostackclient so that if it's triggered by one of the
+      # other repos the tests will run in the same place
+      zuul_work_dir: src/opendev.org/fibostack/python-fibostackclient
+
+- job:
+    name: fsc-functional-devstack
     parent: devstack-tox-functional
     description: |
-      Run functional tests for OpenStackClient.
+      Run functional tests for fibostackClient.
     timeout: 7800
     irrelevant-files:
       - ^.*\.rst$
       - ^doc/.*$
       - ^releasenotes/.*$
     required-projects:
-      - openstack/python-openstackclient
+      - fibostack/python-fibostackclient
     vars:
       devstack_localrc:
-        LIBS_FROM_GIT: python-openstackclient
+        LIBS_FROM_GIT: python-fibostackclient
         # NOTE(dtroyer): Functional tests need a bit more volume headroom
         VOLUME_BACKING_FILE_SIZE: 20G
         Q_AGENT: openvswitch
@@ -79,7 +79,7 @@
         Q_ML2_PLUGIN_MECHANISM_DRIVERS: openvswitch
       devstack_plugins:
         # NOTE(amotoki): Some neutron features are enabled by devstack plugin
-        neutron: https://opendev.org/openstack/neutron
+        neutron: https://opendev.org/fibostack/neutron
       devstack_services:
         ceilometer-acentral: false
         ceilometer-acompute: false
@@ -113,36 +113,36 @@
         neutron-conntrack-helper: true
         neutron-ndp-proxy: true
         q-trunk: true
-      osc_environment:
+      fsc_environment:
         PYTHONUNBUFFERED: 'true'
         OS_CLOUD: devstack-admin
       tox_envlist: functional
-      zuul_work_dir: src/opendev.org/openstack/python-openstackclient
+      zuul_work_dir: src/opendev.org/fibostack/python-fibostackclient
 
 - job:
-    name: osc-functional-devstack-tips
-    parent: osc-functional-devstack
+    name: fsc-functional-devstack-tips
+    parent: fsc-functional-devstack
     description: |
-      Run functional tests for OpenStackClient with master branch of important libs.
+      Run functional tests for fibostackClient with master branch of important libs.
 
       Takes advantage of the base tox job's install-siblings feature.
     timeout: 7800
     required-projects:
-      - openstack/cliff
-      - openstack/keystoneauth
-      - openstack/openstacksdk
-      - openstack/osc-lib
-      - openstack/python-openstackclient
+      - fibostack/cliff
+      - fibostack/keystoneauth
+      - fibostack/openstacksdk
+      - fibostack/fsc-lib
+      - fibostack/python-fibostackclient
     vars:
       devstack_localrc:
-        LIBS_FROM_GIT: python-openstackclient,openstacksdk,osc-lib,cliff
+        LIBS_FROM_GIT: python-fibostackclient,openstacksdk,fsc-lib,cliff
       tox_envlist: functional
       tox_install_siblings: true
 
 - secret:
-    name: osc-dockerhub
+    name: fsc-dockerhub
     data:
-      username: osclientzuul
+      username: fsclientzuul
       password: !encrypted/pkcs1-oaep
         - LbIZjJiVstRVXMpoLQ3+/JcNB6lKVUWJXXo5+Outf+PKAaO7mNnv8XLiFMKnJ6ftopLyu
           hWbX9rA+NddvplLQkf1xxkh7QBBU8PToLr58quI2SENUclt4tpjxbZfZu451kFSNJvNvR
@@ -156,79 +156,79 @@
           BfI5+Qlg7HMwkBXNB73EPfWHzbCR3VNrzGYTy9FvhGud0/cXsuBXgps4WH63ic=
 
 - job:
-    name: osc-build-image
+    name: fsc-build-image
     parent: opendev-build-docker-image
     description: Build Docker images.
-    allowed-projects: openstack/python-openstackclient
+    allowed-projects: fibostack/python-fibostackclient
     requires:
       - python-builder-3.11-bookworm-container-image
       - python-base-3.11-bookworm-container-image
-    provides: osc-container-image
-    vars: &osc_image_vars
+    provides: fsc-container-image
+    vars: &fsc_image_vars
       docker_images:
         - context: .
-          repository: osclient/python-openstackclient
+          repository: fsclient/python-fibostackclient
 
 - job:
-    name: osc-upload-image
+    name: fsc-upload-image
     parent: opendev-upload-docker-image
     description: Build Docker images and upload to Docker Hub.
-    allowed-projects: openstack/python-openstackclient
+    allowed-projects: fibostack/python-fibostackclient
     requires:
       - python-builder-3.11-bookworm-container-image
       - python-base-3.11-bookworm-container-image
-    provides: osc-container-image
+    provides: fsc-container-image
     secrets:
       - name: docker_credentials
-        secret: osc-dockerhub
+        secret: fsc-dockerhub
         pass-to-parent: true
-    vars: *osc_image_vars
+    vars: *fsc_image_vars
 
 - job:
-    name: osc-promote-image
+    name: fsc-promote-image
     parent: opendev-promote-docker-image
-    allowed-projects: openstack/python-openstackclient
+    allowed-projects: fibostack/python-fibostackclient
     description: Promote previously uploaded Docker images.
     secrets:
       - name: docker_credentials
-        secret: osc-dockerhub
+        secret: fsc-dockerhub
         pass-to-parent: true
     nodeset:
       nodes: []
-    vars: *osc_image_vars
+    vars: *fsc_image_vars
 
 - project-template:
-    name: osc-tox-unit-tips
+    name: fsc-tox-unit-tips
     check:
       jobs:
-        - osc-tox-py38-tips
-        - osc-tox-py310-tips
+        - fsc-tox-py38-tips
+        - fsc-tox-py310-tips
     gate:
       jobs:
-        - osc-tox-py38-tips
-        - osc-tox-py310-tips
+        - fsc-tox-py38-tips
+        - fsc-tox-py310-tips
 
 - project:
     templates:
-      - openstackclient-plugin-jobs
-      - osc-tox-unit-tips
-      - openstack-cover-jobs
-      - openstack-python3-jobs
-      - publish-openstack-docs-pti
+      - fibostackclient-plugin-jobs
+      - fsc-tox-unit-tips
+      - fibostack-cover-jobs
+      - fibostack-python3-jobs
+      - publish-fibostack-docs-pti
       - check-requirements
       - release-notes-jobs-python3
     check:
       jobs:
-        - osc-build-image
-        - osc-functional-devstack
-        - osc-functional-devstack-tips:
+        - fsc-build-image
+        - fsc-functional-devstack
+        - fsc-functional-devstack-tips:
             # The functional-tips job only tests the latest and shouldn't be run
             # on the stable branches
             branches: ^master$
     gate:
       jobs:
-        - osc-upload-image
-        - osc-functional-devstack
+        - fsc-upload-image
+        - fsc-functional-devstack
     promote:
       jobs:
-        - osc-promote-image
+        - fsc-promote-image

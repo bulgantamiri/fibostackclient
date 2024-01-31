@@ -10,11 +10,11 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from osc_lib.cli import format_columns
-from osc_lib.command import command
-from osc_lib import utils
+from fsc_lib.cli import format_columns
+from fsc_lib.command import command
+from fsc_lib import utils
 
-from openstackclient.i18n import _
+from fibostackclient.i18n import _
 
 _formatters = {
     'tags': format_columns.ListColumn,
@@ -22,7 +22,7 @@ _formatters = {
 
 
 def _format_task(task):
-    """Format an task to make it more consistent with OSC operations."""
+    """Format an task to make it more consistent with fsc operations."""
 
     info = {}
     properties = {}

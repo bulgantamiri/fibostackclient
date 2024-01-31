@@ -19,17 +19,17 @@ import uuid
 
 # FIXME(stephenfin): We are using v3 resource versions despite being v2 fakes
 from cinderclient import api_versions
-from openstack.block_storage.v2 import _proxy as block_storage_v2_proxy
-from openstack.block_storage.v3 import backup as _backup
-from openstack.block_storage.v3 import capabilities as _capabilities
-from openstack.block_storage.v3 import stats as _stats
-from openstack.block_storage.v3 import volume as _volume
-from openstack.image.v2 import _proxy as image_v2_proxy
-from osc_lib.cli import format_columns
+from fibostack.block_storage.v2 import _proxy as block_storage_v2_proxy
+from fibostack.block_storage.v3 import backup as _backup
+from fibostack.block_storage.v3 import capabilities as _capabilities
+from fibostack.block_storage.v3 import stats as _stats
+from fibostack.block_storage.v3 import volume as _volume
+from fibostack.image.v2 import _proxy as image_v2_proxy
+from fsc_lib.cli import format_columns
 
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
-from openstackclient.tests.unit import utils
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.tests.unit import utils
 
 
 QUOTA = {
@@ -117,7 +117,7 @@ class TestVolume(FakeClientMixin, utils.TestCommand):
         )
 
         # avoid circular imports by defining this manually rather than using
-        # openstackclient.tests.unit.image.v2.fakes.FakeClientMixin
+        # fibostackclient.tests.unit.image.v2.fakes.FakeClientMixin
         self.app.client_manager.image = mock.Mock(spec=image_v2_proxy.Proxy)
         self.image_client = self.app.client_manager.image
 
@@ -267,7 +267,7 @@ def create_one_capability(attrs=None):
     # Set default attribute
     capability_info = {
         "namespace": "OS::Storage::Capabilities::fake",
-        "vendor_name": "OpenStack",
+        "vendor_name": "fibostack",
         "volume_backend_name": "lvmdriver-1",
         "pool_name": "pool",
         "driver_version": "2.0.0",

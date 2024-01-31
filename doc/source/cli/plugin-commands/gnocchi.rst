@@ -1,4 +1,4 @@
 gnocchi
 -------
 
-.. autoprogram-cliff:: openstack.metric.v1
+.. autoprogram-cliff:: fibostack.metric.v1

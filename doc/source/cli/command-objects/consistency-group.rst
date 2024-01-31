@@ -12,7 +12,7 @@ Add volume(s) to consistency group.
 .. program:: consistency group add volume
 .. code:: bash
 
-    openstack consistency group add volume
+    fibostack consistency group add volume
         <consistency-group>
         <volume> [<volume> ...]
 
@@ -34,7 +34,7 @@ Create new consistency group.
 .. program:: consistency group create
 .. code:: bash
 
-    openstack consistency group create
+    fibostack consistency group create
         --volume-type <volume-type> | --consistency-group-source <consistency-group> | --consistency-group-snapshot <consistency-group-snapshot>
         [--description <description>]
         [--availability-zone <availability-zone>]
@@ -74,7 +74,7 @@ Delete consistency group(s).
 .. program:: consistency group delete
 .. code:: bash
 
-    openstack consistency group delete
+    fibostack consistency group delete
         [--force]
         <consistency-group> [<consistency-group> ...]
 
@@ -95,7 +95,7 @@ List consistency groups.
 .. program:: consistency group list
 .. code:: bash
 
-    openstack consistency group list
+    fibostack consistency group list
         [--all-projects]
         [--long]
 
@@ -116,7 +116,7 @@ Remove volume(s) from consistency group.
 .. program:: consistency group remove volume
 .. code:: bash
 
-    openstack consistency group remove volume
+    fibostack consistency group remove volume
         <consistency-group>
         <volume> [<volume> ...]
 
@@ -138,7 +138,7 @@ Set consistency group properties.
 .. program:: consistency group set
 .. code:: bash
 
-    openstack consistency group set
+    fibostack consistency group set
         [--name <name>]
         [--description <description>]
         <consistency-group>
@@ -164,7 +164,7 @@ Display consistency group details.
 .. program:: consistency group show
 .. code:: bash
 
-    openstack consistency group show
+    fibostack consistency group show
         <consistency-group>
 
 .. _consistency_group_show-consistency-group:

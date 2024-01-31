@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class AddressScopeTests(common.NetworkTests):
@@ -26,7 +26,7 @@ class AddressScopeTests(common.NetworkTests):
     def test_address_scope_delete(self):
         """Test create, delete multiple"""
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'address scope create ' + name1,
             parse_output=True,
         )
@@ -38,7 +38,7 @@ class AddressScopeTests(common.NetworkTests):
         self.assertFalse(cmd_output['shared'])
 
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'address scope create ' + name2,
             parse_output=True,
         )
@@ -47,7 +47,7 @@ class AddressScopeTests(common.NetworkTests):
             cmd_output['name'],
         )
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'address scope delete ' + name1 + ' ' + name2,
         )
         self.assertOutput('', raw_output)
@@ -55,11 +55,11 @@ class AddressScopeTests(common.NetworkTests):
     def test_address_scope_list(self):
         """Test create defaults, list filters, delete"""
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'address scope create ' + '--ip-version 4 ' + '--share ' + name1,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'address scope delete ' + name1)
+        self.addCleanup(self.fibostack, 'address scope delete ' + name1)
         self.assertEqual(
             name1,
             cmd_output['name'],
@@ -71,14 +71,14 @@ class AddressScopeTests(common.NetworkTests):
         self.assertTrue(cmd_output['shared'])
 
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'address scope create '
             + '--ip-version 6 '
             + '--no-share '
             + name2,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'address scope delete ' + name2)
+        self.addCleanup(self.fibostack, 'address scope delete ' + name2)
         self.assertEqual(
             name2,
             cmd_output['name'],
@@ -90,7 +90,7 @@ class AddressScopeTests(common.NetworkTests):
         self.assertFalse(cmd_output['shared'])
 
         # Test list
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'address scope list ',
             parse_output=True,
         )
@@ -99,7 +99,7 @@ class AddressScopeTests(common.NetworkTests):
         self.assertIn(6, col_data)
 
         # Test list --share
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'address scope list --share',
             parse_output=True,
         )
@@ -108,7 +108,7 @@ class AddressScopeTests(common.NetworkTests):
         self.assertNotIn(False, col_data)
 
         # Test list --no-share
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'address scope list --no-share',
             parse_output=True,
         )
@@ -120,11 +120,11 @@ class AddressScopeTests(common.NetworkTests):
         """Tests create options, set, show, delete"""
         name = uuid.uuid4().hex
         newname = name + "_"
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'address scope create ' + '--ip-version 4 ' + '--no-share ' + name,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'address scope delete ' + newname)
+        self.addCleanup(self.fibostack, 'address scope delete ' + newname)
         self.assertEqual(
             name,
             cmd_output['name'],
@@ -135,12 +135,12 @@ class AddressScopeTests(common.NetworkTests):
         )
         self.assertFalse(cmd_output['shared'])
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'address scope set ' + '--name ' + newname + ' --share ' + name,
         )
         self.assertOutput('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'address scope show ' + newname,
             parse_output=True,
         )

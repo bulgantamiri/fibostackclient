@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class NetworkFlavorTests(common.NetworkTests):
@@ -22,7 +22,7 @@ class NetworkFlavorTests(common.NetworkTests):
         """Test add and remove network flavor to/from profile"""
         # Create Flavor
         name1 = uuid.uuid4().hex
-        cmd_output1 = self.openstack(
+        cmd_output1 = self.fibostack(
             'network flavor create --description testdescription '
             '--enable  --service-type L3_ROUTER_NAT ' + name1,
             parse_output=True,
@@ -30,27 +30,27 @@ class NetworkFlavorTests(common.NetworkTests):
         flavor_id = cmd_output1.get('id')
 
         # Create Service Flavor
-        cmd_output2 = self.openstack(
+        cmd_output2 = self.fibostack(
             'network flavor profile create --description '
             'fakedescription --enable --metainfo Extrainfo',
             parse_output=True,
         )
         service_profile_id = cmd_output2.get('id')
 
-        self.addCleanup(self.openstack, 'network flavor delete %s' % flavor_id)
+        self.addCleanup(self.fibostack, 'network flavor delete %s' % flavor_id)
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'network flavor profile delete %s' % service_profile_id,
         )
         # Add flavor to service profile
-        self.openstack(
+        self.fibostack(
             'network flavor add profile '
             + flavor_id
             + ' '
             + service_profile_id
         )
 
-        cmd_output4 = self.openstack(
+        cmd_output4 = self.fibostack(
             'network flavor show ' + flavor_id,
             parse_output=True,
         )
@@ -61,14 +61,14 @@ class NetworkFlavorTests(common.NetworkTests):
 
         # Cleanup
         # Remove flavor from service profile
-        self.openstack(
+        self.fibostack(
             'network flavor remove profile '
             + flavor_id
             + ' '
             + service_profile_id
         )
 
-        cmd_output6 = self.openstack(
+        cmd_output6 = self.fibostack(
             'network flavor show ' + flavor_id,
             parse_output=True,
         )
@@ -80,7 +80,7 @@ class NetworkFlavorTests(common.NetworkTests):
     def test_network_flavor_delete(self):
         """Test create, delete multiple"""
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network flavor create --description testdescription '
             '--enable  --service-type L3_ROUTER_NAT ' + name1,
             parse_output=True,
@@ -96,7 +96,7 @@ class NetworkFlavorTests(common.NetworkTests):
         )
 
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network flavor create --description testdescription1 '
             '--disable --service-type  L3_ROUTER_NAT ' + name2,
             parse_output=True,
@@ -110,7 +110,7 @@ class NetworkFlavorTests(common.NetworkTests):
             'testdescription1',
             cmd_output['description'],
         )
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'network flavor delete ' + name1 + " " + name2
         )
         self.assertOutput('', raw_output)
@@ -118,12 +118,12 @@ class NetworkFlavorTests(common.NetworkTests):
     def test_network_flavor_list(self):
         """Test create defaults, list filters, delete"""
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network flavor create --description testdescription '
             '--enable  --service-type  L3_ROUTER_NAT ' + name1,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, "network flavor delete " + name1)
+        self.addCleanup(self.fibostack, "network flavor delete " + name1)
         self.assertEqual(
             name1,
             cmd_output['name'],
@@ -138,7 +138,7 @@ class NetworkFlavorTests(common.NetworkTests):
         )
 
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network flavor create --description testdescription1 '
             '--disable --service-type  L3_ROUTER_NAT ' + name2,
             parse_output=True,
@@ -155,10 +155,10 @@ class NetworkFlavorTests(common.NetworkTests):
             'testdescription1',
             cmd_output['description'],
         )
-        self.addCleanup(self.openstack, "network flavor delete " + name2)
+        self.addCleanup(self.fibostack, "network flavor delete " + name2)
 
         # Test list
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network flavor list ',
             parse_output=True,
         )
@@ -172,12 +172,12 @@ class NetworkFlavorTests(common.NetworkTests):
         """Tests create options, set, show, delete"""
         name = uuid.uuid4().hex
         newname = name + "_"
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network flavor create --description testdescription '
             '--disable --service-type  L3_ROUTER_NAT ' + name,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, "network flavor delete " + newname)
+        self.addCleanup(self.fibostack, "network flavor delete " + newname)
         self.assertEqual(
             name,
             cmd_output['name'],
@@ -191,12 +191,12 @@ class NetworkFlavorTests(common.NetworkTests):
             cmd_output['description'],
         )
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'network flavor set --name ' + newname + ' --disable ' + name
         )
         self.assertOutput('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network flavor show ' + newname,
             parse_output=True,
         )
@@ -216,13 +216,13 @@ class NetworkFlavorTests(common.NetworkTests):
     def test_network_flavor_show(self):
         """Test show network flavor"""
         name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network flavor create --description testdescription '
             '--disable --service-type  L3_ROUTER_NAT ' + name,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, "network flavor delete " + name)
-        cmd_output = self.openstack(
+        self.addCleanup(self.fibostack, "network flavor delete " + name)
+        cmd_output = self.fibostack(
             'network flavor show ' + name,
             parse_output=True,
         )

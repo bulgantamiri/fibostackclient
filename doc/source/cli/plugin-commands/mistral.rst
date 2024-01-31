@@ -1,4 +1,4 @@
 mistral
 -------
 
-.. autoprogram-cliff:: openstack.workflow_engine.v2
+.. autoprogram-cliff:: fibostack.workflow_engine.v2

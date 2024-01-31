@@ -4,7 +4,7 @@ cache-list,cached image list,Get cache state.
 cache-queue,cached image queue,Queue image(s) for caching.
 explain,WONTFIX,Describe a specific model.
 image-create,image create,Create a new image.
-image-create-via-import, image create --import,"EXPERIMENTAL: Create a new image via image import using glance-direct import method. Missing support for web-download, copy-image and glance-download import methods. The OSC command is also missing support for importing image to specified store as well as all stores (--store, --stores, --all-stores) and skip or stop processing if import fails to one of the store (--allow-failure)"
+image-create-via-import, image create --import,"EXPERIMENTAL: Create a new image via image import using glance-direct import method. Missing support for web-download, copy-image and glance-download import methods. The fsc command is also missing support for importing image to specified store as well as all stores (--store, --stores, --all-stores) and skip or stop processing if import fails to one of the store (--allow-failure)"
 image-deactivate,image set --deactivate,Deactivate specified image.
 image-delete,image delete,Delete specified image.
 image-download,image save,Download a specific image.

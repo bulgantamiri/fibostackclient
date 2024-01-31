@@ -13,9 +13,9 @@
 
 from unittest import mock
 
-from openstackclient.identity.v2_0 import catalog
-from openstackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
-from openstackclient.tests.unit import utils
+from fibostackclient.identity.v2_0 import catalog
+from fibostackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
+from fibostackclient.tests.unit import utils
 
 
 class TestCatalog(utils.TestCommand):

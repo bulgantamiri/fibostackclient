@@ -16,7 +16,7 @@ import uuid
 
 from tempest.lib import exceptions
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 
 class ComputeTestCase(base.TestCase):
@@ -37,7 +37,7 @@ class ComputeTestCase(base.TestCase):
     def get_flavor(cls):
         # NOTE(rtheis): Get cirros256 or m1.tiny flavors since functional
         #               tests may create other flavors.
-        flavors = cls.openstack("flavor list", parse_output=True)
+        flavors = cls.fibostack("flavor list", parse_output=True)
         server_flavor = None
         for flavor in flavors:
             if flavor['Name'] in ['m1.tiny', 'cirros256']:
@@ -50,7 +50,7 @@ class ComputeTestCase(base.TestCase):
         # NOTE(rtheis): Get first Cirros image since functional tests may
         #               create other images.  Image may be named '-uec' or
         #               '-disk'.
-        images = cls.openstack("image list", parse_output=True)
+        images = cls.fibostack("image list", parse_output=True)
         server_image = None
         for image in images:
             if image['Name'].startswith('cirros-') and (
@@ -66,7 +66,7 @@ class ComputeTestCase(base.TestCase):
         try:
             # NOTE(rtheis): Get private network since functional tests may
             #               create other networks.
-            cmd_output = cls.openstack(
+            cmd_output = cls.fibostack(
                 'network show private',
                 parse_output=True,
             )
@@ -83,7 +83,7 @@ class ComputeTestCase(base.TestCase):
         if not self.network_arg:
             self.network_arg = self.get_network()
         name = name or uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server create '
             + '--flavor '
             + self.flavor_name
@@ -108,7 +108,7 @@ class ComputeTestCase(base.TestCase):
 
     def server_delete(self, name):
         """Delete server by name"""
-        raw_output = self.openstack('server delete ' + name)
+        raw_output = self.fibostack('server delete ' + name)
         self.assertOutput('', raw_output)
 
     def wait_for_status(
@@ -119,11 +119,11 @@ class ComputeTestCase(base.TestCase):
         interval=10,
     ):
         """Wait until server reaches expected status"""
-        # TODO(thowe): Add a server wait command to osc
+        # TODO(thowe): Add a server wait command to fsc
         failures = ['ERROR']
         total_sleep = 0
         while total_sleep < wait:
-            cmd_output = self.openstack(
+            cmd_output = self.fibostack(
                 'server show ' + name,
                 parse_output=True,
             )
@@ -140,7 +140,7 @@ class ComputeTestCase(base.TestCase):
             time.sleep(interval)
             total_sleep += interval
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server show ' + name,
             parse_output=True,
         )

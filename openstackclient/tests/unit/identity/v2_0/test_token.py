@@ -15,8 +15,8 @@
 
 from unittest import mock
 
-from openstackclient.identity.v2_0 import token
-from openstackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
+from fibostackclient.identity.v2_0 import token
+from fibostackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
 
 
 class TestToken(identity_fakes.TestIdentityv2):

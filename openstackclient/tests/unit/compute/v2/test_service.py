@@ -15,11 +15,11 @@
 from unittest import mock
 from unittest.mock import call
 
-from openstack import utils as sdk_utils
-from osc_lib import exceptions
+from fibostack import utils as sdk_utils
+from fsc_lib import exceptions
 
-from openstackclient.compute.v2 import service
-from openstackclient.tests.unit.compute.v2 import fakes as compute_fakes
+from fibostackclient.compute.v2 import service
+from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
 
 
 class TestServiceDelete(compute_fakes.TestComputev2):

@@ -2,7 +2,7 @@
 Command Errors
 ==============
 
-Handling errors in OpenStackClient commands is fairly straightforward.  An
+Handling errors in fibostackClient commands is fairly straightforward.  An
 exception is thrown and handled by the application-level caller.
 
 Note: There are many cases that need to be filled out here.  The initial
@@ -13,7 +13,7 @@ handle when one or more of those calls fails.
 General Command Errors
 ======================
 
-The general pattern for handling OpenStackClient command-level errors is to
+The general pattern for handling fibostackClient command-level errors is to
 raise a CommandError exception with an appropriate message.  This should include
 conditions arising from arguments that are not valid/allowed (that are not otherwise
 enforced by ``argparse``) as well as errors arising from external conditions.
@@ -21,7 +21,7 @@ enforced by ``argparse``) as well as errors arising from external conditions.
 External Errors
 ---------------
 
-External errors are a result of things outside OpenStackClient not being as
+External errors are a result of things outside fibostackClient not being as
 expected.
 
 Example

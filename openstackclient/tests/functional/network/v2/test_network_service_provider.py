@@ -13,7 +13,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class TestNetworkServiceProvider(common.NetworkTests):
@@ -25,7 +25,7 @@ class TestNetworkServiceProvider(common.NetworkTests):
         # NOTE(slaweq):
         # that tests should works only when "standard" Neutron L3 agent is
         # used, as e.g. OVN L3 plugin don't supports that.
-        l3_agent_list = self.openstack(
+        l3_agent_list = self.fibostack(
             'network agent list --agent-type l3 -c ID',
             parse_output=True,
         )
@@ -33,7 +33,7 @@ class TestNetworkServiceProvider(common.NetworkTests):
             self.skipTest("No Neutron L3 Agents present")
 
     def test_network_service_provider_list(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network service provider list',
             parse_output=True,
         )

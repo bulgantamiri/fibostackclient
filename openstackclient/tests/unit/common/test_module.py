@@ -17,9 +17,9 @@
 
 from unittest import mock
 
-from openstackclient.common import module as osc_module
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit import utils
+from fibostackclient.common import module as fsc_module
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit import utils
 
 
 # NOTE(dtroyer): module_1 must match the version list filter (not --all)
@@ -31,7 +31,7 @@ module_name_2 = 'zlib'
 module_version_2 = '1.1'
 
 # module_3 match openstacksdk
-module_name_3 = 'openstack'
+module_name_3 = 'fibostack'
 module_version_3 = '0.9.13'
 
 # module_4 match sub module of fakeclient
@@ -57,14 +57,14 @@ class TestCommandList(utils.TestCommand):
 
         self.app.command_manager = mock.Mock()
         self.app.command_manager.get_command_groups.return_value = [
-            'openstack.common'
+            'fibostack.common'
         ]
         self.app.command_manager.get_command_names.return_value = [
             'limits show\nextension list'
         ]
 
         # Get the command object to test
-        self.cmd = osc_module.ListCommand(self.app, None)
+        self.cmd = fsc_module.ListCommand(self.app, None)
 
     def test_command_list_no_options(self):
         arglist = []
@@ -80,7 +80,7 @@ class TestCommandList(utils.TestCommand):
         # handling the detection rather than using the hard-code below.
         collist = ('Command Group', 'Commands')
         self.assertEqual(collist, columns)
-        datalist = (('openstack.common', 'limits show\nextension list'),)
+        datalist = (('fibostack.common', 'limits show\nextension list'),)
 
         self.assertEqual(datalist, tuple(data))
 
@@ -114,13 +114,13 @@ class TestCommandList(utils.TestCommand):
 
         collist = ('Command Group', 'Commands')
         self.assertEqual(collist, columns)
-        datalist = (('openstack.common', 'limits show\nextension list'),)
+        datalist = (('fibostack.common', 'limits show\nextension list'),)
 
         self.assertEqual(datalist, tuple(data))
 
 
 @mock.patch.dict(
-    'openstackclient.common.module.sys.modules',
+    'fibostackclient.common.module.sys.modules',
     values=MODULES,
     clear=True,
 )
@@ -129,7 +129,7 @@ class TestModuleList(utils.TestCommand):
         super(TestModuleList, self).setUp()
 
         # Get the command object to test
-        self.cmd = osc_module.ListModule(self.app, None)
+        self.cmd = fsc_module.ListModule(self.app, None)
 
     def test_module_list_no_options(self):
         arglist = []

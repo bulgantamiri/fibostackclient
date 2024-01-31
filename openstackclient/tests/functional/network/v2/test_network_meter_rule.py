@@ -16,7 +16,7 @@
 import unittest
 import uuid
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class TestMeterRule(common.NetworkTests):
@@ -35,7 +35,7 @@ class TestMeterRule(common.NetworkTests):
         if cls.haz_network:
             cls.METER_NAME = uuid.uuid4().hex
 
-            json_output = cls.openstack(
+            json_output = cls.fibostack(
                 'network meter create ' + cls.METER_NAME,
                 parse_output=True,
             )
@@ -45,7 +45,7 @@ class TestMeterRule(common.NetworkTests):
     def tearDownClass(cls):
         try:
             if cls.haz_network:
-                raw_output = cls.openstack(
+                raw_output = cls.fibostack(
                     'network meter delete ' + cls.METER_ID
                 )
                 cls.assertOutput('', raw_output)
@@ -54,7 +54,7 @@ class TestMeterRule(common.NetworkTests):
 
     def test_meter_rule_delete(self):
         """test create, delete"""
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network meter rule create '
             + '--remote-ip-prefix 10.0.0.0/8 '
             + self.METER_ID,
@@ -63,14 +63,14 @@ class TestMeterRule(common.NetworkTests):
         rule_id = json_output.get('id')
         re_ip = json_output.get('remote_ip_prefix')
 
-        self.addCleanup(self.openstack, 'network meter rule delete ' + rule_id)
+        self.addCleanup(self.fibostack, 'network meter rule delete ' + rule_id)
         self.assertIsNotNone(re_ip)
         self.assertIsNotNone(rule_id)
         self.assertEqual('10.0.0.0/8', re_ip)
 
     def test_meter_rule_list(self):
         """Test create, list, delete"""
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network meter rule create '
             + '--remote-ip-prefix 10.0.0.0/8 '
             + self.METER_ID,
@@ -78,11 +78,11 @@ class TestMeterRule(common.NetworkTests):
         )
         rule_id_1 = json_output.get('id')
         self.addCleanup(
-            self.openstack, 'network meter rule delete ' + rule_id_1
+            self.fibostack, 'network meter rule delete ' + rule_id_1
         )
         self.assertEqual('10.0.0.0/8', json_output.get('remote_ip_prefix'))
 
-        json_output_1 = self.openstack(
+        json_output_1 = self.fibostack(
             'network meter rule create '
             + '--remote-ip-prefix 11.0.0.0/8 '
             + self.METER_ID,
@@ -90,11 +90,11 @@ class TestMeterRule(common.NetworkTests):
         )
         rule_id_2 = json_output_1.get('id')
         self.addCleanup(
-            self.openstack, 'network meter rule delete ' + rule_id_2
+            self.fibostack, 'network meter rule delete ' + rule_id_2
         )
         self.assertEqual('11.0.0.0/8', json_output_1.get('remote_ip_prefix'))
 
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network meter rule list',
             parse_output=True,
         )
@@ -107,7 +107,7 @@ class TestMeterRule(common.NetworkTests):
 
     def test_meter_rule_show(self):
         """Test create, show, delete"""
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network meter rule create '
             + '--remote-ip-prefix 10.0.0.0/8 '
             + '--egress '
@@ -118,11 +118,11 @@ class TestMeterRule(common.NetworkTests):
 
         self.assertEqual('egress', json_output.get('direction'))
 
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network meter rule show ' + rule_id,
             parse_output=True,
         )
         self.assertEqual('10.0.0.0/8', json_output.get('remote_ip_prefix'))
         self.assertIsNotNone(rule_id)
 
-        self.addCleanup(self.openstack, 'network meter rule delete ' + rule_id)
+        self.addCleanup(self.fibostack, 'network meter rule delete ' + rule_id)

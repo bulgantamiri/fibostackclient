@@ -6,5 +6,5 @@ Available for all services
 
 .. _configuration-show:
 
-.. autoprogram-cliff:: openstack.common
+.. autoprogram-cliff:: fibostack.common
    :command: configuration show

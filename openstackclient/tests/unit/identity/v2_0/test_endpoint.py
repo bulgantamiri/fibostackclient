@@ -11,8 +11,8 @@
 #   under the License.
 #
 
-from openstackclient.identity.v2_0 import endpoint
-from openstackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
+from fibostackclient.identity.v2_0 import endpoint
+from fibostackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
 
 
 class TestEndpoint(identity_fakes.TestIdentityv2):

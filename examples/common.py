@@ -21,10 +21,10 @@ It may also be run directly as a script to do basic testing of itself.
 
 common.object_parser() provides the common set of command-line arguments
 used in the library CLIs for setting up authentication.  This should make
-playing with the example scripts against a running OpenStack simpler.
+playing with the example scripts against a running fibostack simpler.
 
 common.configure_logging() provides the same basic logging control as
-the OSC shell.
+the fsc shell.
 
 common.make_session() does the minimal loading of a Keystone authentication
 plugin and creates a Keystone client Session.
@@ -38,12 +38,12 @@ import sys
 import traceback
 
 from keystoneauth1 import session as ks_session
-from osc_lib.api import auth
+from fsc_lib.api import auth
 
 
 CONSOLE_MESSAGE_FORMAT = '%(levelname)s: %(name)s %(message)s'
 DEFAULT_VERBOSE_LEVEL = 1
-USER_AGENT = 'osc-examples'
+USER_AGENT = 'fsc-examples'
 
 PARSER_DESCRIPTION = 'A demonstration framework'
 
@@ -154,7 +154,7 @@ def base_parser(parser):
 def configure_logging(opts):
     """Typical app logging setup
 
-    Based on OSC/cliff
+    Based on fsc/cliff
 
     """
 

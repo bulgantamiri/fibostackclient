@@ -12,7 +12,7 @@
 
 from tempest.lib.common.utils import data_utils
 
-from openstackclient.tests.functional.identity.v3 import common
+from fibostackclient.tests.functional.identity.v3 import common
 
 
 class ServiceProviderTests(common.IdentityTests):
@@ -23,7 +23,7 @@ class ServiceProviderTests(common.IdentityTests):
 
     def test_sp_delete(self):
         service_provider = self._create_dummy_sp(add_clean_up=False)
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'service provider delete %s' % service_provider
         )
         self.assertEqual(0, len(raw_output))
@@ -31,14 +31,14 @@ class ServiceProviderTests(common.IdentityTests):
     def test_sp_multi_delete(self):
         sp1 = self._create_dummy_sp(add_clean_up=False)
         sp2 = self._create_dummy_sp(add_clean_up=False)
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'service provider delete %s %s' % (sp1, sp2)
         )
         self.assertEqual(0, len(raw_output))
 
     def test_sp_show(self):
         service_provider = self._create_dummy_sp(add_clean_up=True)
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'service provider show %s' % service_provider
         )
         items = self.parse_show(raw_output)
@@ -46,14 +46,14 @@ class ServiceProviderTests(common.IdentityTests):
 
     def test_sp_list(self):
         self._create_dummy_sp(add_clean_up=True)
-        raw_output = self.openstack('service provider list')
+        raw_output = self.fibostack('service provider list')
         items = self.parse_listing(raw_output)
         self.assert_table_structure(items, self.SERVICE_PROVIDER_LIST_HEADERS)
 
     def test_sp_set(self):
         service_provider = self._create_dummy_sp(add_clean_up=True)
         new_description = data_utils.rand_name('newDescription')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'service provider set '
             '%(service-provider)s '
             '--description %(description)s '
@@ -63,7 +63,7 @@ class ServiceProviderTests(common.IdentityTests):
             }
         )
         self.assertEqual(0, len(raw_output))
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'service provider show %s' % service_provider
         )
         updated_value = self.parse_show_as_object(raw_output)

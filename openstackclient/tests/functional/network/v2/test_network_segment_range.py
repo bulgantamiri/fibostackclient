@@ -16,7 +16,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class NetworkSegmentRangeTests(common.NetworkTests):
@@ -32,12 +32,12 @@ class NetworkSegmentRangeTests(common.NetworkTests):
 
     def test_network_segment_range_create_delete(self):
         # Make a project
-        project_id = self.openstack(
+        project_id = self.fibostack(
             'project create ' + self.PROJECT_NAME,
             parse_output=True,
         )['id']
         name = uuid.uuid4().hex
-        json_output = self.openstack(
+        json_output = self.fibostack(
             ' network segment range create '
             + '--private '
             + "--project "
@@ -58,18 +58,18 @@ class NetworkSegmentRangeTests(common.NetworkTests):
             json_output["project_id"],
         )
 
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'network segment range delete ' + name,
         )
         self.assertOutput('', raw_output)
-        raw_output_project = self.openstack(
+        raw_output_project = self.fibostack(
             'project delete ' + self.PROJECT_NAME
         )
         self.assertEqual('', raw_output_project)
 
     def test_network_segment_range_list(self):
         name = uuid.uuid4().hex
-        json_output = self.openstack(
+        json_output = self.fibostack(
             ' network segment range create '
             + '--shared '
             + '--network-type geneve '
@@ -81,7 +81,7 @@ class NetworkSegmentRangeTests(common.NetworkTests):
         network_segment_range_id = json_output.get('id')
         network_segment_range_name = json_output.get('name')
         self.addCleanup(
-            self.openstack,
+            self.fibostack,
             'network segment range delete ' + network_segment_range_id,
         )
         self.assertEqual(
@@ -89,7 +89,7 @@ class NetworkSegmentRangeTests(common.NetworkTests):
             json_output["name"],
         )
 
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network segment range list',
             parse_output=True,
         )
@@ -98,12 +98,12 @@ class NetworkSegmentRangeTests(common.NetworkTests):
         self.assertIn(network_segment_range_name, item_map.values())
 
     def test_network_segment_range_set_show(self):
-        project_id = self.openstack(
+        project_id = self.fibostack(
             'project create ' + self.PROJECT_NAME,
             parse_output=True,
         )['id']
         name = uuid.uuid4().hex
-        json_output = self.openstack(
+        json_output = self.fibostack(
             ' network segment range create '
             + '--private '
             + "--project "
@@ -115,7 +115,7 @@ class NetworkSegmentRangeTests(common.NetworkTests):
             + name,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'network segment range delete ' + name)
+        self.addCleanup(self.fibostack, 'network segment range delete ' + name)
         self.assertEqual(
             name,
             json_output["name"],
@@ -127,13 +127,13 @@ class NetworkSegmentRangeTests(common.NetworkTests):
 
         new_minimum = 2020
         new_maximum = 2029
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network segment range set --minimum {min} --maximum {max} '
             '{name}'.format(min=new_minimum, max=new_maximum, name=name)
         )
         self.assertOutput('', cmd_output)
 
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network segment range show ' + name,
             parse_output=True,
         )
@@ -146,7 +146,7 @@ class NetworkSegmentRangeTests(common.NetworkTests):
             json_output["maximum"],
         )
 
-        raw_output_project = self.openstack(
+        raw_output_project = self.fibostack(
             'project delete ' + self.PROJECT_NAME
         )
         self.assertEqual('', raw_output_project)

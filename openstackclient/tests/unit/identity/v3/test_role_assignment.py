@@ -14,9 +14,9 @@
 import copy
 from unittest import mock
 
-from openstackclient.identity.v3 import role_assignment
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v3 import fakes as identity_fakes
+from fibostackclient.identity.v3 import role_assignment
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
 
 
 class TestRoleAssignment(identity_fakes.TestIdentityv3):

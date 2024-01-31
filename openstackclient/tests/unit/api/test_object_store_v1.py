@@ -18,8 +18,8 @@ from unittest import mock
 from keystoneauth1 import session
 from requests_mock.contrib import fixture
 
-from openstackclient.api import object_store_v1 as object_store
-from openstackclient.tests.unit import utils
+from fibostackclient.api import object_store_v1 as object_store
+from fibostackclient.tests.unit import utils
 
 
 FAKE_ACCOUNT = 'q12we34r'
@@ -183,7 +183,7 @@ class TestObject(TestObjectAPIv1):
     def setUp(self):
         super(TestObject, self).setUp()
 
-    @mock.patch('openstackclient.api.object_store_v1.io.open')
+    @mock.patch('fibostackclient.api.object_store_v1.io.open')
     def base_object_create(self, file_contents, mock_open):
         mock_open.read.return_value = file_contents
 

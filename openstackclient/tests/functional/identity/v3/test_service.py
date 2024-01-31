@@ -12,7 +12,7 @@
 
 from tempest.lib.common.utils import data_utils
 
-from openstackclient.tests.functional.identity.v3 import common
+from fibostackclient.tests.functional.identity.v3 import common
 
 
 class ServiceTests(common.IdentityTests):
@@ -21,20 +21,20 @@ class ServiceTests(common.IdentityTests):
 
     def test_service_delete(self):
         service_name = self._create_dummy_service(add_clean_up=False)
-        raw_output = self.openstack('service delete %s' % service_name)
+        raw_output = self.fibostack('service delete %s' % service_name)
         self.assertEqual(0, len(raw_output))
 
     def test_service_multi_delete(self):
         service_1 = self._create_dummy_service(add_clean_up=False)
         service_2 = self._create_dummy_service(add_clean_up=False)
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'service delete %s %s' % (service_1, service_2)
         )
         self.assertEqual(0, len(raw_output))
 
     def test_service_list(self):
         self._create_dummy_service()
-        raw_output = self.openstack('service list')
+        raw_output = self.fibostack('service list')
         items = self.parse_listing(raw_output)
         self.assert_table_structure(items, common.BASIC_LIST_HEADERS)
 
@@ -44,7 +44,7 @@ class ServiceTests(common.IdentityTests):
         new_service_name = data_utils.rand_name('NewTestService')
         new_service_description = data_utils.rand_name('description')
         new_service_type = data_utils.rand_name('NewTestType')
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'service set '
             '--type %(type)s '
             '--name %(name)s '
@@ -60,7 +60,7 @@ class ServiceTests(common.IdentityTests):
         )
         self.assertEqual(0, len(raw_output))
         # get service details
-        raw_output = self.openstack('service show %s' % new_service_name)
+        raw_output = self.fibostack('service show %s' % new_service_name)
         # assert service details
         service = self.parse_show_as_object(raw_output)
         self.assertEqual(new_service_type, service['type'])
@@ -69,6 +69,6 @@ class ServiceTests(common.IdentityTests):
 
     def test_service_show(self):
         service_name = self._create_dummy_service()
-        raw_output = self.openstack('service show %s' % service_name)
+        raw_output = self.fibostack('service show %s' % service_name)
         items = self.parse_show(raw_output)
         self.assert_show_fields(items, self.SERVICE_FIELDS)

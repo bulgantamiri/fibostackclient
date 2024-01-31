@@ -1,4 +1,4 @@
-#   Copyright 2012-2013 OpenStack Foundation
+#   Copyright 2012-2013 fibostack Foundation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
 #   not use this file except in compliance with the License. You may obtain
@@ -15,7 +15,7 @@
 
 import oslo_i18n
 
-_translators = oslo_i18n.TranslatorFactory(domain='openstackclient')
+_translators = oslo_i18n.TranslatorFactory(domain='fibostackclient')
 
 # The primary translation function using the well-known name "_"
 _ = _translators.primary

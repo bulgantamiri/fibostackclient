@@ -1,4 +1,4 @@
-#   Copyright 2013 OpenStack Foundation
+#   Copyright 2013 fibostack Foundation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
 #   not use this file except in compliance with the License. You may obtain
@@ -16,9 +16,9 @@
 import copy
 from unittest import mock
 
-from openstackclient.api import object_store_v1 as object_store
-from openstackclient.object.v1 import object as obj
-from openstackclient.tests.unit.object.v1 import fakes as object_fakes
+from fibostackclient.api import object_store_v1 as object_store
+from fibostackclient.object.v1 import object as obj
+from fibostackclient.tests.unit.object.v1 import fakes as object_fakes
 
 
 AUTH_TOKEN = "foobar"
@@ -35,7 +35,7 @@ class TestObject(object_fakes.TestObjectv1):
         self.api = self.app.client_manager.object_store
 
 
-@mock.patch('openstackclient.api.object_store_v1.APIv1.object_list')
+@mock.patch('fibostackclient.api.object_store_v1.APIv1.object_list')
 class TestObjectList(TestObject):
     columns = ('Name',)
     datalist = ((object_fakes.object_name_2,),)
@@ -320,7 +320,7 @@ class TestObjectList(TestObject):
         self.assertEqual(datalist, tuple(data))
 
 
-@mock.patch('openstackclient.api.object_store_v1.APIv1.object_show')
+@mock.patch('fibostackclient.api.object_store_v1.APIv1.object_show')
 class TestObjectShow(TestObject):
     def setUp(self):
         super(TestObjectShow, self).setUp()

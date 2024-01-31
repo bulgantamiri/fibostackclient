@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# osc-lib.py - Example using OSC as a library
+# fsc-lib.py - Example using fsc as a library
 
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -14,9 +14,9 @@
 # under the License.
 
 """
-OpenStackClient Library Examples
+fibostackClient Library Examples
 
-This script shows the basic use of the OpenStackClient ClientManager
+This script shows the basic use of the fibostackClient ClientManager
 as a library.
 
 """
@@ -28,7 +28,7 @@ import sys
 import common
 from os_client_config import config as cloud_config
 
-from openstackclient.common import clientmanager
+from fibostackclient.common import clientmanager
 
 
 LOG = logging.getLogger('')
@@ -38,7 +38,7 @@ def run(opts):
     """Run the examples"""
 
     # Do configuration file handling
-    cc = cloud_config.OpenStackConfig()
+    cc = cloud_config.fibostackConfig()
     LOG.debug("defaults: %s", cc.defaults)
 
     cloud = cc.get_one_cloud(
@@ -58,9 +58,9 @@ def run(opts):
             api_version[api] = version_opt
 
     # Set up certificate verification and CA bundle
-    # NOTE(dtroyer): This converts from the usual OpenStack way to the single
+    # NOTE(dtroyer): This converts from the usual fibostack way to the single
     #                requests argument and is an app-specific thing because
-    #                we want to be like OpenStackClient.
+    #                we want to be like fibostackClient.
     if opts.cacert:
         verify = opts.cacert
     else:

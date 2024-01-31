@@ -1,4 +1,4 @@
-#   Copyright 2012-2013 OpenStack Foundation
+#   Copyright 2012-2013 fibostack Foundation
 #
 #   Licensed under the Apache License, Version 2.0 (the "License"); you may
 #   not use this file except in compliance with the License. You may obtain
@@ -18,12 +18,12 @@
 import logging
 
 from keystoneauth1 import exceptions as ks_exc
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.i18n import _
-from openstackclient.identity import common
+from fibostackclient.i18n import _
+from fibostackclient.identity import common
 
 
 LOG = logging.getLogger(__name__)
@@ -155,7 +155,7 @@ class AddRole(command.Command):
         ):
             msg = _(
                 "Role not added, incorrect set of arguments "
-                "provided. See openstack --help for more details"
+                "provided. See fibostack --help for more details"
             )
             raise exceptions.CommandError(msg)
 
@@ -358,7 +358,7 @@ class RemoveRole(command.Command):
         ):
             msg = _(
                 "Incorrect set of arguments provided. "
-                "See openstack --help for more details"
+                "See fibostack --help for more details"
             )
             raise exceptions.CommandError(msg)
 

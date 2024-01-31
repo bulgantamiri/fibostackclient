@@ -16,8 +16,8 @@
 from keystoneauth1 import session
 from requests_mock.contrib import fixture
 
-from openstackclient.api import image_v2
-from openstackclient.tests.unit import utils
+from fibostackclient.api import image_v2
+from fibostackclient.tests.unit import utils
 
 
 FAKE_PROJECT = 'xyzpdq'

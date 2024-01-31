@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class NetworkRBACTests(common.NetworkTests):
@@ -29,14 +29,14 @@ class NetworkRBACTests(common.NetworkTests):
         self.NET_NAME = uuid.uuid4().hex
         self.PROJECT_NAME = uuid.uuid4().hex
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network create ' + self.NET_NAME,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'network delete ' + cmd_output['id'])
+        self.addCleanup(self.fibostack, 'network delete ' + cmd_output['id'])
         self.OBJECT_ID = cmd_output['id']
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network rbac create '
             + self.OBJECT_ID
             + ' --action access_as_shared'
@@ -45,39 +45,39 @@ class NetworkRBACTests(common.NetworkTests):
             parse_output=True,
         )
         self.addCleanup(
-            self.openstack, 'network rbac delete ' + cmd_output['id']
+            self.fibostack, 'network rbac delete ' + cmd_output['id']
         )
         self.ID = cmd_output['id']
         self.assertEqual(self.OBJECT_ID, cmd_output['object_id'])
 
     def test_network_rbac_list(self):
-        cmd_output = self.openstack('network rbac list', parse_output=True)
+        cmd_output = self.fibostack('network rbac list', parse_output=True)
         self.assertIn(self.ID, [rbac['ID'] for rbac in cmd_output])
 
     def test_network_rbac_show(self):
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'network rbac show ' + self.ID,
             parse_output=True,
         )
         self.assertEqual(self.ID, cmd_output['id'])
 
     def test_network_rbac_set(self):
-        project_id = self.openstack(
+        project_id = self.fibostack(
             'project create ' + self.PROJECT_NAME,
             parse_output=True,
         )['id']
-        self.openstack(
+        self.fibostack(
             'network rbac set '
             + self.ID
             + ' --target-project '
             + self.PROJECT_NAME
         )
-        cmd_output_rbac = self.openstack(
+        cmd_output_rbac = self.fibostack(
             'network rbac show ' + self.ID,
             parse_output=True,
         )
         self.assertEqual(project_id, cmd_output_rbac['target_project_id'])
-        raw_output_project = self.openstack(
+        raw_output_project = self.fibostack(
             'project delete ' + self.PROJECT_NAME
         )
         self.assertEqual('', raw_output_project)

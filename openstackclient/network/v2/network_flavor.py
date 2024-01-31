@@ -15,13 +15,13 @@
 
 import logging
 
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
-from openstackclient.i18n import _
-from openstackclient.identity import common as identity_common
-from openstackclient.network import common
+from fibostackclient.i18n import _
+from fibostackclient.identity import common as identity_common
+from fibostackclient.network import common
 
 LOG = logging.getLogger(__name__)
 
@@ -32,7 +32,7 @@ def _get_columns(item):
     }
 
     hidden_columns = ['location', 'tenant_id']
-    return utils.get_osc_show_columns_for_sdk_resource(
+    return utils.get_fsc_show_columns_for_sdk_resource(
         item, column_map, hidden_columns
     )
 
@@ -88,7 +88,7 @@ class AddNetworkFlavorToProfile(command.Command):
 
 
 # TODO(dasanind): Use the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class CreateNetworkFlavor(command.ShowOne, common.NeutronCommandWithExtraArgs):
     _description = _("Create new network flavor")
 
@@ -103,7 +103,7 @@ class CreateNetworkFlavor(command.ShowOne, common.NeutronCommandWithExtraArgs):
             required=True,
             help=_(
                 'Service type to which the flavor applies to: e.g. VPN '
-                '(See openstack network service provider list for loaded '
+                '(See fibostack network service provider list for loaded '
                 'examples.)'
             ),
         )
@@ -241,7 +241,7 @@ class RemoveNetworkFlavorFromProfile(command.Command):
 
 
 # TODO(dasanind): Use only the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class SetNetworkFlavor(common.NeutronCommandWithExtraArgs):
     _description = _("Set network flavor properties")
 

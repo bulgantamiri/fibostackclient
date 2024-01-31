@@ -15,11 +15,11 @@
 
 import logging
 
-from osc_lib.command import command
-from osc_lib import utils
+from fsc_lib.command import command
+from fsc_lib import utils
 
-from openstackclient.i18n import _
-from openstackclient.identity import common as identity_common
+from fibostackclient.i18n import _
+from fibostackclient.identity import common as identity_common
 
 LOG = logging.getLogger(__name__)
 
@@ -27,7 +27,7 @@ LOG = logging.getLogger(__name__)
 def _get_columns(item):
     column_map = {}
     hidden_columns = ['name', 'location', 'tenant_id']
-    return utils.get_osc_show_columns_for_sdk_resource(
+    return utils.get_fsc_show_columns_for_sdk_resource(
         item, column_map, hidden_columns
     )
 
@@ -60,7 +60,7 @@ def _get_attrs(client_manager, parsed_args):
 
 
 # TODO(ankur-gupta-f): Use the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class CreateAutoAllocatedTopology(command.ShowOne):
     _description = _("Create the  auto allocated topology for project")
 
@@ -121,7 +121,7 @@ class CreateAutoAllocatedTopology(command.ShowOne):
 
 
 # TODO(ankur-gupta-f): Use the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class DeleteAutoAllocatedTopology(command.Command):
     _description = _("Delete auto allocated topology for project")
 

@@ -12,7 +12,7 @@ List role assignments
 .. program:: role assignment list
 .. code:: bash
 
-    openstack role assignment list
+    fibostack role assignment list
         [--role <role>]
         [--role-domain <role-domain>]
         [--user <user>]

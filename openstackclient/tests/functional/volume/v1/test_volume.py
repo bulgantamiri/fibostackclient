@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.volume.v1 import common
+from fibostackclient.tests.functional.volume.v1 import common
 
 
 class VolumeTests(common.BaseVolumeTests):
@@ -21,7 +21,7 @@ class VolumeTests(common.BaseVolumeTests):
     def test_volume_create_and_delete(self):
         """Test create, delete multiple"""
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create ' + '--size 1 ' + name1,
             parse_output=True,
         )
@@ -31,7 +31,7 @@ class VolumeTests(common.BaseVolumeTests):
         )
 
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create ' + '--size 2 ' + name2,
             parse_output=True,
         )
@@ -42,17 +42,17 @@ class VolumeTests(common.BaseVolumeTests):
 
         self.wait_for_status("volume", name1, "available")
         self.wait_for_status("volume", name2, "available")
-        del_output = self.openstack('volume delete ' + name1 + ' ' + name2)
+        del_output = self.fibostack('volume delete ' + name1 + ' ' + name2)
         self.assertOutput('', del_output)
 
     def test_volume_list(self):
         """Test create, list filter"""
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create ' + '--size 1 ' + name1,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'volume delete ' + name1)
+        self.addCleanup(self.fibostack, 'volume delete ' + name1)
         self.assertEqual(
             1,
             cmd_output["size"],
@@ -60,11 +60,11 @@ class VolumeTests(common.BaseVolumeTests):
         self.wait_for_status("volume", name1, "available")
 
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create ' + '--size 2 ' + name2,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'volume delete ' + name2)
+        self.addCleanup(self.fibostack, 'volume delete ' + name2)
         self.assertEqual(
             2,
             cmd_output["size"],
@@ -72,7 +72,7 @@ class VolumeTests(common.BaseVolumeTests):
         self.wait_for_status("volume", name2, "available")
 
         # Test list
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume list ',
             parse_output=True,
         )
@@ -81,7 +81,7 @@ class VolumeTests(common.BaseVolumeTests):
         self.assertIn(name2, names)
 
         # Test list --long
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume list --long',
             parse_output=True,
         )
@@ -89,7 +89,7 @@ class VolumeTests(common.BaseVolumeTests):
         self.assertIn('false', bootable)
 
         # Test list --name
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume list ' + '--name ' + name1,
             parse_output=True,
         )
@@ -100,7 +100,7 @@ class VolumeTests(common.BaseVolumeTests):
     def test_volume_set_and_unset(self):
         """Tests create volume, set, unset, show, delete"""
         name = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume create '
             + '--size 1 '
             + '--description aaaa '
@@ -132,8 +132,8 @@ class VolumeTests(common.BaseVolumeTests):
 
         # Test volume set
         new_name = uuid.uuid4().hex
-        self.addCleanup(self.openstack, 'volume delete ' + new_name)
-        raw_output = self.openstack(
+        self.addCleanup(self.fibostack, 'volume delete ' + new_name)
+        raw_output = self.fibostack(
             'volume set '
             + '--name '
             + new_name
@@ -147,7 +147,7 @@ class VolumeTests(common.BaseVolumeTests):
         )
         self.assertOutput('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume show ' + new_name,
             parse_output=True,
         )
@@ -173,12 +173,12 @@ class VolumeTests(common.BaseVolumeTests):
         )
 
         # Test volume unset
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume unset ' + '--property Beta ' + new_name,
         )
         self.assertOutput('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume show ' + new_name,
             parse_output=True,
         )
@@ -190,7 +190,7 @@ class VolumeTests(common.BaseVolumeTests):
     def test_volume_create_and_list_and_show_backward_compatibility(self):
         """Test backward compatibility of create, list, show"""
         name1 = uuid.uuid4().hex
-        output = self.openstack(
+        output = self.fibostack(
             'volume create ' + '-c display_name -c id ' + '--size 1 ' + name1,
             parse_output=True,
         )
@@ -200,25 +200,25 @@ class VolumeTests(common.BaseVolumeTests):
         volume_id = output['id']
         self.assertIsNotNone(volume_id)
         self.assertNotIn('name', output)
-        self.addCleanup(self.openstack, 'volume delete ' + volume_id)
+        self.addCleanup(self.fibostack, 'volume delete ' + volume_id)
 
         self.wait_for_status("volume", name1, "available")
 
-        output = self.openstack(
+        output = self.fibostack(
             'volume list ' + '-c "Display Name"',
             parse_output=True,
         )
         for each_volume in output:
             self.assertIn('Display Name', each_volume)
 
-        output = self.openstack(
+        output = self.fibostack(
             'volume list ' + '-c "Name"',
             parse_output=True,
         )
         for each_volume in output:
             self.assertIn('Name', each_volume)
 
-        output = self.openstack(
+        output = self.fibostack(
             'volume show ' + '-c display_name -c id ' + name1,
             parse_output=True,
         )

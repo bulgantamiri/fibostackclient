@@ -14,13 +14,13 @@
 """Network action implementations"""
 
 from cliff import columns as cliff_columns
-from osc_lib.cli import format_columns
-from osc_lib import utils
-from osc_lib.utils import tags as _tag
+from fsc_lib.cli import format_columns
+from fsc_lib import utils
+from fsc_lib.utils import tags as _tag
 
-from openstackclient.i18n import _
-from openstackclient.identity import common as identity_common
-from openstackclient.network import common
+from fibostackclient.i18n import _
+from fibostackclient.identity import common as identity_common
+from fibostackclient.network import common
 
 
 class AdminStateColumn(cliff_columns.FormattableColumn):
@@ -62,14 +62,14 @@ def _get_columns_network(item):
     }
     hidden_columns = ['location', 'tenant_id']
     hidden_columns = ['location']
-    return utils.get_osc_show_columns_for_sdk_resource(
+    return utils.get_fsc_show_columns_for_sdk_resource(
         item, column_map, hidden_columns
     )
 
 
 def _get_columns_compute(item):
     column_map = {}
-    return utils.get_osc_show_columns_for_sdk_resource(item, column_map)
+    return utils.get_fsc_show_columns_for_sdk_resource(item, column_map)
 
 
 def _get_attrs_network(client_manager, parsed_args):
@@ -199,7 +199,7 @@ def _add_additional_network_options(parser):
 
 
 # TODO(sindhu): Use the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class CreateNetwork(
     common.NetworkAndComputeShowOne, common.NeutronCommandWithExtraArgs
 ):
@@ -294,7 +294,7 @@ class CreateNetwork(
                 _(
                     "The network has an external routing facility that's not "
                     "managed by Neutron and can be used as in: "
-                    "openstack router set --external-gateway NETWORK "
+                    "fibostack router set --external-gateway NETWORK "
                     "(external-net extension required)"
                 )
             ),
@@ -421,7 +421,7 @@ class DeleteNetwork(common.NetworkAndComputeDelete):
 
 
 # TODO(sindhu): Use the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class ListNetwork(common.NetworkAndComputeLister):
     _description = _("List networks")
 
@@ -690,7 +690,7 @@ class ListNetwork(common.NetworkAndComputeLister):
 
 
 # TODO(sindhu): Use the SDK resource mapped attribute names once the
-# OSC minimum requirements include SDK 1.0.
+# fsc minimum requirements include SDK 1.0.
 class SetNetwork(common.NeutronCommandWithExtraArgs):
     _description = _("Set network properties")
 
@@ -758,7 +758,7 @@ class SetNetwork(common.NeutronCommandWithExtraArgs):
             help=_(
                 "The network has an external routing facility that's not "
                 "managed by Neutron and can be used as in: "
-                "openstack router set --external-gateway NETWORK "
+                "fibostack router set --external-gateway NETWORK "
                 "(external-net extension required)"
             ),
         )

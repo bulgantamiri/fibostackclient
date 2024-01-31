@@ -1,4 +1,4 @@
 octavia
 -------
 
-.. autoprogram-cliff:: openstack.load_balancer.v2
+.. autoprogram-cliff:: fibostack.load_balancer.v2

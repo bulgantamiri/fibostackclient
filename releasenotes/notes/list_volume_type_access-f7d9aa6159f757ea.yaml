@@ -7,4 +7,4 @@ features:
     a specific private volume type by using
     ``volume type show <volume-type>``
 
-    [Bug `1554891 <https://bugs.launchpad.net/python-openstackclient/+bug/1554891>`_]
+    [Bug `1554891 <https://bugs.launchpad.net/python-fibostackclient/+bug/1554891>`_]

@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional import base
+from fibostackclient.tests.functional import base
 
 
 class ServerGroupTests(base.TestCase):
@@ -22,21 +22,21 @@ class ServerGroupTests(base.TestCase):
         """Test create, delete multiple"""
         name1 = uuid.uuid4().hex
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server group create ' + '--policy affinity ' + name1,
             parse_output=True,
         )
         self.assertEqual(name1, cmd_output['name'])
         self.assertEqual('affinity', cmd_output['policy'])
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server group create ' + '--policy anti-affinity ' + name2,
             parse_output=True,
         )
         self.assertEqual(name2, cmd_output['name'])
         self.assertEqual('anti-affinity', cmd_output['policy'])
 
-        del_output = self.openstack(
+        del_output = self.fibostack(
             'server group delete ' + name1 + ' ' + name2
         )
         self.assertOutput('', del_output)
@@ -47,24 +47,24 @@ class ServerGroupTests(base.TestCase):
         name2 = uuid.uuid4().hex
 
         # test server group show
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server group create ' + '--policy affinity ' + name1,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'server group delete ' + name1)
-        cmd_output = self.openstack(
+        self.addCleanup(self.fibostack, 'server group delete ' + name1)
+        cmd_output = self.fibostack(
             'server group show ' + name1,
             parse_output=True,
         )
         self.assertEqual(name1, cmd_output['name'])
         self.assertEqual('affinity', cmd_output['policy'])
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server group create ' + '--policy anti-affinity ' + name2,
             parse_output=True,
         )
-        self.addCleanup(self.openstack, 'server group delete ' + name2)
-        cmd_output = self.openstack(
+        self.addCleanup(self.fibostack, 'server group delete ' + name2)
+        cmd_output = self.fibostack(
             'server group show ' + name2,
             parse_output=True,
         )
@@ -72,7 +72,7 @@ class ServerGroupTests(base.TestCase):
         self.assertEqual('anti-affinity', cmd_output['policy'])
 
         # test server group list
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'server group list',
             parse_output=True,
         )

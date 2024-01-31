@@ -14,11 +14,11 @@
 import copy
 from unittest import mock
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
-from openstackclient.identity.v2_0 import role_assignment
-from openstackclient.tests.unit import fakes
-from openstackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
+from fibostackclient.identity.v2_0 import role_assignment
+from fibostackclient.tests.unit import fakes
+from fibostackclient.tests.unit.identity.v2_0 import fakes as identity_fakes
 
 
 class TestRoleAssignment(identity_fakes.TestIdentityv2):

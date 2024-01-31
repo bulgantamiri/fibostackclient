@@ -10,7 +10,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from openstackclient.tests.functional.network.v2 import common
+from fibostackclient.tests.functional.network.v2 import common
 
 
 class NetworkFlavorProfileTests(common.NetworkTests):
@@ -20,7 +20,7 @@ class NetworkFlavorProfileTests(common.NetworkTests):
     METAINFO = 'Extrainfo'
 
     def test_network_flavor_profile_create(self):
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network flavor profile create '
             + '--description '
             + self.DESCRIPTION
@@ -42,11 +42,11 @@ class NetworkFlavorProfileTests(common.NetworkTests):
         )
 
         # Clean up
-        raw_output = self.openstack('network flavor profile delete ' + ID)
+        raw_output = self.fibostack('network flavor profile delete ' + ID)
         self.assertOutput('', raw_output)
 
     def test_network_flavor_profile_list(self):
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network flavor profile create '
             + '--description '
             + self.DESCRIPTION
@@ -68,7 +68,7 @@ class NetworkFlavorProfileTests(common.NetworkTests):
             json_output.get('meta_info'),
         )
 
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network flavor profile create '
             + '--description '
             + self.DESCRIPTION
@@ -91,7 +91,7 @@ class NetworkFlavorProfileTests(common.NetworkTests):
         )
 
         # Test list
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network flavor profile list',
             parse_output=True,
         )
@@ -102,13 +102,13 @@ class NetworkFlavorProfileTests(common.NetworkTests):
         self.assertIn(ID2, id_list)
 
         # Clean up
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'network flavor profile delete ' + ID1 + ' ' + ID2
         )
         self.assertOutput('', raw_output)
 
     def test_network_flavor_profile_set(self):
-        json_output_1 = self.openstack(
+        json_output_1 = self.fibostack(
             'network flavor profile create '
             + '--description '
             + self.DESCRIPTION
@@ -130,9 +130,9 @@ class NetworkFlavorProfileTests(common.NetworkTests):
             json_output_1.get('meta_info'),
         )
 
-        self.openstack('network flavor profile set --disable ' + ID)
+        self.fibostack('network flavor profile set --disable ' + ID)
 
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network flavor profile show ' + ID,
             parse_output=True,
         )
@@ -147,11 +147,11 @@ class NetworkFlavorProfileTests(common.NetworkTests):
         )
 
         # Clean up
-        raw_output = self.openstack('network flavor profile delete ' + ID)
+        raw_output = self.fibostack('network flavor profile delete ' + ID)
         self.assertOutput('', raw_output)
 
     def test_network_flavor_profile_show(self):
-        json_output_1 = self.openstack(
+        json_output_1 = self.fibostack(
             'network flavor profile create '
             + '--description '
             + self.DESCRIPTION
@@ -163,7 +163,7 @@ class NetworkFlavorProfileTests(common.NetworkTests):
         )
         ID = json_output_1.get('id')
         self.assertIsNotNone(ID)
-        json_output = self.openstack(
+        json_output = self.fibostack(
             'network flavor profile show ' + ID,
             parse_output=True,
         )
@@ -182,5 +182,5 @@ class NetworkFlavorProfileTests(common.NetworkTests):
         )
 
         # Clean up
-        raw_output = self.openstack('network flavor profile delete ' + ID)
+        raw_output = self.fibostack('network flavor profile delete ' + ID)
         self.assertOutput('', raw_output)

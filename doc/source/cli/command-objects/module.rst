@@ -4,7 +4,7 @@ module
 
 Internal
 
-Installed Python modules in the OSC process.
+Installed Python modules in the fsc process.
 
-.. autoprogram-cliff:: openstack.cli
+.. autoprogram-cliff:: fibostack.cli
    :command: module *

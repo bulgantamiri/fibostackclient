@@ -15,10 +15,10 @@
 
 from unittest import mock
 
-from openstackclient.network.v2 import (
+from fibostackclient.network.v2 import (
     network_service_provider as service_provider,
 )
-from openstackclient.tests.unit.network.v2 import fakes
+from fibostackclient.tests.unit.network.v2 import fakes
 
 
 class TestNetworkServiceProvider(fakes.TestNetworkV2):

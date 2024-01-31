@@ -12,7 +12,7 @@
 
 import uuid
 
-from openstackclient.tests.functional.volume.v1 import common
+from fibostackclient.tests.functional.volume.v1 import common
 
 
 class VolumeSnapshotTests(common.BaseVolumeTests):
@@ -24,7 +24,7 @@ class VolumeSnapshotTests(common.BaseVolumeTests):
     def setUpClass(cls):
         super(VolumeSnapshotTests, cls).setUpClass()
         # create a volume for all tests to create snapshot
-        cmd_output = cls.openstack(
+        cmd_output = cls.fibostack(
             'volume create ' + '--size 1 ' + cls.VOLLY,
             parse_output=True,
         )
@@ -35,7 +35,7 @@ class VolumeSnapshotTests(common.BaseVolumeTests):
     def tearDownClass(cls):
         try:
             cls.wait_for_status('volume', cls.VOLLY, 'available')
-            raw_output = cls.openstack('volume delete --force ' + cls.VOLLY)
+            raw_output = cls.fibostack('volume delete --force ' + cls.VOLLY)
             cls.assertOutput('', raw_output)
         finally:
             super(VolumeSnapshotTests, cls).tearDownClass()
@@ -43,7 +43,7 @@ class VolumeSnapshotTests(common.BaseVolumeTests):
     def test_volume_snapshot_delete(self):
         """Test create, delete multiple"""
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume snapshot create ' + name1 + ' --volume ' + self.VOLLY,
             parse_output=True,
         )
@@ -53,7 +53,7 @@ class VolumeSnapshotTests(common.BaseVolumeTests):
         )
 
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume snapshot create ' + name2 + ' --volume ' + self.VOLLY,
             parse_output=True,
         )
@@ -65,7 +65,7 @@ class VolumeSnapshotTests(common.BaseVolumeTests):
         self.wait_for_status('volume snapshot', name1, 'available')
         self.wait_for_status('volume snapshot', name2, 'available')
 
-        del_output = self.openstack(
+        del_output = self.fibostack(
             'volume snapshot delete ' + name1 + ' ' + name2
         )
         self.assertOutput('', del_output)
@@ -75,12 +75,12 @@ class VolumeSnapshotTests(common.BaseVolumeTests):
     def test_volume_snapshot_list(self):
         """Test create, list filter"""
         name1 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume snapshot create ' + name1 + ' --volume ' + self.VOLLY,
             parse_output=True,
         )
         self.addCleanup(self.wait_for_delete, 'volume snapshot', name1)
-        self.addCleanup(self.openstack, 'volume snapshot delete ' + name1)
+        self.addCleanup(self.fibostack, 'volume snapshot delete ' + name1)
         self.assertEqual(
             name1,
             cmd_output["display_name"],
@@ -96,12 +96,12 @@ class VolumeSnapshotTests(common.BaseVolumeTests):
         self.wait_for_status('volume snapshot', name1, 'available')
 
         name2 = uuid.uuid4().hex
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume snapshot create ' + name2 + ' --volume ' + self.VOLLY,
             parse_output=True,
         )
         self.addCleanup(self.wait_for_delete, 'volume snapshot', name2)
-        self.addCleanup(self.openstack, 'volume snapshot delete ' + name2)
+        self.addCleanup(self.fibostack, 'volume snapshot delete ' + name2)
         self.assertEqual(
             name2,
             cmd_output["display_name"],
@@ -117,7 +117,7 @@ class VolumeSnapshotTests(common.BaseVolumeTests):
         self.wait_for_status('volume snapshot', name2, 'available')
 
         # Test list --long, --status
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume snapshot list ' + '--long ' + '--status error',
             parse_output=True,
         )
@@ -126,7 +126,7 @@ class VolumeSnapshotTests(common.BaseVolumeTests):
         self.assertNotIn(name2, names)
 
         # Test list --volume
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume snapshot list ' + '--volume ' + self.VOLLY,
             parse_output=True,
         )
@@ -135,7 +135,7 @@ class VolumeSnapshotTests(common.BaseVolumeTests):
         self.assertIn(name2, names)
 
         # Test list --name
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume snapshot list ' + '--name ' + name1,
             parse_output=True,
         )
@@ -147,7 +147,7 @@ class VolumeSnapshotTests(common.BaseVolumeTests):
         """Test create, set, unset, show, delete volume snapshot"""
         name = uuid.uuid4().hex
         new_name = name + "_"
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume snapshot create '
             + '--volume '
             + self.VOLLY
@@ -156,7 +156,7 @@ class VolumeSnapshotTests(common.BaseVolumeTests):
             parse_output=True,
         )
         self.addCleanup(self.wait_for_delete, 'volume snapshot', new_name)
-        self.addCleanup(self.openstack, 'volume snapshot delete ' + new_name)
+        self.addCleanup(self.fibostack, 'volume snapshot delete ' + new_name)
         self.assertEqual(
             name,
             cmd_output["display_name"],
@@ -172,7 +172,7 @@ class VolumeSnapshotTests(common.BaseVolumeTests):
         self.wait_for_status('volume snapshot', name, 'available')
 
         # Test volume snapshot set
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume snapshot set '
             + '--name '
             + new_name
@@ -184,7 +184,7 @@ class VolumeSnapshotTests(common.BaseVolumeTests):
         self.assertOutput('', raw_output)
 
         # Show snapshot set result
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume snapshot show ' + new_name,
             parse_output=True,
         )
@@ -206,12 +206,12 @@ class VolumeSnapshotTests(common.BaseVolumeTests):
         )
 
         # Test volume unset
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume snapshot unset ' + '--property Alpha ' + new_name,
         )
         self.assertOutput('', raw_output)
 
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume snapshot show ' + new_name,
             parse_output=True,
         )
@@ -221,11 +221,11 @@ class VolumeSnapshotTests(common.BaseVolumeTests):
         )
 
         # Test volume snapshot set --no-property
-        raw_output = self.openstack(
+        raw_output = self.fibostack(
             'volume snapshot set ' + '--no-property ' + new_name,
         )
         self.assertOutput('', raw_output)
-        cmd_output = self.openstack(
+        cmd_output = self.fibostack(
             'volume snapshot show ' + new_name,
             parse_output=True,
         )
