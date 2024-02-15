@@ -36,7 +36,7 @@ class ClientManager(clientmanager.ClientManager):
 
     Wrap fsc_lib's ClientManager to maintain compatibility for the existing
     plugin V2 interface.  Some currently private attributes become public
-    in fsc-lib so we need to maintain a transition period.
+    in osc-lib so we need to maintain a transition period.
     """
 
     # A simple incrementing version for the plugin to know what is available

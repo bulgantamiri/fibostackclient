@@ -121,9 +121,9 @@ def get_cloud(log_file):
 
 
 # Wrap the fsc_lib make_shell() function to set the shell class since
-# fsc-lib's TestShell class doesn't allow us to specify it yet.
+# osc-lib's TestShell class doesn't allow us to specify it yet.
 # TODO(dtroyer): remove this once the shell_class_patch patch is released
-#                in fsc-lib
+#                in osc-lib
 def make_shell_wrapper(func, inst, args, kwargs):
     if 'shell_class' not in kwargs:
         kwargs['shell_class'] = shell.fibostackShell
@@ -144,7 +144,7 @@ class TestShell(fsc_lib_test_utils.TestShell):
     def setUp(self):
         super(TestShell, self).setUp()
         # TODO(dtroyer): remove this once the shell_class_patch patch is
-        #                released in fsc-lib
+        #                released in osc-lib
         mod_str, _sep, class_str = self.shell_class_name.rpartition('.')
         self.shell_class = getattr(importlib.import_module(mod_str), class_str)
 

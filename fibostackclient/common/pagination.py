@@ -15,7 +15,7 @@ from fsc_lib.cli import parseractions
 from fibostackclient.i18n import _
 
 
-# TODO(stephenfin): Consider moving these to fsc-lib since they're broadly
+# TODO(stephenfin): Consider moving these to osc-lib since they're broadly
 # useful
 
 

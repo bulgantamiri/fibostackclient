@@ -3276,7 +3276,7 @@ class RebootServer(command.Command):
         compute_client.reboot_server(server_id, parsed_args.reboot_type)
 
         if parsed_args.wait:
-            # We use fsc-lib's wait_for_status since that allows for a callback
+            # We use osc-lib's wait_for_status since that allows for a callback
             if utils.wait_for_status(
                 compute_client.get_server,
                 server_id,
@@ -4522,9 +4522,9 @@ class ShelveServer(command.Command):
             return
 
         for server_id in server_ids:
-            # We use fsc-lib's wait_for_status since that allows for a callback
+            # We use osc-lib's wait_for_status since that allows for a callback
             # TODO(stephenfin): We should wait for these in parallel using e.g.
-            # https://review.opendev.org/c/fibostack/fsc-lib/+/762503/
+            # https://review.opendev.org/c/fibostack/osc-lib/+/762503/
             if not utils.wait_for_status(
                 compute_client.get_server,
                 server_id,
@@ -4548,9 +4548,9 @@ class ShelveServer(command.Command):
             return
 
         for server_id in server_ids:
-            # We use fsc-lib's wait_for_status since that allows for a callback
+            # We use osc-lib's wait_for_status since that allows for a callback
             # TODO(stephenfin): We should wait for these in parallel using e.g.
-            # https://review.opendev.org/c/fibostack/fsc-lib/+/762503/
+            # https://review.opendev.org/c/fibostack/osc-lib/+/762503/
             if not utils.wait_for_status(
                 compute_client.get_server,
                 server_id,

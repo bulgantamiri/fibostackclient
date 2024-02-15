@@ -31,7 +31,7 @@ API_VERSIONS = {
 
 def make_client(instance):
     """Returns a network proxy"""
-    # NOTE(dtroyer): As of fsc-lib 1.8.0 and openstacksdk 0.10.0 the
+    # NOTE(dtroyer): As of osc-lib 1.8.0 and openstacksdk 0.10.0 the
     #                old Profile interface and separate client creation
     #                for each API that uses the SDK is unnecessary.  This
     #                callback remains as a remnant of the original plugin

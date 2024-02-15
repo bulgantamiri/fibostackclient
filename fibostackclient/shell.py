@@ -69,7 +69,7 @@ class fibostackShell(shell.fibostackShell):
     def _load_plugins(self):
         """Load plugins via stevedore
 
-        fsc-lib has no opinion on what plugins should be loaded
+        osc-lib has no opinion on what plugins should be loaded
         """
         # Loop through extensions to get API versions
         for mod in clientmanager.PLUGIN_MODULES:
@@ -114,7 +114,7 @@ class fibostackShell(shell.fibostackShell):
     def _load_commands(self):
         """Load commands via cliff/stevedore
 
-        fsc-lib has no opinion on what commands should be loaded
+        osc-lib has no opinion on what commands should be loaded
         """
         # Commands that span multiple APIs
         self.command_manager.add_command_group('fibostack.common')

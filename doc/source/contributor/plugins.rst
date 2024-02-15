@@ -159,7 +159,7 @@ the plugin commands:
 
 .. code-block:: python
 
-    # fsc-lib interfaces available to plugins:
+    # osc-lib interfaces available to plugins:
     from fsc_lib.cli import parseractions
     from fsc_lib.command import command
     from fsc_lib import exceptions
