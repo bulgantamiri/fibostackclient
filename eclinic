@@ -1,0 +1,80 @@
+"96bdda6e-9886-4c3d-b60f-f128d26e415f"
+"8c821dac-853a-4464-a92b-000f2a6a1f02"
+"a9c937a9-59c7-4f9a-bc28-f9ad5c2e9b9a"
+"47d2b9a9-f483-4b7f-8267-2762999d3023"
+"0990e1ba-e213-4a2d-9154-2ccdaa1ae8a2"
+"d9238313-5798-4e7b-8742-3f4203c55ec7"
+"1cacdb9b-8abd-4cba-a430-8d54953ead20"
+"23778260-33cb-4c5d-85a8-1ae2ec98a5c0"
+"00a58405-83fc-4972-ab05-0d57220c6695"
+"4e90eb2d-a0ce-4d7b-9e58-f777e4884d1b"
+"e8e13a84-ec08-45ec-b422-3a480e723432"
+"3b90ac63-1f1c-4f26-88a7-71ff80a7e2cf"
+"6c681f28-1a1d-45d9-a9b6-12363f938674"
+"e9b4e64f-85b3-4b70-96c5-4cca88f6d193"
+"5099393c-f890-4335-a6b4-502b4ddaca16"
+"8d39406e-aa18-4de3-9336-89151723fca5"
+"94cd8990-2759-4b04-8375-a597becc8a08"
+"d8d398a8-b711-4d3a-a7c0-035ea33ec509"
+"415c335b-ab83-4878-9b83-289a6c2d8a19"
+
+echo "exporting image pharma-windows.raw"
+rbd export volumes/volume-53075d4c-0792-4e1f-a11b-e5d0cda6b3fa - | ssh eclinic@backup "cat > /home/eclinic/pharma-windows.raw"
+echo "exporting image Laboratory-Database-3.raw"
+rbd export volumes/volume-ecab074d-6d50-469e-97e8-8a330c11bdec - | ssh eclinic@backup "cat > /home/eclinic/Laboratory-Database-3.raw"
+echo "exporting image Laboratory-Database-2.raw"
+rbd export volumes/volume-933d3e37-1018-47a3-9846-d14586fb73cb - | ssh eclinic@backup "cat > /home/eclinic/Laboratory-Database-2.raw"
+echo "exporting image Hospital-database-2.raw"
+rbd export volumes/volume-122eff5a-add9-48f6-afd8-17ef0623ddc6 - | ssh eclinic@backup "cat > /home/eclinic/Hospital-database-2.raw"
+echo "exporting image Platform-DB-Ubuntu.raw"
+rbd export volumes/volume-37e2fa78-1e9d-444a-9092-2ccaf96ede5d - | ssh eclinic@backup "cat > /home/eclinic/Platform-DB-Ubuntu.raw"
+echo "exporting image HIS-Tsahim_story_server.raw"
+rbd export volumes/volume-4e479f28-aacf-4814-a1ae-d8855daa2de3 - | ssh eclinic@backup "cat > /home/eclinic/HIS-Tsahim_story_server.raw"
+echo "exporting image Eclinic-db.raw"
+rbd export volumes/volume-081d9650-aeaa-4468-8279-c71b1ac422eb - | ssh eclinic@backup "cat > /home/eclinic/Eclinic-db.raw"
+echo "exporting image Eclinic-web.raw"
+rbd export volumes/volume-c764c1f0-2231-4a1e-a9cb-2ea3a3e770e2 - | ssh eclinic@backup "cat > /home/eclinic/Eclinic-web.raw"
+echo "exporting image Lab-database-2.raw"
+rbd export volumes/volume-f3db91c7-d8ac-49b9-8294-a3fd4a06c453 - | ssh eclinic@backup "cat > /home/eclinic/Lab-database-2.raw"
+echo "exporting image hiep1.raw"
+rbd export volumes/volume-e4275b7e-e7b3-40cd-a720-938a124cd088 - | ssh eclinic@backup "cat > /home/eclinic/hiep1.raw"
+echo "exporting image hiep2.raw"
+rbd export volumes/volume-7168e0e6-f84f-4a60-b12e-91214c63f5ce - | ssh eclinic@backup "cat > /home/eclinic/hiep2.raw"
+echo "exporting image Hospital-appoinment.raw"
+rbd export volumes/volume-87efd4ca-7cc5-42e5-97da-b44720bfb352 - | ssh eclinic@backup "cat > /home/eclinic/Hospital-appoinment.raw"
+echo "exporting image Windows-2012-VPN.raw"
+rbd export volumes/volume-b16b36da-406c-4b5d-a24a-96233ecbf006 - | ssh eclinic@backup "cat > /home/eclinic/Windows-2012-VPN.raw"
+echo "exporting image Windows-2012-1st-hospital.raw"
+rbd export volumes/volume-84b2bf87-9597-4ba4-9d09-c8b36975d7a1 - | ssh eclinic@backup "cat > /home/eclinic/Windows-2012-1st-hospital.raw"
+echo "exporting image OntimeV3-HIMS.raw"
+rbd export volumes/volume-0d365fe5-9cfa-4b51-b225-1530e6864018 - | ssh eclinic@backup "cat > /home/eclinic/OntimeV3-HIMS.raw"
+echo "exporting image Eclinic-sub-webs.raw"
+rbd export volumes/volume-3e9774f1-ca85-4f0d-82e9-6b228890ef9b - | ssh eclinic@backup "cat > /home/eclinic/Eclinic-sub-webs.raw"
+echo "exporting image EclinicPlatformDev-Syncer.raw"
+rbd export volumes/volume-3e093d84-bc5a-4f22-868e-7c151d220f1d - | ssh eclinic@backup "cat > /home/eclinic/EclinicPlatformDev-Syncer.raw"
+echo "exporting image Windows-2012-Laboratory-Database.raw"
+rbd export volumes/volume-e262dd3f-043f-4852-82ed-7383848ac3c6 - | ssh eclinic@backup "cat > /home/eclinic/Windows-2012-Laboratory-Database.raw"
+echo "exporting image gitlab.raw"
+rbd export volumes/volume-fb7c557f-f655-452d-9671-f687304a434c - | ssh eclinic@backup "cat > /home/eclinic/gitlab.raw"
+echo "exporting image Windows-2012-Hospital-Database.raw"
+rbd export volumes/volume-98b09f39-5131-46e4-ae68-79a087ba10d7 - | ssh eclinic@backup "cat > /home/eclinic/Windows-2012-Hospital-Database.raw"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
