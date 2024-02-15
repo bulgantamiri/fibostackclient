@@ -15,8 +15,8 @@
 from unittest import mock
 from unittest.mock import call
 
-from fsc_lib import exceptions
-from fsc_lib import utils
+from osc_lib import exceptions
+from osc_lib import utils
 
 from fibostackclient.tests.unit.volume.v1 import fakes as volume_fakes
 from fibostackclient.volume.v1 import volume_transfer_request

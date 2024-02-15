@@ -17,9 +17,9 @@ import copy
 from unittest import mock
 from unittest.mock import call
 
-from fsc_lib.cli import format_columns
-from fsc_lib import exceptions
-from fsc_lib import utils
+from osc_lib.cli import format_columns
+from osc_lib import exceptions
+from osc_lib import utils
 
 from fibostackclient.tests.unit.volume.v2 import fakes as volume_fakes
 from fibostackclient.volume.v2 import qos_specs

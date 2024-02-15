@@ -10,7 +10,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from fsc_lib.cli import parseractions
+from osc_lib.cli import parseractions
 
 from fibostackclient.i18n import _
 

@@ -14,7 +14,7 @@
 #
 
 from keystoneclient import exceptions as identity_exc
-from fsc_lib import exceptions
+from osc_lib import exceptions
 
 from fibostackclient.identity.v3 import service
 from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes

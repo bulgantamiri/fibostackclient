@@ -19,11 +19,11 @@
 import logging
 
 from fibostack import utils as sdk_utils
-from fsc_lib.cli import format_columns
-from fsc_lib.cli import parseractions
-from fsc_lib.command import command
-from fsc_lib import exceptions
-from fsc_lib import utils
+from osc_lib.cli import format_columns
+from osc_lib.cli import parseractions
+from osc_lib.command import command
+from osc_lib import exceptions
+from osc_lib import utils
 
 from fibostackclient.i18n import _
 

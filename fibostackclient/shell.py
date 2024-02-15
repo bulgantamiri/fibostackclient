@@ -19,9 +19,9 @@
 import sys
 import warnings
 
-from fsc_lib.api import auth
-from fsc_lib.command import commandmanager
-from fsc_lib import shell
+from osc_lib.api import auth
+from osc_lib.command import commandmanager
+from osc_lib import shell
 
 import fibostackclient
 from fibostackclient.common import clientmanager

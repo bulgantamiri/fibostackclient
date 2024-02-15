@@ -12,7 +12,7 @@
 #   under the License.
 #
 
-from fsc_lib import exceptions
+from osc_lib import exceptions
 
 from fibostackclient.tests.unit.volume.v1 import fakes as volume_fakes
 from fibostackclient.volume.v1 import service

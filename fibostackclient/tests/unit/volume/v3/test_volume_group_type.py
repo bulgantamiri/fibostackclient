@@ -13,8 +13,8 @@
 from unittest import mock
 
 from cinderclient import api_versions
-from fsc_lib.cli import format_columns
-from fsc_lib import exceptions
+from osc_lib.cli import format_columns
+from osc_lib import exceptions
 
 from fibostackclient.tests.unit.volume.v3 import fakes as volume_fakes
 from fibostackclient.volume.v3 import volume_group_type

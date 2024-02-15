@@ -13,7 +13,7 @@
 import copy
 from unittest import mock
 
-from fsc_lib import exceptions
+from osc_lib import exceptions
 
 from fibostackclient.common import quota
 from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes

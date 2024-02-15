@@ -13,7 +13,7 @@
 
 """Base API Library Tests"""
 
-from fsc_lib import exceptions
+from osc_lib import exceptions
 
 from fibostackclient.api import api
 from fibostackclient.tests.unit.api import fakes as api_fakes

@@ -18,12 +18,12 @@
 import logging
 
 from cliff import columns as cliff_columns
-from fsc_lib.cli import format_columns
-from fsc_lib.cli import identity as identity_utils
-from fsc_lib.cli import parseractions
-from fsc_lib.command import command
-from fsc_lib import exceptions
-from fsc_lib import utils as fsc_utils
+from osc_lib.cli import format_columns
+from osc_lib.cli import identity as identity_utils
+from osc_lib.cli import parseractions
+from osc_lib.command import command
+from osc_lib import exceptions
+from osc_lib import utils as fsc_utils
 
 from fibostackclient.i18n import _
 

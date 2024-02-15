@@ -24,12 +24,12 @@ import sys
 from cinderclient import api_versions
 from fibostack import exceptions as sdk_exceptions
 from fibostack.image import image_signer
-from fsc_lib.api import utils as api_utils
-from fsc_lib.cli import format_columns
-from fsc_lib.cli import parseractions
-from fsc_lib.command import command
-from fsc_lib import exceptions
-from fsc_lib import utils
+from osc_lib.api import utils as api_utils
+from osc_lib.cli import format_columns
+from osc_lib.cli import parseractions
+from osc_lib.command import command
+from osc_lib import exceptions
+from osc_lib import utils
 
 from fibostackclient.common import pagination
 from fibostackclient.common import progressbar

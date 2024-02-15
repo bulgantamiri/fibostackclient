@@ -14,8 +14,8 @@
 
 from unittest import mock
 
-from fsc_lib.command import command
-from fsc_lib import exceptions
+from osc_lib.command import command
+from osc_lib import exceptions
 
 from fibostackclient.tests.unit import fakes as test_fakes
 from fibostackclient.tests.unit import utils as test_utils

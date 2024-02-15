@@ -15,9 +15,9 @@
 
 import logging
 
-from fsc_lib.command import command
-from fsc_lib import exceptions
-from fsc_lib import utils
+from osc_lib.command import command
+from osc_lib import exceptions
+from osc_lib import utils
 
 from fibostackclient.i18n import _
 from fibostackclient.identity import common as common_utils
@@ -81,11 +81,11 @@ class CreateLimit(command.ShowOne):
             if 'None' not in val:
                 # NOTE (vishakha): Due to bug #1799153 and for any another
                 # related case where GET resource API does not support the
-                # filter by name, fsc_lib.utils.find_resource() method cannot
+                # filter by name, osc_lib.utils.find_resource() method cannot
                 # be used because that method try to fall back to list all the
                 # resource if requested resource cannot be get via name. Which
                 # ends up with NoUniqueMatch error.
-                # So fsc_lib.utils.find_resource() function cannot be used for
+                # So osc_lib.utils.find_resource() function cannot be used for
                 # 'regions', using common_utils.get_resource() instead.
                 region = common_utils.get_resource(
                     identity_client.regions, parsed_args.region
@@ -149,11 +149,11 @@ class ListLimit(command.Lister):
             if 'None' not in val:
                 # NOTE (vishakha): Due to bug #1799153 and for any another
                 # related case where GET resource API does not support the
-                # filter by name, fsc_lib.utils.find_resource() method cannot
+                # filter by name, osc_lib.utils.find_resource() method cannot
                 # be used because that method try to fall back to list all the
                 # resource if requested resource cannot be get via name. Which
                 # ends up with NoUniqueMatch error.
-                # So fsc_lib.utils.find_resource() function cannot be used for
+                # So osc_lib.utils.find_resource() function cannot be used for
                 # 'regions', using common_utils.get_resource() instead.
                 region = common_utils.get_resource(
                     identity_client.regions, parsed_args.region

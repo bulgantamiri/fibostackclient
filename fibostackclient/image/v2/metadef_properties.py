@@ -14,9 +14,9 @@
 
 import json
 
-from fsc_lib.command import command
-from fsc_lib import exceptions
-from fsc_lib import utils
+from osc_lib.command import command
+from osc_lib import exceptions
+from osc_lib import utils
 
 from fibostackclient.i18n import _
 

@@ -16,7 +16,7 @@
 import copy
 
 from keystoneclient import exceptions as identity_exc
-from fsc_lib import exceptions
+from osc_lib import exceptions
 
 from fibostackclient.identity.v3 import access_rule
 from fibostackclient.tests.unit import fakes

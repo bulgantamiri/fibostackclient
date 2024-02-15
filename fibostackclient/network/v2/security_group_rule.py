@@ -16,9 +16,9 @@
 import argparse
 import logging
 
-from fsc_lib.cli import parseractions
-from fsc_lib import exceptions
-from fsc_lib import utils
+from osc_lib.cli import parseractions
+from osc_lib import exceptions
+from osc_lib import utils
 
 from fibostackclient.i18n import _
 from fibostackclient.identity import common as identity_common

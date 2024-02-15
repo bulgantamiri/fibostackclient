@@ -13,7 +13,7 @@
 # under the License.
 
 from fibostack import exceptions as sdk_exceptions
-from fsc_lib import exceptions
+from osc_lib import exceptions
 
 from fibostackclient.image.v2 import metadef_properties
 from fibostackclient.tests.unit.image.v2 import fakes as image_fakes

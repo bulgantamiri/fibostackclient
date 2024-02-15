@@ -15,9 +15,9 @@ from unittest import mock
 from unittest.mock import call
 
 from cinderclient import api_versions
-from fsc_lib.cli import format_columns
-from fsc_lib import exceptions
-from fsc_lib import utils
+from osc_lib.cli import format_columns
+from osc_lib import exceptions
+from osc_lib import utils
 
 from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes
 from fibostackclient.tests.unit.image.v2 import fakes as image_fakes

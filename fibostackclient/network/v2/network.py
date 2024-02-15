@@ -14,9 +14,9 @@
 """Network action implementations"""
 
 from cliff import columns as cliff_columns
-from fsc_lib.cli import format_columns
-from fsc_lib import utils
-from fsc_lib.utils import tags as _tag
+from osc_lib.cli import format_columns
+from osc_lib import utils
+from osc_lib.utils import tags as _tag
 
 from fibostackclient.i18n import _
 from fibostackclient.identity import common as identity_common

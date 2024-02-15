@@ -17,8 +17,8 @@ from unittest import mock
 
 from cinderclient.v3 import volume_snapshots
 from cinderclient.v3 import volumes
-from fsc_lib import exceptions
-from fsc_lib import utils
+from osc_lib import exceptions
+from osc_lib import utils
 
 from fibostackclient.tests.unit import utils as test_utils
 from fibostackclient.volume import client  # noqa

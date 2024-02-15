@@ -12,9 +12,9 @@
 #
 from unittest import mock
 
-from fsc_lib.cli import format_columns
-from fsc_lib import exceptions
-from fsc_lib import utils as common_utils
+from osc_lib.cli import format_columns
+from osc_lib import exceptions
+from osc_lib import utils as common_utils
 
 from fibostackclient.compute.v2 import server_image
 from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes

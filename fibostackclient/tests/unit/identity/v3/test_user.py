@@ -16,8 +16,8 @@
 import contextlib
 from unittest import mock
 
-from fsc_lib import exceptions
-from fsc_lib import utils
+from osc_lib import exceptions
+from osc_lib import utils
 
 from fibostackclient.identity import common
 from fibostackclient.identity.v3 import user
@@ -180,7 +180,7 @@ class TestUserCreate(TestUser):
         # data to be shown.
         mocker = mock.Mock()
         mocker.return_value = 'abc123'
-        with mock.patch("fsc_lib.utils.get_password", mocker):
+        with mock.patch("osc_lib.utils.get_password", mocker):
             columns, data = self.cmd.take_action(parsed_args)
 
         # Set expected values
@@ -1262,7 +1262,7 @@ class TestUserSet(TestUser):
 
         mocker = mock.Mock()
         mocker.return_value = 'abc123'
-        with mock.patch("fsc_lib.utils.get_password", mocker):
+        with mock.patch("osc_lib.utils.get_password", mocker):
             result = self.cmd.take_action(parsed_args)
 
         # Set expected values
@@ -1777,7 +1777,7 @@ class TestUserSetPassword(TestUser):
     @contextlib.contextmanager
     def _mock_get_password(*passwords):
         mocker = mock.Mock(side_effect=passwords)
-        with mock.patch("fsc_lib.utils.get_password", mocker):
+        with mock.patch("osc_lib.utils.get_password", mocker):
             yield
 
     def test_user_password_change(self):

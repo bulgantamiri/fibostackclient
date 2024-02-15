@@ -103,7 +103,7 @@ so the version should not contain the leading 'v' character.
 
 .. code-block:: python
 
-    from fsc_lib import utils
+    from osc_lib import utils
 
 
     DEFAULT_API_VERSION = '1'
@@ -160,11 +160,11 @@ the plugin commands:
 .. code-block:: python
 
     # osc-lib interfaces available to plugins:
-    from fsc_lib.cli import parseractions
-    from fsc_lib.command import command
-    from fsc_lib import exceptions
-    from fsc_lib import logs
-    from fsc_lib import utils
+    from osc_lib.cli import parseractions
+    from osc_lib.command import command
+    from osc_lib import exceptions
+    from osc_lib import logs
+    from osc_lib import utils
 
 
     class DeleteMypluginobject(command.Command):

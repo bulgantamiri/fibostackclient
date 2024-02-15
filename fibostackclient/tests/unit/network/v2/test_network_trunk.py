@@ -14,8 +14,8 @@ import copy
 from unittest import mock
 from unittest.mock import call
 
-from fsc_lib.cli import format_columns
-from fsc_lib import exceptions
+from osc_lib.cli import format_columns
+from osc_lib import exceptions
 import testtools
 
 from fibostackclient.network.v2 import network_trunk

@@ -23,9 +23,9 @@ import os
 from cryptography.hazmat.primitives.asymmetric import ed25519
 from cryptography.hazmat.primitives import serialization
 from fibostack import utils as sdk_utils
-from fsc_lib.command import command
-from fsc_lib import exceptions
-from fsc_lib import utils
+from osc_lib.command import command
+from osc_lib import exceptions
+from osc_lib import utils
 
 from fibostackclient.common import pagination
 from fibostackclient.i18n import _

@@ -14,7 +14,7 @@ import copy
 from unittest import mock
 
 import fixtures
-from fsc_lib.tests import utils as fsc_lib_utils
+from osc_lib.tests import utils as osc_lib_utils
 
 from fibostackclient import shell
 from fibostackclient.tests.unit.integ import base as test_base
@@ -25,7 +25,7 @@ class TestIntegShellCliNoAuth(test_base.TestInteg):
     def setUp(self):
         super(TestIntegShellCliNoAuth, self).setUp()
         env = {}
-        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         # self.token = test_base.make_v2_token(self.requests_mock)
 
@@ -75,7 +75,7 @@ class TestIntegShellCliV2(test_base.TestInteg):
             "OS_PASSWORD": test_shell.DEFAULT_PASSWORD,
             "OS_IDENTITY_API_VERSION": "2",
         }
-        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v2_token(self.requests_mock)
 
@@ -164,7 +164,7 @@ class TestIntegShellCliV2Ignore(test_base.TestInteg):
             "OS_USER_DOMAIN_ID": test_shell.DEFAULT_USER_DOMAIN_ID,
             "OS_IDENTITY_API_VERSION": "2",
         }
-        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v2_token(self.requests_mock)
 
@@ -209,7 +209,7 @@ class TestIntegShellCliV3(test_base.TestInteg):
             "OS_PASSWORD": test_shell.DEFAULT_PASSWORD,
             "OS_IDENTITY_API_VERSION": "3",
         }
-        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v3_token(self.requests_mock)
 
@@ -298,11 +298,11 @@ class TestIntegShellCliV3Prompt(test_base.TestInteg):
             "OS_USERNAME": test_shell.DEFAULT_USERNAME,
             "OS_IDENTITY_API_VERSION": "3",
         }
-        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v3_token(self.requests_mock)
 
-    @mock.patch("fsc_lib.shell.prompt_for_password")
+    @mock.patch("osc_lib.shell.prompt_for_password")
     def test_shell_callback(self, mock_prompt):
         mock_prompt.return_value = "qaz"
         _shell = shell.fibostackShell()
@@ -347,7 +347,7 @@ class TestIntegShellCliPrecedence(test_base.TestInteg):
             "OS_USERNAME": test_shell.DEFAULT_USERNAME,
             "OS_IDENTITY_API_VERSION": "3",
         }
-        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v3_token(self.requests_mock)
 
@@ -422,7 +422,7 @@ class TestIntegShellCliPrecedenceOCC(test_base.TestInteg):
             "OS_IDENTITY_API_VERSION": "3",
             "OS_CLOUD_NAME": "qaz",
         }
-        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v3_token(self.requests_mock)
 

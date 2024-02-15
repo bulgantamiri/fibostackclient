@@ -16,9 +16,9 @@ import contextlib
 import logging
 
 import fibostack.exceptions
-from fsc_lib.cli import parseractions
-from fsc_lib.command import command
-from fsc_lib import exceptions
+from osc_lib.cli import parseractions
+from osc_lib.command import command
+from osc_lib import exceptions
 
 from fibostackclient.i18n import _
 from fibostackclient.network import utils

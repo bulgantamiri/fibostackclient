@@ -19,8 +19,8 @@ import importlib
 import logging
 import sys
 
-from fsc_lib import clientmanager
-from fsc_lib import shell
+from osc_lib import clientmanager
+from osc_lib import shell
 import stevedore
 
 
@@ -34,7 +34,7 @@ USER_AGENT = 'python-fibostackclient'
 class ClientManager(clientmanager.ClientManager):
     """Manages access to API clients, including authentication
 
-    Wrap fsc_lib's ClientManager to maintain compatibility for the existing
+    Wrap osc_lib's ClientManager to maintain compatibility for the existing
     plugin V2 interface.  Some currently private attributes become public
     in osc-lib so we need to maintain a transition period.
     """

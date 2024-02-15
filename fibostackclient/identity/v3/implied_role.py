@@ -17,7 +17,7 @@
 
 import logging
 
-from fsc_lib.command import command
+from osc_lib.command import command
 
 from fibostackclient.i18n import _
 

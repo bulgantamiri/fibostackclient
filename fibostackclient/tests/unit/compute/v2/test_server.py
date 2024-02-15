@@ -24,9 +24,9 @@ import iso8601
 from novaclient import api_versions
 from fibostack import exceptions as sdk_exceptions
 from fibostack import utils as sdk_utils
-from fsc_lib.cli import format_columns
-from fsc_lib import exceptions
-from fsc_lib import utils as common_utils
+from osc_lib.cli import format_columns
+from osc_lib import exceptions
+from osc_lib import utils as common_utils
 
 from fibostackclient.compute.v2 import server
 from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
@@ -9042,7 +9042,7 @@ class TestServerGeneral(TestServer):
             [6],
         )
 
-    @mock.patch('fsc_lib.utils.find_resource')
+    @mock.patch('osc_lib.utils.find_resource')
     def test_prep_server_detail(self, find_resource):
         # Setup mock method return value. utils.find_resource() will be called
         # three times in _prep_server_detail():

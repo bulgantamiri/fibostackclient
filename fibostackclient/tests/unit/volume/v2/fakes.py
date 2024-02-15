@@ -25,7 +25,7 @@ from fibostack.block_storage.v3 import capabilities as _capabilities
 from fibostack.block_storage.v3 import stats as _stats
 from fibostack.block_storage.v3 import volume as _volume
 from fibostack.image.v2 import _proxy as image_v2_proxy
-from fsc_lib.cli import format_columns
+from osc_lib.cli import format_columns
 
 from fibostackclient.tests.unit import fakes
 from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes

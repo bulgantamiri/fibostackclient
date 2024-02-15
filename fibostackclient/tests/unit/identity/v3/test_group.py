@@ -15,8 +15,8 @@ from unittest import mock
 from unittest.mock import call
 
 from keystoneauth1 import exceptions as ks_exc
-from fsc_lib import exceptions
-from fsc_lib import utils
+from osc_lib import exceptions
+from osc_lib import utils
 
 from fibostackclient.identity.v3 import group
 from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes

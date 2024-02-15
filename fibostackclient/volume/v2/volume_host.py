@@ -14,7 +14,7 @@
 
 """Volume v2 host action implementations"""
 
-from fsc_lib.command import command
+from osc_lib.command import command
 
 from fibostackclient.i18n import _
 

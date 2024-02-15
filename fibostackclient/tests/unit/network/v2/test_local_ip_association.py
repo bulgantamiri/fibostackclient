@@ -16,7 +16,7 @@
 from unittest import mock
 from unittest.mock import call
 
-from fsc_lib import exceptions
+from osc_lib import exceptions
 
 from fibostackclient.network.v2 import local_ip_association
 from fibostackclient.tests.unit.identity.v2_0 import fakes as identity_fakes_v2

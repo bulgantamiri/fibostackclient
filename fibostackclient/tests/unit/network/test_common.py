@@ -15,7 +15,7 @@ import argparse
 from unittest import mock
 
 import fibostack
-from fsc_lib import exceptions
+from osc_lib import exceptions
 
 from fibostackclient.network import common
 from fibostackclient.tests.unit import utils

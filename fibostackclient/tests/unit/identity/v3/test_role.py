@@ -16,8 +16,8 @@
 import copy
 from unittest import mock
 
-from fsc_lib import exceptions
-from fsc_lib import utils
+from osc_lib import exceptions
+from osc_lib import utils
 
 from fibostackclient.identity import common
 from fibostackclient.identity.v3 import role

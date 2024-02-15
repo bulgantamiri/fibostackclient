@@ -228,8 +228,8 @@ Example
     import fixtures
     import os
 
-    from fsc_lib.api import auth
-    from fsc_lib import utils
+    from osc_lib.api import auth
+    from osc_lib import utils
 
     from fibostackclient import shell
     from fibostackclient.tests import utils

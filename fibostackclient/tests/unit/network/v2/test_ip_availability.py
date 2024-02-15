@@ -13,7 +13,7 @@
 
 from unittest import mock
 
-from fsc_lib.cli import format_columns
+from osc_lib.cli import format_columns
 
 from fibostackclient.network.v2 import ip_availability
 from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes

@@ -15,7 +15,7 @@
 import copy
 from unittest import mock
 
-from fsc_lib.cli import format_columns
+from osc_lib.cli import format_columns
 
 from fibostackclient.image.v1 import image
 from fibostackclient.tests.unit import fakes
@@ -381,7 +381,7 @@ class TestImageList(image_fakes.TestImagev1):
         )
         self.assertCountEqual(datalist, tuple(data))
 
-    @mock.patch('fsc_lib.api.utils.simple_filter')
+    @mock.patch('osc_lib.api.utils.simple_filter')
     def test_image_list_property_option(self, sf_mock):
         sf_mock.side_effect = [
             [self.image_info],
@@ -412,7 +412,7 @@ class TestImageList(image_fakes.TestImagev1):
         self.assertEqual(self.columns, columns)
         self.assertEqual(self.datalist, tuple(data))
 
-    @mock.patch('fsc_lib.utils.sort_items')
+    @mock.patch('osc_lib.utils.sort_items')
     def test_image_list_sort_option(self, si_mock):
         si_mock.side_effect = [
             [self._image],

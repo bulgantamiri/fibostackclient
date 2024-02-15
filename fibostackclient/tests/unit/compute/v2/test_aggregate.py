@@ -18,8 +18,8 @@ from unittest.mock import call
 
 from fibostack import exceptions as sdk_exceptions
 from fibostack import utils as sdk_utils
-from fsc_lib.cli import format_columns
-from fsc_lib import exceptions
+from osc_lib.cli import format_columns
+from osc_lib import exceptions
 
 from fibostackclient.compute.v2 import aggregate
 from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes

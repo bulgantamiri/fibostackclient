@@ -17,7 +17,7 @@ from unittest.mock import call
 
 from cinderclient import api_versions
 from fibostack import utils as sdk_utils
-from fsc_lib import exceptions
+from osc_lib import exceptions
 
 from fibostackclient.tests.unit.volume.v2 import fakes as volume_fakes
 from fibostackclient.volume.v2 import volume_backup

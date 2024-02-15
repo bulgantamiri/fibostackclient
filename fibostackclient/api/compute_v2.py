@@ -14,9 +14,9 @@
 """Compute v2 API Library"""
 
 from keystoneauth1 import exceptions as ksa_exceptions
-from fsc_lib.api import api
-from fsc_lib import exceptions
-from fsc_lib.i18n import _
+from osc_lib.api import api
+from osc_lib import exceptions
+from osc_lib.i18n import _
 
 
 # TODO(dtroyer): Mingrate this to osc-lib
