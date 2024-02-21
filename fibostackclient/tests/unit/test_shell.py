@@ -126,7 +126,7 @@ def get_cloud(log_file):
 #                in osc-lib
 def make_shell_wrapper(func, inst, args, kwargs):
     if 'shell_class' not in kwargs:
-        kwargs['shell_class'] = shell.FiboStackShell
+        kwargs['shell_class'] = shell.OpenStackShell
     return func(*args, **kwargs)
 
 
@@ -138,8 +138,8 @@ wrapt.wrap_function_wrapper(
 
 
 class TestShell(osc_lib_test_utils.TestShell):
-    # Full name of the FiboStackShell class to test (cliff.app.App subclass)
-    shell_class_name = "fibostackclient.shell.FiboStackShell"
+    # Full name of the OpenStackShell class to test (cliff.app.App subclass)
+    shell_class_name = "fibostackclient.shell.OpenStackShell"
 
     def setUp(self):
         super(TestShell, self).setUp()
