@@ -34,7 +34,7 @@ class TestIntegV2ProjectID(test_base.TestInteg):
         self.token = test_base.make_v2_token(self.requests_mock)
 
     def test_project_id_env(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("extension list".split())
 
         # Check general calls
@@ -55,7 +55,7 @@ class TestIntegV2ProjectID(test_base.TestInteg):
         )
 
     def test_project_id_arg(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("--os-project-id wsx extension list".split())
 
         # Check general calls
@@ -91,7 +91,7 @@ class TestIntegV2ProjectName(test_base.TestInteg):
         self.token = test_base.make_v2_token(self.requests_mock)
 
     def test_project_name_env(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("extension list".split())
 
         # Check general calls
@@ -112,7 +112,7 @@ class TestIntegV2ProjectName(test_base.TestInteg):
         )
 
     def test_project_name_arg(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("--os-project-name qaz extension list".split())
 
         # Check general calls
@@ -150,7 +150,7 @@ class TestIntegV3ProjectID(test_base.TestInteg):
         self.token = test_base.make_v3_token(self.requests_mock)
 
     def test_project_id_env(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("extension list".split())
 
         # Check general calls
@@ -169,7 +169,7 @@ class TestIntegV3ProjectID(test_base.TestInteg):
         self.assertIsNone(auth_req['auth'].get('tenantName', None))
 
     def test_project_id_arg(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("--os-project-id wsx extension list".split())
 
         # Check general calls
@@ -205,7 +205,7 @@ class TestIntegV3ProjectName(test_base.TestInteg):
         self.token = test_base.make_v3_token(self.requests_mock)
 
     def test_project_name_env(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("extension list".split())
 
         # Check general calls
@@ -229,7 +229,7 @@ class TestIntegV3ProjectName(test_base.TestInteg):
         self.assertIsNone(auth_req['auth'].get('tenantName', None))
 
     def test_project_name_arg(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("--os-project-name wsx extension list".split())
 
         # Check general calls

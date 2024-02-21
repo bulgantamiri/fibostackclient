@@ -30,35 +30,35 @@ class TestIntegShellCliNoAuth(test_base.TestInteg):
         # self.token = test_base.make_v2_token(self.requests_mock)
 
     def test_shell_args_no_options(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("configuration show".split())
 
         # Check general calls
         self.assertEqual(len(self.requests_mock.request_history), 0)
 
     def test_shell_args_verify(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("--verify configuration show".split())
 
         # Check general calls
         self.assertEqual(len(self.requests_mock.request_history), 0)
 
     def test_shell_args_insecure(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("--insecure configuration show".split())
 
         # Check general calls
         self.assertEqual(len(self.requests_mock.request_history), 0)
 
     def test_shell_args_cacert(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("--os-cacert xyzpdq configuration show".split())
 
         # Check general calls
         self.assertEqual(len(self.requests_mock.request_history), 0)
 
     def test_shell_args_cacert_insecure(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("--os-cacert xyzpdq --insecure configuration show".split())
 
         # Check general calls
@@ -80,7 +80,7 @@ class TestIntegShellCliV2(test_base.TestInteg):
         self.token = test_base.make_v2_token(self.requests_mock)
 
     def test_shell_args_no_options(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("extension list".split())
 
         # Check general calls
@@ -109,7 +109,7 @@ class TestIntegShellCliV2(test_base.TestInteg):
         )
 
     def test_shell_args_verify(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("--verify extension list".split())
 
         # Check general calls
@@ -119,7 +119,7 @@ class TestIntegShellCliV2(test_base.TestInteg):
         self.assertTrue(self.requests_mock.request_history[0].verify)
 
     def test_shell_args_insecure(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("--insecure extension list".split())
 
         # Check general calls
@@ -129,7 +129,7 @@ class TestIntegShellCliV2(test_base.TestInteg):
         self.assertFalse(self.requests_mock.request_history[0].verify)
 
     def test_shell_args_cacert(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("--os-cacert xyzpdq extension list".split())
 
         # Check general calls
@@ -142,7 +142,7 @@ class TestIntegShellCliV2(test_base.TestInteg):
         )
 
     def test_shell_args_cacert_insecure(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("--os-cacert xyzpdq --insecure extension list".split())
 
         # Check general calls
@@ -169,7 +169,7 @@ class TestIntegShellCliV2Ignore(test_base.TestInteg):
         self.token = test_base.make_v2_token(self.requests_mock)
 
     def test_shell_args_ignore_v3(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("extension list".split())
 
         # Check general calls
@@ -214,7 +214,7 @@ class TestIntegShellCliV3(test_base.TestInteg):
         self.token = test_base.make_v3_token(self.requests_mock)
 
     def test_shell_args_no_options(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("extension list".split())
 
         # Check general calls
@@ -243,7 +243,7 @@ class TestIntegShellCliV3(test_base.TestInteg):
         )
 
     def test_shell_args_verify(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("--verify extension list".split())
 
         # Check general calls
@@ -253,7 +253,7 @@ class TestIntegShellCliV3(test_base.TestInteg):
         self.assertTrue(self.requests_mock.request_history[0].verify)
 
     def test_shell_args_insecure(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("--insecure extension list".split())
 
         # Check general calls
@@ -263,7 +263,7 @@ class TestIntegShellCliV3(test_base.TestInteg):
         self.assertFalse(self.requests_mock.request_history[0].verify)
 
     def test_shell_args_cacert(self):
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("--os-cacert xyzpdq extension list".split())
 
         # Check general calls
@@ -278,7 +278,7 @@ class TestIntegShellCliV3(test_base.TestInteg):
     def test_shell_args_cacert_insecure(self):
         # This test verifies the outcome of bug 1447784
         # https://bugs.launchpad.net/python-fibostackclient/+bug/1447784
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("--os-cacert xyzpdq --insecure extension list".split())
 
         # Check general calls
@@ -305,7 +305,7 @@ class TestIntegShellCliV3Prompt(test_base.TestInteg):
     @mock.patch("osc_lib.shell.prompt_for_password")
     def test_shell_callback(self, mock_prompt):
         mock_prompt.return_value = "qaz"
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run("extension list".split())
 
         # Check general calls
@@ -359,7 +359,7 @@ class TestIntegShellCliPrecedence(test_base.TestInteg):
     def test_shell_args_options(self):
         """Verify command line options override environment variables"""
 
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run(
             "--os-username zarquon --os-password qaz "
             "extension list".split(),
@@ -461,7 +461,7 @@ class TestIntegShellCliPrecedenceOCC(test_base.TestInteg):
 
         vendor_mock.side_effect = vendor_mock_return
 
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run(
             "--os-password qaz extension list".split(),
         )
@@ -533,7 +533,7 @@ class TestIntegShellCliPrecedenceOCC(test_base.TestInteg):
 
         vendor_mock.side_effect = vendor_mock_return
 
-        _shell = shell.fibostackShell()
+        _shell = shell.OpenStackShell()
         _shell.run(
             "--os-username zarquon --os-password qaz "
             "--os-project-domain-id 5678 extension list".split(),

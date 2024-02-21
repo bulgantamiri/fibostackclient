@@ -136,12 +136,12 @@ so the version should not contain the leading 'v' character.
     def build_option_parser(parser):
         """Hook to add global options
 
-        Called from fibostackclient.shell.fibostackShell.__init__()
+        Called from fibostackclient.shell.OpenStackShell.__init__()
         after the builtin parser has been initialized.  This is
         where a plugin can add global options such as an API version setting.
 
         :param argparse.ArgumentParser parser: The parser object that has been
-            initialized by fibostackShell.
+            initialized by OpenStackShell.
         """
         parser.add_argument(
             '--os-fscplugin-api-version',

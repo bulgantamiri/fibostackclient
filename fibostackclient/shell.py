@@ -30,9 +30,9 @@ from fibostackclient.common import clientmanager
 DEFAULT_DOMAIN = 'default'
 
 
-class fibostackShell(shell.fibostackShell):
+class OpenStackShell(shell.OpenStackShell):
     def __init__(self):
-        super(fibostackShell, self).__init__(
+        super(OpenStackShell, self).__init__(
             description=__doc__.strip(),
             version=fibostackclient.__version__,
             command_manager=commandmanager.CommandManager('fibostack.cli'),
@@ -49,7 +49,7 @@ class fibostackShell(shell.fibostackShell):
         warnings.filterwarnings('ignore', module='fibostack')
 
     def build_option_parser(self, description, version):
-        parser = super(fibostackShell, self).build_option_parser(
+        parser = super(OpenStackShell, self).build_option_parser(
             description, version
         )
         parser = clientmanager.build_plugin_option_parser(parser)
@@ -57,7 +57,7 @@ class fibostackShell(shell.fibostackShell):
         return parser
 
     def _final_defaults(self):
-        super(fibostackShell, self)._final_defaults()
+        super(OpenStackShell, self)._final_defaults()
 
         # Set the default plugin to admin_token if endpoint and token are given
         if self.options.endpoint and self.options.token:
@@ -132,7 +132,7 @@ class fibostackShell(shell.fibostackShell):
         self.command_manager.add_command_group('fibostack.extension')
 
     def initialize_app(self, argv):
-        super(fibostackShell, self).initialize_app(argv)
+        super(OpenStackShell, self).initialize_app(argv)
 
         # Re-create the client_manager with our subclass
         self.client_manager = clientmanager.ClientManager(
@@ -146,7 +146,7 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv[1:]
 
-    return fibostackShell().run(argv)
+    return OpenStackShell().run(argv)
 
 
 if __name__ == "__main__":
