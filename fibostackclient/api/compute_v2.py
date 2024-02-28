@@ -14,12 +14,12 @@
 """Compute v2 API Library"""
 
 from keystoneauth1 import exceptions as ksa_exceptions
-from osc_lib.api import api
-from osc_lib import exceptions
-from osc_lib.i18n import _
+from fsc_lib.api import api
+from fsc_lib import exceptions
+from fsc_lib.i18n import _
 
 
-# TODO(dtroyer): Mingrate this to osc-lib
+# TODO(dtroyer): Mingrate this to fsc-lib
 class InvalidValue(Exception):
     """An argument value is not valid: wrong type, out of range, etc"""
 
@@ -57,7 +57,7 @@ class APIv2(api.BaseAPI):
             raise InvalidValue(msg)
         return value
 
-    # TODO(dtroyer): Override find() until these fixes get into an osc-lib
+    # TODO(dtroyer): Override find() until these fixes get into an fsc-lib
     #                minimum release
     def find(
         self,
@@ -558,7 +558,7 @@ class APIv2(api.BaseAPI):
         :param string security_group:
             Security group name or ID
 
-        TODO(dtroyer): Create an update method in osc-lib
+        TODO(dtroyer): Create an update method in fsc-lib
         """
 
         # Short-circuit no-op

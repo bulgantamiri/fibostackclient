@@ -12,7 +12,7 @@
 
 from unittest import mock
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
 from fibostackclient.network.v2 import network_flavor_profile
 from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes_v3

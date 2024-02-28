@@ -16,7 +16,7 @@ from unittest import mock
 from unittest.mock import call
 
 from fibostack import utils as sdk_utils
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
 from fibostackclient.compute.v2 import service
 from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes

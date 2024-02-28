@@ -13,9 +13,9 @@
 
 from unittest import mock
 
-from osc_lib.cli import format_columns
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.cli import format_columns
+from fsc_lib import exceptions
+from fsc_lib import utils
 
 from fibostackclient.tests.unit.identity.v3 import fakes as project_fakes
 from fibostackclient.tests.unit import utils as test_utils

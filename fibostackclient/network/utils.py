@@ -11,7 +11,7 @@
 #   under the License.
 #
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
 from fibostackclient.i18n import _
 

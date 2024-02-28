@@ -19,9 +19,9 @@
 import sys
 import warnings
 
-from osc_lib.api import auth
-from osc_lib.command import commandmanager
-from osc_lib import shell
+from fsc_lib.api import auth
+from fsc_lib.command import commandmanager
+from fsc_lib import shell
 
 import fibostackclient
 from fibostackclient.common import clientmanager
@@ -69,7 +69,7 @@ class OpenStackShell(shell.OpenStackShell):
     def _load_plugins(self):
         """Load plugins via stevedore
 
-        osc-lib has no opinion on what plugins should be loaded
+        fsc-lib has no opinion on what plugins should be loaded
         """
         # Loop through extensions to get API versions
         for mod in clientmanager.PLUGIN_MODULES:
@@ -114,7 +114,7 @@ class OpenStackShell(shell.OpenStackShell):
     def _load_commands(self):
         """Load commands via cliff/stevedore
 
-        osc-lib has no opinion on what commands should be loaded
+        fsc-lib has no opinion on what commands should be loaded
         """
         # Commands that span multiple APIs
         self.command_manager.add_command_group('fibostack.common')

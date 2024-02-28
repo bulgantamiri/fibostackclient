@@ -20,10 +20,10 @@ import re
 
 from novaclient import exceptions as nova_exceptions
 from fibostack import utils as sdk_utils
-from osc_lib.cli import format_columns
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.cli import format_columns
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
 from fibostackclient.common import pagination
 from fibostackclient.i18n import _

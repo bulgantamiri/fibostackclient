@@ -13,8 +13,8 @@
 
 """IP Floating action implementations"""
 
-from osc_lib import utils
-from osc_lib.utils import tags as _tag
+from fsc_lib import utils
+from fsc_lib.utils import tags as _tag
 
 from fibostackclient.i18n import _
 from fibostackclient.identity import common as identity_common

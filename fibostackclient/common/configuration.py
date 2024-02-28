@@ -14,7 +14,7 @@
 """Configuration action implementations"""
 
 from keystoneauth1.loading import base
-from osc_lib.command import command
+from fsc_lib.command import command
 
 from fibostackclient.i18n import _
 

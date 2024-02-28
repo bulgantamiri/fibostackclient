@@ -20,7 +20,7 @@ import uuid
 
 from keystoneauth1 import access
 from keystoneauth1 import fixture
-from osc_lib.cli import format_columns
+from fsc_lib.cli import format_columns
 
 from fibostackclient.tests.unit import fakes
 from fibostackclient.tests.unit import utils

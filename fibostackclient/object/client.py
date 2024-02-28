@@ -15,7 +15,7 @@
 
 """Object client"""
 
-from osc_lib import utils
+from fsc_lib import utils
 
 from fibostackclient.api import object_store_v1
 

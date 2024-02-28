@@ -15,7 +15,7 @@ import copy
 import io
 from unittest import mock
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 from requests_mock.contrib import fixture
 
 from fibostackclient.object.v1 import object as object_cmds

@@ -11,7 +11,7 @@
 #   under the License.
 #
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
 from fibostackclient.network import utils
 from fibostackclient.tests.unit import utils as tests_utils

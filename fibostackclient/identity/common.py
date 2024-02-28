@@ -20,8 +20,8 @@ from keystoneclient.v3 import domains
 from keystoneclient.v3 import groups
 from keystoneclient.v3 import projects
 from keystoneclient.v3 import users
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib import exceptions
+from fsc_lib import utils
 
 from fibostackclient.i18n import _
 
@@ -76,10 +76,10 @@ def find_service(identity_client, name_type_or_id):
 def get_resource(manager, name_type_or_id):
     # NOTE (vishakha): Due to bug #1799153 and for any another related case
     # where GET resource API does not support the filter by name,
-    # osc_lib.utils.find_resource() method cannot be used because that method
+    # fsc_lib.utils.find_resource() method cannot be used because that method
     # try to fall back to list all the resource if requested resource cannot
     # be get via name. Which ends up with NoUniqueMatch error.
-    # This new function is the replacement for osc_lib.utils.find_resource()
+    # This new function is the replacement for fsc_lib.utils.find_resource()
     # for resources does not support GET by name.
     # For example: identity GET /regions.
     """Find a resource by id or name."""

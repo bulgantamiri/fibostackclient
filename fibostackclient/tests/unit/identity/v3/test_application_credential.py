@@ -17,8 +17,8 @@ import copy
 import json
 from unittest import mock
 
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib import exceptions
+from fsc_lib import utils
 
 from fibostackclient.identity.v3 import application_credential
 from fibostackclient.tests.unit import fakes

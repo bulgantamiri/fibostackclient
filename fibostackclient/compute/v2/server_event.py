@@ -22,9 +22,9 @@ from cliff import columns
 import iso8601
 from fibostack import exceptions as sdk_exceptions
 from fibostack import utils as sdk_utils
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
 from fibostackclient.common import pagination
 from fibostackclient.i18n import _
@@ -32,7 +32,7 @@ from fibostackclient.i18n import _
 LOG = logging.getLogger(__name__)
 
 
-# TODO(stephenfin): Move this to osc_lib since it's useful elsewhere (e.g.
+# TODO(stephenfin): Move this to fsc_lib since it's useful elsewhere (e.g.
 # glance)
 def is_uuid_like(value) -> bool:
     """Returns validation of a value as a UUID.

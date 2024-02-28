@@ -16,8 +16,8 @@
 from unittest import mock
 from unittest.mock import call
 
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib import exceptions
+from fsc_lib import utils
 
 from fibostackclient.identity import common
 from fibostackclient.identity.v3 import project
@@ -221,7 +221,7 @@ class TestProjectCreate(TestProject):
         mocker = mock.Mock()
         mocker.return_value = None
 
-        with mock.patch("osc_lib.utils.find_resource", mocker):
+        with mock.patch("fsc_lib.utils.find_resource", mocker):
             columns, data = self.cmd.take_action(parsed_args)
 
         # Set expected values
@@ -844,7 +844,7 @@ class TestProjectList(TestProject):
         mocker = mock.Mock()
         mocker.return_value = None
 
-        with mock.patch("osc_lib.utils.find_resource", mocker):
+        with mock.patch("fsc_lib.utils.find_resource", mocker):
             columns, data = self.cmd.take_action(parsed_args)
 
         self.projects_mock.list.assert_called_with(

@@ -21,8 +21,8 @@ from fibostack.block_storage.v3 import snapshot as _snapshot
 from fibostack.block_storage.v3 import volume as _volume
 from fibostack.test import fakes as sdk_fakes
 from fibostack import utils as sdk_utils
-from osc_lib.cli import format_columns
-from osc_lib import exceptions
+from fsc_lib.cli import format_columns
+from fsc_lib import exceptions
 
 from fibostackclient.tests.unit.volume.v3 import fakes
 from fibostackclient.volume.v3 import volume

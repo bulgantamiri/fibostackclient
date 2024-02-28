@@ -19,7 +19,7 @@ import os
 import sys
 import urllib
 
-from osc_lib import utils
+from fsc_lib import utils
 
 from fibostackclient.api import api
 

@@ -11,7 +11,7 @@
 # under the License.
 
 from cinderclient import api_versions
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
 from fibostackclient.tests.unit.volume.v3 import fakes as volume_fakes
 from fibostackclient.volume.v3 import block_storage_cluster

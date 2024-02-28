@@ -20,7 +20,7 @@ from fibostack.network.v2 import (
     default_security_group_rule as _default_security_group_rule,
 )
 from fibostack.test import fakes as sdk_fakes
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
 from fibostackclient.network import utils as network_utils
 from fibostackclient.network.v2 import default_security_group_rule

@@ -11,8 +11,8 @@
 # under the License.
 
 from cinderclient import api_versions
-from osc_lib.command import command
-from osc_lib import exceptions
+from fsc_lib.command import command
+from fsc_lib import exceptions
 
 from fibostackclient.i18n import _
 

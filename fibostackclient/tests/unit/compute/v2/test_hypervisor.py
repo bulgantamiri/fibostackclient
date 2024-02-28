@@ -18,8 +18,8 @@ from unittest import mock
 
 from novaclient import exceptions as nova_exceptions
 from fibostack import utils as sdk_utils
-from osc_lib.cli import format_columns
-from osc_lib import exceptions
+from fsc_lib.cli import format_columns
+from fsc_lib import exceptions
 
 from fibostackclient.compute.v2 import hypervisor
 from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes

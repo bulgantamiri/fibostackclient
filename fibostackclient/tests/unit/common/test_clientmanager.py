@@ -16,13 +16,13 @@
 import copy
 
 from keystoneauth1 import token_endpoint
-from osc_lib.tests import utils as osc_lib_test_utils
+from fsc_lib.tests import utils as fsc_lib_test_utils
 
 from fibostackclient.common import clientmanager
 from fibostackclient.tests.unit import fakes
 
 
-class TestClientManager(osc_lib_test_utils.TestClientManager):
+class TestClientManager(fsc_lib_test_utils.TestClientManager):
     def _clientmanager_class(self):
         """Allow subclasses to override the ClientManager class"""
         return clientmanager.ClientManager

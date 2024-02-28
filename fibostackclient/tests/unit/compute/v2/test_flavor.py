@@ -17,8 +17,8 @@ from unittest import mock
 from fibostack.compute.v2 import flavor as _flavor
 from fibostack import exceptions as sdk_exceptions
 from fibostack import utils as sdk_utils
-from osc_lib.cli import format_columns
-from osc_lib import exceptions
+from fsc_lib.cli import format_columns
+from fsc_lib import exceptions
 
 from fibostackclient.compute.v2 import flavor
 from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes

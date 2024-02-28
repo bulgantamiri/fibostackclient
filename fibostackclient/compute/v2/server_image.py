@@ -18,10 +18,10 @@
 import importlib
 import logging
 
-from osc_lib.cli import parseractions
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.cli import parseractions
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
 from fibostackclient.i18n import _
 

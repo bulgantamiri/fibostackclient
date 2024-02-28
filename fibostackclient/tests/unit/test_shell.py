@@ -17,7 +17,7 @@ import importlib
 import os
 from unittest import mock
 
-from osc_lib.tests import utils as osc_lib_test_utils
+from fsc_lib.tests import utils as fsc_lib_test_utils
 import wrapt
 
 from fibostackclient import shell
@@ -120,10 +120,10 @@ def get_cloud(log_file):
     return CLOUD
 
 
-# Wrap the osc_lib make_shell() function to set the shell class since
-# osc-lib's TestShell class doesn't allow us to specify it yet.
+# Wrap the fsc_lib make_shell() function to set the shell class since
+# fsc-lib's TestShell class doesn't allow us to specify it yet.
 # TODO(dtroyer): remove this once the shell_class_patch patch is released
-#                in osc-lib
+#                in fsc-lib
 def make_shell_wrapper(func, inst, args, kwargs):
     if 'shell_class' not in kwargs:
         kwargs['shell_class'] = shell.OpenStackShell
@@ -131,20 +131,20 @@ def make_shell_wrapper(func, inst, args, kwargs):
 
 
 wrapt.wrap_function_wrapper(
-    osc_lib_test_utils,
+    fsc_lib_test_utils,
     'make_shell',
     make_shell_wrapper,
 )
 
 
-class TestShell(osc_lib_test_utils.TestShell):
+class TestShell(fsc_lib_test_utils.TestShell):
     # Full name of the OpenStackShell class to test (cliff.app.App subclass)
     shell_class_name = "fibostackclient.shell.OpenStackShell"
 
     def setUp(self):
         super(TestShell, self).setUp()
         # TODO(dtroyer): remove this once the shell_class_patch patch is
-        #                released in osc-lib
+        #                released in fsc-lib
         mod_str, _sep, class_str = self.shell_class_name.rpartition('.')
         self.shell_class = getattr(importlib.import_module(mod_str), class_str)
 
@@ -153,11 +153,11 @@ class TestShell(osc_lib_test_utils.TestShell):
             self.shell_class_name + ".initialize_app",
             self.app,
         ):
-            _shell = osc_lib_test_utils.make_shell(
+            _shell = fsc_lib_test_utils.make_shell(
                 shell_class=self.shell_class,
             )
             _cmd = cmd_options + " list role"
-            osc_lib_test_utils.fake_execute(_shell, _cmd)
+            fsc_lib_test_utils.fake_execute(_shell, _cmd)
 
             self.app.assert_called_with(["list", "role"])
             self.assertEqual(
@@ -176,11 +176,11 @@ class TestShell(osc_lib_test_utils.TestShell):
             self.shell_class_name + ".initialize_app",
             self.app,
         ):
-            _shell = osc_lib_test_utils.make_shell(
+            _shell = fsc_lib_test_utils.make_shell(
                 shell_class=self.shell_class,
             )
             _cmd = cmd_options + " list role"
-            osc_lib_test_utils.fake_execute(_shell, _cmd)
+            fsc_lib_test_utils.fake_execute(_shell, _cmd)
 
             self.app.assert_called_with(["list", "role"])
             self.assertEqual(
@@ -197,11 +197,11 @@ class TestShell(osc_lib_test_utils.TestShell):
             self.shell_class_name + ".initialize_app",
             self.app,
         ):
-            _shell = osc_lib_test_utils.make_shell(
+            _shell = fsc_lib_test_utils.make_shell(
                 shell_class=self.shell_class,
             )
             _cmd = cmd_options + " list server"
-            osc_lib_test_utils.fake_execute(_shell, _cmd)
+            fsc_lib_test_utils.fake_execute(_shell, _cmd)
 
             self.app.assert_called_with(["list", "server"])
             self.assertEqual(
@@ -229,13 +229,13 @@ class TestShell(osc_lib_test_utils.TestShell):
 class TestShellOptions(TestShell):
     def setUp(self):
         super(TestShellOptions, self).setUp()
-        self.useFixture(osc_lib_test_utils.EnvFixture())
+        self.useFixture(fsc_lib_test_utils.EnvFixture())
 
     def _test_options_init_app(self, test_opts):
         for opt in test_opts.keys():
             if not test_opts[opt][1]:
                 continue
-            key = osc_lib_test_utils.opt2attr(opt)
+            key = fsc_lib_test_utils.opt2attr(opt)
             if isinstance(test_opts[opt][0], str):
                 cmd = opt + " " + test_opts[opt][0]
             else:
@@ -249,7 +249,7 @@ class TestShellOptions(TestShell):
         for opt in test_opts.keys():
             if not test_opts[opt][1]:
                 continue
-            key = osc_lib_test_utils.opt2attr(opt)
+            key = fsc_lib_test_utils.opt2attr(opt)
             if isinstance(test_opts[opt][0], str):
                 cmd = opt + " " + test_opts[opt][0]
             else:
@@ -263,12 +263,12 @@ class TestShellOptions(TestShell):
         for opt in test_opts.keys():
             if not test_opts[opt][2]:
                 continue
-            key = osc_lib_test_utils.opt2attr(opt)
+            key = fsc_lib_test_utils.opt2attr(opt)
             kwargs = {
                 key: test_opts[opt][0],
             }
             env = {
-                osc_lib_test_utils.opt2env(opt): test_opts[opt][0],
+                fsc_lib_test_utils.opt2env(opt): test_opts[opt][0],
             }
             os.environ = env.copy()
             self._assert_initialize_app_arg("", kwargs)
@@ -277,12 +277,12 @@ class TestShellOptions(TestShell):
         for opt in test_opts.keys():
             if not test_opts[opt][2]:
                 continue
-            key = osc_lib_test_utils.opt2attr(opt)
+            key = fsc_lib_test_utils.opt2attr(opt)
             kwargs = {
                 key: test_opts[opt][0],
             }
             env = {
-                osc_lib_test_utils.opt2env(opt): test_opts[opt][0],
+                fsc_lib_test_utils.opt2env(opt): test_opts[opt][0],
             }
             os.environ = env.copy()
             self._assert_cloud_config_arg("", kwargs)
@@ -295,7 +295,7 @@ class TestShellTokenAuthEnv(TestShell):
             "OS_TOKEN": DEFAULT_TOKEN,
             "OS_AUTH_URL": DEFAULT_AUTH_URL,
         }
-        self.useFixture(osc_lib_test_utils.EnvFixture(env.copy()))
+        self.useFixture(fsc_lib_test_utils.EnvFixture(env.copy()))
 
     def test_env(self):
         flag = ""
@@ -338,7 +338,7 @@ class TestShellTokenEndpointAuthEnv(TestShell):
             "OS_TOKEN": DEFAULT_TOKEN,
             "OS_ENDPOINT": DEFAULT_SERVICE_URL,
         }
-        self.useFixture(osc_lib_test_utils.EnvFixture(env.copy()))
+        self.useFixture(fsc_lib_test_utils.EnvFixture(env.copy()))
 
     def test_env(self):
         flag = ""
@@ -384,7 +384,7 @@ class TestShellCli(TestShell):
             "OS_VOLUME_API_VERSION": DEFAULT_VOLUME_API_VERSION,
             "OS_NETWORK_API_VERSION": DEFAULT_NETWORK_API_VERSION,
         }
-        self.useFixture(osc_lib_test_utils.EnvFixture(env.copy()))
+        self.useFixture(fsc_lib_test_utils.EnvFixture(env.copy()))
 
     def test_default_env(self):
         flag = ""

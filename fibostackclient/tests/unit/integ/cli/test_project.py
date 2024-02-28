@@ -12,7 +12,7 @@
 
 import copy
 
-from osc_lib.tests import utils as osc_lib_utils
+from fsc_lib.tests import utils as fsc_lib_utils
 
 from fibostackclient import shell
 from fibostackclient.tests.unit.integ import base as test_base
@@ -29,7 +29,7 @@ class TestIntegV2ProjectID(test_base.TestInteg):
             "OS_PASSWORD": test_shell.DEFAULT_PASSWORD,
             "OS_IDENTITY_API_VERSION": "2",
         }
-        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v2_token(self.requests_mock)
 
@@ -86,7 +86,7 @@ class TestIntegV2ProjectName(test_base.TestInteg):
             "OS_PASSWORD": test_shell.DEFAULT_PASSWORD,
             "OS_IDENTITY_API_VERSION": "2",
         }
-        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v2_token(self.requests_mock)
 
@@ -145,7 +145,7 @@ class TestIntegV3ProjectID(test_base.TestInteg):
             "OS_PASSWORD": test_shell.DEFAULT_PASSWORD,
             "OS_IDENTITY_API_VERSION": "3",
         }
-        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v3_token(self.requests_mock)
 
@@ -200,7 +200,7 @@ class TestIntegV3ProjectName(test_base.TestInteg):
             "OS_PASSWORD": test_shell.DEFAULT_PASSWORD,
             "OS_IDENTITY_API_VERSION": "3",
         }
-        self.useFixture(osc_lib_utils.EnvFixture(copy.deepcopy(env)))
+        self.useFixture(fsc_lib_utils.EnvFixture(copy.deepcopy(env)))
 
         self.token = test_base.make_v3_token(self.requests_mock)
 

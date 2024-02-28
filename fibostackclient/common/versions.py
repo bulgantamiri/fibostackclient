@@ -14,7 +14,7 @@
 
 """Versions Action Implementation"""
 
-from osc_lib.command import command
+from fsc_lib.command import command
 
 from fibostackclient.i18n import _
 

@@ -14,7 +14,7 @@
 from unittest import mock
 from unittest.mock import call
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
 from fibostackclient.network import utils as network_utils
 from fibostackclient.network.v2 import security_group_rule

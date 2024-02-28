@@ -12,7 +12,7 @@
 #   under the License.
 #
 
-from osc_lib.cli import format_columns
+from fsc_lib.cli import format_columns
 
 from fibostackclient.tests.unit.volume.v2 import fakes as volume_fakes
 from fibostackclient.volume.v2 import volume_backend

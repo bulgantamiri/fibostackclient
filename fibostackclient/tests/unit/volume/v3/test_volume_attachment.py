@@ -11,8 +11,8 @@
 # under the License.
 
 from cinderclient import api_versions
-from osc_lib.cli import format_columns
-from osc_lib import exceptions
+from fsc_lib.cli import format_columns
+from fsc_lib import exceptions
 
 from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes
 from fibostackclient.tests.unit.identity.v3 import fakes as identity_fakes

@@ -15,9 +15,9 @@
 from unittest import mock
 from unittest.mock import call
 
-from osc_lib.cli import format_columns
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.cli import format_columns
+from fsc_lib import exceptions
+from fsc_lib import utils
 
 from fibostackclient.tests.unit import utils as tests_utils
 from fibostackclient.tests.unit.volume.v1 import fakes as volume_fakes

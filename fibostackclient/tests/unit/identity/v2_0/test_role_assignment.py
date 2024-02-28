@@ -14,7 +14,7 @@
 import copy
 from unittest import mock
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
 from fibostackclient.identity.v2_0 import role_assignment
 from fibostackclient.tests.unit import fakes

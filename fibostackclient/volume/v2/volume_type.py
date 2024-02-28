@@ -19,11 +19,11 @@ import logging
 
 from cinderclient import api_versions
 from cliff import columns as cliff_columns
-from osc_lib.cli import format_columns
-from osc_lib.cli import parseractions
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.cli import format_columns
+from fsc_lib.cli import parseractions
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
 from fibostackclient.i18n import _
 from fibostackclient.identity import common as identity_common
@@ -37,7 +37,7 @@ class EncryptionInfoColumn(cliff_columns.FormattableColumn):
 
     Unlike the parent FormattableColumn class, the initializer of the
     class takes encryption_data as the second argument.
-    osc_lib.utils.get_item_properties instantiate cliff FormattableColumn
+    fsc_lib.utils.get_item_properties instantiate cliff FormattableColumn
     object with a single parameter "column value", so you need to pass
     a partially initialized class like
     ``functools.partial(EncryptionInfoColumn encryption_data)``.

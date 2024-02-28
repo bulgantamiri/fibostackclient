@@ -27,11 +27,11 @@ import iso8601
 from novaclient import api_versions
 from fibostack import exceptions as sdk_exceptions
 from fibostack import utils as sdk_utils
-from osc_lib.cli import format_columns
-from osc_lib.cli import parseractions
-from osc_lib.command import command
-from osc_lib import exceptions
-from osc_lib import utils
+from fsc_lib.cli import format_columns
+from fsc_lib.cli import parseractions
+from fsc_lib.command import command
+from fsc_lib import exceptions
+from fsc_lib import utils
 
 from fibostackclient.common import pagination
 from fibostackclient.i18n import _
@@ -3276,7 +3276,7 @@ class RebootServer(command.Command):
         compute_client.reboot_server(server_id, parsed_args.reboot_type)
 
         if parsed_args.wait:
-            # We use osc-lib's wait_for_status since that allows for a callback
+            # We use fsc-lib's wait_for_status since that allows for a callback
             if utils.wait_for_status(
                 compute_client.get_server,
                 server_id,
@@ -4522,9 +4522,9 @@ class ShelveServer(command.Command):
             return
 
         for server_id in server_ids:
-            # We use osc-lib's wait_for_status since that allows for a callback
+            # We use fsc-lib's wait_for_status since that allows for a callback
             # TODO(stephenfin): We should wait for these in parallel using e.g.
-            # https://review.opendev.org/c/fibostack/osc-lib/+/762503/
+            # https://review.opendev.org/c/fibostack/fsc-lib/+/762503/
             if not utils.wait_for_status(
                 compute_client.get_server,
                 server_id,
@@ -4548,9 +4548,9 @@ class ShelveServer(command.Command):
             return
 
         for server_id in server_ids:
-            # We use osc-lib's wait_for_status since that allows for a callback
+            # We use fsc-lib's wait_for_status since that allows for a callback
             # TODO(stephenfin): We should wait for these in parallel using e.g.
-            # https://review.opendev.org/c/fibostack/osc-lib/+/762503/
+            # https://review.opendev.org/c/fibostack/fsc-lib/+/762503/
             if not utils.wait_for_status(
                 compute_client.get_server,
                 server_id,

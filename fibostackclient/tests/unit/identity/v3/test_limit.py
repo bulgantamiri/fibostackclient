@@ -13,7 +13,7 @@
 import copy
 
 from keystoneauth1.exceptions import http as ksa_exceptions
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
 from fibostackclient.identity.v3 import limit
 from fibostackclient.tests.unit import fakes

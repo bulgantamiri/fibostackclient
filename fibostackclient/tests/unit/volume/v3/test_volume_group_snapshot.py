@@ -17,7 +17,7 @@ from fibostack.block_storage.v3 import group as _group
 from fibostack.block_storage.v3 import group_snapshot as _group_snapshot
 from fibostack.test import fakes as sdk_fakes
 from fibostack import utils as sdk_utils
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
 from fibostackclient.tests.unit.volume.v3 import fakes as volume_fakes
 from fibostackclient.volume.v3 import volume_group_snapshot

@@ -11,8 +11,8 @@
 # under the License.
 
 
-from osc_lib.cli import format_columns
-from osc_lib.command import command
+from fsc_lib.cli import format_columns
+from fsc_lib.command import command
 
 from fibostackclient.i18n import _
 

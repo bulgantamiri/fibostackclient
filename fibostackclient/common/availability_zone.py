@@ -17,8 +17,8 @@ import copy
 import logging
 
 from fibostack import exceptions as sdk_exceptions
-from osc_lib.command import command
-from osc_lib import utils
+from fsc_lib.command import command
+from fsc_lib import utils
 
 from fibostackclient.i18n import _
 

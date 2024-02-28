@@ -20,7 +20,7 @@ class ModuleTest(base.TestCase):
 
     CLIENTS = ['fibostackclient', 'keystoneclient', 'novaclient', 'fibostack']
 
-    LIBS = ['osc_lib', 'keystoneauth1']
+    LIBS = ['fsc_lib', 'keystoneauth1']
 
     def test_module_list(self):
         # Test module list

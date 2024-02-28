@@ -10,7 +10,7 @@
       - fibostack/cliff
       - fibostack/keystoneauth
       - fibostack/openstacksdk
-      - fibostack/osc-lib
+      - fibostack/fsc-lib
       - fibostack/python-fibostackclient
     vars:
       # Set work dir to fibostackclient so that if it's triggered by one of the
@@ -30,7 +30,7 @@
       - fibostack/cliff
       - fibostack/keystoneauth
       - fibostack/openstacksdk
-      - fibostack/osc-lib
+      - fibostack/fsc-lib
       - fibostack/python-fibostackclient
     vars:
       # Set work dir to fibostackclient so that if it's triggered by one of the
@@ -50,7 +50,7 @@
       - fibostack/cliff
       - fibostack/keystoneauth
       - fibostack/openstacksdk
-      - fibostack/osc-lib
+      - fibostack/fsc-lib
       - fibostack/python-fibostackclient
     vars:
       # Set work dir to fibostackclient so that if it's triggered by one of the
@@ -131,11 +131,11 @@
       - fibostack/cliff
       - fibostack/keystoneauth
       - fibostack/openstacksdk
-      - fibostack/osc-lib
+      - fibostack/fsc-lib
       - fibostack/python-fibostackclient
     vars:
       devstack_localrc:
-        LIBS_FROM_GIT: python-fibostackclient,openstacksdk,osc-lib,cliff
+        LIBS_FROM_GIT: python-fibostackclient,openstacksdk,fsc-lib,cliff
       tox_envlist: functional
       tox_install_siblings: true
 

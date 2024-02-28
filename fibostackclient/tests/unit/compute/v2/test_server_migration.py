@@ -14,8 +14,8 @@ from unittest import mock
 
 from novaclient import api_versions
 from fibostack import utils as sdk_utils
-from osc_lib import exceptions
-from osc_lib import utils as common_utils
+from fsc_lib import exceptions
+from fsc_lib import utils as common_utils
 
 from fibostackclient.compute.v2 import server_migration
 from fibostackclient.tests.unit.compute.v2 import fakes as compute_fakes

@@ -11,7 +11,7 @@
 #   under the License.
 #
 
-from osc_lib import exceptions
+from fsc_lib import exceptions
 
 from fibostackclient.network.v2 import floating_ip_pool
 from fibostackclient.tests.unit.network.v2 import fakes as network_fakes

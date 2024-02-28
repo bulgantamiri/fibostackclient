@@ -14,7 +14,7 @@
 """Compute v2 API Library Tests"""
 
 from keystoneauth1 import session
-from osc_lib import exceptions as osc_lib_exceptions
+from fsc_lib import exceptions as fsc_lib_exceptions
 from requests_mock.contrib import fixture
 
 from fibostackclient.api import compute_v2 as compute
@@ -107,7 +107,7 @@ class TestFloatingIP(TestComputeAPIv2):
             status_code=404,
         )
         self.assertRaises(
-            osc_lib_exceptions.NotFound,
+            fsc_lib_exceptions.NotFound,
             self.api.floating_ip_create,
             'not-nova',
         )
@@ -164,7 +164,7 @@ class TestFloatingIP(TestComputeAPIv2):
             status_code=200,
         )
         self.assertRaises(
-            osc_lib_exceptions.NotFound,
+            fsc_lib_exceptions.NotFound,
             self.api.floating_ip_find,
             '1.2.3.4',
         )
@@ -426,7 +426,7 @@ class TestNetwork(TestComputeAPIv2):
             status_code=200,
         )
         self.assertRaises(
-            osc_lib_exceptions.NotFound,
+            fsc_lib_exceptions.NotFound,
             self.api.network_delete,
             'label3',
         )
@@ -469,7 +469,7 @@ class TestNetwork(TestComputeAPIv2):
             status_code=200,
         )
         self.assertRaises(
-            osc_lib_exceptions.NotFound,
+            fsc_lib_exceptions.NotFound,
             self.api.network_find,
             'label3',
         )
@@ -578,7 +578,7 @@ class TestSecurityGroup(TestComputeAPIv2):
             status_code=200,
         )
         self.assertRaises(
-            osc_lib_exceptions.NotFound,
+            fsc_lib_exceptions.NotFound,
             self.api.security_group_delete,
             'sg3',
         )
@@ -621,7 +621,7 @@ class TestSecurityGroup(TestComputeAPIv2):
             status_code=200,
         )
         self.assertRaises(
-            osc_lib_exceptions.NotFound,
+            fsc_lib_exceptions.NotFound,
             self.api.security_group_find,
             'sg3',
         )
